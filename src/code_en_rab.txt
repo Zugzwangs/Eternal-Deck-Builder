@@ -1,0 +1,32 @@
+/*
+void MainWindow::RechercheCrypt()
+{
+int cpt=1;
+QString requete;
+QSqlQuery SearchQuery;
+
+    //requete = ui->lENameCard->text();
+    //requete = "select Name ='" + requete + "' from VtesCardList";
+    requete = "select Name = 'Ariadne' from VtesCardList";
+    ui->tBResults->clear();
+    ui->tBResults->setText(requete);
+
+    if (SearchQuery.exec(requete))
+        {
+        ui->tBResults->append("succes !");
+        int fieldNo = SearchQuery.record().indexOf("Name");
+        ui->tBResults->append("L'index du champs name est : " + QString::number(fieldNo));
+        ui->tBResults->append("Le nombre de reponse est : " + QString::number(SearchQuery.size()));
+        while(SearchQuery.next())
+            {
+             ui->tBResults->append("Resultat numéro " + QString::number(cpt));
+             ui->tBResults->append(SearchQuery.value(fieldNo).toString());
+             cpt++;
+            }
+        }
+    else
+        {
+         ui->tBResults->append("fail !");
+        }
+    SearchQuery.clear();
+}*/

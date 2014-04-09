@@ -1,0 +1,17 @@
+VtesCardList :
+id Name Sets ImageFile Expansion Rarity Type Clan Grouping Capacity Discipline PCost BCost Text Artist
+
+
+VampireList :
+id Name Sets ImageFile Expansion Rarity Type Clan Grouping Capacity Discipline Sect Trait Text Artist
+
+
+CardList :
+id Name Sets ImageFile Expansion Rarity Type SubType Clan Capacity Discipline PCost BCost Trait Text Artist
+
+
+Requete Sql pour separer ds 2 tables les vampire des cartes :
+
+insert into VampireList (id,Name,Sets,ImageFile,Expansion,Rarity,Type,Clan,Grouping,Capacity,Discipline,Text,Artist) select id,Name,Sets,ImageFile,Expansion,Rarity,Type,Clan,Grouping,Capacity,Discipline,Text,Artist from VtesCardList where Type = 'Vampire' or Type = 'Imbued'
+
+insert into CardList (id,Name,Sets,ImageFile,Expansion,Rarity,Type,Clan,Capacity,Discipline,PCost,BCost,Text,Artist) select id,Name,Sets,ImageFile,Expansion,Rarity,Type,Clan,Capacity,Discipline,PCost,BCost,Text,Artist from VtesCardList where Type != 'Vampire' and Type !='Imbued'

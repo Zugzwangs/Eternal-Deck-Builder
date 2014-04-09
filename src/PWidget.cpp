@@ -1,0 +1,134 @@
+#include "PWidget.h"
+#include "mainwindow.h"
+#include <QDrag>
+
+// /////////////////////////////////////////////////////////////////////////////////////////
+// Ma Subclass de QFrame
+PFrame::PFrame(QWidget *parent) : QFrame(parent)
+{
+    setObjectName("bourse");
+    setGeometry(1170,0,116,94);
+    show();
+    setVisible(true);
+    setFrameStyle(QFrame::Sunken | QFrame::Box);
+    setLineWidth(2);
+    setStyleSheet("background-image: url(" + QCoreApplication::applicationDirPath() + "/Images/bourse.png)");
+    BloodPxm = new QPixmap(QCoreApplication::applicationDirPath() + "/Images/Blood.png");
+}
+
+void PFrame::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+        { startPos = event->pos(); }
+}
+
+void PFrame::mouseMoveEvent(QMouseEvent *event)
+{
+    if(event->buttons() & Qt::LeftButton)
+    {
+        int distance = (event->pos() - startPos).manhattanLength();
+        if (distance >= QApplication::startDragDistance())
+        { startDrag(); }
+    }
+}
+
+void PFrame::startDrag()
+{
+    //QImage IconeDrag;
+    QDrag *Drag = new QDrag(this);
+    QMimeData *mimeData = new QMimeData;
+    mimeData->setText("Blood Marqueur");
+    mimeData->setImageData(*BloodPxm);
+    Drag->setPixmap(*BloodPxm);
+    Drag->setHotSpot(QPoint(20,20));
+    Drag->setMimeData(mimeData);
+    Drag->exec(Qt::CopyAction);
+}
+
+// /////////////////////////////////////////////////////////////////////////////////////////
+// Widget symbolisant une discipline
+DisciplineButton::DisciplineButton(QWidget *parent) : QAbstractButton(parent)
+{
+    state = DisciplineButton::a;
+    sql_request ="";
+}
+
+void DisciplineButton::setupDiscipline(QString dis)
+{
+    discipline = dis.left(3);
+    setText(discipline);
+    setToolTip(discipline);
+    icone = QPixmap(":/icons/disc/" + discipline + ".png");
+}
+
+void DisciplineButton::paintEvent(QPaintEvent *e)
+{
+    QRect rect( e->rect() );
+    QPainter painter( this );
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    //painter.setClipRect( rect );
+
+    switch (state)
+    {
+        case DisciplineButton::a:
+
+            painter.setPen( Qt::NoPen );
+            painter.setBrush( QBrush(QColor(150,150,150,150), Qt::SolidPattern) );
+            rect.adjust(5,5, -5,-5);
+            painter.drawPixmap( rect, icone );
+            painter.drawRect(rect);
+            break;
+
+        case DisciplineButton::b:
+
+            rect.adjust(1,1, -1,-1);
+            painter.setPen( Qt::black );
+            painter.setBrush( QBrush( QRadialGradient() ) );
+            painter.drawRoundedRect( rect, 10, 10, Qt::RelativeSize );
+            rect.adjust(4,4, -4,-4);
+            painter.drawPixmap( rect, icone );
+            break;
+
+        case DisciplineButton::c:
+
+            rect.adjust(1,1, -1,-1);
+            painter.setPen( Qt::black );
+            painter.setBrush( QBrush(Qt::black, Qt::RadialGradientPattern) );
+            painter.drawRoundedRect( rect, 10, 10, Qt::RelativeSize );
+            rect.adjust(4,4, -4,-4);
+            painter.drawPixmap( rect, icone );
+
+            painter.setPen( QPen(Qt::red, 4, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin) );
+            painter.drawEllipse(rect);
+            rect.adjust(5,5,-5,-5);
+            painter.drawLine(rect.bottomLeft(), rect.topRight());
+            break;
+    }
+}
+
+void DisciplineButton::nextCheckState()
+{
+    switch (state)
+    {
+        case DisciplineButton::a:
+            state = DisciplineButton::b;
+            sql_request = " AND Discipline like '%" + discipline + "%'";
+            break;
+
+        case DisciplineButton::b:
+            sql_request = " AND NOT Discipline like '%" + discipline + "%'";
+            state = DisciplineButton::c;
+            break;
+
+        case DisciplineButton::c:
+            sql_request = "";
+            state = DisciplineButton::a;
+            break;
+    }
+
+}
+
+QString DisciplineButton::get_sql_request()
+{
+    return sql_request;
+}

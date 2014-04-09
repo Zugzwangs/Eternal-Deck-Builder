@@ -1,0 +1,130 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/Advanced.gif</file>
+        <file>icons/cost_blood.gif</file>
+        <file>icons/cost_conviction.gif</file>
+        <file>icons/cost_pool.gif</file>
+        <file>icons/clan/Abomination.gif</file>
+        <file>icons/clan/Ahrimanes.gif</file>
+        <file>icons/clan/Akunanse.gif</file>
+        <file>icons/clan/Assamite.gif</file>
+        <file>icons/clan/Baali.gif</file>
+        <file>icons/clan/Blood Brothers.gif</file>
+        <file>icons/clan/Brujah antitribu.gif</file>
+        <file>icons/clan/Brujah.gif</file>
+        <file>icons/clan/Caitiff.gif</file>
+        <file>icons/clan/Daughters of Cacophony.gif</file>
+        <file>icons/clan/Followers of Set.gif</file>
+        <file>icons/clan/Gangrel antitribu.gif</file>
+        <file>icons/clan/Gangrel.gif</file>
+        <file>icons/clan/Gargoyle.gif</file>
+        <file>icons/clan/Giovanni.gif</file>
+        <file>icons/clan/Guruhi.gif</file>
+        <file>icons/clan/Harbingers of Skulls.gif</file>
+        <file>icons/clan/Ishtarri.gif</file>
+        <file>icons/clan/Kyasid.gif</file>
+        <file>icons/clan/Lasombra.gif</file>
+        <file>icons/clan/Malkavian antitribu.gif</file>
+        <file>icons/clan/Malkavian.gif</file>
+        <file>icons/clan/Nagaraja.gif</file>
+        <file>icons/clan/Nosferatu antitribu.gif</file>
+        <file>icons/clan/Nosferatu.gif</file>
+        <file>icons/clan/Osebo.gif</file>
+        <file>icons/clan/Pander.gif</file>
+        <file>icons/clan/Ravnos.gif</file>
+        <file>icons/clan/Salubri antitribu.gif</file>
+        <file>icons/clan/Salubri.gif</file>
+        <file>icons/clan/Samedi.gif</file>
+        <file>icons/clan/Toreador antitribu.gif</file>
+        <file>icons/clan/Toreador.gif</file>
+        <file>icons/clan/Tremere antitribu.gif</file>
+        <file>icons/clan/Tremere.gif</file>
+        <file>icons/clan/True Brujah.gif</file>
+        <file>icons/clan/Tzimisce.gif</file>
+        <file>icons/clan/Ventrue antitribu.gif</file>
+        <file>icons/clan/Ventrue.gif</file>
+        <file>icons/type/Action Modifier.gif</file>
+        <file>icons/type/Action.gif</file>
+        <file>icons/type/Ally.gif</file>
+        <file>icons/type/Combat.gif</file>
+        <file>icons/type/Equipment.gif</file>
+        <file>icons/type/Event.gif</file>
+        <file>icons/type/Political Action.gif</file>
+        <file>icons/type/Power.gif</file>
+        <file>icons/type/Reaction.gif</file>
+        <file>icons/type/Reflex.gif</file>
+        <file>icons/type/Retainer.gif</file>
+        <file>icons/Vtes_Grelarge.gif</file>
+        <file>icons/Vtes_Tanlarge.gif</file>
+        <file>icons/disc/abo.png</file>
+        <file>icons/disc/abo-sup.png</file>
+        <file>icons/disc/ani.png</file>
+        <file>icons/disc/ani-sup.png</file>
+        <file>icons/disc/aus.png</file>
+        <file>icons/disc/aus-sup.png</file>
+        <file>icons/disc/cel.png</file>
+        <file>icons/disc/cel-sup.png</file>
+        <file>icons/disc/chi.png</file>
+        <file>icons/disc/chi-sup.png</file>
+        <file>icons/disc/dai.png</file>
+        <file>icons/disc/dai-sup.png</file>
+        <file>icons/disc/dem.png</file>
+        <file>icons/disc/dem-sup.png</file>
+        <file>icons/disc/dom.png</file>
+        <file>icons/disc/dom-sup.png</file>
+        <file>icons/disc/for.png</file>
+        <file>icons/disc/for-sup.png</file>
+        <file>icons/disc/mal.png</file>
+        <file>icons/disc/mel.png</file>
+        <file>icons/disc/mel-sup.png</file>
+        <file>icons/disc/myt.png</file>
+        <file>icons/disc/myt-sup.png</file>
+        <file>icons/disc/nec.png</file>
+        <file>icons/disc/nec-sup.png</file>
+        <file>icons/disc/obe.png</file>
+        <file>icons/disc/obe-sup.png</file>
+        <file>icons/disc/obf.png</file>
+        <file>icons/disc/obf-sup.png</file>
+        <file>icons/disc/pot.png</file>
+        <file>icons/disc/pot-sup.png</file>
+        <file>icons/disc/pre.png</file>
+        <file>icons/disc/pre-sup.png</file>
+        <file>icons/disc/pro.png</file>
+        <file>icons/disc/pro-sup.png</file>
+        <file>icons/disc/qui.png</file>
+        <file>icons/disc/qui-sup.png</file>
+        <file>icons/disc/san.png</file>
+        <file>icons/disc/san-sup.png</file>
+        <file>icons/disc/ser.png</file>
+        <file>icons/disc/ser-sup.png</file>
+        <file>icons/disc/spi.png</file>
+        <file>icons/disc/spi-sup.png</file>
+        <file>icons/disc/str.png</file>
+        <file>icons/disc/tem.png</file>
+        <file>icons/disc/tem-sup.png</file>
+        <file>icons/disc/tha.png</file>
+        <file>icons/disc/tha-sup.png</file>
+        <file>icons/disc/thn.png</file>
+        <file>icons/disc/thn-sup.png</file>
+        <file>icons/disc/val.png</file>
+        <file>icons/disc/val-sup.png</file>
+        <file>icons/disc/vic.png</file>
+        <file>icons/disc/vic-sup.png</file>
+        <file>icons/disc/vis.png</file>
+        <file>icons/disc/vis-sup.png</file>
+        <file>icons/disc/def.png</file>
+        <file>icons/disc/inn.png</file>
+        <file>icons/disc/jud.png</file>
+        <file>icons/disc/mar.png</file>
+        <file>icons/disc/red.png</file>
+        <file>icons/disc/ven.png</file>
+        <file>icons/disc/vis2.png</file>
+        <file>icons/disc/obt.png</file>
+        <file>icons/disc/obt-sup.png</file>
+        <file>icons/burn_option.gif</file>
+        <file>icons/flight.gif</file>
+        <file>icons/Merge.gif</file>
+        <file>icons/delete.bmp</file>
+        <file>icons/Blood.png</file>
+    </qresource>
+</RCC>
