@@ -465,7 +465,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Text :</string>
+         <string>Text </string>
         </property>
        </widget>
        <widget class="QLabel" name="label_35">
@@ -530,9 +530,9 @@
        <widget class="QComboBox" name="cBRarity">
         <property name="geometry">
          <rect>
-          <x>271</x>
+          <x>281</x>
           <y>88</y>
-          <width>151</width>
+          <width>141</width>
           <height>22</height>
          </rect>
         </property>
@@ -547,7 +547,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Rarity :</string>
+         <string>Rarity</string>
         </property>
        </widget>
       </widget>
@@ -566,14 +566,14 @@
        <widget class="QPushButton" name="pBCardSearch">
         <property name="geometry">
          <rect>
-          <x>20</x>
+          <x>19</x>
           <y>14</y>
-          <width>70</width>
+          <width>71</width>
           <height>30</height>
          </rect>
         </property>
         <property name="text">
-         <string>Rechercher</string>
+         <string>Search</string>
         </property>
        </widget>
        <widget class="QPushButton" name="pBCardClearForm">
@@ -607,12 +607,12 @@
          <rect>
           <x>40</x>
           <y>30</y>
-          <width>41</width>
+          <width>31</width>
           <height>16</height>
          </rect>
         </property>
         <property name="text">
-         <string>Type :</string>
+         <string>Type</string>
         </property>
        </widget>
        <widget class="QComboBox" name="cBType">
@@ -630,12 +630,12 @@
          <rect>
           <x>10</x>
           <y>80</y>
-          <width>71</width>
+          <width>61</width>
           <height>16</height>
          </rect>
         </property>
         <property name="text">
-         <string>Sous type :</string>
+         <string>Sous type</string>
         </property>
        </widget>
        <widget class="QComboBox" name="cBSousType">
@@ -1442,9 +1442,9 @@
        <widget class="QCheckBox" name="Flight">
         <property name="geometry">
          <rect>
-          <x>363</x>
+          <x>353</x>
           <y>22</y>
-          <width>51</width>
+          <width>61</width>
           <height>20</height>
          </rect>
         </property>
@@ -1458,9 +1458,9 @@
        <widget class="QCheckBox" name="BlackHand">
         <property name="geometry">
          <rect>
-          <x>333</x>
+          <x>323</x>
           <y>62</y>
-          <width>81</width>
+          <width>91</width>
           <height>20</height>
          </rect>
         </property>
@@ -1474,9 +1474,9 @@
        <widget class="QCheckBox" name="Infernal">
         <property name="geometry">
          <rect>
-          <x>252</x>
+          <x>242</x>
           <y>102</y>
-          <width>61</width>
+          <width>71</width>
           <height>20</height>
          </rect>
         </property>
@@ -1490,9 +1490,9 @@
        <widget class="QCheckBox" name="RedList">
         <property name="geometry">
          <rect>
-          <x>252</x>
+          <x>242</x>
           <y>62</y>
-          <width>61</width>
+          <width>71</width>
           <height>20</height>
          </rect>
         </property>
@@ -1528,12 +1528,12 @@
          <rect>
           <x>12</x>
           <y>62</y>
-          <width>41</width>
+          <width>31</width>
           <height>16</height>
          </rect>
         </property>
         <property name="text">
-         <string>Sect :</string>
+         <string>Sect</string>
         </property>
        </widget>
        <widget class="QCheckBox" name="Seraph">
@@ -1555,7 +1555,7 @@
        <widget class="QLabel" name="lFortitude_4">
         <property name="geometry">
          <rect>
-          <x>337</x>
+          <x>327</x>
           <y>22</y>
           <width>29</width>
           <height>19</height>
@@ -1594,9 +1594,9 @@
        <widget class="QCheckBox" name="Anarch">
         <property name="geometry">
          <rect>
-          <x>252</x>
+          <x>242</x>
           <y>22</y>
-          <width>61</width>
+          <width>71</width>
           <height>20</height>
          </rect>
         </property>
@@ -1623,9 +1623,9 @@
        <widget class="QCheckBox" name="BurnOption">
         <property name="geometry">
          <rect>
-          <x>42</x>
+          <x>32</x>
           <y>17</y>
-          <width>81</width>
+          <width>91</width>
           <height>20</height>
          </rect>
         </property>
@@ -1687,7 +1687,7 @@
        <widget class="QLabel" name="lFortitude_3">
         <property name="geometry">
          <rect>
-          <x>21</x>
+          <x>12</x>
           <y>19</y>
           <width>19</width>
           <height>19</height>
@@ -1768,7 +1768,17 @@
      </widget>
     </item>
     <item>
-     <widget class="PItemView" name="PTVCardsResults"/>
+     <widget class="PItemView" name="PTVCardsResults">
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="showGrid">
+       <bool>false</bool>
+      </property>
+      <property name="cornerButtonEnabled">
+       <bool>false</bool>
+      </property>
+     </widget>
     </item>
    </layout>
    <zorder>PTVCardsResults</zorder>

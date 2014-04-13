@@ -5,16 +5,16 @@
         <file>icons/cost_conviction.gif</file>
         <file>icons/cost_pool.gif</file>
         <file>icons/clan/Abomination.gif</file>
-        <file>icons/clan/Ahrimanes.gif</file>
+        <file>icons/clan/Ahrimane.gif</file>
         <file>icons/clan/Akunanse.gif</file>
         <file>icons/clan/Assamite.gif</file>
         <file>icons/clan/Baali.gif</file>
-        <file>icons/clan/Blood Brothers.gif</file>
+        <file>icons/clan/Blood Brother.gif</file>
         <file>icons/clan/Brujah antitribu.gif</file>
         <file>icons/clan/Brujah.gif</file>
         <file>icons/clan/Caitiff.gif</file>
         <file>icons/clan/Daughters of Cacophony.gif</file>
-        <file>icons/clan/Followers of Set.gif</file>
+        <file>icons/clan/Follower of Set.gif</file>
         <file>icons/clan/Gangrel antitribu.gif</file>
         <file>icons/clan/Gangrel.gif</file>
         <file>icons/clan/Gargoyle.gif</file>
@@ -22,7 +22,7 @@
         <file>icons/clan/Guruhi.gif</file>
         <file>icons/clan/Harbingers of Skulls.gif</file>
         <file>icons/clan/Ishtarri.gif</file>
-        <file>icons/clan/Kyasid.gif</file>
+        <file>icons/clan/Kiasyd.gif</file>
         <file>icons/clan/Lasombra.gif</file>
         <file>icons/clan/Malkavian antitribu.gif</file>
         <file>icons/clan/Malkavian.gif</file>
@@ -126,5 +126,13 @@
         <file>icons/Merge.gif</file>
         <file>icons/delete.bmp</file>
         <file>icons/Blood.png</file>
+        <file>icons/logo_edb.png</file>
+        <file>icons/clan/Avenger.gif</file>
+        <file>icons/clan/Defender.gif</file>
+        <file>icons/clan/Innocent.gif</file>
+        <file>icons/clan/Judge.gif</file>
+        <file>icons/clan/Martyr.gif</file>
+        <file>icons/clan/Redeemer.gif</file>
+        <file>icons/clan/Visionary.gif</file>
     </qresource>
 </RCC>

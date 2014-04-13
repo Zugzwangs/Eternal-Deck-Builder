@@ -62,10 +62,9 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
         { ui->PTVCardsResults->hideColumn(i); }
     ui->PTVCardsResults->hideColumn(8);
     ui->PTVCardsResults->hideColumn(10);
-    for (int i=15; i<=19; i++)
+    for (int i=15; i<=22; i++)
         { ui->PTVCardsResults->hideColumn(i); }
-    ui->PTVCardsResults->hideColumn(21);
-    ui->PTVCardsResults->hideColumn(22);
+
     ui->PTVCardsResults->setVisible(true);
     ui->PTVCardsResults->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 

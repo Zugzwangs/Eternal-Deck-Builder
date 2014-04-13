@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'tab_search_crypt.ui'
 **
-** Created by: Qt User Interface Compiler version 5.1.1
+** Created by: Qt User Interface Compiler version 5.2.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -172,7 +172,7 @@ public:
         tab_search_crypt->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1038, 633));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1042, 629));
         verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         CryptSearchFrame = new QFrame(scrollAreaWidgetContents);
@@ -198,7 +198,7 @@ public:
         lName->setGeometry(QRect(8, 22, 41, 16));
         lCardText = new QLabel(groupBoxText);
         lCardText->setObjectName(QStringLiteral("lCardText"));
-        lCardText->setGeometry(QRect(18, 56, 31, 16));
+        lCardText->setGeometry(QRect(16, 56, 31, 16));
         lArtist = new QLabel(groupBoxText);
         lArtist->setObjectName(QStringLiteral("lArtist"));
         lArtist->setGeometry(QRect(278, 22, 31, 16));
@@ -210,13 +210,13 @@ public:
         lETextCard->setGeometry(QRect(50, 56, 431, 21));
         label_48 = new QLabel(groupBoxText);
         label_48->setObjectName(QStringLiteral("label_48"));
-        label_48->setGeometry(QRect(20, 92, 30, 16));
+        label_48->setGeometry(QRect(20, 92, 21, 16));
         cBSet_2 = new QComboBox(groupBoxText);
         cBSet_2->setObjectName(QStringLiteral("cBSet_2"));
         cBSet_2->setGeometry(QRect(50, 91, 181, 22));
         cBRarity_2 = new QComboBox(groupBoxText);
         cBRarity_2->setObjectName(QStringLiteral("cBRarity_2"));
-        cBRarity_2->setGeometry(QRect(317, 91, 165, 22));
+        cBRarity_2->setGeometry(QRect(331, 91, 151, 22));
         label_46 = new QLabel(groupBoxText);
         label_46->setObjectName(QStringLiteral("label_46"));
         label_46->setGeometry(QRect(278, 92, 41, 16));
@@ -232,6 +232,7 @@ public:
         lAbombwe->setObjectName(QStringLiteral("lAbombwe"));
         sizePolicy.setHeightForWidth(lAbombwe->sizePolicy().hasHeightForWidth());
         lAbombwe->setSizePolicy(sizePolicy);
+        lAbombwe->setMinimumSize(QSize(22, 22));
         lAbombwe->setMaximumSize(QSize(22, 22));
         lAbombwe->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/abo.png")));
         lAbombwe->setScaledContents(true);
@@ -245,6 +246,7 @@ public:
 
         lDominate = new QLabel(groupBoxDiscipline);
         lDominate->setObjectName(QStringLiteral("lDominate"));
+        lDominate->setMinimumSize(QSize(22, 22));
         lDominate->setMaximumSize(QSize(22, 22));
         lDominate->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/dom.png")));
         lDominate->setScaledContents(true);
@@ -258,6 +260,7 @@ public:
 
         lObtenebration = new QLabel(groupBoxDiscipline);
         lObtenebration->setObjectName(QStringLiteral("lObtenebration"));
+        lObtenebration->setMinimumSize(QSize(22, 22));
         lObtenebration->setMaximumSize(QSize(22, 22));
         lObtenebration->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/obt.png")));
         lObtenebration->setScaledContents(true);
@@ -273,6 +276,7 @@ public:
         lSpiritus->setObjectName(QStringLiteral("lSpiritus"));
         sizePolicy.setHeightForWidth(lSpiritus->sizePolicy().hasHeightForWidth());
         lSpiritus->setSizePolicy(sizePolicy);
+        lSpiritus->setMinimumSize(QSize(22, 22));
         lSpiritus->setMaximumSize(QSize(22, 22));
         lSpiritus->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/spi.png")));
         lSpiritus->setScaledContents(true);
@@ -288,6 +292,7 @@ public:
         lAnimalism->setObjectName(QStringLiteral("lAnimalism"));
         sizePolicy.setHeightForWidth(lAnimalism->sizePolicy().hasHeightForWidth());
         lAnimalism->setSizePolicy(sizePolicy);
+        lAnimalism->setMinimumSize(QSize(22, 22));
         lAnimalism->setMaximumSize(QSize(22, 22));
         lAnimalism->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/ani.png")));
         lAnimalism->setScaledContents(true);
@@ -301,6 +306,7 @@ public:
 
         lFortitude = new QLabel(groupBoxDiscipline);
         lFortitude->setObjectName(QStringLiteral("lFortitude"));
+        lFortitude->setMinimumSize(QSize(22, 22));
         lFortitude->setMaximumSize(QSize(22, 22));
         lFortitude->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/for.png")));
         lFortitude->setScaledContents(true);
@@ -316,6 +322,7 @@ public:
         lPotence->setObjectName(QStringLiteral("lPotence"));
         sizePolicy.setHeightForWidth(lPotence->sizePolicy().hasHeightForWidth());
         lPotence->setSizePolicy(sizePolicy);
+        lPotence->setMinimumSize(QSize(22, 22));
         lPotence->setMaximumSize(QSize(22, 22));
         lPotence->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/pot.png")));
         lPotence->setScaledContents(true);
@@ -331,6 +338,7 @@ public:
         lTemporis->setObjectName(QStringLiteral("lTemporis"));
         sizePolicy.setHeightForWidth(lTemporis->sizePolicy().hasHeightForWidth());
         lTemporis->setSizePolicy(sizePolicy);
+        lTemporis->setMinimumSize(QSize(22, 22));
         lTemporis->setMaximumSize(QSize(22, 22));
         lTemporis->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/tem.png")));
         lTemporis->setScaledContents(true);
@@ -346,6 +354,7 @@ public:
         lAuspex->setObjectName(QStringLiteral("lAuspex"));
         sizePolicy.setHeightForWidth(lAuspex->sizePolicy().hasHeightForWidth());
         lAuspex->setSizePolicy(sizePolicy);
+        lAuspex->setMinimumSize(QSize(22, 22));
         lAuspex->setMaximumSize(QSize(22, 22));
         lAuspex->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/aus.png")));
         lAuspex->setScaledContents(true);
@@ -359,6 +368,7 @@ public:
 
         lMelpominee = new QLabel(groupBoxDiscipline);
         lMelpominee->setObjectName(QStringLiteral("lMelpominee"));
+        lMelpominee->setMinimumSize(QSize(22, 22));
         lMelpominee->setMaximumSize(QSize(22, 22));
         lMelpominee->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/mel.png")));
         lMelpominee->setScaledContents(true);
@@ -374,6 +384,7 @@ public:
         lPresence->setObjectName(QStringLiteral("lPresence"));
         sizePolicy.setHeightForWidth(lPresence->sizePolicy().hasHeightForWidth());
         lPresence->setSizePolicy(sizePolicy);
+        lPresence->setMinimumSize(QSize(22, 22));
         lPresence->setMaximumSize(QSize(22, 22));
         lPresence->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/pre.png")));
         lPresence->setScaledContents(true);
@@ -389,6 +400,7 @@ public:
         lThanatosis->setObjectName(QStringLiteral("lThanatosis"));
         sizePolicy.setHeightForWidth(lThanatosis->sizePolicy().hasHeightForWidth());
         lThanatosis->setSizePolicy(sizePolicy);
+        lThanatosis->setMinimumSize(QSize(22, 22));
         lThanatosis->setMaximumSize(QSize(22, 22));
         lThanatosis->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/tha.png")));
         lThanatosis->setScaledContents(true);
@@ -404,6 +416,7 @@ public:
         lCelerity->setObjectName(QStringLiteral("lCelerity"));
         sizePolicy.setHeightForWidth(lCelerity->sizePolicy().hasHeightForWidth());
         lCelerity->setSizePolicy(sizePolicy);
+        lCelerity->setMinimumSize(QSize(22, 22));
         lCelerity->setMaximumSize(QSize(22, 22));
         lCelerity->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/cel.png")));
         lCelerity->setScaledContents(true);
@@ -417,6 +430,7 @@ public:
 
         lMytherceria = new QLabel(groupBoxDiscipline);
         lMytherceria->setObjectName(QStringLiteral("lMytherceria"));
+        lMytherceria->setMinimumSize(QSize(22, 22));
         lMytherceria->setMaximumSize(QSize(22, 22));
         lMytherceria->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/myt.png")));
         lMytherceria->setScaledContents(true);
@@ -432,6 +446,7 @@ public:
         lProtean->setObjectName(QStringLiteral("lProtean"));
         sizePolicy.setHeightForWidth(lProtean->sizePolicy().hasHeightForWidth());
         lProtean->setSizePolicy(sizePolicy);
+        lProtean->setMinimumSize(QSize(22, 22));
         lProtean->setMaximumSize(QSize(22, 22));
         lProtean->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/pro.png")));
         lProtean->setScaledContents(true);
@@ -447,6 +462,7 @@ public:
         lThaumaturgy->setObjectName(QStringLiteral("lThaumaturgy"));
         sizePolicy.setHeightForWidth(lThaumaturgy->sizePolicy().hasHeightForWidth());
         lThaumaturgy->setSizePolicy(sizePolicy);
+        lThaumaturgy->setMinimumSize(QSize(22, 22));
         lThaumaturgy->setMaximumSize(QSize(22, 22));
         lThaumaturgy->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/thn.png")));
         lThaumaturgy->setScaledContents(true);
@@ -462,6 +478,7 @@ public:
         lChimerstry->setObjectName(QStringLiteral("lChimerstry"));
         sizePolicy.setHeightForWidth(lChimerstry->sizePolicy().hasHeightForWidth());
         lChimerstry->setSizePolicy(sizePolicy);
+        lChimerstry->setMinimumSize(QSize(22, 22));
         lChimerstry->setMaximumSize(QSize(22, 22));
         lChimerstry->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/chi.png")));
         lChimerstry->setScaledContents(true);
@@ -475,6 +492,7 @@ public:
 
         lNecromancy = new QLabel(groupBoxDiscipline);
         lNecromancy->setObjectName(QStringLiteral("lNecromancy"));
+        lNecromancy->setMinimumSize(QSize(22, 22));
         lNecromancy->setMaximumSize(QSize(22, 22));
         lNecromancy->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/nec.png")));
         lNecromancy->setScaledContents(true);
@@ -490,6 +508,7 @@ public:
         lQuietus->setObjectName(QStringLiteral("lQuietus"));
         sizePolicy.setHeightForWidth(lQuietus->sizePolicy().hasHeightForWidth());
         lQuietus->setSizePolicy(sizePolicy);
+        lQuietus->setMinimumSize(QSize(22, 22));
         lQuietus->setMaximumSize(QSize(22, 22));
         lQuietus->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/qui.png")));
         lQuietus->setScaledContents(true);
@@ -505,6 +524,7 @@ public:
         lValeren->setObjectName(QStringLiteral("lValeren"));
         sizePolicy.setHeightForWidth(lValeren->sizePolicy().hasHeightForWidth());
         lValeren->setSizePolicy(sizePolicy);
+        lValeren->setMinimumSize(QSize(22, 22));
         lValeren->setMaximumSize(QSize(22, 22));
         lValeren->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/val.png")));
         lValeren->setScaledContents(true);
@@ -520,6 +540,7 @@ public:
         lDaimoinon->setObjectName(QStringLiteral("lDaimoinon"));
         sizePolicy.setHeightForWidth(lDaimoinon->sizePolicy().hasHeightForWidth());
         lDaimoinon->setSizePolicy(sizePolicy);
+        lDaimoinon->setMinimumSize(QSize(22, 22));
         lDaimoinon->setMaximumSize(QSize(22, 22));
         lDaimoinon->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/dai.png")));
         lDaimoinon->setScaledContents(true);
@@ -533,6 +554,7 @@ public:
 
         lObeah = new QLabel(groupBoxDiscipline);
         lObeah->setObjectName(QStringLiteral("lObeah"));
+        lObeah->setMinimumSize(QSize(22, 22));
         lObeah->setMaximumSize(QSize(22, 22));
         lObeah->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/obe.png")));
         lObeah->setScaledContents(true);
@@ -548,6 +570,7 @@ public:
         lSanguinus->setObjectName(QStringLiteral("lSanguinus"));
         sizePolicy.setHeightForWidth(lSanguinus->sizePolicy().hasHeightForWidth());
         lSanguinus->setSizePolicy(sizePolicy);
+        lSanguinus->setMinimumSize(QSize(22, 22));
         lSanguinus->setMaximumSize(QSize(22, 22));
         lSanguinus->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/san.png")));
         lSanguinus->setScaledContents(true);
@@ -563,6 +586,7 @@ public:
         lVicissitude->setObjectName(QStringLiteral("lVicissitude"));
         sizePolicy.setHeightForWidth(lVicissitude->sizePolicy().hasHeightForWidth());
         lVicissitude->setSizePolicy(sizePolicy);
+        lVicissitude->setMinimumSize(QSize(22, 22));
         lVicissitude->setMaximumSize(QSize(22, 22));
         lVicissitude->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/vic.png")));
         lVicissitude->setScaledContents(true);
@@ -578,6 +602,7 @@ public:
         lDementation->setObjectName(QStringLiteral("lDementation"));
         sizePolicy.setHeightForWidth(lDementation->sizePolicy().hasHeightForWidth());
         lDementation->setSizePolicy(sizePolicy);
+        lDementation->setMinimumSize(QSize(22, 22));
         lDementation->setMaximumSize(QSize(22, 22));
         lDementation->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/dem.png")));
         lDementation->setScaledContents(true);
@@ -591,6 +616,7 @@ public:
 
         lObfuscate = new QLabel(groupBoxDiscipline);
         lObfuscate->setObjectName(QStringLiteral("lObfuscate"));
+        lObfuscate->setMinimumSize(QSize(22, 22));
         lObfuscate->setMaximumSize(QSize(22, 22));
         lObfuscate->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/obf.png")));
         lObfuscate->setScaledContents(true);
@@ -606,6 +632,7 @@ public:
         lSerpentis->setObjectName(QStringLiteral("lSerpentis"));
         sizePolicy.setHeightForWidth(lSerpentis->sizePolicy().hasHeightForWidth());
         lSerpentis->setSizePolicy(sizePolicy);
+        lSerpentis->setMinimumSize(QSize(22, 22));
         lSerpentis->setMaximumSize(QSize(22, 22));
         lSerpentis->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/ser.png")));
         lSerpentis->setScaledContents(true);
@@ -621,6 +648,7 @@ public:
         lVisceratika->setObjectName(QStringLiteral("lVisceratika"));
         sizePolicy.setHeightForWidth(lVisceratika->sizePolicy().hasHeightForWidth());
         lVisceratika->setSizePolicy(sizePolicy);
+        lVisceratika->setMinimumSize(QSize(22, 22));
         lVisceratika->setMaximumSize(QSize(22, 22));
         lVisceratika->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/vis.png")));
         lVisceratika->setScaledContents(true);
@@ -641,7 +669,8 @@ public:
         lDefense->setObjectName(QStringLiteral("lDefense"));
         sizePolicy.setHeightForWidth(lDefense->sizePolicy().hasHeightForWidth());
         lDefense->setSizePolicy(sizePolicy);
-        lDefense->setMaximumSize(QSize(30, 30));
+        lDefense->setMinimumSize(QSize(22, 22));
+        lDefense->setMaximumSize(QSize(22, 22));
         lDefense->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/def.png")));
         lDefense->setScaledContents(true);
 
@@ -656,7 +685,8 @@ public:
         lInnocence->setObjectName(QStringLiteral("lInnocence"));
         sizePolicy.setHeightForWidth(lInnocence->sizePolicy().hasHeightForWidth());
         lInnocence->setSizePolicy(sizePolicy);
-        lInnocence->setMaximumSize(QSize(30, 30));
+        lInnocence->setMinimumSize(QSize(22, 22));
+        lInnocence->setMaximumSize(QSize(22, 22));
         lInnocence->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/inn.png")));
         lInnocence->setScaledContents(true);
 
@@ -672,7 +702,8 @@ public:
         lJudgment->setObjectName(QStringLiteral("lJudgment"));
         sizePolicy.setHeightForWidth(lJudgment->sizePolicy().hasHeightForWidth());
         lJudgment->setSizePolicy(sizePolicy);
-        lJudgment->setMaximumSize(QSize(30, 30));
+        lJudgment->setMinimumSize(QSize(22, 22));
+        lJudgment->setMaximumSize(QSize(22, 22));
         lJudgment->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/jud.png")));
         lJudgment->setScaledContents(true);
 
@@ -687,7 +718,8 @@ public:
         lMartyrdom->setObjectName(QStringLiteral("lMartyrdom"));
         sizePolicy.setHeightForWidth(lMartyrdom->sizePolicy().hasHeightForWidth());
         lMartyrdom->setSizePolicy(sizePolicy);
-        lMartyrdom->setMaximumSize(QSize(30, 30));
+        lMartyrdom->setMinimumSize(QSize(22, 22));
+        lMartyrdom->setMaximumSize(QSize(22, 22));
         lMartyrdom->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/mar.png")));
         lMartyrdom->setScaledContents(true);
 
@@ -702,7 +734,8 @@ public:
         lRedemption->setObjectName(QStringLiteral("lRedemption"));
         sizePolicy.setHeightForWidth(lRedemption->sizePolicy().hasHeightForWidth());
         lRedemption->setSizePolicy(sizePolicy);
-        lRedemption->setMaximumSize(QSize(30, 30));
+        lRedemption->setMinimumSize(QSize(22, 22));
+        lRedemption->setMaximumSize(QSize(22, 22));
         lRedemption->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/red.png")));
         lRedemption->setScaledContents(true);
 
@@ -717,7 +750,8 @@ public:
         lVengeance->setObjectName(QStringLiteral("lVengeance"));
         sizePolicy.setHeightForWidth(lVengeance->sizePolicy().hasHeightForWidth());
         lVengeance->setSizePolicy(sizePolicy);
-        lVengeance->setMaximumSize(QSize(30, 30));
+        lVengeance->setMinimumSize(QSize(22, 22));
+        lVengeance->setMaximumSize(QSize(22, 22));
         lVengeance->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/ven.png")));
         lVengeance->setScaledContents(true);
 
@@ -732,7 +766,8 @@ public:
         lVision->setObjectName(QStringLiteral("lVision"));
         sizePolicy.setHeightForWidth(lVision->sizePolicy().hasHeightForWidth());
         lVision->setSizePolicy(sizePolicy);
-        lVision->setMaximumSize(QSize(30, 30));
+        lVision->setMinimumSize(QSize(22, 22));
+        lVision->setMaximumSize(QSize(22, 22));
         lVision->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/vis2.png")));
         lVision->setScaledContents(true);
 
@@ -788,7 +823,7 @@ public:
         ckBInfernal->setLayoutDirection(Qt::RightToLeft);
         ckBBlackHand = new QCheckBox(groupBoxTrait);
         ckBBlackHand->setObjectName(QStringLiteral("ckBBlackHand"));
-        ckBBlackHand->setGeometry(QRect(244, 30, 81, 20));
+        ckBBlackHand->setGeometry(QRect(234, 30, 91, 20));
         ckBBlackHand->setLayoutDirection(Qt::RightToLeft);
         ckBRedList = new QCheckBox(groupBoxTrait);
         ckBRedList->setObjectName(QStringLiteral("ckBRedList"));
@@ -876,6 +911,8 @@ public:
 
         PTVCryptResults = new PItemView(scrollAreaWidgetContents);
         PTVCryptResults->setObjectName(QStringLiteral("PTVCryptResults"));
+        PTVCryptResults->setAlternatingRowColors(true);
+        PTVCryptResults->setShowGrid(false);
 
         verticalLayout->addWidget(PTVCryptResults);
 
@@ -891,11 +928,11 @@ public:
         tab_search_crypt->setWindowTitle(QApplication::translate("tab_search_crypt", "ScrollArea", 0));
         groupBoxText->setTitle(QApplication::translate("tab_search_crypt", "General : ", 0));
         lENameCard->setText(QString());
-        lName->setText(QApplication::translate("tab_search_crypt", "Name :", 0));
-        lCardText->setText(QApplication::translate("tab_search_crypt", "Text :", 0));
+        lName->setText(QApplication::translate("tab_search_crypt", "Name", 0));
+        lCardText->setText(QApplication::translate("tab_search_crypt", "Text", 0));
         lArtist->setText(QApplication::translate("tab_search_crypt", "Artist :", 0));
-        label_48->setText(QApplication::translate("tab_search_crypt", "Set :", 0));
-        label_46->setText(QApplication::translate("tab_search_crypt", "Rarity :", 0));
+        label_48->setText(QApplication::translate("tab_search_crypt", "Set", 0));
+        label_46->setText(QApplication::translate("tab_search_crypt", "Rarity", 0));
         groupBoxDiscipline->setTitle(QApplication::translate("tab_search_crypt", "Disciplines :  ", 0));
         lAbombwe->setText(QString());
         lDominate->setText(QString());
@@ -983,14 +1020,14 @@ public:
         ckBBloodCurse->setText(QApplication::translate("tab_search_crypt", "Blood curse", 0));
         ckBScare->setText(QApplication::translate("tab_search_crypt", "Scarce", 0));
         ckBSterile->setText(QApplication::translate("tab_search_crypt", "Sterile", 0));
-        lSect->setText(QApplication::translate("tab_search_crypt", "Sect :", 0));
-        lClan->setText(QApplication::translate("tab_search_crypt", "Clan :", 0));
-        lTitle->setText(QApplication::translate("tab_search_crypt", "Title :", 0));
+        lSect->setText(QApplication::translate("tab_search_crypt", "Sect", 0));
+        lClan->setText(QApplication::translate("tab_search_crypt", "Clan", 0));
+        lTitle->setText(QApplication::translate("tab_search_crypt", "Title", 0));
         groupBox_2->setTitle(QApplication::translate("tab_search_crypt", "Options : ", 0));
         pBCryptClearForm->setText(QApplication::translate("tab_search_crypt", "Clear Form", 0));
         pBCryptSearch->setText(QApplication::translate("tab_search_crypt", "Recherche", 0));
         groupBox->setTitle(QApplication::translate("tab_search_crypt", "GroupBox", 0));
-        label_21->setText(QApplication::translate("tab_search_crypt", "Group :", 0));
+        label_21->setText(QApplication::translate("tab_search_crypt", "Group", 0));
         label_29->setText(QApplication::translate("tab_search_crypt", "Capacity :", 0));
     } // retranslateUi
 

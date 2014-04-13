@@ -41,6 +41,7 @@ class Carte : public QObject
     Q_PROPERTY(QString Commentaires READ getCommentaires)
 
 public:
+
     Carte(QObject* parent=0);       // create an empty card
     Carte(const Carte& c);          // copy constructor
     Carte(QStringList);             // create and setup a card. the class doesn't verify if the given list is correct
@@ -75,6 +76,31 @@ public:
     void SetCard(QStringList L);
     void ClearCard();
 
+private:
+    CardType Kind;
+    QString Name;
+    QString Sets;
+    QString ImageFile;
+    QString UrlCard;
+    QString Expansion;
+    QString Rarity;
+    QString Type;
+    QString SubType;
+    QString Clan;
+    QString Capacity;
+    QString Grouping;
+    QString Discipline;
+    QString Sect;
+    QString PCost;
+    QString BCost;
+    QString CCost;
+    QString Title;
+    QString Trait;
+    QString KeyWords;
+    QString Limitation;
+    QString Text;
+    QString Artist;
+    QString Commentaires;
 };
 
 class Deck

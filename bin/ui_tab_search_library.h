@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'tab_search_library.ui'
 **
-** Created by: Qt User Interface Compiler version 5.1.1
+** Created by: Qt User Interface Compiler version 5.2.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -306,7 +306,7 @@ public:
         label_47->setGeometry(QRect(16, 88, 21, 16));
         cBRarity = new QComboBox(CardgroupBoxGeneral);
         cBRarity->setObjectName(QStringLiteral("cBRarity"));
-        cBRarity->setGeometry(QRect(271, 88, 151, 22));
+        cBRarity->setGeometry(QRect(281, 88, 141, 22));
         label_45 = new QLabel(CardgroupBoxGeneral);
         label_45->setObjectName(QStringLiteral("label_45"));
         label_45->setGeometry(QRect(233, 88, 41, 16));
@@ -315,7 +315,7 @@ public:
         CardgroupBoxOptions->setGeometry(QRect(0, 260, 181, 51));
         pBCardSearch = new QPushButton(CardgroupBoxOptions);
         pBCardSearch->setObjectName(QStringLiteral("pBCardSearch"));
-        pBCardSearch->setGeometry(QRect(20, 14, 70, 30));
+        pBCardSearch->setGeometry(QRect(19, 14, 71, 30));
         pBCardClearForm = new QPushButton(CardgroupBoxOptions);
         pBCardClearForm->setObjectName(QStringLiteral("pBCardClearForm"));
         pBCardClearForm->setGeometry(QRect(100, 14, 70, 30));
@@ -324,13 +324,13 @@ public:
         CardgroupBoxFilters->setGeometry(QRect(438, 0, 251, 120));
         label_43 = new QLabel(CardgroupBoxFilters);
         label_43->setObjectName(QStringLiteral("label_43"));
-        label_43->setGeometry(QRect(40, 30, 41, 16));
+        label_43->setGeometry(QRect(40, 30, 31, 16));
         cBType = new QComboBox(CardgroupBoxFilters);
         cBType->setObjectName(QStringLiteral("cBType"));
         cBType->setGeometry(QRect(80, 30, 161, 22));
         label_4 = new QLabel(CardgroupBoxFilters);
         label_4->setObjectName(QStringLiteral("label_4"));
-        label_4->setGeometry(QRect(10, 80, 71, 16));
+        label_4->setGeometry(QRect(10, 80, 61, 16));
         cBSousType = new QComboBox(CardgroupBoxFilters);
         cBSousType->setObjectName(QStringLiteral("cBSousType"));
         cBSousType->setGeometry(QRect(80, 80, 161, 22));
@@ -617,19 +617,19 @@ public:
         label_49->setGeometry(QRect(12, 22, 41, 16));
         Flight = new QCheckBox(CardgroupBoxRequirements);
         Flight->setObjectName(QStringLiteral("Flight"));
-        Flight->setGeometry(QRect(363, 22, 51, 20));
+        Flight->setGeometry(QRect(353, 22, 61, 20));
         Flight->setLayoutDirection(Qt::RightToLeft);
         BlackHand = new QCheckBox(CardgroupBoxRequirements);
         BlackHand->setObjectName(QStringLiteral("BlackHand"));
-        BlackHand->setGeometry(QRect(333, 62, 81, 20));
+        BlackHand->setGeometry(QRect(323, 62, 91, 20));
         BlackHand->setLayoutDirection(Qt::RightToLeft);
         Infernal = new QCheckBox(CardgroupBoxRequirements);
         Infernal->setObjectName(QStringLiteral("Infernal"));
-        Infernal->setGeometry(QRect(252, 102, 61, 20));
+        Infernal->setGeometry(QRect(242, 102, 71, 20));
         Infernal->setLayoutDirection(Qt::RightToLeft);
         RedList = new QCheckBox(CardgroupBoxRequirements);
         RedList->setObjectName(QStringLiteral("RedList"));
-        RedList->setGeometry(QRect(252, 62, 61, 20));
+        RedList->setGeometry(QRect(242, 62, 71, 20));
         RedList->setLayoutDirection(Qt::RightToLeft);
         cBClan_2 = new QComboBox(CardgroupBoxRequirements);
         cBClan_2->setObjectName(QStringLiteral("cBClan_2"));
@@ -639,14 +639,14 @@ public:
         cBSect_2->setGeometry(QRect(43, 62, 191, 21));
         lSect_2 = new QLabel(CardgroupBoxRequirements);
         lSect_2->setObjectName(QStringLiteral("lSect_2"));
-        lSect_2->setGeometry(QRect(12, 62, 41, 16));
+        lSect_2->setGeometry(QRect(12, 62, 31, 16));
         Seraph = new QCheckBox(CardgroupBoxRequirements);
         Seraph->setObjectName(QStringLiteral("Seraph"));
         Seraph->setGeometry(QRect(333, 102, 81, 20));
         Seraph->setLayoutDirection(Qt::RightToLeft);
         lFortitude_4 = new QLabel(CardgroupBoxRequirements);
         lFortitude_4->setObjectName(QStringLiteral("lFortitude_4"));
-        lFortitude_4->setGeometry(QRect(337, 22, 29, 19));
+        lFortitude_4->setGeometry(QRect(327, 22, 29, 19));
         lFortitude_4->setPixmap(QPixmap(QString::fromUtf8(":/icons/flight.gif")));
         lTitle_2 = new QLabel(CardgroupBoxRequirements);
         lTitle_2->setObjectName(QStringLiteral("lTitle_2"));
@@ -656,14 +656,14 @@ public:
         cBTitle_2->setGeometry(QRect(43, 102, 191, 21));
         Anarch = new QCheckBox(CardgroupBoxRequirements);
         Anarch->setObjectName(QStringLiteral("Anarch"));
-        Anarch->setGeometry(QRect(252, 22, 61, 20));
+        Anarch->setGeometry(QRect(242, 22, 71, 20));
         Anarch->setLayoutDirection(Qt::RightToLeft);
         CardgroupBoxOthers = new QGroupBox(CardSearchFrame);
         CardgroupBoxOthers->setObjectName(QStringLiteral("CardgroupBoxOthers"));
         CardgroupBoxOthers->setGeometry(QRect(438, 121, 251, 141));
         BurnOption = new QCheckBox(CardgroupBoxOthers);
         BurnOption->setObjectName(QStringLiteral("BurnOption"));
-        BurnOption->setGeometry(QRect(42, 17, 81, 20));
+        BurnOption->setGeometry(QRect(32, 17, 91, 20));
         BurnOption->setLayoutDirection(Qt::RightToLeft);
         Anarch_3_Way = new QCheckBox(CardgroupBoxOthers);
         Anarch_3_Way->setObjectName(QStringLiteral("Anarch_3_Way"));
@@ -679,7 +679,7 @@ public:
         Multi_discipline->setLayoutDirection(Qt::RightToLeft);
         lFortitude_3 = new QLabel(CardgroupBoxOthers);
         lFortitude_3->setObjectName(QStringLiteral("lFortitude_3"));
-        lFortitude_3->setGeometry(QRect(21, 19, 19, 19));
+        lFortitude_3->setGeometry(QRect(12, 19, 19, 19));
         lFortitude_3->setPixmap(QPixmap(QString::fromUtf8(":/icons/burn_option.gif")));
         Boon = new QCheckBox(CardgroupBoxOthers);
         Boon->setObjectName(QStringLiteral("Boon"));
@@ -702,6 +702,9 @@ public:
 
         PTVCardsResults = new PItemView(scrollAreaWidgetContents);
         PTVCardsResults->setObjectName(QStringLiteral("PTVCardsResults"));
+        PTVCardsResults->setAlternatingRowColors(true);
+        PTVCardsResults->setShowGrid(false);
+        PTVCardsResults->setCornerButtonEnabled(false);
 
         verticalLayout->addWidget(PTVCardsResults);
 
@@ -731,16 +734,16 @@ public:
         label_37->setText(QApplication::translate("tab_search_library", "Blood cost :", 0));
         CardgroupBoxGeneral->setTitle(QApplication::translate("tab_search_library", "General ", 0));
         label_31->setText(QApplication::translate("tab_search_library", "Name :", 0));
-        label_33->setText(QApplication::translate("tab_search_library", "Text :", 0));
+        label_33->setText(QApplication::translate("tab_search_library", "Text ", 0));
         label_35->setText(QApplication::translate("tab_search_library", "Artist :", 0));
         label_47->setText(QApplication::translate("tab_search_library", "Set :", 0));
-        label_45->setText(QApplication::translate("tab_search_library", "Rarity :", 0));
+        label_45->setText(QApplication::translate("tab_search_library", "Rarity", 0));
         CardgroupBoxOptions->setTitle(QApplication::translate("tab_search_library", "Actions ", 0));
-        pBCardSearch->setText(QApplication::translate("tab_search_library", "Rechercher", 0));
+        pBCardSearch->setText(QApplication::translate("tab_search_library", "Search", 0));
         pBCardClearForm->setText(QApplication::translate("tab_search_library", "Clear Form", 0));
         CardgroupBoxFilters->setTitle(QApplication::translate("tab_search_library", "Filters ", 0));
-        label_43->setText(QApplication::translate("tab_search_library", "Type :", 0));
-        label_4->setText(QApplication::translate("tab_search_library", "Sous type :", 0));
+        label_43->setText(QApplication::translate("tab_search_library", "Type", 0));
+        label_4->setText(QApplication::translate("tab_search_library", "Sous type", 0));
         CardgroupBoxDiscipline->setTitle(QApplication::translate("tab_search_library", "Disciplines : ", 0));
         abo->setText(QString());
         dem->setText(QString());
@@ -778,7 +781,7 @@ public:
         BlackHand->setText(QApplication::translate("tab_search_library", "Black hand", 0));
         Infernal->setText(QApplication::translate("tab_search_library", "Infernal", 0));
         RedList->setText(QApplication::translate("tab_search_library", "Red list", 0));
-        lSect_2->setText(QApplication::translate("tab_search_library", "Sect :", 0));
+        lSect_2->setText(QApplication::translate("tab_search_library", "Sect", 0));
         Seraph->setText(QApplication::translate("tab_search_library", "Seraph", 0));
         lFortitude_4->setText(QString());
         lTitle_2->setText(QApplication::translate("tab_search_library", "Title :", 0));

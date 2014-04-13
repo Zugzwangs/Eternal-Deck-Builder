@@ -47,10 +47,12 @@ tab_search_crypt::tab_search_crypt(QWidget *parent) : QScrollArea(parent), ui(ne
     ui->PTVCryptResults->hideColumn(0);
     for (int i=2; i<=7; i++)
         { ui->PTVCryptResults->hideColumn(i); }
-    ui->PTVCryptResults->hideColumn(15);
+    //ui->PTVCryptResults->hideColumn(15);
     ui->PTVCryptResults->hideColumn(16);
+    ui->PTVCryptResults->hideColumn(17);
     ui->PTVCryptResults->hideColumn(18);
     ui->PTVCryptResults->hideColumn(19);
+
     ui->PTVCryptResults->setVisible(true);
     ui->PTVCryptResults->resizeColumnsToContents();
 

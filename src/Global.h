@@ -8,7 +8,7 @@ namespace VtesInfo
 
     // On déclare les listes contenant la base de connaissance du jeu
 
-    const QStringList ExpList = QStringList() << "Keepers of Tradition" << "Legacies of Blood" << "Third Edition" << "Bloodlines" << "Anarchs" << "Sabbat"
+    const QStringList ExpList = QStringList()   << "Keepers of Tradition" << "Legacies of Blood" << "Third Edition" << "Bloodlines" << "Anarchs" << "Sabbat"
                                                 << "Ebony Kingdom" << "Camarilla Edition" << "Heirs to the Blood" << "Lords of The Night" << "Ancient Hearts"
                                                 << "Final Nights" << "Sword of Caine" << "Dark Sovereigns" << "Black Hand" << "10th Anniversary" << "Sabbat War"
                                                 << "Blood Shadow Court" << "Promo" << "Kindred Most Wanted"<<  "Twilight Rebellion" << "Nights of Reckoning";
@@ -19,6 +19,8 @@ namespace VtesInfo
                                                 << "Nagaraja" << "Nosferatu" << "Nosferatu antitribu" << "Osebo" << "Pander" << "Ravnos" << "Salubri" << "Salubri antitribu"
                                                 << "Samedi" << "Toreador" << "Toreador antitribu" << "Tremere" << "Tremere antitribu" << "True Brujah" << "Tzimisce"
                                                 << "Ventrue" << "Ventrue antitribu";
+
+    const QStringList CreedList = QStringList() << "Avenger" << "Defender" << "Innocent" << "Judge" << "Martyr" << "Redeemer" << "Visionary";
 
     const QStringList TitlesList = QStringList() << "Titled" << "Primogen" << "Prince" << "Justicar" << "Inner Circle" << "Bishop"
                                                  << "Archbishop" << "Cardinal" << "Regent" << "Priscus" << "1 vote" << "2 votes"

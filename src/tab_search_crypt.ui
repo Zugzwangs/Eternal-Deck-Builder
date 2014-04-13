@@ -36,8 +36,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1038</width>
-     <height>633</height>
+     <width>1042</width>
+     <height>629</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -102,20 +102,20 @@
          </rect>
         </property>
         <property name="text">
-         <string>Name :</string>
+         <string>Name</string>
         </property>
        </widget>
        <widget class="QLabel" name="lCardText">
         <property name="geometry">
          <rect>
-          <x>18</x>
+          <x>16</x>
           <y>56</y>
           <width>31</width>
           <height>16</height>
          </rect>
         </property>
         <property name="text">
-         <string>Text :</string>
+         <string>Text</string>
         </property>
        </widget>
        <widget class="QLabel" name="lArtist">
@@ -156,12 +156,12 @@
          <rect>
           <x>20</x>
           <y>92</y>
-          <width>30</width>
+          <width>21</width>
           <height>16</height>
          </rect>
         </property>
         <property name="text">
-         <string>Set :</string>
+         <string>Set</string>
         </property>
        </widget>
        <widget class="QComboBox" name="cBSet_2">
@@ -177,9 +177,9 @@
        <widget class="QComboBox" name="cBRarity_2">
         <property name="geometry">
          <rect>
-          <x>317</x>
+          <x>331</x>
           <y>91</y>
-          <width>165</width>
+          <width>151</width>
           <height>22</height>
          </rect>
         </property>
@@ -194,7 +194,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Rarity :</string>
+         <string>Rarity</string>
         </property>
        </widget>
       </widget>
@@ -237,6 +237,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -259,6 +265,12 @@
         </item>
         <item row="0" column="2">
          <widget class="QLabel" name="lDominate">
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -281,6 +293,12 @@
         </item>
         <item row="0" column="4">
          <widget class="QLabel" name="lObtenebration">
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -308,6 +326,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
           </property>
           <property name="maximumSize">
            <size>
@@ -337,6 +361,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -359,6 +389,12 @@
         </item>
         <item row="1" column="2">
          <widget class="QLabel" name="lFortitude">
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -386,6 +422,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
           </property>
           <property name="maximumSize">
            <size>
@@ -415,6 +457,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -443,6 +491,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -465,6 +519,12 @@
         </item>
         <item row="2" column="2">
          <widget class="QLabel" name="lMelpominee">
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -492,6 +552,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
           </property>
           <property name="maximumSize">
            <size>
@@ -521,6 +587,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -549,6 +621,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -568,6 +646,12 @@
         </item>
         <item row="3" column="2">
          <widget class="QLabel" name="lMytherceria">
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -595,6 +679,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
           </property>
           <property name="maximumSize">
            <size>
@@ -624,6 +714,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -652,6 +748,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -671,6 +773,12 @@
         </item>
         <item row="4" column="2">
          <widget class="QLabel" name="lNecromancy">
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -698,6 +806,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
           </property>
           <property name="maximumSize">
            <size>
@@ -727,6 +841,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -755,6 +875,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -777,6 +903,12 @@
         </item>
         <item row="5" column="2">
          <widget class="QLabel" name="lObeah">
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -804,6 +936,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
           </property>
           <property name="maximumSize">
            <size>
@@ -833,6 +971,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -861,6 +1005,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -883,6 +1033,12 @@
         </item>
         <item row="6" column="2">
          <widget class="QLabel" name="lObfuscate">
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -911,6 +1067,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>22</width>
@@ -938,6 +1100,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
           </property>
           <property name="maximumSize">
            <size>
@@ -982,10 +1150,16 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>22</width>
+            <height>22</height>
            </size>
           </property>
           <property name="text">
@@ -1026,10 +1200,16 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>22</width>
+            <height>22</height>
            </size>
           </property>
           <property name="text">
@@ -1073,10 +1253,16 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>22</width>
+            <height>22</height>
            </size>
           </property>
           <property name="text">
@@ -1117,10 +1303,16 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>22</width>
+            <height>22</height>
            </size>
           </property>
           <property name="text">
@@ -1161,10 +1353,16 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>22</width>
+            <height>22</height>
            </size>
           </property>
           <property name="text">
@@ -1205,10 +1403,16 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>22</width>
+            <height>22</height>
            </size>
           </property>
           <property name="text">
@@ -1249,10 +1453,16 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>22</width>
+            <height>22</height>
            </size>
           </property>
           <property name="text">
@@ -1438,9 +1648,9 @@
        <widget class="QCheckBox" name="ckBBlackHand">
         <property name="geometry">
          <rect>
-          <x>244</x>
+          <x>234</x>
           <y>30</y>
-          <width>81</width>
+          <width>91</width>
           <height>20</height>
          </rect>
         </property>
@@ -1557,7 +1767,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Sect :</string>
+         <string>Sect</string>
         </property>
        </widget>
        <widget class="QComboBox" name="cBSect">
@@ -1580,7 +1790,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Clan :</string>
+         <string>Clan</string>
         </property>
        </widget>
        <widget class="QComboBox" name="cBTitle">
@@ -1603,7 +1813,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Title :</string>
+         <string>Title</string>
         </property>
        </widget>
        <widget class="QComboBox" name="cBClan">
@@ -1678,7 +1888,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Group :</string>
+         <string>Group</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_29">
@@ -1760,7 +1970,14 @@
      </widget>
     </item>
     <item>
-     <widget class="PItemView" name="PTVCryptResults"/>
+     <widget class="PItemView" name="PTVCryptResults">
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="showGrid">
+       <bool>false</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

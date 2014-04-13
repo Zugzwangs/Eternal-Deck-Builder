@@ -18,30 +18,30 @@ Carte::Carte(QStringList)
 {
 }
 
-CardType Carte::getKind() const {}
-QString Carte::getName() const {}
-QString Carte::getSets() const {}
-QString Carte::getImageFile() const {}
-QString Carte::getUrlCard() const {}
-QString Carte::getExpansion() const {}
-QString Carte::getRarity() const {}
-QString Carte::getType() const {}
-QString Carte::getSubType() const {}
-QString Carte::getClan() const {}
-QString Carte::getCapacity() const {}
-QString Carte::getGrouping() const {}
-QString Carte::getDiscipline() const {}
-QString Carte::getSect() const {}
-QString Carte::getPCost() const {}
-QString Carte::getBCost() const {}
-QString Carte::getCCost() const {}
-QString Carte::getTitle() const {}
-QString Carte::getTrait() const {}
-QString Carte::getKeyWords() const {}
-QString Carte::getLimitation() const {}
-QString Carte::getText() const {}
-QString Carte::getArtist() const {}
-QString Carte::getCommentaires() const {}
+CardType Carte::getKind() const { return(Kind); }
+QString Carte::getName() const { return(Name); }
+QString Carte::getSets() const { return(Sets); }
+QString Carte::getImageFile() const { return(ImageFile); }
+QString Carte::getUrlCard() const { return(UrlCard); }
+QString Carte::getExpansion() const { return(Expansion); }
+QString Carte::getRarity() const { return(Rarity); }
+QString Carte::getType() const { return(Type); }
+QString Carte::getSubType() const { return(SubType); }
+QString Carte::getClan() const { return(Clan); }
+QString Carte::getCapacity() const { return(Capacity); }
+QString Carte::getGrouping() const { return(Grouping); }
+QString Carte::getDiscipline() const { return(Discipline); }
+QString Carte::getSect() const { return(Sect); }
+QString Carte::getPCost() const { return(PCost); }
+QString Carte::getBCost() const { return(BCost); }
+QString Carte::getCCost() const { return(CCost); }
+QString Carte::getTitle() const { return(Title); }
+QString Carte::getTrait() const { return(Trait); }
+QString Carte::getKeyWords() const { return(KeyWords); }
+QString Carte::getLimitation() const { return(Limitation); }
+QString Carte::getText() const { return(Text); }
+QString Carte::getArtist() const { return(Artist); }
+QString Carte::getCommentaires() const { return(Commentaires); }
 
 Carte::~Carte()
 {
