@@ -134,5 +134,8 @@
         <file>icons/clan/Martyr.gif</file>
         <file>icons/clan/Redeemer.gif</file>
         <file>icons/clan/Visionary.gif</file>
+        <file>icons/delete.png</file>
+        <file>icons/minus.png</file>
+        <file>icons/plus.png</file>
     </qresource>
 </RCC>

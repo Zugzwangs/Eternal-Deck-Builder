@@ -644,13 +644,22 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
         painter->setClipRect(opt.rect, Qt::ReplaceClip);
 
         // découpage des régions
+        // affichage de la forme : [ nbExp | Name card | - | + | x ]
         QRect ExRegion( opt.rect );
-        ExRegion.setRight( 40/*opt.rect.height()*/ );
-        QRect DeleteRegion( opt.rect );
-        DeleteRegion.setLeft( DeleteRegion.right() - opt.rect.height() );
+        ExRegion.setRight( 50 );
+        QRect ButtonsRegion( opt.rect );
+        ButtonsRegion.setLeft( ButtonsRegion.right() - 100 );
+        QRect btMinusRegion( ButtonsRegion);
+        btMinusRegion.setWidth( 30 );
+        QRect btPlusRegion( ButtonsRegion);
+        btPlusRegion.setLeft( btMinusRegion.right()+5 );
+        btPlusRegion.setWidth( 30 );
+        QRect btDeleteRegion( ButtonsRegion );
+        btDeleteRegion.setLeft( btPlusRegion.right()+5  );
+        btDeleteRegion.setWidth( 30 );
         QRect NameRegion( opt.rect );
         NameRegion.setLeft( ExRegion.right() );
-        NameRegion.setRight( DeleteRegion.left() );
+        NameRegion.setRight( ButtonsRegion.left() );
 
         // dessin de la case
         opt.text = "";
@@ -670,12 +679,26 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
         // dessin du nom de la carte
         painter->drawText( NameRegion, Qt::AlignLeft, index.data().toString());
 
+        // dessin du bouton - (enlever exemplaire)
+        QStyleOptionButton*  bt_rmex = new QStyleOptionButton;
+        bt_rmex->rect = btMinusRegion;
+        bt_rmex->icon = QIcon(":/icons/minus.png");
+        bt_rmex->iconSize = btMinusRegion.size();
+        style->drawControl( QStyle::CE_PushButton, bt_rmex, painter);
+
+        // dessin du bouton + (ajouter exemplaire)
+        QStyleOptionButton*  bt_addex = new QStyleOptionButton;
+        bt_addex->rect = btPlusRegion;
+        bt_addex->icon = QIcon(":/icons/plus.png");
+        bt_addex->iconSize = btPlusRegion.size();
+        style->drawControl( QStyle::CE_PushButton, bt_addex, painter);
+
         // dessin du bouton delete
-        QStyleOptionButton* testbt = new QStyleOptionButton();
-        testbt->rect = DeleteRegion;
-        testbt->icon = QIcon(":/icons/delete.bmp");
-        testbt->iconSize = DeleteRegion.size();
-        style->drawControl( QStyle::CE_PushButton, testbt, painter);
+        QStyleOptionButton* bt_delete = new QStyleOptionButton();
+        bt_delete->rect = btDeleteRegion;
+        bt_delete->icon = QIcon(":/icons/delete.png");
+        bt_delete->iconSize = btDeleteRegion.size();
+        style->drawControl( QStyle::CE_PushButton, bt_delete, painter);
 
         // dessin du nombre d'exemplaires
         style->drawItemText(painter, ExRegion, 1, opt.palette, true, "x" + index.data(Qt::UserRole+2).toString() );
