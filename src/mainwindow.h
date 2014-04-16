@@ -6,17 +6,17 @@
 #include <Qfile>
 #include <QList>
 #include <QtSql>
-#include <QGraphicsScene>
 #include <QStandardItemModel>
 #include <QtPrintSupport/QPrinter>
 
 #include <math.h>
 
 #include "pitemview.h"
-#include "PGraphics.h"
 #include "dialogoptions.h"
 #include "tab_search_library.h"
 #include "tab_search_crypt.h"
+#include "tab_gold_fich.h"
+#include "tab_deck_tuning.h"
 #include "update_manager.h"
 
 namespace Ui { class MainWindow; }
@@ -44,16 +44,14 @@ private:
     // On déclare et initialise des ressources
     QPixmap DosCarte;
     QPixmap DosCrypt;
-    // On déclare les Views
-    PTreeView* PTreeViewDeckList;
-    PGraphicsView* TabledeJeu;
-    // On déclare les modules ET les scènes
+    // On déclare le Modèle pour la gestion du deck
     PTreeModel *ModeleDeck;
-    QGraphicsScene *Scenedejeu;
 
-    //test
+    //les contenus des onglets
     tab_search_library  *test_search;
     tab_search_crypt *test_crypt;
+    tab_deck_tuning *test_tuning;
+    tab_gold_fich * test_goldfish;
 
 private slots:
     void AfficheImageCarte(QString CardName);

@@ -2,7 +2,7 @@
 #include "mainwindow.h"
 #include "Global.h"
 #include <QDrag>
-
+#include <QPushButton>
 
 //*******************************************************************************************************
 //                                  LES VIEWS
@@ -253,7 +253,7 @@ void PDelegateCryptResult::paint(QPainter * painter, const QStyleOptionViewItem 
 {
 switch(index.column())
     {
-    case 8:
+    case 8: // CASE CLAN
         {
         // setup du contexte de dessin
         QStyleOptionViewItemV4 opt(option);
@@ -283,7 +283,7 @@ switch(index.column())
         painter->restore();
         }break;
 
-    case 9:
+    case 9: // CASE GROUPING
         {
         // setup du contexte de dessin
         QStyleOptionViewItemV4 opt(option);
@@ -317,7 +317,7 @@ switch(index.column())
 
         } break;
 
-    case 10:
+    case 10: // CASE CAPACITY
         {
         // setup du contexte de dessin
         QStyleOptionViewItemV4 opt(option);
@@ -351,7 +351,7 @@ switch(index.column())
 
         } break;
 
-    case 11:
+    case 11: // CASE DISCIPLINES
         {
         // setup du contexte de dessin
         QStyleOptionViewItemV4 opt(option);
@@ -382,14 +382,14 @@ switch(index.column())
             {
             if (ListeDisciplines.at(i) < ListeDisciplines.at(i).toLower())
                 {
-                QRect target(rect.x()+i*25+10, rect.center().y()-11, 22, 22);
+                QRect target( rect.x()+i*25+10, rect.center().y()-11, 22, 22 );
                 NomIconeDiscipline = ListeDisciplines.at(i).toLower() + "-sup.png";
                 QPixmap PixmapCourante(":/icons/disc/" + NomIconeDiscipline);
                 painter->drawPixmap(target, PixmapCourante);
                 }
             else
                 {
-                QRect target(rect.x()+i*25+10, rect.center().y()-11, 22, 22);
+                QRect target( rect.x()+i*25+10, rect.center().y()-11, 22, 22 );
                 NomIconeDiscipline = ListeDisciplines.at(i) + ".png";
                 QPixmap PixmapCourante(":/icons/disc/" + NomIconeDiscipline);
                 painter->drawPixmap(target, PixmapCourante);
@@ -408,10 +408,13 @@ QSize PDelegateCryptResult::sizeHint(const QStyleOptionViewItem & option, const 
 {
     switch(index.column())
         {
-        case 8:  { return(QSize(60,30));  } break;
-        case 9:  { return(QSize(50,30));  } break;
-        case 10: { return(QSize(50,30));  } break;
-        case 11: { return(QSize(150,30)); } break;
+
+        case 11:
+                {
+                QStringList ListeDisciplines = index.data().toString().split(" ", QString::SkipEmptyParts);
+                return(QSize( ListeDisciplines.count()*25+20, 40) );
+                } break;
+
         default: return QStyledItemDelegate::sizeHint(option, index);
         }
 }
@@ -427,7 +430,8 @@ void PDelegateCardResult::paint(QPainter *painter, const QStyleOptionViewItem &o
 {
     switch(index.column())
         {
-        case 7:
+
+        case 7: // CASE CARD TYPE
             {
             // setup du contexte de dessin
             QStyleOptionViewItemV4 opt(option);
@@ -465,7 +469,7 @@ void PDelegateCardResult::paint(QPainter *painter, const QStyleOptionViewItem &o
             painter->restore();
             } break;
 
-        case 9:
+        case 9: // CASE CLAN
             {
             // setup du contexte de dessin
             QStyleOptionViewItemV4 opt(option);
@@ -496,7 +500,7 @@ void PDelegateCardResult::paint(QPainter *painter, const QStyleOptionViewItem &o
             painter->restore();
             }break;
 
-        case 11:
+        case 11: // CASE DISCIPLINES
             {
             // setup du contexte de dessin
             QStyleOptionViewItemV4 opt(option);
@@ -538,7 +542,7 @@ void PDelegateCardResult::paint(QPainter *painter, const QStyleOptionViewItem &o
             painter->restore();
             } break;
 
-        case 13:
+        case 13: // CASE POOL COST
             {
             // setup du contexte de dessin
             QStyleOptionViewItemV4 opt(option);
@@ -572,7 +576,7 @@ void PDelegateCardResult::paint(QPainter *painter, const QStyleOptionViewItem &o
 
             } break;
 
-        case 14:
+        case 14: // CASE BLOOD COST
             {
             // setup du contexte de dessin
             QStyleOptionViewItemV4 opt(option);
@@ -614,8 +618,19 @@ QSize PDelegateCardResult::sizeHint(const QStyleOptionViewItem & option, const Q
 {
     switch(index.column())
         {
-        case 7:  { return(QSize(70,30));  } break;
-        case 11: { return(QSize(100,30)); } break;
+
+        case 7:
+            {
+            QStringList ListeTypesCarte = index.data().toString().split(" / ",QString::SkipEmptyParts);
+            return( QSize(ListeTypesCarte.size()*25+20, 40) );
+            } break;
+
+        case 11:
+            {
+            QStringList ListeDisciplines = index.data().toString().split(" ",QString::SkipEmptyParts);
+            return( QSize(ListeDisciplines.size()*25+20, 40) );
+            } break;
+
         default: return QStyledItemDelegate::sizeHint(option, index);
         }
 }
@@ -684,6 +699,7 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
         bt_rmex->rect = btMinusRegion;
         bt_rmex->icon = QIcon(":/icons/minus.png");
         bt_rmex->iconSize = btMinusRegion.size();
+
         style->drawControl( QStyle::CE_PushButton, bt_rmex, painter);
 
         // dessin du bouton + (ajouter exemplaire)
@@ -693,12 +709,21 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
         bt_addex->iconSize = btPlusRegion.size();
         style->drawControl( QStyle::CE_PushButton, bt_addex, painter);
 
-        // dessin du bouton delete
+        QPushButton *fock = new QPushButton();
+        fock->setStyleSheet("border: none;");
+        fock->setGeometry(btDeleteRegion);
+        fock->setIcon(QIcon(":/icons/delete.png"));
+        fock->setIconSize(btDeleteRegion.size());
+
         QStyleOptionButton* bt_delete = new QStyleOptionButton();
+        bt_delete->initFrom(fock);
+        style->drawControl(QStyle::CE_PushButton, bt_delete, painter);
+        // dessin du bouton delete
+        /*QStyleOptionButton* bt_delete = new QStyleOptionButton();
         bt_delete->rect = btDeleteRegion;
         bt_delete->icon = QIcon(":/icons/delete.png");
         bt_delete->iconSize = btDeleteRegion.size();
-        style->drawControl( QStyle::CE_PushButton, bt_delete, painter);
+        style->drawControl( QStyle::CE_PushButton, bt_delete, painter);*/
 
         // dessin du nombre d'exemplaires
         style->drawItemText(painter, ExRegion, 1, opt.palette, true, "x" + index.data(Qt::UserRole+2).toString() );

@@ -23,6 +23,7 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QWidget>
+#include "pitemview.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -38,6 +39,7 @@ public:
     QLabel *VisuelDeck;
     QLabel *VisuelCrypt;
     QLabel *VisuelCarte;
+    PTreeView *PTreeViewDeckList;
     QTabWidget *tabEditorModule;
     QWidget *OngletRechercheCarte;
     QWidget *OngletRechercheCrypte;
@@ -99,7 +101,7 @@ public:
         VisuelCrypt->setFrameShape(QFrame::StyledPanel);
         VisuelCrypt->setFrameShadow(QFrame::Sunken);
         VisuelCrypt->setLineWidth(0);
-        VisuelCrypt->setPixmap(QPixmap(QString::fromUtf8("../../../../jr/Desktop/Vtes_Grelarge.gif")));
+        VisuelCrypt->setPixmap(QPixmap(QString::fromUtf8("../../jr/Desktop/Vtes_Grelarge.gif")));
         VisuelCarte = new QLabel(FrameVisuel);
         VisuelCarte->setObjectName(QStringLiteral("VisuelCarte"));
         VisuelCarte->setGeometry(QRect(3, 3, 360, 500));
@@ -110,7 +112,10 @@ public:
         VisuelCarte->setFrameShape(QFrame::StyledPanel);
         VisuelCarte->setFrameShadow(QFrame::Sunken);
         VisuelCarte->setLineWidth(0);
-        VisuelCarte->setPixmap(QPixmap(QString::fromUtf8("../../../../jr/Desktop/Vtes_Grelarge.gif")));
+        VisuelCarte->setPixmap(QPixmap(QString::fromUtf8("../../jr/Desktop/Vtes_Grelarge.gif")));
+        PTreeViewDeckList = new PTreeView(FrameVisuel);
+        PTreeViewDeckList->setObjectName(QStringLiteral("PTreeViewDeckList"));
+        PTreeViewDeckList->setGeometry(QRect(10, 510, 341, 451));
 
         gridLayout->addWidget(FrameVisuel, 0, 0, 1, 1);
 
@@ -144,7 +149,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1680, 21));
+        menuBar->setGeometry(QRect(0, 0, 1680, 26));
         menuFichier = new QMenu(menuBar);
         menuFichier->setObjectName(QStringLiteral("menuFichier"));
         menuParam_trages = new QMenu(menuBar);

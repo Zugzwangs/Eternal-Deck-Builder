@@ -911,6 +911,7 @@ public:
 
         PTVCryptResults = new PItemView(scrollAreaWidgetContents);
         PTVCryptResults->setObjectName(QStringLiteral("PTVCryptResults"));
+        PTVCryptResults->setFrameShape(QFrame::NoFrame);
         PTVCryptResults->setAlternatingRowColors(true);
         PTVCryptResults->setShowGrid(false);
 
@@ -1026,6 +1027,7 @@ public:
         groupBox_2->setTitle(QApplication::translate("tab_search_crypt", "Options : ", 0));
         pBCryptClearForm->setText(QApplication::translate("tab_search_crypt", "Clear Form", 0));
         pBCryptSearch->setText(QApplication::translate("tab_search_crypt", "Recherche", 0));
+        pBCryptSearch->setShortcut(QApplication::translate("tab_search_crypt", "F1", 0));
         groupBox->setTitle(QApplication::translate("tab_search_crypt", "GroupBox", 0));
         label_21->setText(QApplication::translate("tab_search_crypt", "Group", 0));
         label_29->setText(QApplication::translate("tab_search_crypt", "Capacity :", 0));

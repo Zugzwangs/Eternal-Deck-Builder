@@ -124,7 +124,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>../../../../jr/Desktop/Vtes_Grelarge.gif</pixmap>
+        <pixmap>../../jr/Desktop/Vtes_Grelarge.gif</pixmap>
        </property>
       </widget>
       <widget class="QLabel" name="VisuelCarte">
@@ -167,7 +167,17 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>../../../../jr/Desktop/Vtes_Grelarge.gif</pixmap>
+        <pixmap>../../jr/Desktop/Vtes_Grelarge.gif</pixmap>
+       </property>
+      </widget>
+      <widget class="PTreeView" name="PTreeViewDeckList">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>510</y>
+         <width>341</width>
+         <height>451</height>
+        </rect>
        </property>
       </widget>
      </widget>
@@ -228,7 +238,7 @@
      <x>0</x>
      <y>0</y>
      <width>1680</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
@@ -271,6 +281,13 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>PTreeView</class>
+   <extends>QTreeView</extends>
+   <header>pitemview.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

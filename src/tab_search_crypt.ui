@@ -1864,6 +1864,9 @@
         <property name="text">
          <string>Recherche</string>
         </property>
+        <property name="shortcut">
+         <string>F1</string>
+        </property>
        </widget>
       </widget>
       <widget class="QGroupBox" name="groupBox">
@@ -1971,6 +1974,9 @@
     </item>
     <item>
      <widget class="PItemView" name="PTVCryptResults">
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
       <property name="alternatingRowColors">
        <bool>true</bool>
       </property>

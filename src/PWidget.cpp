@@ -49,7 +49,7 @@ void PFrame::startDrag()
 // Widget symbolisant une discipline
 DisciplineButton::DisciplineButton(QWidget *parent) : QAbstractButton(parent)
 {
-    state = DisciplineButton::a;
+    state = DisciplineButton::RequestNothing;
     sql_request ="";
 }
 
@@ -70,7 +70,7 @@ void DisciplineButton::paintEvent(QPaintEvent *e)
 
     switch (state)
     {
-        case DisciplineButton::a:
+        case DisciplineButton::RequestNothing:
 
             painter.setPen( Qt::NoPen );
             painter.setBrush( QBrush(QColor(150,150,150,150), Qt::SolidPattern) );
@@ -79,7 +79,7 @@ void DisciplineButton::paintEvent(QPaintEvent *e)
             painter.drawRect(rect);
             break;
 
-        case DisciplineButton::b:
+        case DisciplineButton::RequestDiscipline:
 
             rect.adjust(1,1, -1,-1);
             painter.setPen( Qt::black );
@@ -89,7 +89,7 @@ void DisciplineButton::paintEvent(QPaintEvent *e)
             painter.drawPixmap( rect, icone );
             break;
 
-        case DisciplineButton::c:
+        case DisciplineButton::RequestNotDiscipline:
 
             rect.adjust(1,1, -1,-1);
             painter.setPen( Qt::black );
@@ -110,22 +110,29 @@ void DisciplineButton::nextCheckState()
 {
     switch (state)
     {
-        case DisciplineButton::a:
-            state = DisciplineButton::b;
+        case DisciplineButton::RequestNothing:
+            state = DisciplineButton::RequestDiscipline;
             sql_request = " AND Discipline like '%" + discipline + "%'";
             break;
 
-        case DisciplineButton::b:
+        case DisciplineButton::RequestDiscipline:
+            state = DisciplineButton::RequestNotDiscipline;
             sql_request = " AND NOT Discipline like '%" + discipline + "%'";
-            state = DisciplineButton::c;
             break;
 
-        case DisciplineButton::c:
+        case DisciplineButton::RequestNotDiscipline:
+            state = DisciplineButton::RequestNothing;
             sql_request = "";
-            state = DisciplineButton::a;
+
             break;
     }
+}
 
+void DisciplineButton::resetState()
+{
+    state = DisciplineButton::RequestNothing;
+    sql_request = "";
+    this->update();
 }
 
 QString DisciplineButton::get_sql_request()

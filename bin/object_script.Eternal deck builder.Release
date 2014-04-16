@@ -12,6 +12,8 @@ INPUT(
 ./release\tab_search_crypt.o
 ./release\game_element.o
 ./release\update_manager.o
+./release\tab_deck_tuning.o
+./release\tab_gold_fich.o
 ./release\qrc_res.o
 ./release\moc_mainwindow.o
 ./release\moc_pitemview.o
@@ -21,4 +23,6 @@ INPUT(
 ./release\moc_tab_search_crypt.o
 ./release\moc_game_element.o
 ./release\moc_update_manager.o
+./release\moc_tab_deck_tuning.o
+./release\moc_tab_gold_fich.o
 );

@@ -88,42 +88,32 @@ this->setWindowState(Qt::WindowMaximized);
 // ///////////////////////////////////////////////
 // MISE EN FORME DU TAB 'gold fish'
 {
-    PFrame* Bourse = new PFrame(ui->OngletGoldFish);
-    TabledeJeu = new PGraphicsView(ui->OngletGoldFish);
-    Scenedejeu = new PGraphicsScene();
-    TabledeJeu->setScene(Scenedejeu);
-
-    /*!!!!!!!!!!!!! TEST !!!!!!!!!!!!!!! */
-    PGraphicsPixmapItem* CardItem  = new PGraphicsPixmapItem(QPixmap(PathCartes + "/" + "44magnum.jpg"),PGraphicsPixmapItem::CartedeLibrairie);
-    PGraphicsPixmapItem* CardItem2 = new PGraphicsPixmapItem(QPixmap(PathCartes + "/" + "abiku.jpg"),PGraphicsPixmapItem::CartedeVampire);
-    PGraphicsPixmapItem* CardItem3 = new PGraphicsPixmapItem(QPixmap(":icons/Blood.png"));
-
-    CardItem2->setPos(1000,1000);
-    CardItem3->setPos(400,600);
-    Scenedejeu->addItem(CardItem);
-    Scenedejeu->addItem(CardItem2);
-    Scenedejeu->addItem(CardItem3);
+    QHBoxLayout *layout = new QHBoxLayout;
+    test_goldfish = new tab_gold_fich();
+    test_goldfish->initialisation(PathCartes);
+    layout->addWidget(test_goldfish);
+    ui->OngletGoldFish->setLayout(layout);
 }
 
 // ///////////////////////////////////////////////
 // MISE EN FORME DU TAB 'OngletProba'
 {
+    QHBoxLayout *layout = new QHBoxLayout;
+    test_tuning = new tab_deck_tuning();
+    layout->addWidget(test_tuning);
+    ui->OngletProba->setLayout(layout);
 }
 
 // ///////////////////////////////////////////////
-// ASSOCIATION DES MODELES/VIEWS
+// ASSOCIATION DES MODELES/VIEWS POUR LA GESTION DE DECK
 {
-    PTreeViewDeckList = new PTreeView(ui->centralWidget);
-    PTreeViewDeckList->setVisible(true);
-    PTreeViewDeckList->setGeometry(10,515,360,455);
-
     // on assigne le model de données
     ModeleDeck = new PTreeModel();
-    PTreeViewDeckList->setModel(ModeleDeck);
+    ui->PTreeViewDeckList->setModel(ModeleDeck);
 
     // on assigne le delegate
     PDelegateDeck *DelegateDeck = new PDelegateDeck();
-    PTreeViewDeckList->setItemDelegate(DelegateDeck);
+    ui->PTreeViewDeckList->setItemDelegate(DelegateDeck);
 }
 
 // ///////////////////////////////////////////////
@@ -131,8 +121,7 @@ this->setWindowState(Qt::WindowMaximized);
 {
     connect(test_search, SIGNAL( new_card_selected(QString) ), this, SLOT( AfficheImageCarte(QString) ));
     connect(test_crypt,  SIGNAL( new_card_selected(QString) ), this, SLOT( AfficheImageCrypt(QString) ));
-    connect(PTreeViewDeckList,SIGNAL(clicked(QModelIndex)), this, SLOT(AfficheCartesDeck(QModelIndex)));
-
+    connect(ui->PTreeViewDeckList,SIGNAL(clicked(QModelIndex)), this, SLOT(AfficheCartesDeck(QModelIndex)));
     connect(ui->tabEditorModule, SIGNAL(currentChanged(int)), this, SLOT(ChangeVisuel(int)));
 
     connect(ui->actionEnregistrer_le_Deck, SIGNAL(triggered()), this, SLOT(EnregistreDeck()));
@@ -235,7 +224,7 @@ void MainWindow::ImprimeDeck()
 {
 int NbPage,NbEx,k,x,y;
 float NbCarteParPage;
-PTreeModel *ModelDeckCourant = dynamic_cast<PTreeModel*>(PTreeViewDeckList->model());
+PTreeModel *ModelDeckCourant = dynamic_cast<PTreeModel*>(ui->PTreeViewDeckList->model());
 QList<QStandardItem *> ItemCrypte = ModelDeckCourant->findItems("CRYPTE");
 QList<QStandardItem *> ItemLibrary = ModelDeckCourant->findItems("BIBLIOTHEQUE");
 QList<QStandardItem *> ItemMetadonnees = ModelDeckCourant->findItems("METADONNEES");

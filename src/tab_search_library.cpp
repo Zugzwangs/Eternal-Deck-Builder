@@ -57,16 +57,22 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
     ui->PTVCardsResults->setObjectName("PTVCardsResults");
     ui->PTVCardsResults->setItemDelegate(DelegateCarte);
     ui->PTVCardsResults->setModel(ModelReponseCarte);
+    ui->PTVCardsResults->setFrameShape(QFrame::NoFrame);
     ui->PTVCardsResults->hideColumn(0);
-    for (int i=2; i<=6; i++)
-        { ui->PTVCardsResults->hideColumn(i); }
+    for (int i=2; i<=6; i++)    { ui->PTVCardsResults->hideColumn(i); }
     ui->PTVCardsResults->hideColumn(8);
     ui->PTVCardsResults->hideColumn(10);
-    for (int i=15; i<=22; i++)
-        { ui->PTVCardsResults->hideColumn(i); }
+    for (int i=15; i<=22; i++)  { ui->PTVCardsResults->hideColumn(i); }
 
     ui->PTVCardsResults->setVisible(true);
     ui->PTVCardsResults->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui->PTVCardsResults->horizontalHeader()->setSectionResizeMode( 9, QHeaderView::Fixed);
+    ui->PTVCardsResults->horizontalHeader()->setSectionResizeMode( 13, QHeaderView::Fixed);
+    ui->PTVCardsResults->horizontalHeader()->setSectionResizeMode( 14, QHeaderView::Fixed);
+    ui->PTVCardsResults->horizontalHeader()->resizeSection( 9, 60 );
+    ui->PTVCardsResults->horizontalHeader()->resizeSection( 13, 60 );
+    ui->PTVCardsResults->horizontalHeader()->resizeSection( 14, 60 );
+    ui->PTVCardsResults->verticalHeader()->setDefaultSectionSize( 40 ); //set the default height of rows a bit taller for a better lisibility
 
     // connections du bordel
     connect( ui->cBType, SIGNAL( activated(int )),     this, SLOT( AdapteSousType() ) );
@@ -139,14 +145,12 @@ Requete = "(Type != 'Vampire' AND Type != 'Imbued')"; //condition tjrs vraie
 
     /******************* Cadre Disciplines et cadre Virtues *******************/
     QList<DisciplineButton *> ListDisciplineBt = ui->CardgroupBoxDiscipline->findChildren<DisciplineButton *>(QString(), Qt::FindDirectChildrenOnly);
-
     foreach( DisciplineButton* current_discipline_bt, ListDisciplineBt )
         {
         Requete += current_discipline_bt->get_sql_request();
         }
 
     QList<DisciplineButton *> ListVirtuesCheckBox = ui->CardgroupBoxVirtues->findChildren<DisciplineButton *>(QString(), Qt::FindDirectChildrenOnly);
-
     foreach( DisciplineButton* current_virtues_bt, ListVirtuesCheckBox )
         {
         Requete += current_virtues_bt->get_sql_request();
@@ -198,7 +202,7 @@ void tab_search_library::ClearForm()
 {
 QList<QGroupBox *> ListFrameFormulaireCrypt = ui->CardSearchFrame->findChildren<QGroupBox *>();
 
-for (int i=0; i<ListFrameFormulaireCrypt.count(); i++)
+for (int i=0; i<ListFrameFormulaireCrypt.count(); i++) //TODO revoir l'algo il est moche non ?
     {
 
     QList<QComboBox *> CurrentComboBoxList = ListFrameFormulaireCrypt.at(i)->findChildren<QComboBox *>();
@@ -216,8 +220,20 @@ for (int i=0; i<ListFrameFormulaireCrypt.count(); i++)
     QList<QSpinBox *> CurrentSpinBoxList = ListFrameFormulaireCrypt.at(i)->findChildren<QSpinBox *>();
     for(int m=0; m<CurrentSpinBoxList.count() ; m++)
         { CurrentSpinBoxList.at(m)->setValue(0); }
-
     }
+
+QList<DisciplineButton *> ListDisciplineBt = ui->CardgroupBoxDiscipline->findChildren<DisciplineButton *>(QString(), Qt::FindDirectChildrenOnly);
+foreach( DisciplineButton* current_discipline_bt, ListDisciplineBt )
+    {
+    current_discipline_bt->resetState();
+    }
+
+QList<DisciplineButton *> ListVirtuesCheckBox = ui->CardgroupBoxVirtues->findChildren<DisciplineButton *>(QString(), Qt::FindDirectChildrenOnly);
+foreach( DisciplineButton* current_virtues_bt, ListVirtuesCheckBox )
+    {
+    current_virtues_bt->resetState();
+    }
+
 ModelReponseCarte->setFilter(""); //On nettoie le filtre
 }
 

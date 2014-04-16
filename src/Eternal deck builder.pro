@@ -26,7 +26,9 @@ SOURCES +=  main.cpp\
             tab_search_library.cpp \
             tab_search_crypt.cpp \
             game_element.cpp \
-            update_manager.cpp
+            update_manager.cpp \
+    tab_deck_tuning.cpp \
+    tab_gold_fich.cpp
 
 HEADERS  += mainwindow.h \
             pitemview.h \
@@ -39,12 +41,16 @@ HEADERS  += mainwindow.h \
             tab_search_library.h \
             tab_search_crypt.h \
             game_element.h \
-            update_manager.h
+            update_manager.h \
+    tab_deck_tuning.h \
+    tab_gold_fich.h
 
 FORMS    += mainwindow.ui \
             dialogoptions.ui \
             tab_search_library.ui \
-            tab_search_crypt.ui
+            tab_search_crypt.ui \
+    tab_deck_tuning.ui \
+    tab_gold_fich.ui
 
 RESOURCES += res.qrc
 

@@ -32,6 +32,7 @@ class DisciplineButton : public QAbstractButton
 public:
     explicit DisciplineButton(QWidget *parent = 0);
     void setupDiscipline(QString dis);
+    void resetState();
     QString get_sql_request();
 
 protected:
@@ -40,7 +41,7 @@ protected:
 
 private:
     int state;
-    enum state_list{ a, b, c };
+    enum state_list{ RequestNothing, RequestDiscipline, RequestNotDiscipline };
     QString discipline;
     QPixmap icone;
     QString sql_request;

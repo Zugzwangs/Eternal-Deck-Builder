@@ -45,16 +45,17 @@ tab_search_crypt::tab_search_crypt(QWidget *parent) : QScrollArea(parent), ui(ne
     ui->PTVCryptResults->setItemDelegate(DelegateCrypt);
     ui->PTVCryptResults->setModel(ModelReponseCrypt);
     ui->PTVCryptResults->hideColumn(0);
-    for (int i=2; i<=7; i++)
-        { ui->PTVCryptResults->hideColumn(i); }
-    //ui->PTVCryptResults->hideColumn(15);
-    ui->PTVCryptResults->hideColumn(16);
-    ui->PTVCryptResults->hideColumn(17);
-    ui->PTVCryptResults->hideColumn(18);
-    ui->PTVCryptResults->hideColumn(19);
-
+    for (int i=2; i<=7; i++)        { ui->PTVCryptResults->hideColumn(i); }
+    for (int i=16; i<=19; i++)      { ui->PTVCryptResults->hideColumn(i); }
     ui->PTVCryptResults->setVisible(true);
-    ui->PTVCryptResults->resizeColumnsToContents();
+    ui->PTVCryptResults->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui->PTVCryptResults->horizontalHeader()->setSectionResizeMode(8, QHeaderView::Fixed);
+    ui->PTVCryptResults->horizontalHeader()->setSectionResizeMode(9, QHeaderView::Fixed);
+    ui->PTVCryptResults->horizontalHeader()->setSectionResizeMode(10, QHeaderView::Fixed);
+    ui->PTVCryptResults->horizontalHeader()->resizeSection( 8, 60 );
+    ui->PTVCryptResults->horizontalHeader()->resizeSection( 9, 75 );
+    ui->PTVCryptResults->horizontalHeader()->resizeSection( 10, 75 );
+    ui->PTVCryptResults->verticalHeader()->setDefaultSectionSize( 40 ); //set the default height of rows a bit taller for a better lisibility
 
     // connections
     connect(ui->pBCryptSearch, SIGNAL( clicked() ),    this, SLOT( RechercheCarte() ));
@@ -115,7 +116,7 @@ QString Requete,NameRequete,TextRequete,ArtistRequete;
     QList<QComboBox *> ListDisciplineComboBox = ui->groupBoxDiscipline->findChildren<QComboBox *>(QString(), Qt::FindDirectChildrenOnly);;
     foreach( QComboBox* CurrentComboBox, ListDisciplineComboBox )
         {
-         QString CurrentName = CurrentComboBox->objectName().left(3); //left3 à cause fortitude : on peut pas nommer un objet 'for'
+         QString CurrentName = CurrentComboBox->objectName().left(3); //left3 �  cause fortitude : on peut pas nommer un objet 'for'
          switch(CurrentComboBox->currentIndex())
             {
              case 0 : {/*pas de conditions supplémentaires */} break;

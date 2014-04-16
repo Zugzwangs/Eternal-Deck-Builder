@@ -12,6 +12,8 @@ INPUT(
 ./debug\tab_search_crypt.o
 ./debug\game_element.o
 ./debug\update_manager.o
+./debug\tab_deck_tuning.o
+./debug\tab_gold_fich.o
 ./debug\qrc_res.o
 ./debug\moc_mainwindow.o
 ./debug\moc_pitemview.o
@@ -21,4 +23,6 @@ INPUT(
 ./debug\moc_tab_search_crypt.o
 ./debug\moc_game_element.o
 ./debug\moc_update_manager.o
+./debug\moc_tab_deck_tuning.o
+./debug\moc_tab_gold_fich.o
 );
