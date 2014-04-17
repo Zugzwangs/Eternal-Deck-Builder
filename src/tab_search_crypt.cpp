@@ -25,6 +25,7 @@ tab_search_crypt::tab_search_crypt(QWidget *parent) : QScrollArea(parent), ui(ne
 
     ui->cBClan->addItem("   <vide>");
     ui->cBClan->addItems(VtesInfo::ClansList);
+    ui->cBClan->addItems(VtesInfo::CreedList);
 
     ui->cBTitle->addItem("   <vide>");
     ui->cBTitle->addItems(VtesInfo::TitlesList);
