@@ -29,7 +29,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     QString getPathCartes();
     ~MainWindow();
-    
+
 private:
     Ui::MainWindow *ui;
     // On déclare l'objet BDD

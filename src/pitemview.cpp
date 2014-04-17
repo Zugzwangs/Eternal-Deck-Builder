@@ -710,14 +710,16 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
         style->drawControl( QStyle::CE_PushButton, bt_addex, painter);
 
         QPushButton *fock = new QPushButton();
-        fock->setStyleSheet("border: none;");
         fock->setGeometry(btDeleteRegion);
         fock->setIcon(QIcon(":/icons/delete.png"));
-        fock->setIconSize(btDeleteRegion.size());
+        fock->setStyleSheet("border: none;");
+        fock->render(painter);
+        //fock->setIconSize(btDeleteRegion.size());
 
-        QStyleOptionButton* bt_delete = new QStyleOptionButton();
+        /*QStyleOptionButton* bt_delete = new QStyleOptionButton();
         bt_delete->initFrom(fock);
-        style->drawControl(QStyle::CE_PushButton, bt_delete, painter);
+        style->drawControl(QStyle::CE_PushButton, bt_delete, painter);*/
+
         // dessin du bouton delete
         /*QStyleOptionButton* bt_delete = new QStyleOptionButton();
         bt_delete->rect = btDeleteRegion;

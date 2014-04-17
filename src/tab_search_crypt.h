@@ -2,6 +2,7 @@
 #define TAB_SEARCH_CRYPT_H
 
 #include <QScrollArea>
+#include <QCompleter>
 
 #include "Global.h"
 #include "pitemview.h"
@@ -19,8 +20,12 @@ public:
     ~tab_search_crypt();
     PSqlTableModel *ModelReponseCrypt;
 
+protected:
+    void keyPressEvent(QKeyEvent *);
+
 private:
     Ui::tab_search_crypt *ui;
+    QCompleter *Completer;
 
 private slots:
     void ClearForm();

@@ -2,6 +2,7 @@
 #define TAB_SEARCH_LIBRARY_H
 
 #include <QScrollArea>
+#include <QCompleter>
 
 #include "Global.h"
 #include "pitemview.h"
@@ -19,8 +20,12 @@ public:
     ~tab_search_library();
     PSqlTableModel *ModelReponseCarte;
 
+protected:
+    void keyPressEvent(QKeyEvent *);
+
 private:
     Ui::tab_search_library *ui;
+    QCompleter *Completer;
 
 private slots:
     void AdapteSousType();

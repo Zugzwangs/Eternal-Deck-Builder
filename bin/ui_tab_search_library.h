@@ -318,7 +318,7 @@ public:
         pBCardSearch->setGeometry(QRect(19, 14, 71, 30));
         pBCardClearForm = new QPushButton(CardgroupBoxOptions);
         pBCardClearForm->setObjectName(QStringLiteral("pBCardClearForm"));
-        pBCardClearForm->setGeometry(QRect(100, 14, 70, 30));
+        pBCardClearForm->setGeometry(QRect(100, 14, 71, 30));
         CardgroupBoxFilters = new QGroupBox(CardSearchFrame);
         CardgroupBoxFilters->setObjectName(QStringLiteral("CardgroupBoxFilters"));
         CardgroupBoxFilters->setGeometry(QRect(438, 0, 251, 120));

@@ -45,15 +45,17 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
         current_virtues_bt->setupDiscipline( current_virtues_bt->objectName() );
         }
 
-    //init du delegate
-    PDelegateCardResult *DelegateCarte = new PDelegateCardResult();
+    // Init the MVC //
 
-    //init du modèle de données
+    // Model
     ModelReponseCarte = new PSqlTableModel();
     ModelReponseCarte->setTable("CardList");
     ModelReponseCarte->select();
 
-    //init de la vue
+    // Delegate
+    PDelegateCardResult *DelegateCarte = new PDelegateCardResult();
+
+    // View
     ui->PTVCardsResults->setObjectName("PTVCardsResults");
     ui->PTVCardsResults->setItemDelegate(DelegateCarte);
     ui->PTVCardsResults->setModel(ModelReponseCarte);
@@ -73,6 +75,16 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
     ui->PTVCardsResults->horizontalHeader()->resizeSection( 13, 60 );
     ui->PTVCardsResults->horizontalHeader()->resizeSection( 14, 60 );
     ui->PTVCardsResults->verticalHeader()->setDefaultSectionSize( 40 ); //set the default height of rows a bit taller for a better lisibility
+
+    // Add the completer to the main search label ( card name)
+    Completer = new QCompleter( this );
+    Completer->setCaseSensitivity( Qt::CaseInsensitive );
+    Completer->setFilterMode( Qt::MatchStartsWith );
+    Completer->setCompletionColumn( 1 );
+    Completer->setCompletionRole( Qt::DisplayRole );
+    Completer->setMaxVisibleItems( 8 );
+    Completer->setModel( ModelReponseCarte );
+    ui->lENameCard_2->setCompleter( Completer );
 
     // connections du bordel
     connect( ui->cBType, SIGNAL( activated(int )),     this, SLOT( AdapteSousType() ) );
@@ -235,6 +247,19 @@ foreach( DisciplineButton* current_virtues_bt, ListVirtuesCheckBox )
     }
 
 ModelReponseCarte->setFilter(""); //On nettoie le filtre
+}
+
+/* GESTION DES EVENEMENTS */
+void tab_search_library::keyPressEvent(QKeyEvent *e)
+{
+    //if user type enter when crypt search tab is the active tab do the SQL select
+    //verify the AutoRepeat flag garanty that a long press doesn't perform many time the same request
+    if( !e->isAutoRepeat() && (e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return) )
+        {
+        RechercheCarte();
+        }
+    else
+        QScrollArea::keyPressEvent(e);
 }
 
 tab_search_library::~tab_search_library()

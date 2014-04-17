@@ -32,15 +32,17 @@ tab_search_crypt::tab_search_crypt(QWidget *parent) : QScrollArea(parent), ui(ne
     ui->cBGroup->addItems(VtesInfo::OperatorList);
     ui->cBCapa->addItems(VtesInfo::OperatorList);
 
-    //init du delegate
-    PDelegateCryptResult *DelegateCrypt = new PDelegateCryptResult();
+    // Init the MVC //
 
-    //init du modèle de données
+    // Model
     ModelReponseCrypt = new PSqlTableModel();
     ModelReponseCrypt->setTable("VampireList");
     ModelReponseCrypt->select();
 
-    //init de la vue
+    // Delegate
+    PDelegateCryptResult *DelegateCrypt = new PDelegateCryptResult();
+
+    // View
     ui->PTVCryptResults->setObjectName("PTVCryptResults");
     ui->PTVCryptResults->setItemDelegate(DelegateCrypt);
     ui->PTVCryptResults->setModel(ModelReponseCrypt);
@@ -56,6 +58,16 @@ tab_search_crypt::tab_search_crypt(QWidget *parent) : QScrollArea(parent), ui(ne
     ui->PTVCryptResults->horizontalHeader()->resizeSection( 9, 75 );
     ui->PTVCryptResults->horizontalHeader()->resizeSection( 10, 75 );
     ui->PTVCryptResults->verticalHeader()->setDefaultSectionSize( 40 ); //set the default height of rows a bit taller for a better lisibility
+
+    // Add the completer to the main search label ( card name)
+    Completer = new QCompleter( this );
+    Completer->setCaseSensitivity( Qt::CaseInsensitive );
+    Completer->setFilterMode( Qt::MatchStartsWith );
+    Completer->setCompletionColumn( 1 );
+    Completer->setCompletionRole( Qt::DisplayRole );
+    Completer->setMaxVisibleItems( 8 );
+    Completer->setModel( ModelReponseCrypt );
+    ui->lENameCard->setCompleter( Completer );
 
     // connections
     connect(ui->pBCryptSearch, SIGNAL( clicked() ),    this, SLOT( RechercheCarte() ));
@@ -187,6 +199,18 @@ void tab_search_crypt::request_affichage(QModelIndex Idx)
 
         emit new_card_selected(CardName);
         }
+}
+
+void tab_search_crypt::keyPressEvent(QKeyEvent *e)
+{
+    //if user type enter when crypt search tab is the active tab do the SQL select
+    //verify the AutoRepeat flag garanty that a long press doesn't perform many time the same request
+    if( !e->isAutoRepeat() && (e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return) )
+        {
+        RechercheCarte();
+        }
+    else
+        QScrollArea::keyPressEvent(e);
 }
 
 tab_search_crypt::~tab_search_crypt()

@@ -334,7 +334,6 @@ void MainWindow::OuvrirMenuOption()
  test.exec();
 }
 
-/* IMPLEMENTATION DES METHODES PUBLIQUES */
 QString MainWindow::getPathCartes()
 {
     return(PathCartes);

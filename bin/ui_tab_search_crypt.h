@@ -170,6 +170,7 @@ public:
         tab_search_crypt->setFrameShadow(QFrame::Plain);
         tab_search_crypt->setLineWidth(0);
         tab_search_crypt->setWidgetResizable(true);
+        tab_search_crypt->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1042, 629));
