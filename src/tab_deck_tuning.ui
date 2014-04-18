@@ -28,8 +28,8 @@
    <widget class="QPushButton" name="testbt">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>140</y>
+      <x>830</x>
+      <y>240</y>
       <width>81</width>
       <height>51</height>
      </rect>
@@ -38,8 +38,59 @@
      <string/>
     </property>
    </widget>
+   <widget class="PTreeView" name="PTreeViewDeckList">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>351</width>
+      <height>571</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="VisuelDeck">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>40</y>
+      <width>360</width>
+      <height>500</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>360</width>
+      <height>500</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>360</width>
+      <height>500</height>
+     </size>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PTreeView</class>
+   <extends>QTreeView</extends>
+   <header>pitemview.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

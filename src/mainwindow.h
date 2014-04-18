@@ -6,18 +6,16 @@
 #include <Qfile>
 #include <QList>
 #include <QtSql>
-#include <QStandardItemModel>
 #include <QtPrintSupport/QPrinter>
-
 #include <math.h>
 
-#include "pitemview.h"
 #include "dialogoptions.h"
 #include "tab_search_library.h"
 #include "tab_search_crypt.h"
 #include "tab_gold_fich.h"
 #include "tab_deck_tuning.h"
 #include "update_manager.h"
+#include "pitemview.h"
 
 namespace Ui { class MainWindow; }
 
@@ -41,29 +39,21 @@ private:
     QString PathCartes;
     QString PathRessources;
     QString PathDeck;
-    // On déclare et initialise des ressources
-    QPixmap DosCarte;
-    QPixmap DosCrypt;
-    // On déclare le Modèle pour la gestion du deck
-    PTreeModel *ModeleDeck;
-
     //les contenus des onglets
     tab_search_library  *test_search;
     tab_search_crypt *test_crypt;
     tab_deck_tuning *test_tuning;
     tab_gold_fich * test_goldfish;
+    PTreeView *DeckView; //a virer depuis la refacto
+    PTreeModel *ModelDeckCourant;//
 
 private slots:
-    void AfficheImageCarte(QString CardName);
-    void AfficheImageCrypt(QString CardName);
-    void AfficheCartesDeck(QModelIndex Idx);
-    void ChangeVisuel(int IndexCourant);
     void EnregistreDeck();
     void ImprimeDeck();
     void OuvrirMenuOption();
 
 signals:
-    void card_picture_missing(QString);
+
 };
 
 #endif // MAINWINDOW_H

@@ -45,6 +45,10 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
         current_virtues_bt->setupDiscipline( current_virtues_bt->objectName() );
         }
 
+    // init card display area
+    DosCarte = QPixmap(":/icons/Vtes_Grelarge.gif");
+    ui->VisuelCarte->setPixmap(DosCarte);
+
     // Init the MVC //
 
     // Model
@@ -92,6 +96,8 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
     connect( ui->pBCardSearch, SIGNAL( clicked() ),    this, SLOT( RechercheCarte() ) );
     connect( ui->PTVCardsResults, SIGNAL( clicked(QModelIndex) ), this, SLOT( request_affichage(QModelIndex) ) );
     connect (ui->PTVCardsResults->selectionModel(), SIGNAL( currentRowChanged(QModelIndex,QModelIndex) ), this, SLOT( request_affichage(QModelIndex) ) );
+
+    connect(this, SIGNAL( new_card_selected(QString) ), this, SLOT( AfficheImageCarte(QString) ));
 }
 
 void tab_search_library::RechercheCarte()
@@ -247,6 +253,22 @@ foreach( DisciplineButton* current_virtues_bt, ListVirtuesCheckBox )
     }
 
 ModelReponseCarte->setFilter(""); //On nettoie le filtre
+}
+
+void tab_search_library::AfficheImageCarte(QString CardName)
+{
+    // !!!!!!!!!! dépannage
+    QString PathCartes;
+    PathCartes = "D:\\Eternal-Deck-Builder\\bin\\debug\\Cartes\\";
+    // !!!!!!!!!! dépannage
+    QImage Image;
+    if (Image.load(PathCartes + CardName))
+        { ui->VisuelCarte->setPixmap(QPixmap::fromImage(Image)); }
+    else
+        {
+        emit card_picture_missing(CardName);
+        /*Afficher un truc par defaut genre Vtes_Grelarge.gif*/
+        }
 }
 
 /* GESTION DES EVENEMENTS */

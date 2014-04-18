@@ -13,17 +13,14 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QWidget>
-#include "pitemview.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -35,11 +32,6 @@ public:
     QAction *actionOptions;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
-    QFrame *FrameVisuel;
-    QLabel *VisuelDeck;
-    QLabel *VisuelCrypt;
-    QLabel *VisuelCarte;
-    PTreeView *PTreeViewDeckList;
     QTabWidget *tabEditorModule;
     QWidget *OngletRechercheCarte;
     QWidget *OngletRechercheCrypte;
@@ -68,64 +60,13 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        FrameVisuel = new QFrame(centralWidget);
-        FrameVisuel->setObjectName(QStringLiteral("FrameVisuel"));
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(FrameVisuel->sizePolicy().hasHeightForWidth());
-        FrameVisuel->setSizePolicy(sizePolicy);
-        FrameVisuel->setMinimumSize(QSize(360, 500));
-        FrameVisuel->setMaximumSize(QSize(360, 5000));
-        FrameVisuel->setFrameShape(QFrame::Box);
-        FrameVisuel->setFrameShadow(QFrame::Raised);
-        FrameVisuel->setLineWidth(0);
-        VisuelDeck = new QLabel(FrameVisuel);
-        VisuelDeck->setObjectName(QStringLiteral("VisuelDeck"));
-        VisuelDeck->setGeometry(QRect(3, 3, 360, 500));
-        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(VisuelDeck->sizePolicy().hasHeightForWidth());
-        VisuelDeck->setSizePolicy(sizePolicy1);
-        VisuelDeck->setMinimumSize(QSize(360, 500));
-        VisuelDeck->setMaximumSize(QSize(360, 500));
-        VisuelDeck->setLineWidth(0);
-        VisuelCrypt = new QLabel(FrameVisuel);
-        VisuelCrypt->setObjectName(QStringLiteral("VisuelCrypt"));
-        VisuelCrypt->setGeometry(QRect(3, 3, 360, 500));
-        sizePolicy1.setHeightForWidth(VisuelCrypt->sizePolicy().hasHeightForWidth());
-        VisuelCrypt->setSizePolicy(sizePolicy1);
-        VisuelCrypt->setMinimumSize(QSize(360, 500));
-        VisuelCrypt->setMaximumSize(QSize(360, 500));
-        VisuelCrypt->setFrameShape(QFrame::StyledPanel);
-        VisuelCrypt->setFrameShadow(QFrame::Sunken);
-        VisuelCrypt->setLineWidth(0);
-        VisuelCrypt->setPixmap(QPixmap(QString::fromUtf8("../../jr/Desktop/Vtes_Grelarge.gif")));
-        VisuelCarte = new QLabel(FrameVisuel);
-        VisuelCarte->setObjectName(QStringLiteral("VisuelCarte"));
-        VisuelCarte->setGeometry(QRect(3, 3, 360, 500));
-        sizePolicy1.setHeightForWidth(VisuelCarte->sizePolicy().hasHeightForWidth());
-        VisuelCarte->setSizePolicy(sizePolicy1);
-        VisuelCarte->setMinimumSize(QSize(360, 500));
-        VisuelCarte->setMaximumSize(QSize(360, 500));
-        VisuelCarte->setFrameShape(QFrame::StyledPanel);
-        VisuelCarte->setFrameShadow(QFrame::Sunken);
-        VisuelCarte->setLineWidth(0);
-        VisuelCarte->setPixmap(QPixmap(QString::fromUtf8("../../jr/Desktop/Vtes_Grelarge.gif")));
-        PTreeViewDeckList = new PTreeView(FrameVisuel);
-        PTreeViewDeckList->setObjectName(QStringLiteral("PTreeViewDeckList"));
-        PTreeViewDeckList->setGeometry(QRect(10, 510, 341, 451));
-
-        gridLayout->addWidget(FrameVisuel, 0, 0, 1, 1);
-
         tabEditorModule = new QTabWidget(centralWidget);
         tabEditorModule->setObjectName(QStringLiteral("tabEditorModule"));
-        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(tabEditorModule->sizePolicy().hasHeightForWidth());
-        tabEditorModule->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(tabEditorModule->sizePolicy().hasHeightForWidth());
+        tabEditorModule->setSizePolicy(sizePolicy);
         tabEditorModule->setAutoFillBackground(false);
         tabEditorModule->setStyleSheet(QStringLiteral(""));
         tabEditorModule->setTabPosition(QTabWidget::North);
@@ -144,7 +85,7 @@ public:
         OngletProba->setObjectName(QStringLiteral("OngletProba"));
         tabEditorModule->addTab(OngletProba, QString());
 
-        gridLayout->addWidget(tabEditorModule, 0, 1, 1, 1);
+        gridLayout->addWidget(tabEditorModule, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -167,7 +108,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabEditorModule->setCurrentIndex(3);
+        tabEditorModule->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -181,9 +122,6 @@ public:
         actionImprimer_le_Deck->setText(QApplication::translate("MainWindow", "Imprimer le Deck", 0));
         actionImprimer_le_Deck->setShortcut(QApplication::translate("MainWindow", "Ctrl+P", 0));
         actionOptions->setText(QApplication::translate("MainWindow", "Options", 0));
-        VisuelDeck->setText(QString());
-        VisuelCrypt->setText(QString());
-        VisuelCarte->setText(QString());
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletRechercheCarte), QApplication::translate("MainWindow", "Recherche Carte", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletRechercheCrypte), QApplication::translate("MainWindow", "Recherche Crypte", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletGoldFish), QApplication::translate("MainWindow", "Gold Fish", 0));

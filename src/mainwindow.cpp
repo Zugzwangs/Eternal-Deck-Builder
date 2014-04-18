@@ -37,9 +37,6 @@ else
 downloader = new update_manager( this );
 downloader->set_card_directory( PathCartes );
 downloader->set_serv_settings( "127.0.0.1", "jr", "pass" );
-
-connect( this, SIGNAL( card_picture_missing(QString) ), downloader, SLOT( seek_card_picture(QString) ) );
-//connect( downloader, SIGNAL( picture_downloaded() ), this, SLOT( AfficheImageCarte(QString) ) );
 }
 
 // ////////////////////////////////////////////////
@@ -57,13 +54,7 @@ if (!this->SqlDB.open())
 // ////////////////////////////////////////////////
 //  MISE EN FORME DE LA FENETRE PRINCIPALE
 {
-ui->setupUi(this);                                        // Lancement du script QtCreator
-QPixmap DosCarte = QPixmap(":/icons/Vtes_Grelarge.gif");
-ui->VisuelCarte->setPixmap(DosCarte);
-QPixmap DosCrypt = QPixmap(":/icons/Vtes_Tanlarge.gif");
-ui->VisuelCrypt->setPixmap(DosCrypt);
-ui->VisuelCrypt->hide();
-ui->VisuelDeck->hide();
+ui->setupUi(this);
 this->setWindowState(Qt::WindowMaximized);
 }
 
@@ -102,31 +93,20 @@ this->setWindowState(Qt::WindowMaximized);
     test_tuning = new tab_deck_tuning();
     layout->addWidget(test_tuning);
     ui->OngletProba->setLayout(layout);
+    PTreeView *DeckView = test_tuning->DeckView;
+    ModelDeckCourant = dynamic_cast<PTreeModel *>(DeckView->model());
 }
 
-// ///////////////////////////////////////////////
-// ASSOCIATION DES MODELES/VIEWS POUR LA GESTION DE DECK
-{
-    // on assigne le model de données
-    ModeleDeck = new PTreeModel();
-    ui->PTreeViewDeckList->setModel(ModeleDeck);
-
-    // on assigne le delegate
-    PDelegateDeck *DelegateDeck = new PDelegateDeck();
-    ui->PTreeViewDeckList->setItemDelegate(DelegateDeck);
-}
 
 // ///////////////////////////////////////////////
 // DEFINITION DES CONNEXIONS
 {
-    connect(test_search, SIGNAL( new_card_selected(QString) ), this, SLOT( AfficheImageCarte(QString) ));
-    connect(test_crypt,  SIGNAL( new_card_selected(QString) ), this, SLOT( AfficheImageCrypt(QString) ));
-    connect(ui->PTreeViewDeckList,SIGNAL(clicked(QModelIndex)), this, SLOT(AfficheCartesDeck(QModelIndex)));
-    connect(ui->tabEditorModule, SIGNAL(currentChanged(int)), this, SLOT(ChangeVisuel(int)));
-
     connect(ui->actionEnregistrer_le_Deck, SIGNAL(triggered()), this, SLOT(EnregistreDeck()));
     connect(ui->actionImprimer_le_Deck, SIGNAL(triggered()), this, SLOT(ImprimeDeck()));
     connect(ui->actionOptions, SIGNAL(triggered()), this, SLOT(OuvrirMenuOption()));
+
+    connect( test_tuning, SIGNAL( card_picture_missing(QString) ), downloader, SLOT( seek_card_picture(QString) ) );
+    //connect( downloader, SIGNAL( picture_downloaded() ), this, SLOT( AfficheImageCarte(QString) ) );
 }
 
 // ///////////////////////////////////////////////
@@ -135,82 +115,6 @@ this->setWindowState(Qt::WindowMaximized);
     ui->tabEditorModule->setCurrentIndex(0);
 }
 
-}
-
-/* IMPLEMENTATION DES SLOTS */
-void MainWindow::AfficheImageCarte(QString CardName)
-{
-    //On affiche le bon Qlabel     UTILE ??????
-    ui->VisuelCrypt->hide();
-    ui->VisuelDeck->hide();
-    ui->VisuelCarte->show();
-
-    QImage Image;
-    if (Image.load(PathCartes + CardName))
-        { ui->VisuelCarte->setPixmap(QPixmap::fromImage(Image)); }
-    else
-        {
-        emit card_picture_missing(CardName);
-        /*Afficher un truc par defaut genre Vtes_Grelarge.gif*/
-        }
-}
-
-void MainWindow::AfficheImageCrypt(QString CardName)
-{
-
-    //On affiche le bon Qlabel     UTILE ??????
-    ui->VisuelCrypt->show();
-    ui->VisuelDeck->hide();
-    ui->VisuelCarte->hide();
-
-    QImage Image;
-    if (Image.load(PathCartes + CardName))
-        {ui->VisuelCrypt->setPixmap(QPixmap::fromImage(Image));}
-    else
-        {
-        emit card_picture_missing(CardName);
-        /*Afficher un truc par defaut genre Vtes_Grelarge.gif*/
-        }
-}
-
-void MainWindow::AfficheCartesDeck(QModelIndex Idx)
-{
-if (Idx.isValid())
-    {
-    QVariant CardData;
-    QString CardName;
-    QImage Image;
-    const PTreeModel* CurrentModel = dynamic_cast<const PTreeModel*>(Idx.model());
-    QStandardItem* CurrentItem = CurrentModel->itemFromIndex(Idx);
-
-    if (CurrentItem->data(Qt::UserRole+1) == "LibraryCard" or CurrentItem->data(Qt::UserRole+1) == "CryptCard")
-        {
-        //On affiche le bon Qlabel
-        ui->VisuelCrypt->hide();
-        ui->VisuelDeck->show();
-        ui->VisuelCarte->hide();
-
-        CardData = CurrentItem->data(Qt::UserRole);
-        CardName = "/" + CardData.toStringList()[3] + ".jpg";
-        if (Image.load(PathCartes + CardName))
-            {ui->VisuelDeck->setPixmap(QPixmap::fromImage(Image));}
-        else
-            {
-            emit card_picture_missing(CardName);
-            /*Afficher un truc par defaut genre Vtes_Grelarge.gif*/
-            }
-        }
-    }
-}
-
-void MainWindow::ChangeVisuel(int IndexCourant)
-{
-    switch(IndexCourant)
-        {
-        case 0: { ui->VisuelCrypt->hide(); ui->VisuelDeck->hide();  ui->VisuelCarte->show(); break; }
-        case 1: { ui->VisuelCarte->hide(); ui->VisuelDeck->hide();  ui->VisuelCrypt->show(); break; }
-        case 2: { ui->VisuelCarte->hide(); ui->VisuelCrypt->hide(); ui->VisuelDeck->show(); break; }
-        }
 }
 
 void MainWindow::EnregistreDeck()
@@ -224,7 +128,6 @@ void MainWindow::ImprimeDeck()
 {
 int NbPage,NbEx,k,x,y;
 float NbCarteParPage;
-PTreeModel *ModelDeckCourant = dynamic_cast<PTreeModel*>(ui->PTreeViewDeckList->model());
 QList<QStandardItem *> ItemCrypte = ModelDeckCourant->findItems("CRYPTE");
 QList<QStandardItem *> ItemLibrary = ModelDeckCourant->findItems("BIBLIOTHEQUE");
 QList<QStandardItem *> ItemMetadonnees = ModelDeckCourant->findItems("METADONNEES");

@@ -26,15 +26,18 @@ protected:
 private:
     Ui::tab_search_library *ui;
     QCompleter *Completer;
+    QPixmap DosCarte;
 
 private slots:
     void AdapteSousType();
     void ClearForm();
     void RechercheCarte();
     void request_affichage(QModelIndex Idx);
+    void AfficheImageCarte(QString CardName);
 
 signals:
     void new_card_selected(QString);
+    void card_picture_missing(QString);
 };
 
 #endif // TAB_SEARCH_LIBRARY_H

@@ -33,6 +33,10 @@ tab_search_crypt::tab_search_crypt(QWidget *parent) : QScrollArea(parent), ui(ne
     ui->cBGroup->addItems(VtesInfo::OperatorList);
     ui->cBCapa->addItems(VtesInfo::OperatorList);
 
+    // init card display area
+    DosCrypt = QPixmap(":/icons/Vtes_Tanlarge.gif");
+    ui->VisuelCrypt->setPixmap(DosCrypt);
+
     // Init the MVC //
 
     // Model
@@ -75,6 +79,8 @@ tab_search_crypt::tab_search_crypt(QWidget *parent) : QScrollArea(parent), ui(ne
     connect(ui->pBCryptClearForm, SIGNAL( clicked() ), this, SLOT( ClearForm() ));
     connect(ui->PTVCryptResults, SIGNAL( clicked(QModelIndex) ), this, SLOT(request_affichage(QModelIndex)));
     connect(ui->PTVCryptResults->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(request_affichage(QModelIndex)));
+
+    connect(this,  SIGNAL( new_card_selected(QString) ), this, SLOT( AfficheImageCrypt(QString) ));
 }
 
 void tab_search_crypt::RechercheCarte()
@@ -212,6 +218,22 @@ void tab_search_crypt::keyPressEvent(QKeyEvent *e)
         }
     else
         QScrollArea::keyPressEvent(e);
+}
+
+void tab_search_crypt::AfficheImageCrypt(QString CardName)
+{
+    // !!!!!!!!!! dépannage
+    QString PathCartes;
+    PathCartes = "D:\\Eternal-Deck-Builder\\bin\\debug\\Cartes\\";
+    // !!!!!!!!!! dépannage
+    QImage Image;
+    if (Image.load(PathCartes + CardName))
+        {ui->VisuelCrypt->setPixmap(QPixmap::fromImage(Image));}
+    else
+        {
+        emit card_picture_missing(CardName);
+        /*Afficher un truc par defaut genre Vtes_Grelarge.gif*/
+        }
 }
 
 tab_search_crypt::~tab_search_crypt()

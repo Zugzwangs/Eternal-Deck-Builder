@@ -26,14 +26,17 @@ protected:
 private:
     Ui::tab_search_crypt *ui;
     QCompleter *Completer;
+    QPixmap DosCrypt;
 
 private slots:
     void ClearForm();
     void RechercheCarte();
     void request_affichage(QModelIndex Idx);
+    void AfficheImageCrypt(QString CardName);
 
 signals:
     void new_card_selected(QString);
+    void card_picture_missing(QString);
 };
 
 #endif // TAB_SEARCH_CRYPT_H
