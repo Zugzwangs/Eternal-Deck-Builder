@@ -12,8 +12,8 @@ PFrame::PFrame(QWidget *parent) : QFrame(parent)
     setVisible(true);
     setFrameStyle(QFrame::Sunken | QFrame::Box);
     setLineWidth(2);
-    setStyleSheet("background-image: url(" + QCoreApplication::applicationDirPath() + "/Images/bourse.png)");
-    BloodPxm = new QPixmap(QCoreApplication::applicationDirPath() + "/Images/Blood.png");
+    //setStyleSheet("background-image: url(" + QCoreApplication::applicationDirPath() + "/Images/bourse.png)");
+    //BloodPxm = new QPixmap(QCoreApplication::applicationDirPath() + "/Images/Blood.png");
 }
 
 void PFrame::mousePressEvent(QMouseEvent *event)
@@ -47,7 +47,7 @@ void PFrame::startDrag()
 
 // /////////////////////////////////////////////////////////////////////////////////////////
 // Drop zone to add cards in the deck model
-PDeckDropArea::PDeckDropArea(QWidget *parent) : QFrame(parent){
+PDeckDropArea::PDeckDropArea(QWidget *parent) : QLabel(parent){
 
     setAcceptDrops(true);
     setFrameStyle(QFrame::Sunken | QFrame::Box);
@@ -73,7 +73,24 @@ void PDeckDropArea::dragMoveEvent(QDragMoveEvent *event){
 
 void PDeckDropArea::dropEvent(QDropEvent *event){
 
-    qDebug() << "HOLY SHIT JE DROP TA MERE !";
+QString TempData;
+QString NomCarte;
+QStringList ListofData;
+
+//On recup les données du drop | on les split | on chope le nom de la carte
+TempData = event->mimeData()->text();
+ListofData = TempData.split("\n",QString::KeepEmptyParts);
+NomCarte = ListofData[1].trimmed();
+
+// TODO : choose from who, drops are accepted here  !
+// bon besoin conception
+// on peut build un objet carte ici et le passer à l'objet deck, au Model/View deck ??
+// ou on passe la string list "brute" au Deck ou model ou vue.
+//comment on connecte la zone de drop au reste
+//comment on connecte Deck au MVC ? fusion ou pas
+// on peut faire via les signaux : [signal] void card_dropped(Card C); ???
+//                                 [signal] void card_dropped(QStringList StrL); ???
+// c le plus simple et le moins de couplage => réflechir en terme de couplage
 }
 
 PDeckDropArea::~PDeckDropArea() {}

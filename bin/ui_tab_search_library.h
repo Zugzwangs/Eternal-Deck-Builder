@@ -40,10 +40,6 @@ public:
     QVBoxLayout *verticalLayout;
     QFrame *frame_2;
     QHBoxLayout *horizontalLayout_3;
-    QGroupBox *CardgroupBoxOptions;
-    QVBoxLayout *verticalLayout_2;
-    QPushButton *pBCardSearch;
-    QPushButton *pBCardClearForm;
     QFrame *CardSearchFrame;
     QGridLayout *gridLayout_8;
     QGroupBox *CardgroupBoxOthers;
@@ -142,11 +138,16 @@ public:
     QLabel *label_41;
     QComboBox *cBConvictionCost;
     QSpinBox *sBConvictionCost;
+    PDeckDropArea *dropLabel;
     QSpacerItem *horizontalSpacer;
     QFrame *frame;
     QHBoxLayout *horizontalLayout;
     QFrame *frame_3;
-    QVBoxLayout *verticalLayout_3;
+    QVBoxLayout *verticalLayout_2;
+    QFrame *frame_4;
+    QHBoxLayout *horizontalLayout_4;
+    QPushButton *pBCardSearch;
+    QPushButton *pBCardClearForm;
     QLabel *VisuelCarte;
     QSpacerItem *verticalSpacer_3;
     PItemView *PTVCardsResults;
@@ -156,7 +157,7 @@ public:
     {
         if (tab_search_library->objectName().isEmpty())
             tab_search_library->setObjectName(QStringLiteral("tab_search_library"));
-        tab_search_library->resize(1609, 1183);
+        tab_search_library->resize(1815, 1213);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -171,7 +172,7 @@ public:
         tab_search_library->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1609, 1183));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1815, 1213));
         verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(5, 5, 5, 5);
@@ -182,42 +183,13 @@ public:
         horizontalLayout_3 = new QHBoxLayout(frame_2);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         horizontalLayout_3->setContentsMargins(10, 0, 10, 0);
-        CardgroupBoxOptions = new QGroupBox(frame_2);
-        CardgroupBoxOptions->setObjectName(QStringLiteral("CardgroupBoxOptions"));
-        verticalLayout_2 = new QVBoxLayout(CardgroupBoxOptions);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(10, 0, 10, 0);
-        pBCardSearch = new QPushButton(CardgroupBoxOptions);
-        pBCardSearch->setObjectName(QStringLiteral("pBCardSearch"));
-        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(pBCardSearch->sizePolicy().hasHeightForWidth());
-        pBCardSearch->setSizePolicy(sizePolicy1);
-        pBCardSearch->setMinimumSize(QSize(70, 40));
-        pBCardSearch->setMaximumSize(QSize(70, 40));
-
-        verticalLayout_2->addWidget(pBCardSearch);
-
-        pBCardClearForm = new QPushButton(CardgroupBoxOptions);
-        pBCardClearForm->setObjectName(QStringLiteral("pBCardClearForm"));
-        sizePolicy1.setHeightForWidth(pBCardClearForm->sizePolicy().hasHeightForWidth());
-        pBCardClearForm->setSizePolicy(sizePolicy1);
-        pBCardClearForm->setMinimumSize(QSize(70, 40));
-        pBCardClearForm->setMaximumSize(QSize(70, 40));
-
-        verticalLayout_2->addWidget(pBCardClearForm);
-
-
-        horizontalLayout_3->addWidget(CardgroupBoxOptions);
-
         CardSearchFrame = new QFrame(frame_2);
         CardSearchFrame->setObjectName(QStringLiteral("CardSearchFrame"));
-        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(CardSearchFrame->sizePolicy().hasHeightForWidth());
-        CardSearchFrame->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(CardSearchFrame->sizePolicy().hasHeightForWidth());
+        CardSearchFrame->setSizePolicy(sizePolicy1);
         CardSearchFrame->setMinimumSize(QSize(1350, 300));
         CardSearchFrame->setMaximumSize(QSize(1350, 300));
         CardSearchFrame->setFrameShape(QFrame::NoFrame);
@@ -300,11 +272,11 @@ public:
 
         label_45 = new QLabel(groupBox);
         label_45->setObjectName(QStringLiteral("label_45"));
-        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Preferred);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(label_45->sizePolicy().hasHeightForWidth());
-        label_45->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(label_45->sizePolicy().hasHeightForWidth());
+        label_45->setSizePolicy(sizePolicy2);
         label_45->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout_6->addWidget(label_45, 1, 0, 1, 1);
@@ -324,8 +296,8 @@ public:
         gridLayout_4->setContentsMargins(5, 5, 5, 5);
         label_49 = new QLabel(CardgroupBoxRequirements);
         label_49->setObjectName(QStringLiteral("label_49"));
-        sizePolicy3.setHeightForWidth(label_49->sizePolicy().hasHeightForWidth());
-        label_49->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(label_49->sizePolicy().hasHeightForWidth());
+        label_49->setSizePolicy(sizePolicy2);
 
         gridLayout_4->addWidget(label_49, 0, 0, 1, 1);
 
@@ -349,8 +321,8 @@ public:
 
         lSect_2 = new QLabel(CardgroupBoxRequirements);
         lSect_2->setObjectName(QStringLiteral("lSect_2"));
-        sizePolicy3.setHeightForWidth(lSect_2->sizePolicy().hasHeightForWidth());
-        lSect_2->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(lSect_2->sizePolicy().hasHeightForWidth());
+        lSect_2->setSizePolicy(sizePolicy2);
 
         gridLayout_4->addWidget(lSect_2, 1, 0, 1, 1);
 
@@ -374,8 +346,8 @@ public:
 
         lTitle_2 = new QLabel(CardgroupBoxRequirements);
         lTitle_2->setObjectName(QStringLiteral("lTitle_2"));
-        sizePolicy3.setHeightForWidth(lTitle_2->sizePolicy().hasHeightForWidth());
-        lTitle_2->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(lTitle_2->sizePolicy().hasHeightForWidth());
+        lTitle_2->setSizePolicy(sizePolicy2);
 
         gridLayout_4->addWidget(lTitle_2, 2, 0, 1, 1);
 
@@ -408,8 +380,11 @@ public:
         gridLayout->setContentsMargins(5, 5, 5, 5);
         qui = new DisciplineButton(CardgroupBoxDiscipline);
         qui->setObjectName(QStringLiteral("qui"));
-        sizePolicy1.setHeightForWidth(qui->sizePolicy().hasHeightForWidth());
-        qui->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(qui->sizePolicy().hasHeightForWidth());
+        qui->setSizePolicy(sizePolicy3);
         qui->setMinimumSize(QSize(40, 40));
         qui->setMaximumSize(QSize(40, 40));
 
@@ -417,8 +392,8 @@ public:
 
         dom = new DisciplineButton(CardgroupBoxDiscipline);
         dom->setObjectName(QStringLiteral("dom"));
-        sizePolicy1.setHeightForWidth(dom->sizePolicy().hasHeightForWidth());
-        dom->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(dom->sizePolicy().hasHeightForWidth());
+        dom->setSizePolicy(sizePolicy3);
         dom->setMinimumSize(QSize(40, 40));
         dom->setMaximumSize(QSize(40, 40));
 
@@ -426,8 +401,8 @@ public:
 
         obt = new DisciplineButton(CardgroupBoxDiscipline);
         obt->setObjectName(QStringLiteral("obt"));
-        sizePolicy1.setHeightForWidth(obt->sizePolicy().hasHeightForWidth());
-        obt->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(obt->sizePolicy().hasHeightForWidth());
+        obt->setSizePolicy(sizePolicy3);
         obt->setMinimumSize(QSize(40, 40));
         obt->setMaximumSize(QSize(40, 40));
 
@@ -435,8 +410,8 @@ public:
 
         aus = new DisciplineButton(CardgroupBoxDiscipline);
         aus->setObjectName(QStringLiteral("aus"));
-        sizePolicy1.setHeightForWidth(aus->sizePolicy().hasHeightForWidth());
-        aus->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(aus->sizePolicy().hasHeightForWidth());
+        aus->setSizePolicy(sizePolicy3);
         aus->setMinimumSize(QSize(40, 40));
         aus->setMaximumSize(QSize(40, 40));
 
@@ -444,8 +419,8 @@ public:
 
         pot = new DisciplineButton(CardgroupBoxDiscipline);
         pot->setObjectName(QStringLiteral("pot"));
-        sizePolicy1.setHeightForWidth(pot->sizePolicy().hasHeightForWidth());
-        pot->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(pot->sizePolicy().hasHeightForWidth());
+        pot->setSizePolicy(sizePolicy3);
         pot->setMinimumSize(QSize(40, 40));
         pot->setMaximumSize(QSize(40, 40));
 
@@ -453,8 +428,8 @@ public:
 
         tem = new DisciplineButton(CardgroupBoxDiscipline);
         tem->setObjectName(QStringLiteral("tem"));
-        sizePolicy1.setHeightForWidth(tem->sizePolicy().hasHeightForWidth());
-        tem->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(tem->sizePolicy().hasHeightForWidth());
+        tem->setSizePolicy(sizePolicy3);
         tem->setMinimumSize(QSize(40, 40));
         tem->setMaximumSize(QSize(40, 40));
 
@@ -462,8 +437,8 @@ public:
 
         nec = new DisciplineButton(CardgroupBoxDiscipline);
         nec->setObjectName(QStringLiteral("nec"));
-        sizePolicy1.setHeightForWidth(nec->sizePolicy().hasHeightForWidth());
-        nec->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(nec->sizePolicy().hasHeightForWidth());
+        nec->setSizePolicy(sizePolicy3);
         nec->setMinimumSize(QSize(40, 40));
         nec->setMaximumSize(QSize(40, 40));
 
@@ -471,8 +446,8 @@ public:
 
         vic = new DisciplineButton(CardgroupBoxDiscipline);
         vic->setObjectName(QStringLiteral("vic"));
-        sizePolicy1.setHeightForWidth(vic->sizePolicy().hasHeightForWidth());
-        vic->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(vic->sizePolicy().hasHeightForWidth());
+        vic->setSizePolicy(sizePolicy3);
         vic->setMinimumSize(QSize(40, 40));
         vic->setMaximumSize(QSize(40, 40));
 
@@ -480,8 +455,8 @@ public:
 
         cel = new DisciplineButton(CardgroupBoxDiscipline);
         cel->setObjectName(QStringLiteral("cel"));
-        sizePolicy1.setHeightForWidth(cel->sizePolicy().hasHeightForWidth());
-        cel->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(cel->sizePolicy().hasHeightForWidth());
+        cel->setSizePolicy(sizePolicy3);
         cel->setMinimumSize(QSize(40, 40));
         cel->setMaximumSize(QSize(40, 40));
 
@@ -489,8 +464,8 @@ public:
 
         san = new DisciplineButton(CardgroupBoxDiscipline);
         san->setObjectName(QStringLiteral("san"));
-        sizePolicy1.setHeightForWidth(san->sizePolicy().hasHeightForWidth());
-        san->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(san->sizePolicy().hasHeightForWidth());
+        san->setSizePolicy(sizePolicy3);
         san->setMinimumSize(QSize(40, 40));
         san->setMaximumSize(QSize(40, 40));
 
@@ -498,8 +473,8 @@ public:
 
         dem = new DisciplineButton(CardgroupBoxDiscipline);
         dem->setObjectName(QStringLiteral("dem"));
-        sizePolicy1.setHeightForWidth(dem->sizePolicy().hasHeightForWidth());
-        dem->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(dem->sizePolicy().hasHeightForWidth());
+        dem->setSizePolicy(sizePolicy3);
         dem->setMinimumSize(QSize(40, 40));
         dem->setMaximumSize(QSize(40, 40));
 
@@ -507,8 +482,8 @@ public:
 
         myt = new DisciplineButton(CardgroupBoxDiscipline);
         myt->setObjectName(QStringLiteral("myt"));
-        sizePolicy1.setHeightForWidth(myt->sizePolicy().hasHeightForWidth());
-        myt->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(myt->sizePolicy().hasHeightForWidth());
+        myt->setSizePolicy(sizePolicy3);
         myt->setMinimumSize(QSize(40, 40));
         myt->setMaximumSize(QSize(40, 40));
 
@@ -516,8 +491,8 @@ public:
 
         tha = new DisciplineButton(CardgroupBoxDiscipline);
         tha->setObjectName(QStringLiteral("tha"));
-        sizePolicy1.setHeightForWidth(tha->sizePolicy().hasHeightForWidth());
-        tha->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(tha->sizePolicy().hasHeightForWidth());
+        tha->setSizePolicy(sizePolicy3);
         tha->setMinimumSize(QSize(40, 40));
         tha->setMaximumSize(QSize(40, 40));
 
@@ -525,8 +500,8 @@ public:
 
         vis = new DisciplineButton(CardgroupBoxDiscipline);
         vis->setObjectName(QStringLiteral("vis"));
-        sizePolicy1.setHeightForWidth(vis->sizePolicy().hasHeightForWidth());
-        vis->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(vis->sizePolicy().hasHeightForWidth());
+        vis->setSizePolicy(sizePolicy3);
         vis->setMinimumSize(QSize(40, 40));
         vis->setMaximumSize(QSize(40, 40));
 
@@ -534,8 +509,8 @@ public:
 
         obe = new DisciplineButton(CardgroupBoxDiscipline);
         obe->setObjectName(QStringLiteral("obe"));
-        sizePolicy1.setHeightForWidth(obe->sizePolicy().hasHeightForWidth());
-        obe->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(obe->sizePolicy().hasHeightForWidth());
+        obe->setSizePolicy(sizePolicy3);
         obe->setMinimumSize(QSize(40, 40));
         obe->setMaximumSize(QSize(40, 40));
 
@@ -543,8 +518,8 @@ public:
 
         for_2 = new DisciplineButton(CardgroupBoxDiscipline);
         for_2->setObjectName(QStringLiteral("for_2"));
-        sizePolicy1.setHeightForWidth(for_2->sizePolicy().hasHeightForWidth());
-        for_2->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(for_2->sizePolicy().hasHeightForWidth());
+        for_2->setSizePolicy(sizePolicy3);
         for_2->setMinimumSize(QSize(40, 40));
         for_2->setMaximumSize(QSize(40, 40));
 
@@ -552,8 +527,8 @@ public:
 
         dai = new DisciplineButton(CardgroupBoxDiscipline);
         dai->setObjectName(QStringLiteral("dai"));
-        sizePolicy1.setHeightForWidth(dai->sizePolicy().hasHeightForWidth());
-        dai->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(dai->sizePolicy().hasHeightForWidth());
+        dai->setSizePolicy(sizePolicy3);
         dai->setMinimumSize(QSize(40, 40));
         dai->setMaximumSize(QSize(40, 40));
 
@@ -561,8 +536,8 @@ public:
 
         abo = new DisciplineButton(CardgroupBoxDiscipline);
         abo->setObjectName(QStringLiteral("abo"));
-        sizePolicy1.setHeightForWidth(abo->sizePolicy().hasHeightForWidth());
-        abo->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(abo->sizePolicy().hasHeightForWidth());
+        abo->setSizePolicy(sizePolicy3);
         abo->setMinimumSize(QSize(40, 40));
         abo->setMaximumSize(QSize(40, 40));
 
@@ -570,8 +545,8 @@ public:
 
         ser = new DisciplineButton(CardgroupBoxDiscipline);
         ser->setObjectName(QStringLiteral("ser"));
-        sizePolicy1.setHeightForWidth(ser->sizePolicy().hasHeightForWidth());
-        ser->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(ser->sizePolicy().hasHeightForWidth());
+        ser->setSizePolicy(sizePolicy3);
         ser->setMinimumSize(QSize(40, 40));
         ser->setMaximumSize(QSize(40, 40));
 
@@ -579,8 +554,8 @@ public:
 
         chi = new DisciplineButton(CardgroupBoxDiscipline);
         chi->setObjectName(QStringLiteral("chi"));
-        sizePolicy1.setHeightForWidth(chi->sizePolicy().hasHeightForWidth());
-        chi->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(chi->sizePolicy().hasHeightForWidth());
+        chi->setSizePolicy(sizePolicy3);
         chi->setMinimumSize(QSize(40, 40));
         chi->setMaximumSize(QSize(40, 40));
 
@@ -588,8 +563,8 @@ public:
 
         pre = new DisciplineButton(CardgroupBoxDiscipline);
         pre->setObjectName(QStringLiteral("pre"));
-        sizePolicy1.setHeightForWidth(pre->sizePolicy().hasHeightForWidth());
-        pre->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(pre->sizePolicy().hasHeightForWidth());
+        pre->setSizePolicy(sizePolicy3);
         pre->setMinimumSize(QSize(40, 40));
         pre->setMaximumSize(QSize(40, 40));
 
@@ -597,8 +572,8 @@ public:
 
         ani = new DisciplineButton(CardgroupBoxDiscipline);
         ani->setObjectName(QStringLiteral("ani"));
-        sizePolicy1.setHeightForWidth(ani->sizePolicy().hasHeightForWidth());
-        ani->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(ani->sizePolicy().hasHeightForWidth());
+        ani->setSizePolicy(sizePolicy3);
         ani->setMinimumSize(QSize(40, 40));
         ani->setMaximumSize(QSize(40, 40));
 
@@ -606,8 +581,8 @@ public:
 
         obf = new DisciplineButton(CardgroupBoxDiscipline);
         obf->setObjectName(QStringLiteral("obf"));
-        sizePolicy1.setHeightForWidth(obf->sizePolicy().hasHeightForWidth());
-        obf->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(obf->sizePolicy().hasHeightForWidth());
+        obf->setSizePolicy(sizePolicy3);
         obf->setMinimumSize(QSize(40, 40));
         obf->setMaximumSize(QSize(40, 40));
 
@@ -615,8 +590,8 @@ public:
 
         val = new DisciplineButton(CardgroupBoxDiscipline);
         val->setObjectName(QStringLiteral("val"));
-        sizePolicy1.setHeightForWidth(val->sizePolicy().hasHeightForWidth());
-        val->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(val->sizePolicy().hasHeightForWidth());
+        val->setSizePolicy(sizePolicy3);
         val->setMinimumSize(QSize(40, 40));
         val->setMaximumSize(QSize(40, 40));
 
@@ -624,8 +599,8 @@ public:
 
         stri = new DisciplineButton(CardgroupBoxDiscipline);
         stri->setObjectName(QStringLiteral("stri"));
-        sizePolicy1.setHeightForWidth(stri->sizePolicy().hasHeightForWidth());
-        stri->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(stri->sizePolicy().hasHeightForWidth());
+        stri->setSizePolicy(sizePolicy3);
         stri->setMinimumSize(QSize(40, 40));
         stri->setMaximumSize(QSize(40, 40));
 
@@ -633,8 +608,8 @@ public:
 
         pro = new DisciplineButton(CardgroupBoxDiscipline);
         pro->setObjectName(QStringLiteral("pro"));
-        sizePolicy1.setHeightForWidth(pro->sizePolicy().hasHeightForWidth());
-        pro->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(pro->sizePolicy().hasHeightForWidth());
+        pro->setSizePolicy(sizePolicy3);
         pro->setMinimumSize(QSize(40, 40));
         pro->setMaximumSize(QSize(40, 40));
 
@@ -642,8 +617,8 @@ public:
 
         spi = new DisciplineButton(CardgroupBoxDiscipline);
         spi->setObjectName(QStringLiteral("spi"));
-        sizePolicy1.setHeightForWidth(spi->sizePolicy().hasHeightForWidth());
-        spi->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(spi->sizePolicy().hasHeightForWidth());
+        spi->setSizePolicy(sizePolicy3);
         spi->setMinimumSize(QSize(40, 40));
         spi->setMaximumSize(QSize(40, 40));
 
@@ -651,8 +626,8 @@ public:
 
         thn = new DisciplineButton(CardgroupBoxDiscipline);
         thn->setObjectName(QStringLiteral("thn"));
-        sizePolicy1.setHeightForWidth(thn->sizePolicy().hasHeightForWidth());
-        thn->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(thn->sizePolicy().hasHeightForWidth());
+        thn->setSizePolicy(sizePolicy3);
         thn->setMinimumSize(QSize(40, 40));
         thn->setMaximumSize(QSize(40, 40));
 
@@ -660,8 +635,8 @@ public:
 
         mel = new DisciplineButton(CardgroupBoxDiscipline);
         mel->setObjectName(QStringLiteral("mel"));
-        sizePolicy1.setHeightForWidth(mel->sizePolicy().hasHeightForWidth());
-        mel->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(mel->sizePolicy().hasHeightForWidth());
+        mel->setSizePolicy(sizePolicy3);
         mel->setMinimumSize(QSize(40, 40));
         mel->setMaximumSize(QSize(40, 40));
 
@@ -669,8 +644,8 @@ public:
 
         mal = new DisciplineButton(CardgroupBoxDiscipline);
         mal->setObjectName(QStringLiteral("mal"));
-        sizePolicy1.setHeightForWidth(mal->sizePolicy().hasHeightForWidth());
-        mal->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(mal->sizePolicy().hasHeightForWidth());
+        mal->setSizePolicy(sizePolicy3);
         mal->setMinimumSize(QSize(40, 40));
         mal->setMaximumSize(QSize(40, 40));
 
@@ -686,8 +661,8 @@ public:
         horizontalLayout_2->setContentsMargins(5, 5, 5, 5);
         def = new DisciplineButton(CardgroupBoxVirtues);
         def->setObjectName(QStringLiteral("def"));
-        sizePolicy1.setHeightForWidth(def->sizePolicy().hasHeightForWidth());
-        def->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(def->sizePolicy().hasHeightForWidth());
+        def->setSizePolicy(sizePolicy3);
         def->setMinimumSize(QSize(40, 40));
         def->setMaximumSize(QSize(40, 40));
 
@@ -695,8 +670,8 @@ public:
 
         inn = new DisciplineButton(CardgroupBoxVirtues);
         inn->setObjectName(QStringLiteral("inn"));
-        sizePolicy1.setHeightForWidth(inn->sizePolicy().hasHeightForWidth());
-        inn->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(inn->sizePolicy().hasHeightForWidth());
+        inn->setSizePolicy(sizePolicy3);
         inn->setMinimumSize(QSize(40, 40));
         inn->setMaximumSize(QSize(40, 40));
 
@@ -704,8 +679,8 @@ public:
 
         jud = new DisciplineButton(CardgroupBoxVirtues);
         jud->setObjectName(QStringLiteral("jud"));
-        sizePolicy1.setHeightForWidth(jud->sizePolicy().hasHeightForWidth());
-        jud->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(jud->sizePolicy().hasHeightForWidth());
+        jud->setSizePolicy(sizePolicy3);
         jud->setMinimumSize(QSize(40, 40));
         jud->setMaximumSize(QSize(40, 40));
 
@@ -713,8 +688,8 @@ public:
 
         mar = new DisciplineButton(CardgroupBoxVirtues);
         mar->setObjectName(QStringLiteral("mar"));
-        sizePolicy1.setHeightForWidth(mar->sizePolicy().hasHeightForWidth());
-        mar->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(mar->sizePolicy().hasHeightForWidth());
+        mar->setSizePolicy(sizePolicy3);
         mar->setMinimumSize(QSize(40, 40));
         mar->setMaximumSize(QSize(40, 40));
 
@@ -722,8 +697,8 @@ public:
 
         red = new DisciplineButton(CardgroupBoxVirtues);
         red->setObjectName(QStringLiteral("red"));
-        sizePolicy1.setHeightForWidth(red->sizePolicy().hasHeightForWidth());
-        red->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(red->sizePolicy().hasHeightForWidth());
+        red->setSizePolicy(sizePolicy3);
         red->setMinimumSize(QSize(40, 40));
         red->setMaximumSize(QSize(40, 40));
 
@@ -731,8 +706,8 @@ public:
 
         ven = new DisciplineButton(CardgroupBoxVirtues);
         ven->setObjectName(QStringLiteral("ven"));
-        sizePolicy1.setHeightForWidth(ven->sizePolicy().hasHeightForWidth());
-        ven->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(ven->sizePolicy().hasHeightForWidth());
+        ven->setSizePolicy(sizePolicy3);
         ven->setMinimumSize(QSize(40, 40));
         ven->setMaximumSize(QSize(40, 40));
 
@@ -740,8 +715,8 @@ public:
 
         vis2 = new DisciplineButton(CardgroupBoxVirtues);
         vis2->setObjectName(QStringLiteral("vis2"));
-        sizePolicy1.setHeightForWidth(vis2->sizePolicy().hasHeightForWidth());
-        vis2->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(vis2->sizePolicy().hasHeightForWidth());
+        vis2->setSizePolicy(sizePolicy3);
         vis2->setMinimumSize(QSize(40, 40));
         vis2->setMaximumSize(QSize(40, 40));
 
@@ -757,8 +732,8 @@ public:
         gridLayout_2->setContentsMargins(5, 5, 5, 5);
         label_4 = new QLabel(CardgroupBoxFilters);
         label_4->setObjectName(QStringLiteral("label_4"));
-        sizePolicy3.setHeightForWidth(label_4->sizePolicy().hasHeightForWidth());
-        label_4->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(label_4->sizePolicy().hasHeightForWidth());
+        label_4->setSizePolicy(sizePolicy2);
         label_4->setLayoutDirection(Qt::LeftToRight);
         label_4->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
@@ -841,8 +816,8 @@ public:
 
         cBBloodCost = new QComboBox(CardgroupBoxCout);
         cBBloodCost->setObjectName(QStringLiteral("cBBloodCost"));
-        sizePolicy1.setHeightForWidth(cBBloodCost->sizePolicy().hasHeightForWidth());
-        cBBloodCost->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(cBBloodCost->sizePolicy().hasHeightForWidth());
+        cBBloodCost->setSizePolicy(sizePolicy3);
         cBBloodCost->setMinimumSize(QSize(45, 0));
         cBBloodCost->setMaximumSize(QSize(45, 16777215));
 
@@ -850,8 +825,8 @@ public:
 
         sBBloodCost = new QSpinBox(CardgroupBoxCout);
         sBBloodCost->setObjectName(QStringLiteral("sBBloodCost"));
-        sizePolicy1.setHeightForWidth(sBBloodCost->sizePolicy().hasHeightForWidth());
-        sBBloodCost->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(sBBloodCost->sizePolicy().hasHeightForWidth());
+        sBBloodCost->setSizePolicy(sizePolicy3);
         sBBloodCost->setMinimumSize(QSize(40, 0));
         sBBloodCost->setMaximumSize(QSize(40, 16777215));
         QFont font;
@@ -874,8 +849,8 @@ public:
 
         cBPoolCost = new QComboBox(CardgroupBoxCout);
         cBPoolCost->setObjectName(QStringLiteral("cBPoolCost"));
-        sizePolicy1.setHeightForWidth(cBPoolCost->sizePolicy().hasHeightForWidth());
-        cBPoolCost->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(cBPoolCost->sizePolicy().hasHeightForWidth());
+        cBPoolCost->setSizePolicy(sizePolicy3);
         cBPoolCost->setMinimumSize(QSize(45, 0));
         cBPoolCost->setMaximumSize(QSize(45, 16777215));
 
@@ -883,8 +858,8 @@ public:
 
         sBPoolCost = new QSpinBox(CardgroupBoxCout);
         sBPoolCost->setObjectName(QStringLiteral("sBPoolCost"));
-        sizePolicy1.setHeightForWidth(sBPoolCost->sizePolicy().hasHeightForWidth());
-        sBPoolCost->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(sBPoolCost->sizePolicy().hasHeightForWidth());
+        sBPoolCost->setSizePolicy(sizePolicy3);
         sBPoolCost->setMinimumSize(QSize(40, 0));
         sBPoolCost->setMaximumSize(QSize(40, 16777215));
         sBPoolCost->setFont(font);
@@ -902,8 +877,8 @@ public:
 
         cBConvictionCost = new QComboBox(CardgroupBoxCout);
         cBConvictionCost->setObjectName(QStringLiteral("cBConvictionCost"));
-        sizePolicy1.setHeightForWidth(cBConvictionCost->sizePolicy().hasHeightForWidth());
-        cBConvictionCost->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(cBConvictionCost->sizePolicy().hasHeightForWidth());
+        cBConvictionCost->setSizePolicy(sizePolicy3);
         cBConvictionCost->setMinimumSize(QSize(45, 0));
         cBConvictionCost->setMaximumSize(QSize(45, 16777215));
 
@@ -911,8 +886,8 @@ public:
 
         sBConvictionCost = new QSpinBox(CardgroupBoxCout);
         sBConvictionCost->setObjectName(QStringLiteral("sBConvictionCost"));
-        sizePolicy1.setHeightForWidth(sBConvictionCost->sizePolicy().hasHeightForWidth());
-        sBConvictionCost->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(sBConvictionCost->sizePolicy().hasHeightForWidth());
+        sBConvictionCost->setSizePolicy(sizePolicy3);
         sBConvictionCost->setMinimumSize(QSize(40, 0));
         sBConvictionCost->setMaximumSize(QSize(40, 16777215));
         sBConvictionCost->setFont(font);
@@ -925,6 +900,17 @@ public:
 
 
         horizontalLayout_3->addWidget(CardSearchFrame);
+
+        dropLabel = new PDeckDropArea(frame_2);
+        dropLabel->setObjectName(QStringLiteral("dropLabel"));
+        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(dropLabel->sizePolicy().hasHeightForWidth());
+        dropLabel->setSizePolicy(sizePolicy4);
+        dropLabel->setPixmap(QPixmap(QString::fromUtf8(":/icons/deck.jpg")));
+
+        horizontalLayout_3->addWidget(dropLabel);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -940,17 +926,45 @@ public:
         frame->setLineWidth(0);
         horizontalLayout = new QHBoxLayout(frame);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setContentsMargins(5, 5, 5, 5);
+        horizontalLayout->setContentsMargins(10, 0, 10, 0);
         frame_3 = new QFrame(frame);
         frame_3->setObjectName(QStringLiteral("frame_3"));
         frame_3->setFrameShape(QFrame::StyledPanel);
         frame_3->setFrameShadow(QFrame::Raised);
-        verticalLayout_3 = new QVBoxLayout(frame_3);
-        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalLayout_2 = new QVBoxLayout(frame_3);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        frame_4 = new QFrame(frame_3);
+        frame_4->setObjectName(QStringLiteral("frame_4"));
+        frame_4->setFrameShape(QFrame::StyledPanel);
+        frame_4->setFrameShadow(QFrame::Raised);
+        horizontalLayout_4 = new QHBoxLayout(frame_4);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        pBCardSearch = new QPushButton(frame_4);
+        pBCardSearch->setObjectName(QStringLiteral("pBCardSearch"));
+        sizePolicy3.setHeightForWidth(pBCardSearch->sizePolicy().hasHeightForWidth());
+        pBCardSearch->setSizePolicy(sizePolicy3);
+        pBCardSearch->setMinimumSize(QSize(70, 40));
+        pBCardSearch->setMaximumSize(QSize(70, 40));
+
+        horizontalLayout_4->addWidget(pBCardSearch);
+
+        pBCardClearForm = new QPushButton(frame_4);
+        pBCardClearForm->setObjectName(QStringLiteral("pBCardClearForm"));
+        sizePolicy3.setHeightForWidth(pBCardClearForm->sizePolicy().hasHeightForWidth());
+        pBCardClearForm->setSizePolicy(sizePolicy3);
+        pBCardClearForm->setMinimumSize(QSize(70, 40));
+        pBCardClearForm->setMaximumSize(QSize(70, 40));
+
+        horizontalLayout_4->addWidget(pBCardClearForm);
+
+
+        verticalLayout_2->addWidget(frame_4);
+
         VisuelCarte = new QLabel(frame_3);
         VisuelCarte->setObjectName(QStringLiteral("VisuelCarte"));
-        sizePolicy1.setHeightForWidth(VisuelCarte->sizePolicy().hasHeightForWidth());
-        VisuelCarte->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(VisuelCarte->sizePolicy().hasHeightForWidth());
+        VisuelCarte->setSizePolicy(sizePolicy3);
         VisuelCarte->setMinimumSize(QSize(360, 500));
         VisuelCarte->setMaximumSize(QSize(360, 500));
         VisuelCarte->setFrameShape(QFrame::StyledPanel);
@@ -958,11 +972,11 @@ public:
         VisuelCarte->setLineWidth(0);
         VisuelCarte->setPixmap(QPixmap(QString::fromUtf8("../../jr/Desktop/Vtes_Grelarge.gif")));
 
-        verticalLayout_3->addWidget(VisuelCarte);
+        verticalLayout_2->addWidget(VisuelCarte);
 
         verticalSpacer_3 = new QSpacerItem(20, 310, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        verticalLayout_3->addItem(verticalSpacer_3);
+        verticalLayout_2->addItem(verticalSpacer_3);
 
 
         horizontalLayout->addWidget(frame_3);
@@ -998,9 +1012,6 @@ public:
     void retranslateUi(QScrollArea *tab_search_library)
     {
         tab_search_library->setWindowTitle(QApplication::translate("tab_search_library", "ScrollArea", 0));
-        CardgroupBoxOptions->setTitle(QString());
-        pBCardSearch->setText(QApplication::translate("tab_search_library", "Search", 0));
-        pBCardClearForm->setText(QApplication::translate("tab_search_library", "Clear Form", 0));
         CardgroupBoxOthers->setTitle(QApplication::translate("tab_search_library", "Key words ", 0));
         BurnOption->setText(QApplication::translate("tab_search_library", "Burn Option", 0));
         Anarch_3_Way->setText(QApplication::translate("tab_search_library", "Anarch 3-way", 0));
@@ -1073,6 +1084,9 @@ public:
         label_37->setText(QApplication::translate("tab_search_library", "Blood cost", 0));
         label_39->setText(QApplication::translate("tab_search_library", "Pool cost", 0));
         label_41->setText(QApplication::translate("tab_search_library", "Conviction cost", 0));
+        dropLabel->setText(QString());
+        pBCardSearch->setText(QApplication::translate("tab_search_library", "Search", 0));
+        pBCardClearForm->setText(QApplication::translate("tab_search_library", "Clear Form", 0));
         VisuelCarte->setText(QString());
     } // retranslateUi
 

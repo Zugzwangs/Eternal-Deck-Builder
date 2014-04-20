@@ -40,10 +40,6 @@ public:
     QVBoxLayout *verticalLayout_2;
     QFrame *frame_2;
     QHBoxLayout *horizontalLayout_2;
-    QGroupBox *groupBox_2;
-    QVBoxLayout *verticalLayout;
-    QPushButton *pBCryptSearch;
-    QPushButton *pBCryptClearForm;
     QFrame *CryptSearchFrame;
     QGridLayout *gridLayout_5;
     QGroupBox *groupBoxText;
@@ -159,12 +155,16 @@ public:
     QCheckBox *ckBSterile;
     QCheckBox *ckBBloodCurse;
     QCheckBox *ckBRedList;
+    PDeckDropArea *dropLabel;
     QSpacerItem *horizontalSpacer;
-    PDeckDropArea *frame_4;
     QFrame *frame;
-    QHBoxLayout *horizontalLayout_3;
+    QHBoxLayout *horizontalLayout_4;
     QFrame *frame_3;
-    QVBoxLayout *verticalLayout_3;
+    QVBoxLayout *verticalLayout;
+    QFrame *frame_4;
+    QHBoxLayout *horizontalLayout_3;
+    QPushButton *pBCryptClearForm;
+    QPushButton *pBCryptSearch;
     QLabel *VisuelCrypt;
     QSpacerItem *verticalSpacer;
     PItemView *PTVCryptResults;
@@ -174,7 +174,7 @@ public:
     {
         if (tab_search_crypt->objectName().isEmpty())
             tab_search_crypt->setObjectName(QStringLiteral("tab_search_crypt"));
-        tab_search_crypt->resize(1705, 1131);
+        tab_search_crypt->resize(1789, 1131);
         tab_search_crypt->setWindowOpacity(0);
         tab_search_crypt->setAutoFillBackground(true);
         tab_search_crypt->setFrameShape(QFrame::NoFrame);
@@ -184,7 +184,7 @@ public:
         tab_search_crypt->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1705, 1131));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1789, 1131));
         verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(5, 5, 5, 5);
@@ -202,44 +202,13 @@ public:
         horizontalLayout_2 = new QHBoxLayout(frame_2);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(10, 0, 10, 0);
-        groupBox_2 = new QGroupBox(frame_2);
-        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        groupBox_2->setStyleSheet(QStringLiteral(""));
-        groupBox_2->setFlat(false);
-        verticalLayout = new QVBoxLayout(groupBox_2);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(10, 0, 10, 0);
-        pBCryptSearch = new QPushButton(groupBox_2);
-        pBCryptSearch->setObjectName(QStringLiteral("pBCryptSearch"));
-        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(pBCryptSearch->sizePolicy().hasHeightForWidth());
-        pBCryptSearch->setSizePolicy(sizePolicy1);
-        pBCryptSearch->setMinimumSize(QSize(70, 40));
-        pBCryptSearch->setMaximumSize(QSize(70, 40));
-
-        verticalLayout->addWidget(pBCryptSearch);
-
-        pBCryptClearForm = new QPushButton(groupBox_2);
-        pBCryptClearForm->setObjectName(QStringLiteral("pBCryptClearForm"));
-        sizePolicy1.setHeightForWidth(pBCryptClearForm->sizePolicy().hasHeightForWidth());
-        pBCryptClearForm->setSizePolicy(sizePolicy1);
-        pBCryptClearForm->setMinimumSize(QSize(70, 40));
-        pBCryptClearForm->setMaximumSize(QSize(70, 40));
-
-        verticalLayout->addWidget(pBCryptClearForm);
-
-
-        horizontalLayout_2->addWidget(groupBox_2);
-
         CryptSearchFrame = new QFrame(frame_2);
         CryptSearchFrame->setObjectName(QStringLiteral("CryptSearchFrame"));
-        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(CryptSearchFrame->sizePolicy().hasHeightForWidth());
-        CryptSearchFrame->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(CryptSearchFrame->sizePolicy().hasHeightForWidth());
+        CryptSearchFrame->setSizePolicy(sizePolicy1);
         CryptSearchFrame->setMinimumSize(QSize(1350, 300));
         CryptSearchFrame->setMaximumSize(QSize(1350, 300));
         CryptSearchFrame->setAutoFillBackground(true);
@@ -298,11 +267,11 @@ public:
         gridLayout_2->setContentsMargins(5, 5, 5, 5);
         label_48 = new QLabel(groupBox_3);
         label_48->setObjectName(QStringLiteral("label_48"));
-        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Preferred);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(label_48->sizePolicy().hasHeightForWidth());
-        label_48->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(label_48->sizePolicy().hasHeightForWidth());
+        label_48->setSizePolicy(sizePolicy2);
         label_48->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout_2->addWidget(label_48, 0, 0, 1, 1);
@@ -315,8 +284,8 @@ public:
 
         label_46 = new QLabel(groupBox_3);
         label_46->setObjectName(QStringLiteral("label_46"));
-        sizePolicy3.setHeightForWidth(label_46->sizePolicy().hasHeightForWidth());
-        label_46->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(label_46->sizePolicy().hasHeightForWidth());
+        label_46->setSizePolicy(sizePolicy2);
         label_46->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout_2->addWidget(label_46, 1, 0, 1, 1);
@@ -339,8 +308,11 @@ public:
         gridLayout->setContentsMargins(10, 5, 10, 5);
         lAbombwe = new QLabel(groupBoxDiscipline);
         lAbombwe->setObjectName(QStringLiteral("lAbombwe"));
-        sizePolicy1.setHeightForWidth(lAbombwe->sizePolicy().hasHeightForWidth());
-        lAbombwe->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(lAbombwe->sizePolicy().hasHeightForWidth());
+        lAbombwe->setSizePolicy(sizePolicy3);
         lAbombwe->setMinimumSize(QSize(22, 22));
         lAbombwe->setMaximumSize(QSize(22, 22));
         lAbombwe->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/abo.png")));
@@ -350,8 +322,8 @@ public:
 
         abo = new QComboBox(groupBoxDiscipline);
         abo->setObjectName(QStringLiteral("abo"));
-        sizePolicy1.setHeightForWidth(abo->sizePolicy().hasHeightForWidth());
-        abo->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(abo->sizePolicy().hasHeightForWidth());
+        abo->setSizePolicy(sizePolicy3);
         abo->setMinimumSize(QSize(52, 22));
         abo->setMaximumSize(QSize(52, 22));
 
@@ -359,8 +331,8 @@ public:
 
         lChimerstry = new QLabel(groupBoxDiscipline);
         lChimerstry->setObjectName(QStringLiteral("lChimerstry"));
-        sizePolicy1.setHeightForWidth(lChimerstry->sizePolicy().hasHeightForWidth());
-        lChimerstry->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lChimerstry->sizePolicy().hasHeightForWidth());
+        lChimerstry->setSizePolicy(sizePolicy3);
         lChimerstry->setMinimumSize(QSize(22, 22));
         lChimerstry->setMaximumSize(QSize(22, 22));
         lChimerstry->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/chi.png")));
@@ -370,8 +342,8 @@ public:
 
         chi = new QComboBox(groupBoxDiscipline);
         chi->setObjectName(QStringLiteral("chi"));
-        sizePolicy1.setHeightForWidth(chi->sizePolicy().hasHeightForWidth());
-        chi->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(chi->sizePolicy().hasHeightForWidth());
+        chi->setSizePolicy(sizePolicy3);
         chi->setMinimumSize(QSize(52, 22));
         chi->setMaximumSize(QSize(52, 22));
 
@@ -388,8 +360,8 @@ public:
 
         for_2 = new QComboBox(groupBoxDiscipline);
         for_2->setObjectName(QStringLiteral("for_2"));
-        sizePolicy1.setHeightForWidth(for_2->sizePolicy().hasHeightForWidth());
-        for_2->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(for_2->sizePolicy().hasHeightForWidth());
+        for_2->setSizePolicy(sizePolicy3);
         for_2->setMinimumSize(QSize(52, 22));
         for_2->setMaximumSize(QSize(52, 22));
 
@@ -406,8 +378,8 @@ public:
 
         obe = new QComboBox(groupBoxDiscipline);
         obe->setObjectName(QStringLiteral("obe"));
-        sizePolicy1.setHeightForWidth(obe->sizePolicy().hasHeightForWidth());
-        obe->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(obe->sizePolicy().hasHeightForWidth());
+        obe->setSizePolicy(sizePolicy3);
         obe->setMinimumSize(QSize(52, 22));
         obe->setMaximumSize(QSize(52, 22));
 
@@ -415,8 +387,8 @@ public:
 
         lPresence = new QLabel(groupBoxDiscipline);
         lPresence->setObjectName(QStringLiteral("lPresence"));
-        sizePolicy1.setHeightForWidth(lPresence->sizePolicy().hasHeightForWidth());
-        lPresence->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lPresence->sizePolicy().hasHeightForWidth());
+        lPresence->setSizePolicy(sizePolicy3);
         lPresence->setMinimumSize(QSize(22, 22));
         lPresence->setMaximumSize(QSize(22, 22));
         lPresence->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/pre.png")));
@@ -426,8 +398,8 @@ public:
 
         pre = new QComboBox(groupBoxDiscipline);
         pre->setObjectName(QStringLiteral("pre"));
-        sizePolicy1.setHeightForWidth(pre->sizePolicy().hasHeightForWidth());
-        pre->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(pre->sizePolicy().hasHeightForWidth());
+        pre->setSizePolicy(sizePolicy3);
         pre->setMinimumSize(QSize(52, 22));
         pre->setMaximumSize(QSize(52, 22));
 
@@ -435,8 +407,8 @@ public:
 
         lSerpentis = new QLabel(groupBoxDiscipline);
         lSerpentis->setObjectName(QStringLiteral("lSerpentis"));
-        sizePolicy1.setHeightForWidth(lSerpentis->sizePolicy().hasHeightForWidth());
-        lSerpentis->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lSerpentis->sizePolicy().hasHeightForWidth());
+        lSerpentis->setSizePolicy(sizePolicy3);
         lSerpentis->setMinimumSize(QSize(22, 22));
         lSerpentis->setMaximumSize(QSize(22, 22));
         lSerpentis->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/ser.png")));
@@ -446,8 +418,8 @@ public:
 
         ser = new QComboBox(groupBoxDiscipline);
         ser->setObjectName(QStringLiteral("ser"));
-        sizePolicy1.setHeightForWidth(ser->sizePolicy().hasHeightForWidth());
-        ser->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(ser->sizePolicy().hasHeightForWidth());
+        ser->setSizePolicy(sizePolicy3);
         ser->setMinimumSize(QSize(52, 22));
         ser->setMaximumSize(QSize(52, 22));
 
@@ -455,8 +427,8 @@ public:
 
         lThaumaturgy = new QLabel(groupBoxDiscipline);
         lThaumaturgy->setObjectName(QStringLiteral("lThaumaturgy"));
-        sizePolicy1.setHeightForWidth(lThaumaturgy->sizePolicy().hasHeightForWidth());
-        lThaumaturgy->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lThaumaturgy->sizePolicy().hasHeightForWidth());
+        lThaumaturgy->setSizePolicy(sizePolicy3);
         lThaumaturgy->setMinimumSize(QSize(22, 22));
         lThaumaturgy->setMaximumSize(QSize(22, 22));
         lThaumaturgy->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/thn.png")));
@@ -466,8 +438,8 @@ public:
 
         tha = new QComboBox(groupBoxDiscipline);
         tha->setObjectName(QStringLiteral("tha"));
-        sizePolicy1.setHeightForWidth(tha->sizePolicy().hasHeightForWidth());
-        tha->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(tha->sizePolicy().hasHeightForWidth());
+        tha->setSizePolicy(sizePolicy3);
         tha->setMinimumSize(QSize(52, 22));
         tha->setMaximumSize(QSize(52, 22));
 
@@ -475,8 +447,8 @@ public:
 
         lAnimalism = new QLabel(groupBoxDiscipline);
         lAnimalism->setObjectName(QStringLiteral("lAnimalism"));
-        sizePolicy1.setHeightForWidth(lAnimalism->sizePolicy().hasHeightForWidth());
-        lAnimalism->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lAnimalism->sizePolicy().hasHeightForWidth());
+        lAnimalism->setSizePolicy(sizePolicy3);
         lAnimalism->setMinimumSize(QSize(22, 22));
         lAnimalism->setMaximumSize(QSize(22, 22));
         lAnimalism->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/ani.png")));
@@ -486,8 +458,8 @@ public:
 
         ani = new QComboBox(groupBoxDiscipline);
         ani->setObjectName(QStringLiteral("ani"));
-        sizePolicy1.setHeightForWidth(ani->sizePolicy().hasHeightForWidth());
-        ani->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(ani->sizePolicy().hasHeightForWidth());
+        ani->setSizePolicy(sizePolicy3);
         ani->setMinimumSize(QSize(52, 22));
         ani->setMaximumSize(QSize(52, 22));
 
@@ -495,8 +467,8 @@ public:
 
         lDaimoinon = new QLabel(groupBoxDiscipline);
         lDaimoinon->setObjectName(QStringLiteral("lDaimoinon"));
-        sizePolicy1.setHeightForWidth(lDaimoinon->sizePolicy().hasHeightForWidth());
-        lDaimoinon->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lDaimoinon->sizePolicy().hasHeightForWidth());
+        lDaimoinon->setSizePolicy(sizePolicy3);
         lDaimoinon->setMinimumSize(QSize(22, 22));
         lDaimoinon->setMaximumSize(QSize(22, 22));
         lDaimoinon->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/dai.png")));
@@ -506,8 +478,8 @@ public:
 
         dai = new QComboBox(groupBoxDiscipline);
         dai->setObjectName(QStringLiteral("dai"));
-        sizePolicy1.setHeightForWidth(dai->sizePolicy().hasHeightForWidth());
-        dai->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(dai->sizePolicy().hasHeightForWidth());
+        dai->setSizePolicy(sizePolicy3);
         dai->setMinimumSize(QSize(52, 22));
         dai->setMaximumSize(QSize(52, 22));
 
@@ -524,8 +496,8 @@ public:
 
         mel = new QComboBox(groupBoxDiscipline);
         mel->setObjectName(QStringLiteral("mel"));
-        sizePolicy1.setHeightForWidth(mel->sizePolicy().hasHeightForWidth());
-        mel->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(mel->sizePolicy().hasHeightForWidth());
+        mel->setSizePolicy(sizePolicy3);
         mel->setMinimumSize(QSize(52, 22));
         mel->setMaximumSize(QSize(52, 22));
 
@@ -542,8 +514,8 @@ public:
 
         obf = new QComboBox(groupBoxDiscipline);
         obf->setObjectName(QStringLiteral("obf"));
-        sizePolicy1.setHeightForWidth(obf->sizePolicy().hasHeightForWidth());
-        obf->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(obf->sizePolicy().hasHeightForWidth());
+        obf->setSizePolicy(sizePolicy3);
         obf->setMinimumSize(QSize(52, 22));
         obf->setMaximumSize(QSize(52, 22));
 
@@ -551,8 +523,8 @@ public:
 
         lProtean = new QLabel(groupBoxDiscipline);
         lProtean->setObjectName(QStringLiteral("lProtean"));
-        sizePolicy1.setHeightForWidth(lProtean->sizePolicy().hasHeightForWidth());
-        lProtean->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lProtean->sizePolicy().hasHeightForWidth());
+        lProtean->setSizePolicy(sizePolicy3);
         lProtean->setMinimumSize(QSize(22, 22));
         lProtean->setMaximumSize(QSize(22, 22));
         lProtean->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/pro.png")));
@@ -562,8 +534,8 @@ public:
 
         pro = new QComboBox(groupBoxDiscipline);
         pro->setObjectName(QStringLiteral("pro"));
-        sizePolicy1.setHeightForWidth(pro->sizePolicy().hasHeightForWidth());
-        pro->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(pro->sizePolicy().hasHeightForWidth());
+        pro->setSizePolicy(sizePolicy3);
         pro->setMinimumSize(QSize(52, 22));
         pro->setMaximumSize(QSize(52, 22));
 
@@ -571,8 +543,8 @@ public:
 
         lSpiritus = new QLabel(groupBoxDiscipline);
         lSpiritus->setObjectName(QStringLiteral("lSpiritus"));
-        sizePolicy1.setHeightForWidth(lSpiritus->sizePolicy().hasHeightForWidth());
-        lSpiritus->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lSpiritus->sizePolicy().hasHeightForWidth());
+        lSpiritus->setSizePolicy(sizePolicy3);
         lSpiritus->setMinimumSize(QSize(22, 22));
         lSpiritus->setMaximumSize(QSize(22, 22));
         lSpiritus->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/spi.png")));
@@ -582,8 +554,8 @@ public:
 
         spi = new QComboBox(groupBoxDiscipline);
         spi->setObjectName(QStringLiteral("spi"));
-        sizePolicy1.setHeightForWidth(spi->sizePolicy().hasHeightForWidth());
-        spi->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(spi->sizePolicy().hasHeightForWidth());
+        spi->setSizePolicy(sizePolicy3);
         spi->setMinimumSize(QSize(52, 22));
         spi->setMaximumSize(QSize(52, 22));
 
@@ -591,8 +563,8 @@ public:
 
         lValeren = new QLabel(groupBoxDiscipline);
         lValeren->setObjectName(QStringLiteral("lValeren"));
-        sizePolicy1.setHeightForWidth(lValeren->sizePolicy().hasHeightForWidth());
-        lValeren->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lValeren->sizePolicy().hasHeightForWidth());
+        lValeren->setSizePolicy(sizePolicy3);
         lValeren->setMinimumSize(QSize(22, 22));
         lValeren->setMaximumSize(QSize(22, 22));
         lValeren->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/val.png")));
@@ -602,8 +574,8 @@ public:
 
         val = new QComboBox(groupBoxDiscipline);
         val->setObjectName(QStringLiteral("val"));
-        sizePolicy1.setHeightForWidth(val->sizePolicy().hasHeightForWidth());
-        val->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(val->sizePolicy().hasHeightForWidth());
+        val->setSizePolicy(sizePolicy3);
         val->setMinimumSize(QSize(52, 22));
         val->setMaximumSize(QSize(52, 22));
 
@@ -611,8 +583,8 @@ public:
 
         lAuspex = new QLabel(groupBoxDiscipline);
         lAuspex->setObjectName(QStringLiteral("lAuspex"));
-        sizePolicy1.setHeightForWidth(lAuspex->sizePolicy().hasHeightForWidth());
-        lAuspex->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lAuspex->sizePolicy().hasHeightForWidth());
+        lAuspex->setSizePolicy(sizePolicy3);
         lAuspex->setMinimumSize(QSize(22, 22));
         lAuspex->setMaximumSize(QSize(22, 22));
         lAuspex->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/aus.png")));
@@ -622,8 +594,8 @@ public:
 
         aus = new QComboBox(groupBoxDiscipline);
         aus->setObjectName(QStringLiteral("aus"));
-        sizePolicy1.setHeightForWidth(aus->sizePolicy().hasHeightForWidth());
-        aus->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(aus->sizePolicy().hasHeightForWidth());
+        aus->setSizePolicy(sizePolicy3);
         aus->setMinimumSize(QSize(52, 22));
         aus->setMaximumSize(QSize(52, 22));
 
@@ -631,8 +603,8 @@ public:
 
         lDementation = new QLabel(groupBoxDiscipline);
         lDementation->setObjectName(QStringLiteral("lDementation"));
-        sizePolicy1.setHeightForWidth(lDementation->sizePolicy().hasHeightForWidth());
-        lDementation->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lDementation->sizePolicy().hasHeightForWidth());
+        lDementation->setSizePolicy(sizePolicy3);
         lDementation->setMinimumSize(QSize(22, 22));
         lDementation->setMaximumSize(QSize(22, 22));
         lDementation->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/dem.png")));
@@ -642,8 +614,8 @@ public:
 
         dem = new QComboBox(groupBoxDiscipline);
         dem->setObjectName(QStringLiteral("dem"));
-        sizePolicy1.setHeightForWidth(dem->sizePolicy().hasHeightForWidth());
-        dem->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(dem->sizePolicy().hasHeightForWidth());
+        dem->setSizePolicy(sizePolicy3);
         dem->setMinimumSize(QSize(52, 22));
         dem->setMaximumSize(QSize(52, 22));
 
@@ -660,8 +632,8 @@ public:
 
         myt = new QComboBox(groupBoxDiscipline);
         myt->setObjectName(QStringLiteral("myt"));
-        sizePolicy1.setHeightForWidth(myt->sizePolicy().hasHeightForWidth());
-        myt->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(myt->sizePolicy().hasHeightForWidth());
+        myt->setSizePolicy(sizePolicy3);
         myt->setMinimumSize(QSize(52, 22));
         myt->setMaximumSize(QSize(52, 22));
 
@@ -678,8 +650,8 @@ public:
 
         obt = new QComboBox(groupBoxDiscipline);
         obt->setObjectName(QStringLiteral("obt"));
-        sizePolicy1.setHeightForWidth(obt->sizePolicy().hasHeightForWidth());
-        obt->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(obt->sizePolicy().hasHeightForWidth());
+        obt->setSizePolicy(sizePolicy3);
         obt->setMinimumSize(QSize(52, 22));
         obt->setMaximumSize(QSize(52, 22));
 
@@ -687,8 +659,8 @@ public:
 
         lQuietus = new QLabel(groupBoxDiscipline);
         lQuietus->setObjectName(QStringLiteral("lQuietus"));
-        sizePolicy1.setHeightForWidth(lQuietus->sizePolicy().hasHeightForWidth());
-        lQuietus->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lQuietus->sizePolicy().hasHeightForWidth());
+        lQuietus->setSizePolicy(sizePolicy3);
         lQuietus->setMinimumSize(QSize(22, 22));
         lQuietus->setMaximumSize(QSize(22, 22));
         lQuietus->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/qui.png")));
@@ -698,8 +670,8 @@ public:
 
         qui = new QComboBox(groupBoxDiscipline);
         qui->setObjectName(QStringLiteral("qui"));
-        sizePolicy1.setHeightForWidth(qui->sizePolicy().hasHeightForWidth());
-        qui->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(qui->sizePolicy().hasHeightForWidth());
+        qui->setSizePolicy(sizePolicy3);
         qui->setMinimumSize(QSize(52, 22));
         qui->setMaximumSize(QSize(52, 22));
 
@@ -707,8 +679,8 @@ public:
 
         lTemporis = new QLabel(groupBoxDiscipline);
         lTemporis->setObjectName(QStringLiteral("lTemporis"));
-        sizePolicy1.setHeightForWidth(lTemporis->sizePolicy().hasHeightForWidth());
-        lTemporis->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lTemporis->sizePolicy().hasHeightForWidth());
+        lTemporis->setSizePolicy(sizePolicy3);
         lTemporis->setMinimumSize(QSize(22, 22));
         lTemporis->setMaximumSize(QSize(22, 22));
         lTemporis->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/tem.png")));
@@ -718,8 +690,8 @@ public:
 
         tem = new QComboBox(groupBoxDiscipline);
         tem->setObjectName(QStringLiteral("tem"));
-        sizePolicy1.setHeightForWidth(tem->sizePolicy().hasHeightForWidth());
-        tem->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(tem->sizePolicy().hasHeightForWidth());
+        tem->setSizePolicy(sizePolicy3);
         tem->setMinimumSize(QSize(52, 22));
         tem->setMaximumSize(QSize(52, 22));
 
@@ -727,8 +699,8 @@ public:
 
         lVicissitude = new QLabel(groupBoxDiscipline);
         lVicissitude->setObjectName(QStringLiteral("lVicissitude"));
-        sizePolicy1.setHeightForWidth(lVicissitude->sizePolicy().hasHeightForWidth());
-        lVicissitude->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lVicissitude->sizePolicy().hasHeightForWidth());
+        lVicissitude->setSizePolicy(sizePolicy3);
         lVicissitude->setMinimumSize(QSize(22, 22));
         lVicissitude->setMaximumSize(QSize(22, 22));
         lVicissitude->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/vic.png")));
@@ -738,8 +710,8 @@ public:
 
         vic = new QComboBox(groupBoxDiscipline);
         vic->setObjectName(QStringLiteral("vic"));
-        sizePolicy1.setHeightForWidth(vic->sizePolicy().hasHeightForWidth());
-        vic->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(vic->sizePolicy().hasHeightForWidth());
+        vic->setSizePolicy(sizePolicy3);
         vic->setMinimumSize(QSize(52, 22));
         vic->setMaximumSize(QSize(52, 22));
 
@@ -747,8 +719,8 @@ public:
 
         lCelerity = new QLabel(groupBoxDiscipline);
         lCelerity->setObjectName(QStringLiteral("lCelerity"));
-        sizePolicy1.setHeightForWidth(lCelerity->sizePolicy().hasHeightForWidth());
-        lCelerity->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lCelerity->sizePolicy().hasHeightForWidth());
+        lCelerity->setSizePolicy(sizePolicy3);
         lCelerity->setMinimumSize(QSize(22, 22));
         lCelerity->setMaximumSize(QSize(22, 22));
         lCelerity->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/cel.png")));
@@ -758,8 +730,8 @@ public:
 
         cel = new QComboBox(groupBoxDiscipline);
         cel->setObjectName(QStringLiteral("cel"));
-        sizePolicy1.setHeightForWidth(cel->sizePolicy().hasHeightForWidth());
-        cel->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(cel->sizePolicy().hasHeightForWidth());
+        cel->setSizePolicy(sizePolicy3);
         cel->setMinimumSize(QSize(52, 22));
         cel->setMaximumSize(QSize(52, 22));
 
@@ -776,8 +748,8 @@ public:
 
         dom = new QComboBox(groupBoxDiscipline);
         dom->setObjectName(QStringLiteral("dom"));
-        sizePolicy1.setHeightForWidth(dom->sizePolicy().hasHeightForWidth());
-        dom->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(dom->sizePolicy().hasHeightForWidth());
+        dom->setSizePolicy(sizePolicy3);
         dom->setMinimumSize(QSize(52, 22));
         dom->setMaximumSize(QSize(52, 22));
 
@@ -794,8 +766,8 @@ public:
 
         nec = new QComboBox(groupBoxDiscipline);
         nec->setObjectName(QStringLiteral("nec"));
-        sizePolicy1.setHeightForWidth(nec->sizePolicy().hasHeightForWidth());
-        nec->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(nec->sizePolicy().hasHeightForWidth());
+        nec->setSizePolicy(sizePolicy3);
         nec->setMinimumSize(QSize(52, 22));
         nec->setMaximumSize(QSize(52, 22));
 
@@ -803,8 +775,8 @@ public:
 
         lPotence = new QLabel(groupBoxDiscipline);
         lPotence->setObjectName(QStringLiteral("lPotence"));
-        sizePolicy1.setHeightForWidth(lPotence->sizePolicy().hasHeightForWidth());
-        lPotence->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lPotence->sizePolicy().hasHeightForWidth());
+        lPotence->setSizePolicy(sizePolicy3);
         lPotence->setMinimumSize(QSize(22, 22));
         lPotence->setMaximumSize(QSize(22, 22));
         lPotence->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/pot.png")));
@@ -814,8 +786,8 @@ public:
 
         pot = new QComboBox(groupBoxDiscipline);
         pot->setObjectName(QStringLiteral("pot"));
-        sizePolicy1.setHeightForWidth(pot->sizePolicy().hasHeightForWidth());
-        pot->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(pot->sizePolicy().hasHeightForWidth());
+        pot->setSizePolicy(sizePolicy3);
         pot->setMinimumSize(QSize(52, 22));
         pot->setMaximumSize(QSize(52, 22));
 
@@ -823,8 +795,8 @@ public:
 
         lSanguinus = new QLabel(groupBoxDiscipline);
         lSanguinus->setObjectName(QStringLiteral("lSanguinus"));
-        sizePolicy1.setHeightForWidth(lSanguinus->sizePolicy().hasHeightForWidth());
-        lSanguinus->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lSanguinus->sizePolicy().hasHeightForWidth());
+        lSanguinus->setSizePolicy(sizePolicy3);
         lSanguinus->setMinimumSize(QSize(22, 22));
         lSanguinus->setMaximumSize(QSize(22, 22));
         lSanguinus->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/san.png")));
@@ -834,8 +806,8 @@ public:
 
         san = new QComboBox(groupBoxDiscipline);
         san->setObjectName(QStringLiteral("san"));
-        sizePolicy1.setHeightForWidth(san->sizePolicy().hasHeightForWidth());
-        san->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(san->sizePolicy().hasHeightForWidth());
+        san->setSizePolicy(sizePolicy3);
         san->setMinimumSize(QSize(52, 22));
         san->setMaximumSize(QSize(52, 22));
 
@@ -843,8 +815,8 @@ public:
 
         lThanatosis = new QLabel(groupBoxDiscipline);
         lThanatosis->setObjectName(QStringLiteral("lThanatosis"));
-        sizePolicy1.setHeightForWidth(lThanatosis->sizePolicy().hasHeightForWidth());
-        lThanatosis->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lThanatosis->sizePolicy().hasHeightForWidth());
+        lThanatosis->setSizePolicy(sizePolicy3);
         lThanatosis->setMinimumSize(QSize(22, 22));
         lThanatosis->setMaximumSize(QSize(22, 22));
         lThanatosis->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/tha.png")));
@@ -854,8 +826,8 @@ public:
 
         thn = new QComboBox(groupBoxDiscipline);
         thn->setObjectName(QStringLiteral("thn"));
-        sizePolicy1.setHeightForWidth(thn->sizePolicy().hasHeightForWidth());
-        thn->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(thn->sizePolicy().hasHeightForWidth());
+        thn->setSizePolicy(sizePolicy3);
         thn->setMinimumSize(QSize(52, 22));
         thn->setMaximumSize(QSize(52, 22));
 
@@ -863,8 +835,8 @@ public:
 
         lVisceratika = new QLabel(groupBoxDiscipline);
         lVisceratika->setObjectName(QStringLiteral("lVisceratika"));
-        sizePolicy1.setHeightForWidth(lVisceratika->sizePolicy().hasHeightForWidth());
-        lVisceratika->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lVisceratika->sizePolicy().hasHeightForWidth());
+        lVisceratika->setSizePolicy(sizePolicy3);
         lVisceratika->setMinimumSize(QSize(22, 22));
         lVisceratika->setMaximumSize(QSize(22, 22));
         lVisceratika->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/vis.png")));
@@ -874,8 +846,8 @@ public:
 
         vis = new QComboBox(groupBoxDiscipline);
         vis->setObjectName(QStringLiteral("vis"));
-        sizePolicy1.setHeightForWidth(vis->sizePolicy().hasHeightForWidth());
-        vis->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(vis->sizePolicy().hasHeightForWidth());
+        vis->setSizePolicy(sizePolicy3);
         vis->setMinimumSize(QSize(52, 22));
         vis->setMaximumSize(QSize(52, 22));
 
@@ -891,16 +863,16 @@ public:
         gridLayout_3->setContentsMargins(5, 5, 5, 5);
         label_21 = new QLabel(groupBox);
         label_21->setObjectName(QStringLiteral("label_21"));
-        sizePolicy3.setHeightForWidth(label_21->sizePolicy().hasHeightForWidth());
-        label_21->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(label_21->sizePolicy().hasHeightForWidth());
+        label_21->setSizePolicy(sizePolicy2);
         label_21->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout_3->addWidget(label_21, 0, 0, 1, 1);
 
         cBGroup = new QComboBox(groupBox);
         cBGroup->setObjectName(QStringLiteral("cBGroup"));
-        sizePolicy1.setHeightForWidth(cBGroup->sizePolicy().hasHeightForWidth());
-        cBGroup->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(cBGroup->sizePolicy().hasHeightForWidth());
+        cBGroup->setSizePolicy(sizePolicy3);
         cBGroup->setMinimumSize(QSize(45, 0));
         cBGroup->setMaximumSize(QSize(45, 16777215));
 
@@ -908,8 +880,8 @@ public:
 
         sBGroup = new QSpinBox(groupBox);
         sBGroup->setObjectName(QStringLiteral("sBGroup"));
-        sizePolicy1.setHeightForWidth(sBGroup->sizePolicy().hasHeightForWidth());
-        sBGroup->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(sBGroup->sizePolicy().hasHeightForWidth());
+        sBGroup->setSizePolicy(sizePolicy3);
         sBGroup->setMinimumSize(QSize(40, 0));
         sBGroup->setMaximumSize(QSize(40, 16777215));
         QFont font;
@@ -924,16 +896,16 @@ public:
 
         label_29 = new QLabel(groupBox);
         label_29->setObjectName(QStringLiteral("label_29"));
-        sizePolicy3.setHeightForWidth(label_29->sizePolicy().hasHeightForWidth());
-        label_29->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(label_29->sizePolicy().hasHeightForWidth());
+        label_29->setSizePolicy(sizePolicy2);
         label_29->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout_3->addWidget(label_29, 1, 0, 1, 1);
 
         cBCapa = new QComboBox(groupBox);
         cBCapa->setObjectName(QStringLiteral("cBCapa"));
-        sizePolicy1.setHeightForWidth(cBCapa->sizePolicy().hasHeightForWidth());
-        cBCapa->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(cBCapa->sizePolicy().hasHeightForWidth());
+        cBCapa->setSizePolicy(sizePolicy3);
         cBCapa->setMinimumSize(QSize(45, 0));
         cBCapa->setMaximumSize(QSize(45, 16777215));
 
@@ -941,8 +913,8 @@ public:
 
         sBCapa = new QSpinBox(groupBox);
         sBCapa->setObjectName(QStringLiteral("sBCapa"));
-        sizePolicy1.setHeightForWidth(sBCapa->sizePolicy().hasHeightForWidth());
-        sBCapa->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(sBCapa->sizePolicy().hasHeightForWidth());
+        sBCapa->setSizePolicy(sizePolicy3);
         sBCapa->setMinimumSize(QSize(40, 0));
         sBCapa->setMaximumSize(QSize(40, 16777215));
         sBCapa->setFont(font);
@@ -960,8 +932,8 @@ public:
         horizontalLayout->setContentsMargins(10, 5, 10, 5);
         lDefense = new QLabel(groupBoxVirtues);
         lDefense->setObjectName(QStringLiteral("lDefense"));
-        sizePolicy1.setHeightForWidth(lDefense->sizePolicy().hasHeightForWidth());
-        lDefense->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lDefense->sizePolicy().hasHeightForWidth());
+        lDefense->setSizePolicy(sizePolicy3);
         lDefense->setMinimumSize(QSize(22, 22));
         lDefense->setMaximumSize(QSize(22, 22));
         lDefense->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/def.png")));
@@ -971,8 +943,8 @@ public:
 
         def = new QComboBox(groupBoxVirtues);
         def->setObjectName(QStringLiteral("def"));
-        sizePolicy1.setHeightForWidth(def->sizePolicy().hasHeightForWidth());
-        def->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(def->sizePolicy().hasHeightForWidth());
+        def->setSizePolicy(sizePolicy3);
         def->setMinimumSize(QSize(52, 22));
         def->setMaximumSize(QSize(52, 22));
 
@@ -980,8 +952,8 @@ public:
 
         lInnocence = new QLabel(groupBoxVirtues);
         lInnocence->setObjectName(QStringLiteral("lInnocence"));
-        sizePolicy1.setHeightForWidth(lInnocence->sizePolicy().hasHeightForWidth());
-        lInnocence->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lInnocence->sizePolicy().hasHeightForWidth());
+        lInnocence->setSizePolicy(sizePolicy3);
         lInnocence->setMinimumSize(QSize(22, 22));
         lInnocence->setMaximumSize(QSize(22, 22));
         lInnocence->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/inn.png")));
@@ -991,8 +963,8 @@ public:
 
         inn = new QComboBox(groupBoxVirtues);
         inn->setObjectName(QStringLiteral("inn"));
-        sizePolicy1.setHeightForWidth(inn->sizePolicy().hasHeightForWidth());
-        inn->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(inn->sizePolicy().hasHeightForWidth());
+        inn->setSizePolicy(sizePolicy3);
         inn->setMinimumSize(QSize(52, 22));
         inn->setMaximumSize(QSize(52, 22));
         inn->setFrame(true);
@@ -1001,8 +973,8 @@ public:
 
         lJudgment = new QLabel(groupBoxVirtues);
         lJudgment->setObjectName(QStringLiteral("lJudgment"));
-        sizePolicy1.setHeightForWidth(lJudgment->sizePolicy().hasHeightForWidth());
-        lJudgment->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lJudgment->sizePolicy().hasHeightForWidth());
+        lJudgment->setSizePolicy(sizePolicy3);
         lJudgment->setMinimumSize(QSize(22, 22));
         lJudgment->setMaximumSize(QSize(22, 22));
         lJudgment->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/jud.png")));
@@ -1012,8 +984,8 @@ public:
 
         jud = new QComboBox(groupBoxVirtues);
         jud->setObjectName(QStringLiteral("jud"));
-        sizePolicy1.setHeightForWidth(jud->sizePolicy().hasHeightForWidth());
-        jud->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(jud->sizePolicy().hasHeightForWidth());
+        jud->setSizePolicy(sizePolicy3);
         jud->setMinimumSize(QSize(52, 22));
         jud->setMaximumSize(QSize(52, 22));
 
@@ -1021,8 +993,8 @@ public:
 
         lMartyrdom = new QLabel(groupBoxVirtues);
         lMartyrdom->setObjectName(QStringLiteral("lMartyrdom"));
-        sizePolicy1.setHeightForWidth(lMartyrdom->sizePolicy().hasHeightForWidth());
-        lMartyrdom->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lMartyrdom->sizePolicy().hasHeightForWidth());
+        lMartyrdom->setSizePolicy(sizePolicy3);
         lMartyrdom->setMinimumSize(QSize(22, 22));
         lMartyrdom->setMaximumSize(QSize(22, 22));
         lMartyrdom->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/mar.png")));
@@ -1032,8 +1004,8 @@ public:
 
         mar = new QComboBox(groupBoxVirtues);
         mar->setObjectName(QStringLiteral("mar"));
-        sizePolicy1.setHeightForWidth(mar->sizePolicy().hasHeightForWidth());
-        mar->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(mar->sizePolicy().hasHeightForWidth());
+        mar->setSizePolicy(sizePolicy3);
         mar->setMinimumSize(QSize(52, 22));
         mar->setMaximumSize(QSize(52, 22));
 
@@ -1041,8 +1013,8 @@ public:
 
         lRedemption = new QLabel(groupBoxVirtues);
         lRedemption->setObjectName(QStringLiteral("lRedemption"));
-        sizePolicy1.setHeightForWidth(lRedemption->sizePolicy().hasHeightForWidth());
-        lRedemption->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lRedemption->sizePolicy().hasHeightForWidth());
+        lRedemption->setSizePolicy(sizePolicy3);
         lRedemption->setMinimumSize(QSize(22, 22));
         lRedemption->setMaximumSize(QSize(22, 22));
         lRedemption->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/red.png")));
@@ -1052,8 +1024,8 @@ public:
 
         red = new QComboBox(groupBoxVirtues);
         red->setObjectName(QStringLiteral("red"));
-        sizePolicy1.setHeightForWidth(red->sizePolicy().hasHeightForWidth());
-        red->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(red->sizePolicy().hasHeightForWidth());
+        red->setSizePolicy(sizePolicy3);
         red->setMinimumSize(QSize(52, 22));
         red->setMaximumSize(QSize(52, 22));
 
@@ -1061,8 +1033,8 @@ public:
 
         lVengeance = new QLabel(groupBoxVirtues);
         lVengeance->setObjectName(QStringLiteral("lVengeance"));
-        sizePolicy1.setHeightForWidth(lVengeance->sizePolicy().hasHeightForWidth());
-        lVengeance->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lVengeance->sizePolicy().hasHeightForWidth());
+        lVengeance->setSizePolicy(sizePolicy3);
         lVengeance->setMinimumSize(QSize(22, 22));
         lVengeance->setMaximumSize(QSize(22, 22));
         lVengeance->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/ven.png")));
@@ -1072,8 +1044,8 @@ public:
 
         ven = new QComboBox(groupBoxVirtues);
         ven->setObjectName(QStringLiteral("ven"));
-        sizePolicy1.setHeightForWidth(ven->sizePolicy().hasHeightForWidth());
-        ven->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(ven->sizePolicy().hasHeightForWidth());
+        ven->setSizePolicy(sizePolicy3);
         ven->setMinimumSize(QSize(52, 22));
         ven->setMaximumSize(QSize(52, 22));
 
@@ -1081,8 +1053,8 @@ public:
 
         lVision = new QLabel(groupBoxVirtues);
         lVision->setObjectName(QStringLiteral("lVision"));
-        sizePolicy1.setHeightForWidth(lVision->sizePolicy().hasHeightForWidth());
-        lVision->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(lVision->sizePolicy().hasHeightForWidth());
+        lVision->setSizePolicy(sizePolicy3);
         lVision->setMinimumSize(QSize(22, 22));
         lVision->setMaximumSize(QSize(22, 22));
         lVision->setPixmap(QPixmap(QString::fromUtf8(":/icons/disc/vis2.png")));
@@ -1092,8 +1064,8 @@ public:
 
         vis2 = new QComboBox(groupBoxVirtues);
         vis2->setObjectName(QStringLiteral("vis2"));
-        sizePolicy1.setHeightForWidth(vis2->sizePolicy().hasHeightForWidth());
-        vis2->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(vis2->sizePolicy().hasHeightForWidth());
+        vis2->setSizePolicy(sizePolicy3);
         vis2->setMinimumSize(QSize(52, 22));
         vis2->setMaximumSize(QSize(52, 22));
 
@@ -1109,8 +1081,8 @@ public:
         gridLayout_4->setContentsMargins(5, 5, 5, 5);
         lClan = new QLabel(groupBoxTrait);
         lClan->setObjectName(QStringLiteral("lClan"));
-        sizePolicy3.setHeightForWidth(lClan->sizePolicy().hasHeightForWidth());
-        lClan->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(lClan->sizePolicy().hasHeightForWidth());
+        lClan->setSizePolicy(sizePolicy2);
 
         gridLayout_4->addWidget(lClan, 0, 0, 1, 1);
 
@@ -1140,8 +1112,8 @@ public:
 
         lTitle = new QLabel(groupBoxTrait);
         lTitle->setObjectName(QStringLiteral("lTitle"));
-        sizePolicy3.setHeightForWidth(lTitle->sizePolicy().hasHeightForWidth());
-        lTitle->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(lTitle->sizePolicy().hasHeightForWidth());
+        lTitle->setSizePolicy(sizePolicy2);
 
         gridLayout_4->addWidget(lTitle, 1, 0, 1, 1);
 
@@ -1171,8 +1143,8 @@ public:
 
         lSect = new QLabel(groupBoxTrait);
         lSect->setObjectName(QStringLiteral("lSect"));
-        sizePolicy3.setHeightForWidth(lSect->sizePolicy().hasHeightForWidth());
-        lSect->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(lSect->sizePolicy().hasHeightForWidth());
+        lSect->setSizePolicy(sizePolicy2);
 
         gridLayout_4->addWidget(lSect, 2, 0, 1, 1);
 
@@ -1206,17 +1178,20 @@ public:
 
         horizontalLayout_2->addWidget(CryptSearchFrame);
 
+        dropLabel = new PDeckDropArea(frame_2);
+        dropLabel->setObjectName(QStringLiteral("dropLabel"));
+        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(dropLabel->sizePolicy().hasHeightForWidth());
+        dropLabel->setSizePolicy(sizePolicy4);
+        dropLabel->setPixmap(QPixmap(QString::fromUtf8(":/icons/deck.jpg")));
+
+        horizontalLayout_2->addWidget(dropLabel);
+
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer);
-
-        frame_4 = new PDeckDropArea(frame_2);
-        frame_4->setObjectName(QStringLiteral("frame_4"));
-        frame_4->setMinimumSize(QSize(100, 0));
-        frame_4->setFrameShape(QFrame::StyledPanel);
-        frame_4->setFrameShadow(QFrame::Raised);
-
-        horizontalLayout_2->addWidget(frame_4);
 
 
         verticalLayout_2->addWidget(frame_2);
@@ -1226,19 +1201,47 @@ public:
         frame->setFrameShape(QFrame::NoFrame);
         frame->setFrameShadow(QFrame::Plain);
         frame->setLineWidth(0);
-        horizontalLayout_3 = new QHBoxLayout(frame);
-        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        horizontalLayout_3->setContentsMargins(5, 5, 5, 5);
+        horizontalLayout_4 = new QHBoxLayout(frame);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalLayout_4->setContentsMargins(10, 0, 10, 0);
         frame_3 = new QFrame(frame);
         frame_3->setObjectName(QStringLiteral("frame_3"));
         frame_3->setFrameShape(QFrame::StyledPanel);
         frame_3->setFrameShadow(QFrame::Raised);
-        verticalLayout_3 = new QVBoxLayout(frame_3);
-        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalLayout = new QVBoxLayout(frame_3);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        frame_4 = new QFrame(frame_3);
+        frame_4->setObjectName(QStringLiteral("frame_4"));
+        frame_4->setFrameShape(QFrame::StyledPanel);
+        frame_4->setFrameShadow(QFrame::Raised);
+        horizontalLayout_3 = new QHBoxLayout(frame_4);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        pBCryptClearForm = new QPushButton(frame_4);
+        pBCryptClearForm->setObjectName(QStringLiteral("pBCryptClearForm"));
+        sizePolicy3.setHeightForWidth(pBCryptClearForm->sizePolicy().hasHeightForWidth());
+        pBCryptClearForm->setSizePolicy(sizePolicy3);
+        pBCryptClearForm->setMinimumSize(QSize(70, 40));
+        pBCryptClearForm->setMaximumSize(QSize(70, 40));
+
+        horizontalLayout_3->addWidget(pBCryptClearForm);
+
+        pBCryptSearch = new QPushButton(frame_4);
+        pBCryptSearch->setObjectName(QStringLiteral("pBCryptSearch"));
+        sizePolicy3.setHeightForWidth(pBCryptSearch->sizePolicy().hasHeightForWidth());
+        pBCryptSearch->setSizePolicy(sizePolicy3);
+        pBCryptSearch->setMinimumSize(QSize(70, 40));
+        pBCryptSearch->setMaximumSize(QSize(70, 40));
+
+        horizontalLayout_3->addWidget(pBCryptSearch);
+
+
+        verticalLayout->addWidget(frame_4);
+
         VisuelCrypt = new QLabel(frame_3);
         VisuelCrypt->setObjectName(QStringLiteral("VisuelCrypt"));
-        sizePolicy1.setHeightForWidth(VisuelCrypt->sizePolicy().hasHeightForWidth());
-        VisuelCrypt->setSizePolicy(sizePolicy1);
+        sizePolicy3.setHeightForWidth(VisuelCrypt->sizePolicy().hasHeightForWidth());
+        VisuelCrypt->setSizePolicy(sizePolicy3);
         VisuelCrypt->setMinimumSize(QSize(360, 500));
         VisuelCrypt->setMaximumSize(QSize(360, 500));
         VisuelCrypt->setFrameShape(QFrame::StyledPanel);
@@ -1246,20 +1249,17 @@ public:
         VisuelCrypt->setLineWidth(0);
         VisuelCrypt->setPixmap(QPixmap(QString::fromUtf8("../../jr/Desktop/Vtes_Grelarge.gif")));
 
-        verticalLayout_3->addWidget(VisuelCrypt);
+        verticalLayout->addWidget(VisuelCrypt);
 
         verticalSpacer = new QSpacerItem(20, 246, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        verticalLayout_3->addItem(verticalSpacer);
+        verticalLayout->addItem(verticalSpacer);
 
 
-        horizontalLayout_3->addWidget(frame_3);
+        horizontalLayout_4->addWidget(frame_3);
 
         PTVCryptResults = new PItemView(frame);
         PTVCryptResults->setObjectName(QStringLiteral("PTVCryptResults"));
-        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
         sizePolicy4.setHeightForWidth(PTVCryptResults->sizePolicy().hasHeightForWidth());
         PTVCryptResults->setSizePolicy(sizePolicy4);
         PTVCryptResults->setMinimumSize(QSize(1130, 100));
@@ -1269,11 +1269,11 @@ public:
         PTVCryptResults->setAlternatingRowColors(true);
         PTVCryptResults->setShowGrid(false);
 
-        horizontalLayout_3->addWidget(PTVCryptResults);
+        horizontalLayout_4->addWidget(PTVCryptResults);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        horizontalLayout_3->addItem(horizontalSpacer_2);
+        horizontalLayout_4->addItem(horizontalSpacer_2);
 
 
         verticalLayout_2->addWidget(frame);
@@ -1288,10 +1288,6 @@ public:
     void retranslateUi(QScrollArea *tab_search_crypt)
     {
         tab_search_crypt->setWindowTitle(QApplication::translate("tab_search_crypt", "ScrollArea", 0));
-        groupBox_2->setTitle(QString());
-        pBCryptSearch->setText(QApplication::translate("tab_search_crypt", "Search", 0));
-        pBCryptSearch->setShortcut(QApplication::translate("tab_search_crypt", "F1", 0));
-        pBCryptClearForm->setText(QApplication::translate("tab_search_crypt", "Clear Form", 0));
         groupBoxText->setTitle(QApplication::translate("tab_search_crypt", "General", 0));
         lName->setText(QApplication::translate("tab_search_crypt", "Name", 0));
         lENameCard->setText(QString());
@@ -1393,6 +1389,10 @@ public:
         ckBSterile->setText(QApplication::translate("tab_search_crypt", "Sterile", 0));
         ckBBloodCurse->setText(QApplication::translate("tab_search_crypt", "Blood curse", 0));
         ckBRedList->setText(QApplication::translate("tab_search_crypt", "Red List", 0));
+        dropLabel->setText(QString());
+        pBCryptClearForm->setText(QApplication::translate("tab_search_crypt", "Clear Form", 0));
+        pBCryptSearch->setText(QApplication::translate("tab_search_crypt", "Search", 0));
+        pBCryptSearch->setShortcut(QApplication::translate("tab_search_crypt", "F1", 0));
         VisuelCrypt->setText(QString());
     } // retranslateUi
 

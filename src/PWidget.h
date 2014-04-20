@@ -2,6 +2,7 @@
 #define PWIDGET_H
 
 #include <QFrame>
+#include <QLabel>
 #include <QWidget>
 #include <QMouseEvent>
 #include <QApplication>
@@ -51,7 +52,7 @@ private:
 
 // /////////////////////////////////////////////////////////////////////////////////////////
 //
-class PDeckDropArea : public QFrame
+class PDeckDropArea : public QLabel
 {
     Q_OBJECT
 

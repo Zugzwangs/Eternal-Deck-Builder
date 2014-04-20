@@ -35,8 +35,8 @@ public:
     QTabWidget *tabEditorModule;
     QWidget *OngletRechercheCarte;
     QWidget *OngletRechercheCrypte;
-    QWidget *OngletGoldFish;
     QWidget *OngletProba;
+    QWidget *OngletGoldFish;
     QMenuBar *menuBar;
     QMenu *menuFichier;
     QMenu *menuParam_trages;
@@ -78,12 +78,12 @@ public:
         OngletRechercheCrypte = new QWidget();
         OngletRechercheCrypte->setObjectName(QStringLiteral("OngletRechercheCrypte"));
         tabEditorModule->addTab(OngletRechercheCrypte, QString());
-        OngletGoldFish = new QWidget();
-        OngletGoldFish->setObjectName(QStringLiteral("OngletGoldFish"));
-        tabEditorModule->addTab(OngletGoldFish, QString());
         OngletProba = new QWidget();
         OngletProba->setObjectName(QStringLiteral("OngletProba"));
         tabEditorModule->addTab(OngletProba, QString());
+        OngletGoldFish = new QWidget();
+        OngletGoldFish->setObjectName(QStringLiteral("OngletGoldFish"));
+        tabEditorModule->addTab(OngletGoldFish, QString());
 
         gridLayout->addWidget(tabEditorModule, 0, 0, 1, 1);
 
@@ -124,8 +124,8 @@ public:
         actionOptions->setText(QApplication::translate("MainWindow", "Options", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletRechercheCarte), QApplication::translate("MainWindow", "Recherche Carte", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletRechercheCrypte), QApplication::translate("MainWindow", "Recherche Crypte", 0));
-        tabEditorModule->setTabText(tabEditorModule->indexOf(OngletGoldFish), QApplication::translate("MainWindow", "Gold Fish", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletProba), QApplication::translate("MainWindow", "Atelier Probabilit\303\251s", 0));
+        tabEditorModule->setTabText(tabEditorModule->indexOf(OngletGoldFish), QApplication::translate("MainWindow", "Gold Fish", 0));
         menuFichier->setTitle(QApplication::translate("MainWindow", "Fichier", 0));
         menuParam_trages->setTitle(QApplication::translate("MainWindow", "Param\303\250trages", 0));
     } // retranslateUi

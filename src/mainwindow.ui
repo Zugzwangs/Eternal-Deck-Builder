@@ -57,14 +57,14 @@
         <string>Recherche Crypte</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="OngletGoldFish">
-       <attribute name="title">
-        <string>Gold Fish</string>
-       </attribute>
-      </widget>
       <widget class="QWidget" name="OngletProba">
        <attribute name="title">
         <string>Atelier Probabilités</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="OngletGoldFish">
+       <attribute name="title">
+        <string>Gold Fish</string>
        </attribute>
       </widget>
      </widget>
