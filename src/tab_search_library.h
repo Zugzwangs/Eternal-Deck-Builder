@@ -38,6 +38,7 @@ private slots:
 signals:
     void new_card_selected(QString);
     void card_picture_missing(QString);
+    void card_dropped(QStringList StrL);
 };
 
 #endif // TAB_SEARCH_LIBRARY_H

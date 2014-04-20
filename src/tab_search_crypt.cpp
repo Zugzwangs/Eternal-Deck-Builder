@@ -82,6 +82,8 @@ tab_search_crypt::tab_search_crypt(QWidget *parent) : QScrollArea(parent), ui(ne
     connect(ui->PTVCryptResults->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(request_affichage(QModelIndex)));
 
     connect(this,  SIGNAL( new_card_selected(QString) ), this, SLOT( AfficheImageCrypt(QString) ));
+    //propagate the interne signal outside
+    connect( ui->dropLabel, SIGNAL(card_dropped(QStringList)), this, SIGNAL(card_dropped(QStringList)) );
 }
 
 void tab_search_crypt::RechercheCarte()

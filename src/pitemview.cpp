@@ -90,102 +90,52 @@ setAnimated(true);
 setIndentation(10);
 }
 
-void PTreeView::dragEnterEvent(QDragEnterEvent *event)
+void PTreeView::fakeDrop(QStringList StrL)
 {
-if (event->mimeData()->hasFormat("text/plain"))
-    {
-    event->setDropAction(Qt::CopyAction);
-    event->accept();
-    }
-}
+QString CardName;
+QString CardCat;
+QString Category;
 
-void PTreeView::dragMoveEvent(QDragMoveEvent *event)
-{
-if (event->mimeData()->hasFormat("text/plain"))
-    {
-    event->setDropAction(Qt::CopyAction);
-    event->accept();
-    }
-}
+    // we've got the list of datas, we need to figure out the card's category and his name
+    CardName = StrL[1].trimmed();
+    CardCat = StrL[7].trimmed();
 
-void PTreeView::dropEvent(QDropEvent *event)
-{
-QString TempData;
-QString NomCarte;
-QStringList ListofData;
+    if ( CardCat == "Vampire" || CardCat == "Imbued" )
+        { Category = "BIBLIOTHEQUE"; }
+    else
+        { Category = "CRYPTE"; }
 
-/* On vérifie la source du drop */
-if (event->source()->objectName() == "PTVCardsResults")
-    {
-    //On recup les données du drop | on les split | on chope le nom de la carte
-    TempData = event->mimeData()->text();
-    ListofData = TempData.split("\n",QString::KeepEmptyParts);
-    NomCarte = ListofData[1].trimmed();
-
-    //On vérifie si la carte n'est pas déja dans la list du deck et on la rajoute
+    // Checkout if this card is already in the list
     PTreeModel *modelcourant=dynamic_cast<PTreeModel*>(this->model());
-    QList<QStandardItem *> ItemBibliotheque = modelcourant->findItems("BIBLIOTHEQUE");
-
+    QList<QStandardItem *> ItemPool = modelcourant->findItems(Category);
     QStandardItem* TempItem;
-    bool FlagCartePresente = false;
-    for (int i=0; i<ItemBibliotheque[0]->rowCount(); i++)
+    for (int i=0; i<ItemPool[0]->rowCount(); i++)
         {
-        TempItem = ItemBibliotheque[0]->child(i);
-        if ( NomCarte == TempItem->text())
+        TempItem = ItemPool[0]->child(i);
+        if ( CardName == TempItem->text())
             {
-            FlagCartePresente = true;
+            //if true, increment the exemplair value and exit
             TempItem->setData(TempItem->data(Qt::UserRole+2).toInt()+1,Qt::UserRole+2);
+            return;
             }
         }
 
-    if (!FlagCartePresente)
+    // the card is not already in the model, so we add it
+    QStandardItem* NouvelItem = new QStandardItem(CardName);
+    NouvelItem->setData(StrL,Qt::UserRole);
+    NouvelItem->setData(1,Qt::UserRole+2);
+    NouvelItem->setEditable(false);
+    if ( Category == "BIBLIOTHEQUE" )
         {
-        QStandardItem* NouvelItem = new QStandardItem(NomCarte);
-        NouvelItem->setData(ListofData,Qt::UserRole);
         NouvelItem->setData("LibraryCard",Qt::UserRole+1);
-        NouvelItem->setData(1,Qt::UserRole+2);
-        NouvelItem->setEditable(false);
-        ItemBibliotheque[0]->appendRow(NouvelItem);
+        ItemPool[0]->appendRow(NouvelItem);
         }
-    }
-else
-    {
-    if (event->source()->objectName() == "PTVCryptResults")
+    else
         {
-        //On recup les données du drop | on les split | on chope le nom de la carte
-        TempData = event->mimeData()->text();
-        ListofData = TempData.split("\n",QString::KeepEmptyParts);
-        NomCarte = ListofData[1].trimmed();
-
-        //On vérifie si la carte n'est pas déja dans la list du deck et on la rajoute
-        PTreeModel *modelcourant=dynamic_cast<PTreeModel*>(this->model());
-        QList<QStandardItem *> ItemCrypte = modelcourant->findItems("CRYPTE");
-
-        QStandardItem* TempItem;
-        bool FlagCartePresente = false;
-        for (int i=0; i<ItemCrypte[0]->rowCount(); i++)
-            {
-            TempItem = ItemCrypte[0]->child(i);
-            if ( NomCarte == TempItem->text())
-                {
-                FlagCartePresente = true;
-                TempItem->setData(TempItem->data(Qt::UserRole+2).toInt()+1,Qt::UserRole+2);
-                }
-            }
-
-        if (!FlagCartePresente)
-            {
-            QStandardItem* NouvelItem = new QStandardItem(NomCarte);
-            NouvelItem->setData(ListofData,Qt::UserRole);
-            NouvelItem->setData("CryptCard",Qt::UserRole+1);
-            NouvelItem->setData(1,Qt::UserRole+2);
-            NouvelItem->setEditable(false);
-            ItemCrypte[0]->appendRow(NouvelItem);
-            }
+        NouvelItem->setData("CryptCard",Qt::UserRole+1);
+        ItemPool[0]->appendRow(NouvelItem);
         }
-    }
 }
-
 
 //*******************************************************************************************************
 //                                  LES MODELES DE DONNEES

@@ -99,6 +99,7 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
     connect (ui->PTVCardsResults->selectionModel(), SIGNAL( currentRowChanged(QModelIndex,QModelIndex) ), this, SLOT( request_affichage(QModelIndex) ) );
 
     connect(this, SIGNAL( new_card_selected(QString) ), this, SLOT( AfficheImageCarte(QString) ));
+    connect( ui->dropLabel, SIGNAL(card_dropped(QStringList)), this, SIGNAL(card_dropped(QStringList)) );
 }
 
 void tab_search_library::RechercheCarte()

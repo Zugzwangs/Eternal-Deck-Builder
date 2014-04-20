@@ -77,20 +77,15 @@ QString TempData;
 QString NomCarte;
 QStringList ListofData;
 
-//On recup les données du drop | on les split | on chope le nom de la carte
-TempData = event->mimeData()->text();
-ListofData = TempData.split("\n",QString::KeepEmptyParts);
-NomCarte = ListofData[1].trimmed();
+    //On recup les données du drop | on les split | on chope le nom de la carte
+    TempData = event->mimeData()->text();
+    ListofData = TempData.split("\n",QString::KeepEmptyParts);
+    NomCarte = ListofData[1].trimmed();
 
-// TODO : choose from who, drops are accepted here  !
-// bon besoin conception
-// on peut build un objet carte ici et le passer à l'objet deck, au Model/View deck ??
-// ou on passe la string list "brute" au Deck ou model ou vue.
-//comment on connecte la zone de drop au reste
-//comment on connecte Deck au MVC ? fusion ou pas
-// on peut faire via les signaux : [signal] void card_dropped(Card C); ???
-//                                 [signal] void card_dropped(QStringList StrL); ???
-// c le plus simple et le moins de couplage => réflechir en terme de couplage
+    // TODO : checkout the drop's source and decide what to do !
+
+    //emit the datas
+    emit card_dropped( ListofData );
 }
 
 PDeckDropArea::~PDeckDropArea() {}
@@ -105,7 +100,11 @@ DisciplineButton::DisciplineButton(QWidget *parent) : QAbstractButton(parent)
 
 void DisciplineButton::setupDiscipline(QString dis)
 {
-    discipline = dis.left(3);
+    if ( dis.left(4) == "vis2" )
+        discipline = "vis2";
+    else
+        discipline = dis.left(3);
+
     setText(discipline);
     setToolTip(discipline);
     icone = QPixmap(":/icons/disc/" + discipline + ".png");

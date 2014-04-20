@@ -77,6 +77,17 @@ this->setWindowState(Qt::WindowMaximized);
 }
 
 // ///////////////////////////////////////////////
+// MISE EN FORME DU TAB 'deck tuning'
+{
+    QHBoxLayout *layout = new QHBoxLayout;
+    test_tuning = new tab_deck_tuning();
+    layout->addWidget(test_tuning);
+    ui->OngletProba->setLayout(layout);
+    PTreeView *DeckView = test_tuning->DeckView;
+    ModelDeckCourant = dynamic_cast<PTreeModel *>(DeckView->model());
+}
+
+// ///////////////////////////////////////////////
 // MISE EN FORME DU TAB 'gold fish'
 {
     QHBoxLayout *layout = new QHBoxLayout;
@@ -87,18 +98,6 @@ this->setWindowState(Qt::WindowMaximized);
 }
 
 // ///////////////////////////////////////////////
-// MISE EN FORME DU TAB 'OngletProba'
-{
-    QHBoxLayout *layout = new QHBoxLayout;
-    test_tuning = new tab_deck_tuning();
-    layout->addWidget(test_tuning);
-    ui->OngletProba->setLayout(layout);
-    PTreeView *DeckView = test_tuning->DeckView;
-    ModelDeckCourant = dynamic_cast<PTreeModel *>(DeckView->model());
-}
-
-
-// ///////////////////////////////////////////////
 // DEFINITION DES CONNEXIONS
 {
     connect(ui->actionEnregistrer_le_Deck, SIGNAL(triggered()), this, SLOT(EnregistreDeck()));
@@ -107,7 +106,10 @@ this->setWindowState(Qt::WindowMaximized);
 
     connect( test_tuning, SIGNAL( card_picture_missing(QString) ), downloader, SLOT( seek_card_picture(QString) ) );
     //connect( downloader, SIGNAL( picture_downloaded() ), this, SLOT( AfficheImageCarte(QString) ) );
-}
+
+    connect( test_crypt, SIGNAL(card_dropped(QStringList)), test_tuning->DeckView, SLOT(fakeDrop(QStringList)) );
+    connect( test_search, SIGNAL(card_dropped(QStringList)), test_tuning->DeckView, SLOT(fakeDrop(QStringList)) );
+    }
 
 // ///////////////////////////////////////////////
 // FINITIONS

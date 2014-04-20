@@ -163,8 +163,8 @@ public:
     QVBoxLayout *verticalLayout;
     QFrame *frame_4;
     QHBoxLayout *horizontalLayout_3;
-    QPushButton *pBCryptClearForm;
     QPushButton *pBCryptSearch;
+    QPushButton *pBCryptClearForm;
     QLabel *VisuelCrypt;
     QSpacerItem *verticalSpacer;
     PItemView *PTVCryptResults;
@@ -1217,15 +1217,6 @@ public:
         frame_4->setFrameShadow(QFrame::Raised);
         horizontalLayout_3 = new QHBoxLayout(frame_4);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        pBCryptClearForm = new QPushButton(frame_4);
-        pBCryptClearForm->setObjectName(QStringLiteral("pBCryptClearForm"));
-        sizePolicy3.setHeightForWidth(pBCryptClearForm->sizePolicy().hasHeightForWidth());
-        pBCryptClearForm->setSizePolicy(sizePolicy3);
-        pBCryptClearForm->setMinimumSize(QSize(70, 40));
-        pBCryptClearForm->setMaximumSize(QSize(70, 40));
-
-        horizontalLayout_3->addWidget(pBCryptClearForm);
-
         pBCryptSearch = new QPushButton(frame_4);
         pBCryptSearch->setObjectName(QStringLiteral("pBCryptSearch"));
         sizePolicy3.setHeightForWidth(pBCryptSearch->sizePolicy().hasHeightForWidth());
@@ -1234,6 +1225,15 @@ public:
         pBCryptSearch->setMaximumSize(QSize(70, 40));
 
         horizontalLayout_3->addWidget(pBCryptSearch);
+
+        pBCryptClearForm = new QPushButton(frame_4);
+        pBCryptClearForm->setObjectName(QStringLiteral("pBCryptClearForm"));
+        sizePolicy3.setHeightForWidth(pBCryptClearForm->sizePolicy().hasHeightForWidth());
+        pBCryptClearForm->setSizePolicy(sizePolicy3);
+        pBCryptClearForm->setMinimumSize(QSize(70, 40));
+        pBCryptClearForm->setMaximumSize(QSize(70, 40));
+
+        horizontalLayout_3->addWidget(pBCryptClearForm);
 
 
         verticalLayout->addWidget(frame_4);
@@ -1390,9 +1390,9 @@ public:
         ckBBloodCurse->setText(QApplication::translate("tab_search_crypt", "Blood curse", 0));
         ckBRedList->setText(QApplication::translate("tab_search_crypt", "Red List", 0));
         dropLabel->setText(QString());
-        pBCryptClearForm->setText(QApplication::translate("tab_search_crypt", "Clear Form", 0));
         pBCryptSearch->setText(QApplication::translate("tab_search_crypt", "Search", 0));
         pBCryptSearch->setShortcut(QApplication::translate("tab_search_crypt", "F1", 0));
+        pBCryptClearForm->setText(QApplication::translate("tab_search_crypt", "Clear Form", 0));
         VisuelCrypt->setText(QString());
     } // retranslateUi
 

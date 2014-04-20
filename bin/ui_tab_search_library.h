@@ -163,6 +163,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(tab_search_library->sizePolicy().hasHeightForWidth());
         tab_search_library->setSizePolicy(sizePolicy);
+        tab_search_library->setAutoFillBackground(true);
         tab_search_library->setFrameShape(QFrame::NoFrame);
         tab_search_library->setFrameShadow(QFrame::Plain);
         tab_search_library->setLineWidth(0);

@@ -9,7 +9,7 @@
 #include <QPushButton>
 
 // /////////////////////////////////////////////////////////////////////////////////////////
-// Ma Subclass de QFrame
+// Distributeur de blood
 
 class PFrame : public QFrame
 {
@@ -65,7 +65,8 @@ protected:
     void dragMoveEvent(QDragMoveEvent *event);
     void dropEvent(QDropEvent *event);
 
-private:
+signals:
+    void card_dropped(QStringList StrL);
 
 
 };
