@@ -80,12 +80,8 @@ void PItemView::dragLeaveEvent(QDragLeaveEvent *event)
 PTreeView::PTreeView(QWidget *parent) : QTreeView(parent)
 {
 setVisible(true);
-setGeometry(1015,0,255,600);
-setAcceptDrops(true);
-setDragDropMode(DropOnly);
-setDropIndicatorShown(true);
 setDragDropOverwriteMode(false);
-setHeaderHidden(false);
+setHeaderHidden("true");
 setAnimated(true);
 setIndentation(10);
 }
@@ -101,9 +97,9 @@ QString Category;
     CardCat = StrL[7].trimmed();
 
     if ( CardCat == "Vampire" || CardCat == "Imbued" )
-        { Category = "BIBLIOTHEQUE"; }
-    else
         { Category = "CRYPTE"; }
+    else
+        { Category = "BIBLIOTHEQUE"; }
 
     // Checkout if this card is already in the list
     PTreeModel *modelcourant=dynamic_cast<PTreeModel*>(this->model());
@@ -150,7 +146,6 @@ PSqlTableModel::PSqlTableModel(QObject *parent) : QSqlTableModel()
 PTreeModel::PTreeModel() : QStandardItemModel()
 {
 QStandardItem *RootItem = this->invisibleRootItem();
-this->setColumnCount(2);
 
 itemMeta = new QStandardItem("METADONNEES");
 itemMeta->setEditable(false);
@@ -162,23 +157,11 @@ ListItemMeta.append(new QStandardItem("Auteur"));
 ListItemMeta.append(new QStandardItem("Commentaires"));
 for (int i=0; i<ListItemMeta.length(); i++)
     {
-    ListItemMeta.at(i)->setEditable(false);
-    ListItemMeta.at(i)->setData( ListItemMeta.at(i)->data(Qt::DisplayRole) , Qt::ToolTipRole );
-    //UserRole+3 sert à savoir le role de l'item => remplace le Type pour pas avoir a sousclasser
-    //ListItemMeta.at(i)->setData(1,Qt::UserRole+3);
+    //ListItemMeta.at(i)->setEditable(false);
+    ListItemMeta.at(i)->setData( ListItemMeta.at(i)->data(Qt::DisplayRole) , Qt::UserRole );
+    ListItemMeta.at(i)->setData("meta",Qt::UserRole+1);
     }
 itemMeta->appendColumn(ListItemMeta);
-
-QList<QStandardItem *> chmurt2;
-chmurt2.append(new QStandardItem());
-chmurt2.append(new QStandardItem());
-chmurt2.append(new QStandardItem());
-for (int i=0; i<chmurt2.length(); i++)
-    {
-    chmurt2.at(i)->setData("bita mange boules de merde ta race",Qt::DisplayRole);
-    chmurt2.at(i)->setData("deckMetaDonnees",Qt::UserRole);
-    }
-itemMeta->appendColumn(chmurt2);
 
 itemMeta = new QStandardItem("CRYPTE");
 itemMeta->setEditable(false);
@@ -594,8 +577,45 @@ PDelegateDeck::PDelegateDeck(QObject *parent) : QStyledItemDelegate(parent)
 void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
 
-    //  dessin custom dabs le cas d'une carte crypt/biblio
-    if ( index.isValid() && ( index.data(Qt::UserRole+1).toString() == "CryptCard" ||  index.data(Qt::UserRole+1).toString() == "LibraryCard" ) )
+    if ( index.isValid() && index.data(Qt::UserRole+1).toString() == "meta" )
+        {
+        //dessin spécifique pour les métadonnées:
+        // setup du contexte de dessin
+        QStyleOptionViewItemV4 opt(option);
+        QStyledItemDelegate::initStyleOption(&opt, index);
+        const QWidget *widget = option.widget;
+        QStyle *style = widget ? widget->style() : QApplication::style();
+
+        // setup du paintre
+        painter->save();
+        painter->setRenderHint(QPainter::Antialiasing);
+        painter->setClipRect(opt.rect, Qt::ReplaceClip);
+
+        QRect LRegion( opt.rect );
+        LRegion.setWidth( 100 );
+        QRect RRegion( opt.rect );
+        RRegion.setLeft( LRegion.right() );
+
+        // dessin de la case
+        opt.text = "";
+        if ( opt.state & QStyle::State_Selected )
+            {
+            painter->setBrush( option.palette.highlightedText() );
+            style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
+            }
+        else
+            {
+            painter->setPen( QPen(option.palette.windowText(), 0) );
+            }
+
+        // dessin du nom de la carte
+        painter->drawText( LRegion, Qt::AlignLeft, index.data(Qt::UserRole).toString());
+        painter->drawText( RRegion, Qt::AlignCenter, index.data(Qt::EditRole).toString());
+
+        painter->restore();
+        }
+
+    else if ( index.isValid() && ( index.data(Qt::UserRole+1).toString() == "CryptCard" ||  index.data(Qt::UserRole+1).toString() == "LibraryCard" ) )
         {
         // setup du contexte de dessin
         QStyleOptionViewItemV4 opt(option);
@@ -686,7 +706,6 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
         {
         QStyledItemDelegate::paint(painter, option, index);
         }
-    //QStyledItemDelegate::paint(painter, option, index);
 }
 
 QSize PDelegateDeck::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const

@@ -24,10 +24,8 @@ private:
     PTreeModel *ModeleDeck;
 
 public slots:
-    void AfficheCartesDeck(QModelIndex Idx);
 
 signals:
-    void card_picture_missing(QString);
 
 };
 
