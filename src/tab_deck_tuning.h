@@ -18,12 +18,13 @@ public:
     explicit tab_deck_tuning(QWidget *parent = 0);
     PTreeView *DeckView;
     ~tab_deck_tuning();
-    void AfficheCartesDeck(QModelIndex Idx);
 
 private:
     Ui::tab_deck_tuning *ui;
-    // On déclare le Modèle pour la gestion du deck
     PTreeModel *ModeleDeck;
+
+public slots:
+    void AfficheCartesDeck(QModelIndex Idx);
 
 signals:
     void card_picture_missing(QString);

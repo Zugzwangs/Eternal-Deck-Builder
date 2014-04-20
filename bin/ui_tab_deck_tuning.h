@@ -13,9 +13,11 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QWidget>
 #include "pitemview.h"
@@ -26,28 +28,38 @@ class Ui_tab_deck_tuning
 {
 public:
     QWidget *scrollAreaWidgetContents;
-    QPushButton *testbt;
+    QHBoxLayout *horizontalLayout;
     PTreeView *PTreeViewDeckList;
+    QFrame *frame;
+    QGridLayout *gridLayout;
     QLabel *VisuelDeck;
 
     void setupUi(QScrollArea *tab_deck_tuning)
     {
         if (tab_deck_tuning->objectName().isEmpty())
             tab_deck_tuning->setObjectName(QStringLiteral("tab_deck_tuning"));
-        tab_deck_tuning->resize(972, 618);
+        tab_deck_tuning->resize(1426, 926);
         tab_deck_tuning->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 970, 616));
-        testbt = new QPushButton(scrollAreaWidgetContents);
-        testbt->setObjectName(QStringLiteral("testbt"));
-        testbt->setGeometry(QRect(830, 240, 81, 51));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1424, 924));
+        horizontalLayout = new QHBoxLayout(scrollAreaWidgetContents);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         PTreeViewDeckList = new PTreeView(scrollAreaWidgetContents);
         PTreeViewDeckList->setObjectName(QStringLiteral("PTreeViewDeckList"));
-        PTreeViewDeckList->setGeometry(QRect(20, 10, 351, 571));
-        VisuelDeck = new QLabel(scrollAreaWidgetContents);
+        PTreeViewDeckList->setMinimumSize(QSize(200, 0));
+        PTreeViewDeckList->setMaximumSize(QSize(450, 16777215));
+
+        horizontalLayout->addWidget(PTreeViewDeckList);
+
+        frame = new QFrame(scrollAreaWidgetContents);
+        frame->setObjectName(QStringLiteral("frame"));
+        frame->setFrameShape(QFrame::StyledPanel);
+        frame->setFrameShadow(QFrame::Raised);
+        gridLayout = new QGridLayout(frame);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        VisuelDeck = new QLabel(frame);
         VisuelDeck->setObjectName(QStringLiteral("VisuelDeck"));
-        VisuelDeck->setGeometry(QRect(410, 40, 360, 500));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -56,6 +68,12 @@ public:
         VisuelDeck->setMinimumSize(QSize(360, 500));
         VisuelDeck->setMaximumSize(QSize(360, 500));
         VisuelDeck->setLineWidth(0);
+
+        gridLayout->addWidget(VisuelDeck, 0, 0, 1, 1);
+
+
+        horizontalLayout->addWidget(frame);
+
         tab_deck_tuning->setWidget(scrollAreaWidgetContents);
 
         retranslateUi(tab_deck_tuning);
@@ -66,7 +84,6 @@ public:
     void retranslateUi(QScrollArea *tab_deck_tuning)
     {
         tab_deck_tuning->setWindowTitle(QApplication::translate("tab_deck_tuning", "ScrollArea", 0));
-        testbt->setText(QString());
         VisuelDeck->setText(QString());
     } // retranslateUi
 

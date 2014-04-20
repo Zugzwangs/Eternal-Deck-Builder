@@ -68,7 +68,7 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
     for (int i=2; i<=6; i++)    { ui->PTVCardsResults->hideColumn(i); }
     ui->PTVCardsResults->hideColumn(8);
     ui->PTVCardsResults->hideColumn(10);
-    for (int i=15; i<=22; i++)  { ui->PTVCardsResults->hideColumn(i); }
+    for (int i=16; i<=22; i++)  { ui->PTVCardsResults->hideColumn(i); }
 
     ui->PTVCardsResults->setVisible(true);
     ui->PTVCardsResults->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
@@ -78,6 +78,7 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
     ui->PTVCardsResults->horizontalHeader()->resizeSection( 9, 60 );
     ui->PTVCardsResults->horizontalHeader()->resizeSection( 13, 60 );
     ui->PTVCardsResults->horizontalHeader()->resizeSection( 14, 60 );
+    ui->PTVCardsResults->horizontalHeader()->setStretchLastSection(true);
     ui->PTVCardsResults->verticalHeader()->setDefaultSectionSize( 40 ); //set the default height of rows a bit taller for a better lisibility
 
     // Add the completer to the main search label ( card name)

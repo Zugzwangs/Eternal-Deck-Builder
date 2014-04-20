@@ -28,6 +28,7 @@
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "PWidget.h"
 #include "pitemview.h"
 
 QT_BEGIN_NAMESPACE
@@ -36,17 +37,29 @@ class Ui_tab_search_crypt
 {
 public:
     QWidget *scrollAreaWidgetContents;
-    QVBoxLayout *verticalLayout;
+    QVBoxLayout *verticalLayout_2;
     QFrame *frame_2;
-    QHBoxLayout *horizontalLayout_4;
+    QHBoxLayout *horizontalLayout_2;
+    QGroupBox *groupBox_2;
+    QVBoxLayout *verticalLayout;
+    QPushButton *pBCryptSearch;
+    QPushButton *pBCryptClearForm;
     QFrame *CryptSearchFrame;
+    QGridLayout *gridLayout_5;
     QGroupBox *groupBoxText;
-    QLineEdit *lENameCard;
+    QGridLayout *gridLayout_6;
     QLabel *lName;
-    QLabel *lCardText;
+    QLineEdit *lENameCard;
     QLabel *lArtist;
     QLineEdit *lEArtist;
+    QLabel *lCardText;
     QLineEdit *lETextCard;
+    QGroupBox *groupBox_3;
+    QGridLayout *gridLayout_2;
+    QLabel *label_48;
+    QComboBox *cBSet_2;
+    QLabel *label_46;
+    QComboBox *cBRarity_2;
     QGroupBox *groupBoxDiscipline;
     QGridLayout *gridLayout;
     QLabel *lAbombwe;
@@ -105,6 +118,14 @@ public:
     QComboBox *thn;
     QLabel *lVisceratika;
     QComboBox *vis;
+    QGroupBox *groupBox;
+    QGridLayout *gridLayout_3;
+    QLabel *label_21;
+    QComboBox *cBGroup;
+    QSpinBox *sBGroup;
+    QLabel *label_29;
+    QComboBox *cBCapa;
+    QSpinBox *sBCapa;
     QGroupBox *groupBoxVirtues;
     QHBoxLayout *horizontalLayout;
     QLabel *lDefense;
@@ -122,47 +143,38 @@ public:
     QLabel *lVision;
     QComboBox *vis2;
     QGroupBox *groupBoxTrait;
-    QCheckBox *ckBFlight;
-    QCheckBox *ckBInfernal;
+    QGridLayout *gridLayout_4;
+    QLabel *lClan;
+    QComboBox *cBClan;
     QCheckBox *ckBBlackHand;
-    QCheckBox *ckBRedList;
-    QCheckBox *ckBSeraph;
-    QCheckBox *ckBSlave;
-    QCheckBox *ckBBloodCurse;
+    QCheckBox *ckBFlight;
     QCheckBox *ckBScare;
-    QCheckBox *ckBSterile;
+    QLabel *lTitle;
+    QComboBox *cBTitle;
+    QCheckBox *ckBSeraph;
+    QCheckBox *ckBInfernal;
+    QCheckBox *ckBSlave;
     QLabel *lSect;
     QComboBox *cBSect;
-    QLabel *lClan;
-    QComboBox *cBTitle;
-    QLabel *lTitle;
-    QComboBox *cBClan;
-    QGroupBox *groupBox_2;
-    QHBoxLayout *horizontalLayout_2;
-    QPushButton *pBCryptSearch;
-    QPushButton *pBCryptClearForm;
-    QGroupBox *groupBox;
-    QLabel *label_21;
-    QLabel *label_29;
-    QSpinBox *sBGroup;
-    QComboBox *cBCapa;
-    QSpinBox *sBCapa;
-    QComboBox *cBGroup;
-    QComboBox *cBRarity_2;
-    QLabel *label_46;
-    QComboBox *cBSet_2;
-    QLabel *label_48;
+    QCheckBox *ckBSterile;
+    QCheckBox *ckBBloodCurse;
+    QCheckBox *ckBRedList;
     QSpacerItem *horizontalSpacer;
+    PDeckDropArea *frame_4;
     QFrame *frame;
     QHBoxLayout *horizontalLayout_3;
+    QFrame *frame_3;
+    QVBoxLayout *verticalLayout_3;
     QLabel *VisuelCrypt;
+    QSpacerItem *verticalSpacer;
     PItemView *PTVCryptResults;
+    QSpacerItem *horizontalSpacer_2;
 
     void setupUi(QScrollArea *tab_search_crypt)
     {
         if (tab_search_crypt->objectName().isEmpty())
             tab_search_crypt->setObjectName(QStringLiteral("tab_search_crypt"));
-        tab_search_crypt->resize(1415, 755);
+        tab_search_crypt->resize(1705, 1131);
         tab_search_crypt->setWindowOpacity(0);
         tab_search_crypt->setAutoFillBackground(true);
         tab_search_crypt->setFrameShape(QFrame::NoFrame);
@@ -172,51 +184,154 @@ public:
         tab_search_crypt->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1394, 915));
-        verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1705, 1131));
+        verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(5, 5, 5, 5);
         frame_2 = new QFrame(scrollAreaWidgetContents);
         frame_2->setObjectName(QStringLiteral("frame_2"));
-        frame_2->setFrameShape(QFrame::StyledPanel);
-        frame_2->setFrameShadow(QFrame::Raised);
-        horizontalLayout_4 = new QHBoxLayout(frame_2);
-        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        CryptSearchFrame = new QFrame(frame_2);
-        CryptSearchFrame->setObjectName(QStringLiteral("CryptSearchFrame"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(CryptSearchFrame->sizePolicy().hasHeightForWidth());
-        CryptSearchFrame->setSizePolicy(sizePolicy);
-        CryptSearchFrame->setMinimumSize(QSize(1020, 340));
+        sizePolicy.setHeightForWidth(frame_2->sizePolicy().hasHeightForWidth());
+        frame_2->setSizePolicy(sizePolicy);
+        frame_2->setMinimumSize(QSize(0, 300));
+        frame_2->setMaximumSize(QSize(16777215, 300));
+        frame_2->setFrameShape(QFrame::NoFrame);
+        frame_2->setFrameShadow(QFrame::Plain);
+        horizontalLayout_2 = new QHBoxLayout(frame_2);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(10, 0, 10, 0);
+        groupBox_2 = new QGroupBox(frame_2);
+        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
+        groupBox_2->setStyleSheet(QStringLiteral(""));
+        groupBox_2->setFlat(false);
+        verticalLayout = new QVBoxLayout(groupBox_2);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(10, 0, 10, 0);
+        pBCryptSearch = new QPushButton(groupBox_2);
+        pBCryptSearch->setObjectName(QStringLiteral("pBCryptSearch"));
+        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(pBCryptSearch->sizePolicy().hasHeightForWidth());
+        pBCryptSearch->setSizePolicy(sizePolicy1);
+        pBCryptSearch->setMinimumSize(QSize(70, 40));
+        pBCryptSearch->setMaximumSize(QSize(70, 40));
+
+        verticalLayout->addWidget(pBCryptSearch);
+
+        pBCryptClearForm = new QPushButton(groupBox_2);
+        pBCryptClearForm->setObjectName(QStringLiteral("pBCryptClearForm"));
+        sizePolicy1.setHeightForWidth(pBCryptClearForm->sizePolicy().hasHeightForWidth());
+        pBCryptClearForm->setSizePolicy(sizePolicy1);
+        pBCryptClearForm->setMinimumSize(QSize(70, 40));
+        pBCryptClearForm->setMaximumSize(QSize(70, 40));
+
+        verticalLayout->addWidget(pBCryptClearForm);
+
+
+        horizontalLayout_2->addWidget(groupBox_2);
+
+        CryptSearchFrame = new QFrame(frame_2);
+        CryptSearchFrame->setObjectName(QStringLiteral("CryptSearchFrame"));
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(CryptSearchFrame->sizePolicy().hasHeightForWidth());
+        CryptSearchFrame->setSizePolicy(sizePolicy2);
+        CryptSearchFrame->setMinimumSize(QSize(1350, 300));
+        CryptSearchFrame->setMaximumSize(QSize(1350, 300));
         CryptSearchFrame->setAutoFillBackground(true);
         CryptSearchFrame->setFrameShape(QFrame::NoFrame);
         CryptSearchFrame->setFrameShadow(QFrame::Plain);
         CryptSearchFrame->setLineWidth(0);
+        gridLayout_5 = new QGridLayout(CryptSearchFrame);
+        gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
+        gridLayout_5->setHorizontalSpacing(5);
+        gridLayout_5->setVerticalSpacing(4);
+        gridLayout_5->setContentsMargins(0, 0, 0, 0);
         groupBoxText = new QGroupBox(CryptSearchFrame);
         groupBoxText->setObjectName(QStringLiteral("groupBoxText"));
-        groupBoxText->setGeometry(QRect(0, 0, 520, 101));
-        lENameCard = new QLineEdit(groupBoxText);
-        lENameCard->setObjectName(QStringLiteral("lENameCard"));
-        lENameCard->setGeometry(QRect(65, 30, 200, 22));
+        groupBoxText->setMinimumSize(QSize(0, 130));
+        gridLayout_6 = new QGridLayout(groupBoxText);
+        gridLayout_6->setObjectName(QStringLiteral("gridLayout_6"));
+        gridLayout_6->setContentsMargins(5, 5, 5, 5);
         lName = new QLabel(groupBoxText);
         lName->setObjectName(QStringLiteral("lName"));
-        lName->setGeometry(QRect(23, 30, 41, 16));
-        lCardText = new QLabel(groupBoxText);
-        lCardText->setObjectName(QStringLiteral("lCardText"));
-        lCardText->setGeometry(QRect(31, 64, 31, 16));
+
+        gridLayout_6->addWidget(lName, 0, 0, 1, 1);
+
+        lENameCard = new QLineEdit(groupBoxText);
+        lENameCard->setObjectName(QStringLiteral("lENameCard"));
+
+        gridLayout_6->addWidget(lENameCard, 0, 1, 1, 1);
+
         lArtist = new QLabel(groupBoxText);
         lArtist->setObjectName(QStringLiteral("lArtist"));
-        lArtist->setGeometry(QRect(293, 30, 31, 16));
+
+        gridLayout_6->addWidget(lArtist, 0, 2, 1, 1);
+
         lEArtist = new QLineEdit(groupBoxText);
         lEArtist->setObjectName(QStringLiteral("lEArtist"));
-        lEArtist->setGeometry(QRect(331, 30, 165, 22));
+
+        gridLayout_6->addWidget(lEArtist, 0, 3, 1, 1);
+
+        lCardText = new QLabel(groupBoxText);
+        lCardText->setObjectName(QStringLiteral("lCardText"));
+
+        gridLayout_6->addWidget(lCardText, 1, 0, 1, 1);
+
         lETextCard = new QLineEdit(groupBoxText);
         lETextCard->setObjectName(QStringLiteral("lETextCard"));
-        lETextCard->setGeometry(QRect(65, 64, 431, 21));
+
+        gridLayout_6->addWidget(lETextCard, 1, 1, 1, 3);
+
+
+        gridLayout_5->addWidget(groupBoxText, 0, 0, 1, 1);
+
+        groupBox_3 = new QGroupBox(CryptSearchFrame);
+        groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
+        groupBox_3->setMinimumSize(QSize(0, 120));
+        gridLayout_2 = new QGridLayout(groupBox_3);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        gridLayout_2->setContentsMargins(5, 5, 5, 5);
+        label_48 = new QLabel(groupBox_3);
+        label_48->setObjectName(QStringLiteral("label_48"));
+        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(label_48->sizePolicy().hasHeightForWidth());
+        label_48->setSizePolicy(sizePolicy3);
+        label_48->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_2->addWidget(label_48, 0, 0, 1, 1);
+
+        cBSet_2 = new QComboBox(groupBox_3);
+        cBSet_2->setObjectName(QStringLiteral("cBSet_2"));
+        cBSet_2->setMinimumSize(QSize(150, 0));
+
+        gridLayout_2->addWidget(cBSet_2, 0, 1, 1, 1);
+
+        label_46 = new QLabel(groupBox_3);
+        label_46->setObjectName(QStringLiteral("label_46"));
+        sizePolicy3.setHeightForWidth(label_46->sizePolicy().hasHeightForWidth());
+        label_46->setSizePolicy(sizePolicy3);
+        label_46->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_2->addWidget(label_46, 1, 0, 1, 1);
+
+        cBRarity_2 = new QComboBox(groupBox_3);
+        cBRarity_2->setObjectName(QStringLiteral("cBRarity_2"));
+
+        gridLayout_2->addWidget(cBRarity_2, 1, 1, 1, 1);
+
+
+        gridLayout_5->addWidget(groupBox_3, 0, 1, 1, 1);
+
         groupBoxDiscipline = new QGroupBox(CryptSearchFrame);
         groupBoxDiscipline->setObjectName(QStringLiteral("groupBoxDiscipline"));
-        groupBoxDiscipline->setGeometry(QRect(525, 0, 630, 191));
+        groupBoxDiscipline->setMinimumSize(QSize(0, 220));
         groupBoxDiscipline->setAutoFillBackground(false);
         groupBoxDiscipline->setStyleSheet(QStringLiteral(""));
         gridLayout = new QGridLayout(groupBoxDiscipline);
@@ -224,9 +339,6 @@ public:
         gridLayout->setContentsMargins(10, 5, 10, 5);
         lAbombwe = new QLabel(groupBoxDiscipline);
         lAbombwe->setObjectName(QStringLiteral("lAbombwe"));
-        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(lAbombwe->sizePolicy().hasHeightForWidth());
         lAbombwe->setSizePolicy(sizePolicy1);
         lAbombwe->setMinimumSize(QSize(22, 22));
@@ -769,11 +881,83 @@ public:
 
         gridLayout->addWidget(vis, 3, 13, 1, 1);
 
+
+        gridLayout_5->addWidget(groupBoxDiscipline, 0, 2, 2, 1);
+
+        groupBox = new QGroupBox(CryptSearchFrame);
+        groupBox->setObjectName(QStringLiteral("groupBox"));
+        gridLayout_3 = new QGridLayout(groupBox);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        gridLayout_3->setContentsMargins(5, 5, 5, 5);
+        label_21 = new QLabel(groupBox);
+        label_21->setObjectName(QStringLiteral("label_21"));
+        sizePolicy3.setHeightForWidth(label_21->sizePolicy().hasHeightForWidth());
+        label_21->setSizePolicy(sizePolicy3);
+        label_21->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_3->addWidget(label_21, 0, 0, 1, 1);
+
+        cBGroup = new QComboBox(groupBox);
+        cBGroup->setObjectName(QStringLiteral("cBGroup"));
+        sizePolicy1.setHeightForWidth(cBGroup->sizePolicy().hasHeightForWidth());
+        cBGroup->setSizePolicy(sizePolicy1);
+        cBGroup->setMinimumSize(QSize(45, 0));
+        cBGroup->setMaximumSize(QSize(45, 16777215));
+
+        gridLayout_3->addWidget(cBGroup, 0, 1, 1, 1);
+
+        sBGroup = new QSpinBox(groupBox);
+        sBGroup->setObjectName(QStringLiteral("sBGroup"));
+        sizePolicy1.setHeightForWidth(sBGroup->sizePolicy().hasHeightForWidth());
+        sBGroup->setSizePolicy(sizePolicy1);
+        sBGroup->setMinimumSize(QSize(40, 0));
+        sBGroup->setMaximumSize(QSize(40, 16777215));
+        QFont font;
+        font.setFamily(QStringLiteral("Comic Sans MS"));
+        font.setPointSize(9);
+        font.setBold(true);
+        font.setWeight(75);
+        sBGroup->setFont(font);
+        sBGroup->setMaximum(6);
+
+        gridLayout_3->addWidget(sBGroup, 0, 2, 1, 1);
+
+        label_29 = new QLabel(groupBox);
+        label_29->setObjectName(QStringLiteral("label_29"));
+        sizePolicy3.setHeightForWidth(label_29->sizePolicy().hasHeightForWidth());
+        label_29->setSizePolicy(sizePolicy3);
+        label_29->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_3->addWidget(label_29, 1, 0, 1, 1);
+
+        cBCapa = new QComboBox(groupBox);
+        cBCapa->setObjectName(QStringLiteral("cBCapa"));
+        sizePolicy1.setHeightForWidth(cBCapa->sizePolicy().hasHeightForWidth());
+        cBCapa->setSizePolicy(sizePolicy1);
+        cBCapa->setMinimumSize(QSize(45, 0));
+        cBCapa->setMaximumSize(QSize(45, 16777215));
+
+        gridLayout_3->addWidget(cBCapa, 1, 1, 1, 1);
+
+        sBCapa = new QSpinBox(groupBox);
+        sBCapa->setObjectName(QStringLiteral("sBCapa"));
+        sizePolicy1.setHeightForWidth(sBCapa->sizePolicy().hasHeightForWidth());
+        sBCapa->setSizePolicy(sizePolicy1);
+        sBCapa->setMinimumSize(QSize(40, 0));
+        sBCapa->setMaximumSize(QSize(40, 16777215));
+        sBCapa->setFont(font);
+        sBCapa->setMaximum(11);
+
+        gridLayout_3->addWidget(sBCapa, 1, 2, 1, 1);
+
+
+        gridLayout_5->addWidget(groupBox, 1, 1, 2, 1);
+
         groupBoxVirtues = new QGroupBox(CryptSearchFrame);
         groupBoxVirtues->setObjectName(QStringLiteral("groupBoxVirtues"));
-        groupBoxVirtues->setGeometry(QRect(525, 191, 630, 62));
         horizontalLayout = new QHBoxLayout(groupBoxVirtues);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(10, 5, 10, 5);
         lDefense = new QLabel(groupBoxVirtues);
         lDefense->setObjectName(QStringLiteral("lDefense"));
         sizePolicy1.setHeightForWidth(lDefense->sizePolicy().hasHeightForWidth());
@@ -915,155 +1099,127 @@ public:
 
         horizontalLayout->addWidget(vis2);
 
+
+        gridLayout_5->addWidget(groupBoxVirtues, 2, 2, 1, 1);
+
         groupBoxTrait = new QGroupBox(CryptSearchFrame);
         groupBoxTrait->setObjectName(QStringLiteral("groupBoxTrait"));
-        groupBoxTrait->setGeometry(QRect(0, 103, 520, 150));
-        ckBFlight = new QCheckBox(groupBoxTrait);
-        ckBFlight->setObjectName(QStringLiteral("ckBFlight"));
-        ckBFlight->setGeometry(QRect(356, 30, 61, 20));
-        ckBFlight->setLayoutDirection(Qt::RightToLeft);
-        ckBInfernal = new QCheckBox(groupBoxTrait);
-        ckBInfernal->setObjectName(QStringLiteral("ckBInfernal"));
-        ckBInfernal->setGeometry(QRect(346, 68, 71, 20));
-        ckBInfernal->setLayoutDirection(Qt::RightToLeft);
-        ckBBlackHand = new QCheckBox(groupBoxTrait);
-        ckBBlackHand->setObjectName(QStringLiteral("ckBBlackHand"));
-        ckBBlackHand->setGeometry(QRect(234, 30, 91, 20));
-        ckBBlackHand->setLayoutDirection(Qt::RightToLeft);
-        ckBRedList = new QCheckBox(groupBoxTrait);
-        ckBRedList->setObjectName(QStringLiteral("ckBRedList"));
-        ckBRedList->setGeometry(QRect(425, 108, 71, 20));
-        ckBRedList->setLayoutDirection(Qt::RightToLeft);
-        ckBSeraph = new QCheckBox(groupBoxTrait);
-        ckBSeraph->setObjectName(QStringLiteral("ckBSeraph"));
-        ckBSeraph->setGeometry(QRect(254, 68, 71, 20));
-        ckBSeraph->setLayoutDirection(Qt::RightToLeft);
-        ckBSlave = new QCheckBox(groupBoxTrait);
-        ckBSlave->setObjectName(QStringLiteral("ckBSlave"));
-        ckBSlave->setGeometry(QRect(435, 68, 61, 20));
-        ckBSlave->setLayoutDirection(Qt::RightToLeft);
-        ckBBloodCurse = new QCheckBox(groupBoxTrait);
-        ckBBloodCurse->setObjectName(QStringLiteral("ckBBloodCurse"));
-        ckBBloodCurse->setGeometry(QRect(336, 108, 81, 20));
-        ckBBloodCurse->setLayoutDirection(Qt::RightToLeft);
-        ckBScare = new QCheckBox(groupBoxTrait);
-        ckBScare->setObjectName(QStringLiteral("ckBScare"));
-        ckBScare->setGeometry(QRect(435, 30, 61, 20));
-        ckBScare->setLayoutDirection(Qt::RightToLeft);
-        ckBSterile = new QCheckBox(groupBoxTrait);
-        ckBSterile->setObjectName(QStringLiteral("ckBSterile"));
-        ckBSterile->setGeometry(QRect(254, 108, 71, 20));
-        ckBSterile->setLayoutDirection(Qt::RightToLeft);
-        lSect = new QLabel(groupBoxTrait);
-        lSect->setObjectName(QStringLiteral("lSect"));
-        lSect->setGeometry(QRect(10, 109, 31, 16));
-        cBSect = new QComboBox(groupBoxTrait);
-        cBSect->setObjectName(QStringLiteral("cBSect"));
-        cBSect->setGeometry(QRect(43, 108, 185, 21));
+        gridLayout_4 = new QGridLayout(groupBoxTrait);
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        gridLayout_4->setContentsMargins(5, 5, 5, 5);
         lClan = new QLabel(groupBoxTrait);
         lClan->setObjectName(QStringLiteral("lClan"));
-        lClan->setGeometry(QRect(10, 29, 31, 16));
-        cBTitle = new QComboBox(groupBoxTrait);
-        cBTitle->setObjectName(QStringLiteral("cBTitle"));
-        cBTitle->setGeometry(QRect(43, 68, 185, 21));
-        lTitle = new QLabel(groupBoxTrait);
-        lTitle->setObjectName(QStringLiteral("lTitle"));
-        lTitle->setGeometry(QRect(10, 69, 31, 16));
+        sizePolicy3.setHeightForWidth(lClan->sizePolicy().hasHeightForWidth());
+        lClan->setSizePolicy(sizePolicy3);
+
+        gridLayout_4->addWidget(lClan, 0, 0, 1, 1);
+
         cBClan = new QComboBox(groupBoxTrait);
         cBClan->setObjectName(QStringLiteral("cBClan"));
-        cBClan->setGeometry(QRect(43, 28, 185, 21));
-        ckBFlight->raise();
-        ckBInfernal->raise();
-        ckBBlackHand->raise();
-        ckBRedList->raise();
-        ckBSeraph->raise();
-        ckBSlave->raise();
-        ckBBloodCurse->raise();
-        ckBScare->raise();
-        ckBSterile->raise();
-        lSect->raise();
-        cBSect->raise();
-        lClan->raise();
-        cBTitle->raise();
-        lTitle->raise();
-        cBClan->raise();
-        groupBox_2 = new QGroupBox(CryptSearchFrame);
-        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        groupBox_2->setGeometry(QRect(0, 256, 520, 60));
-        groupBox_2->setStyleSheet(QStringLiteral(""));
-        groupBox_2->setFlat(false);
-        horizontalLayout_2 = new QHBoxLayout(groupBox_2);
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(10, 8, 10, 8);
-        pBCryptSearch = new QPushButton(groupBox_2);
-        pBCryptSearch->setObjectName(QStringLiteral("pBCryptSearch"));
-        sizePolicy1.setHeightForWidth(pBCryptSearch->sizePolicy().hasHeightForWidth());
-        pBCryptSearch->setSizePolicy(sizePolicy1);
-        pBCryptSearch->setMinimumSize(QSize(70, 40));
-        pBCryptSearch->setMaximumSize(QSize(70, 40));
+        cBClan->setMinimumSize(QSize(160, 0));
 
-        horizontalLayout_2->addWidget(pBCryptSearch);
+        gridLayout_4->addWidget(cBClan, 0, 1, 1, 1);
 
-        pBCryptClearForm = new QPushButton(groupBox_2);
-        pBCryptClearForm->setObjectName(QStringLiteral("pBCryptClearForm"));
-        sizePolicy1.setHeightForWidth(pBCryptClearForm->sizePolicy().hasHeightForWidth());
-        pBCryptClearForm->setSizePolicy(sizePolicy1);
-        pBCryptClearForm->setMinimumSize(QSize(70, 40));
-        pBCryptClearForm->setMaximumSize(QSize(70, 40));
+        ckBBlackHand = new QCheckBox(groupBoxTrait);
+        ckBBlackHand->setObjectName(QStringLiteral("ckBBlackHand"));
+        ckBBlackHand->setLayoutDirection(Qt::RightToLeft);
 
-        horizontalLayout_2->addWidget(pBCryptClearForm);
+        gridLayout_4->addWidget(ckBBlackHand, 0, 2, 1, 1);
 
-        groupBox = new QGroupBox(CryptSearchFrame);
-        groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(524, 256, 630, 60));
-        label_21 = new QLabel(groupBox);
-        label_21->setObjectName(QStringLiteral("label_21"));
-        label_21->setGeometry(QRect(14, 22, 35, 16));
-        label_29 = new QLabel(groupBox);
-        label_29->setObjectName(QStringLiteral("label_29"));
-        label_29->setGeometry(QRect(149, 22, 51, 16));
-        sBGroup = new QSpinBox(groupBox);
-        sBGroup->setObjectName(QStringLiteral("sBGroup"));
-        sBGroup->setGeometry(QRect(95, 20, 41, 22));
-        QFont font;
-        font.setFamily(QStringLiteral("Comic Sans MS"));
-        font.setPointSize(9);
-        font.setBold(true);
-        font.setWeight(75);
-        sBGroup->setFont(font);
-        sBGroup->setMaximum(6);
-        cBCapa = new QComboBox(groupBox);
-        cBCapa->setObjectName(QStringLiteral("cBCapa"));
-        cBCapa->setGeometry(QRect(202, 20, 41, 22));
-        sBCapa = new QSpinBox(groupBox);
-        sBCapa->setObjectName(QStringLiteral("sBCapa"));
-        sBCapa->setGeometry(QRect(245, 20, 41, 22));
-        sBCapa->setFont(font);
-        sBCapa->setMaximum(11);
-        cBGroup = new QComboBox(groupBox);
-        cBGroup->setObjectName(QStringLiteral("cBGroup"));
-        cBGroup->setGeometry(QRect(52, 20, 41, 22));
-        cBRarity_2 = new QComboBox(groupBox);
-        cBRarity_2->setObjectName(QStringLiteral("cBRarity_2"));
-        cBRarity_2->setGeometry(QRect(540, 20, 71, 22));
-        label_46 = new QLabel(groupBox);
-        label_46->setObjectName(QStringLiteral("label_46"));
-        label_46->setGeometry(QRect(500, 22, 38, 16));
-        cBSet_2 = new QComboBox(groupBox);
-        cBSet_2->setObjectName(QStringLiteral("cBSet_2"));
-        cBSet_2->setGeometry(QRect(337, 20, 145, 22));
-        label_48 = new QLabel(groupBox);
-        label_48->setObjectName(QStringLiteral("label_48"));
-        label_48->setGeometry(QRect(313, 22, 21, 16));
+        ckBFlight = new QCheckBox(groupBoxTrait);
+        ckBFlight->setObjectName(QStringLiteral("ckBFlight"));
+        ckBFlight->setLayoutDirection(Qt::RightToLeft);
 
-        horizontalLayout_4->addWidget(CryptSearchFrame);
+        gridLayout_4->addWidget(ckBFlight, 0, 3, 1, 1);
 
-        horizontalSpacer = new QSpacerItem(318, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        ckBScare = new QCheckBox(groupBoxTrait);
+        ckBScare->setObjectName(QStringLiteral("ckBScare"));
+        ckBScare->setLayoutDirection(Qt::RightToLeft);
 
-        horizontalLayout_4->addItem(horizontalSpacer);
+        gridLayout_4->addWidget(ckBScare, 0, 4, 1, 1);
+
+        lTitle = new QLabel(groupBoxTrait);
+        lTitle->setObjectName(QStringLiteral("lTitle"));
+        sizePolicy3.setHeightForWidth(lTitle->sizePolicy().hasHeightForWidth());
+        lTitle->setSizePolicy(sizePolicy3);
+
+        gridLayout_4->addWidget(lTitle, 1, 0, 1, 1);
+
+        cBTitle = new QComboBox(groupBoxTrait);
+        cBTitle->setObjectName(QStringLiteral("cBTitle"));
+        cBTitle->setMinimumSize(QSize(160, 0));
+
+        gridLayout_4->addWidget(cBTitle, 1, 1, 1, 1);
+
+        ckBSeraph = new QCheckBox(groupBoxTrait);
+        ckBSeraph->setObjectName(QStringLiteral("ckBSeraph"));
+        ckBSeraph->setLayoutDirection(Qt::RightToLeft);
+
+        gridLayout_4->addWidget(ckBSeraph, 1, 2, 1, 1);
+
+        ckBInfernal = new QCheckBox(groupBoxTrait);
+        ckBInfernal->setObjectName(QStringLiteral("ckBInfernal"));
+        ckBInfernal->setLayoutDirection(Qt::RightToLeft);
+
+        gridLayout_4->addWidget(ckBInfernal, 1, 3, 1, 1);
+
+        ckBSlave = new QCheckBox(groupBoxTrait);
+        ckBSlave->setObjectName(QStringLiteral("ckBSlave"));
+        ckBSlave->setLayoutDirection(Qt::RightToLeft);
+
+        gridLayout_4->addWidget(ckBSlave, 1, 4, 1, 1);
+
+        lSect = new QLabel(groupBoxTrait);
+        lSect->setObjectName(QStringLiteral("lSect"));
+        sizePolicy3.setHeightForWidth(lSect->sizePolicy().hasHeightForWidth());
+        lSect->setSizePolicy(sizePolicy3);
+
+        gridLayout_4->addWidget(lSect, 2, 0, 1, 1);
+
+        cBSect = new QComboBox(groupBoxTrait);
+        cBSect->setObjectName(QStringLiteral("cBSect"));
+        cBSect->setMinimumSize(QSize(160, 0));
+
+        gridLayout_4->addWidget(cBSect, 2, 1, 1, 1);
+
+        ckBSterile = new QCheckBox(groupBoxTrait);
+        ckBSterile->setObjectName(QStringLiteral("ckBSterile"));
+        ckBSterile->setLayoutDirection(Qt::RightToLeft);
+
+        gridLayout_4->addWidget(ckBSterile, 2, 2, 1, 1);
+
+        ckBBloodCurse = new QCheckBox(groupBoxTrait);
+        ckBBloodCurse->setObjectName(QStringLiteral("ckBBloodCurse"));
+        ckBBloodCurse->setLayoutDirection(Qt::RightToLeft);
+
+        gridLayout_4->addWidget(ckBBloodCurse, 2, 3, 1, 1);
+
+        ckBRedList = new QCheckBox(groupBoxTrait);
+        ckBRedList->setObjectName(QStringLiteral("ckBRedList"));
+        ckBRedList->setLayoutDirection(Qt::RightToLeft);
+
+        gridLayout_4->addWidget(ckBRedList, 2, 4, 1, 1);
 
 
-        verticalLayout->addWidget(frame_2);
+        gridLayout_5->addWidget(groupBoxTrait, 1, 0, 2, 1);
+
+
+        horizontalLayout_2->addWidget(CryptSearchFrame);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer);
+
+        frame_4 = new PDeckDropArea(frame_2);
+        frame_4->setObjectName(QStringLiteral("frame_4"));
+        frame_4->setMinimumSize(QSize(100, 0));
+        frame_4->setFrameShape(QFrame::StyledPanel);
+        frame_4->setFrameShadow(QFrame::Raised);
+
+        horizontalLayout_2->addWidget(frame_4);
+
+
+        verticalLayout_2->addWidget(frame_2);
 
         frame = new QFrame(scrollAreaWidgetContents);
         frame->setObjectName(QStringLiteral("frame"));
@@ -1072,7 +1228,14 @@ public:
         frame->setLineWidth(0);
         horizontalLayout_3 = new QHBoxLayout(frame);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        VisuelCrypt = new QLabel(frame);
+        horizontalLayout_3->setContentsMargins(5, 5, 5, 5);
+        frame_3 = new QFrame(frame);
+        frame_3->setObjectName(QStringLiteral("frame_3"));
+        frame_3->setFrameShape(QFrame::StyledPanel);
+        frame_3->setFrameShadow(QFrame::Raised);
+        verticalLayout_3 = new QVBoxLayout(frame_3);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        VisuelCrypt = new QLabel(frame_3);
         VisuelCrypt->setObjectName(QStringLiteral("VisuelCrypt"));
         sizePolicy1.setHeightForWidth(VisuelCrypt->sizePolicy().hasHeightForWidth());
         VisuelCrypt->setSizePolicy(sizePolicy1);
@@ -1083,21 +1246,37 @@ public:
         VisuelCrypt->setLineWidth(0);
         VisuelCrypt->setPixmap(QPixmap(QString::fromUtf8("../../jr/Desktop/Vtes_Grelarge.gif")));
 
-        horizontalLayout_3->addWidget(VisuelCrypt);
+        verticalLayout_3->addWidget(VisuelCrypt);
+
+        verticalSpacer = new QSpacerItem(20, 246, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_3->addItem(verticalSpacer);
+
+
+        horizontalLayout_3->addWidget(frame_3);
 
         PTVCryptResults = new PItemView(frame);
         PTVCryptResults->setObjectName(QStringLiteral("PTVCryptResults"));
-        sizePolicy.setHeightForWidth(PTVCryptResults->sizePolicy().hasHeightForWidth());
-        PTVCryptResults->setSizePolicy(sizePolicy);
-        PTVCryptResults->setMinimumSize(QSize(800, 100));
+        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(PTVCryptResults->sizePolicy().hasHeightForWidth());
+        PTVCryptResults->setSizePolicy(sizePolicy4);
+        PTVCryptResults->setMinimumSize(QSize(1130, 100));
         PTVCryptResults->setFrameShape(QFrame::NoFrame);
+        PTVCryptResults->setFrameShadow(QFrame::Plain);
+        PTVCryptResults->setLineWidth(0);
         PTVCryptResults->setAlternatingRowColors(true);
         PTVCryptResults->setShowGrid(false);
 
         horizontalLayout_3->addWidget(PTVCryptResults);
 
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        verticalLayout->addWidget(frame);
+        horizontalLayout_3->addItem(horizontalSpacer_2);
+
+
+        verticalLayout_2->addWidget(frame);
 
         tab_search_crypt->setWidget(scrollAreaWidgetContents);
 
@@ -1109,12 +1288,19 @@ public:
     void retranslateUi(QScrollArea *tab_search_crypt)
     {
         tab_search_crypt->setWindowTitle(QApplication::translate("tab_search_crypt", "ScrollArea", 0));
-        groupBoxText->setTitle(QApplication::translate("tab_search_crypt", "General : ", 0));
-        lENameCard->setText(QString());
+        groupBox_2->setTitle(QString());
+        pBCryptSearch->setText(QApplication::translate("tab_search_crypt", "Search", 0));
+        pBCryptSearch->setShortcut(QApplication::translate("tab_search_crypt", "F1", 0));
+        pBCryptClearForm->setText(QApplication::translate("tab_search_crypt", "Clear Form", 0));
+        groupBoxText->setTitle(QApplication::translate("tab_search_crypt", "General", 0));
         lName->setText(QApplication::translate("tab_search_crypt", "Name", 0));
-        lCardText->setText(QApplication::translate("tab_search_crypt", "Text", 0));
+        lENameCard->setText(QString());
         lArtist->setText(QApplication::translate("tab_search_crypt", "Artist :", 0));
-        groupBoxDiscipline->setTitle(QApplication::translate("tab_search_crypt", "Disciplines :  ", 0));
+        lCardText->setText(QApplication::translate("tab_search_crypt", "Text", 0));
+        groupBox_3->setTitle(QApplication::translate("tab_search_crypt", "Edition", 0));
+        label_48->setText(QApplication::translate("tab_search_crypt", "Set", 0));
+        label_46->setText(QApplication::translate("tab_search_crypt", "Rarity", 0));
+        groupBoxDiscipline->setTitle(QApplication::translate("tab_search_crypt", "Disciplines", 0));
         lAbombwe->setText(QString());
         lFortitude->setText(QString());
         lObeah->setText(QString());
@@ -1141,7 +1327,10 @@ public:
         lSanguinus->setText(QString());
         lThanatosis->setText(QString());
         lVisceratika->setText(QString());
-        groupBoxVirtues->setTitle(QApplication::translate("tab_search_crypt", "Virtues :  ", 0));
+        groupBox->setTitle(QApplication::translate("tab_search_crypt", "Generation", 0));
+        label_21->setText(QApplication::translate("tab_search_crypt", "Grouping", 0));
+        label_29->setText(QApplication::translate("tab_search_crypt", "Capacity", 0));
+        groupBoxVirtues->setTitle(QApplication::translate("tab_search_crypt", "Virtues", 0));
         lDefense->setText(QString());
         def->clear();
         def->insertItems(0, QStringList()
@@ -1191,28 +1380,19 @@ public:
          << QApplication::translate("tab_search_crypt", "yes", 0)
          << QApplication::translate("tab_search_crypt", "None", 0)
         );
-        groupBoxTrait->setTitle(QApplication::translate("tab_search_crypt", "Caracteristiques : ", 0));
-        ckBFlight->setText(QApplication::translate("tab_search_crypt", "Flight", 0));
-        ckBInfernal->setText(QApplication::translate("tab_search_crypt", "Infernal", 0));
-        ckBBlackHand->setText(QApplication::translate("tab_search_crypt", "Black hand", 0));
-        ckBRedList->setText(QApplication::translate("tab_search_crypt", "Red List", 0));
-        ckBSeraph->setText(QApplication::translate("tab_search_crypt", "Seraph", 0));
-        ckBSlave->setText(QApplication::translate("tab_search_crypt", "Slave", 0));
-        ckBBloodCurse->setText(QApplication::translate("tab_search_crypt", "Blood curse", 0));
-        ckBScare->setText(QApplication::translate("tab_search_crypt", "Scarce", 0));
-        ckBSterile->setText(QApplication::translate("tab_search_crypt", "Sterile", 0));
-        lSect->setText(QApplication::translate("tab_search_crypt", "Sect", 0));
+        groupBoxTrait->setTitle(QApplication::translate("tab_search_crypt", "Caracteristics", 0));
         lClan->setText(QApplication::translate("tab_search_crypt", "Clan", 0));
+        ckBBlackHand->setText(QApplication::translate("tab_search_crypt", "Black hand", 0));
+        ckBFlight->setText(QApplication::translate("tab_search_crypt", "Flight", 0));
+        ckBScare->setText(QApplication::translate("tab_search_crypt", "Scarce", 0));
         lTitle->setText(QApplication::translate("tab_search_crypt", "Title", 0));
-        groupBox_2->setTitle(QString());
-        pBCryptSearch->setText(QApplication::translate("tab_search_crypt", "Recherche", 0));
-        pBCryptSearch->setShortcut(QApplication::translate("tab_search_crypt", "F1", 0));
-        pBCryptClearForm->setText(QApplication::translate("tab_search_crypt", "Clear Form", 0));
-        groupBox->setTitle(QString());
-        label_21->setText(QApplication::translate("tab_search_crypt", "Group", 0));
-        label_29->setText(QApplication::translate("tab_search_crypt", "Capacity :", 0));
-        label_46->setText(QApplication::translate("tab_search_crypt", "Rarity", 0));
-        label_48->setText(QApplication::translate("tab_search_crypt", "Set", 0));
+        ckBSeraph->setText(QApplication::translate("tab_search_crypt", "Seraph", 0));
+        ckBInfernal->setText(QApplication::translate("tab_search_crypt", "Infernal", 0));
+        ckBSlave->setText(QApplication::translate("tab_search_crypt", "Slave", 0));
+        lSect->setText(QApplication::translate("tab_search_crypt", "Sect", 0));
+        ckBSterile->setText(QApplication::translate("tab_search_crypt", "Sterile", 0));
+        ckBBloodCurse->setText(QApplication::translate("tab_search_crypt", "Blood curse", 0));
+        ckBRedList->setText(QApplication::translate("tab_search_crypt", "Red List", 0));
         VisuelCrypt->setText(QString());
     } // retranslateUi
 

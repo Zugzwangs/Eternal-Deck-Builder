@@ -3,7 +3,7 @@
 #include <QDrag>
 
 // /////////////////////////////////////////////////////////////////////////////////////////
-// Ma Subclass de QFrame
+// Distributeur de blood
 PFrame::PFrame(QWidget *parent) : QFrame(parent)
 {
     setObjectName("bourse");
@@ -44,6 +44,39 @@ void PFrame::startDrag()
     Drag->setMimeData(mimeData);
     Drag->exec(Qt::CopyAction);
 }
+
+// /////////////////////////////////////////////////////////////////////////////////////////
+// Drop zone to add cards in the deck model
+PDeckDropArea::PDeckDropArea(QWidget *parent) : QFrame(parent){
+
+    setAcceptDrops(true);
+    setFrameStyle(QFrame::Sunken | QFrame::Box);
+}
+
+void PDeckDropArea::dragEnterEvent(QDragEnterEvent *event){
+
+    if (event->mimeData()->hasFormat("text/plain"))
+        {
+        event->setDropAction(Qt::CopyAction);
+        event->accept();
+        }
+}
+
+void PDeckDropArea::dragMoveEvent(QDragMoveEvent *event){
+
+    if (event->mimeData()->hasFormat("text/plain"))
+        {
+        event->setDropAction(Qt::CopyAction);
+        event->accept();
+        }
+}
+
+void PDeckDropArea::dropEvent(QDropEvent *event){
+
+    qDebug() << "HOLY SHIT JE DROP TA MERE !";
+}
+
+PDeckDropArea::~PDeckDropArea() {}
 
 // /////////////////////////////////////////////////////////////////////////////////////////
 // Widget symbolisant une discipline

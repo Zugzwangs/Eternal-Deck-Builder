@@ -18,6 +18,7 @@ INPUT(
 ./debug\moc_mainwindow.o
 ./debug\moc_pitemview.o
 ./debug\moc_PGraphics.o
+./debug\moc_PWidget.o
 ./debug\moc_dialogoptions.o
 ./debug\moc_tab_search_library.o
 ./debug\moc_tab_search_crypt.o

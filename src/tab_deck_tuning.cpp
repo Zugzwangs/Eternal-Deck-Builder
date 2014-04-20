@@ -4,26 +4,19 @@
 tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new Ui::tab_deck_tuning)
 {
     ui->setupUi(this);
-    ui->testbt->setIcon( QIcon(":/icons/delete.png") );
-    ui->testbt->setStyleSheet("border: none;");
 
-    // ///////////////////////////////////////////////
-    // ASSOCIATION DES MODELES/VIEWS POUR LA GESTION DE DECK
-    {
-        // on map la vue définie private dans l'ui vers un membre de classe public
-        DeckView = ui->PTreeViewDeckList;
+    // on map la vue définie private dans l'ui vers un membre de classe public
+    DeckView = ui->PTreeViewDeckList;
 
-        // on assigne le model de données
-        ModeleDeck = new PTreeModel();
-        ui->PTreeViewDeckList->setModel(ModeleDeck);
+    // on assigne le model de données
+    ModeleDeck = new PTreeModel();
+    ui->PTreeViewDeckList->setModel(ModeleDeck);
 
-        // on assigne le delegate
-        PDelegateDeck *DelegateDeck = new PDelegateDeck();
-        ui->PTreeViewDeckList->setItemDelegate(DelegateDeck);
-    }
+    // on assigne le delegate
+    PDelegateDeck *DelegateDeck = new PDelegateDeck();
+    ui->PTreeViewDeckList->setItemDelegate(DelegateDeck);
 
     connect(ui->PTreeViewDeckList, SIGNAL(clicked(QModelIndex)), this, SLOT(AfficheCartesDeck(QModelIndex)));
-
 }
 
 void tab_deck_tuning::AfficheCartesDeck(QModelIndex Idx)

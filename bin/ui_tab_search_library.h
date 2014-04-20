@@ -40,45 +40,42 @@ public:
     QVBoxLayout *verticalLayout;
     QFrame *frame_2;
     QHBoxLayout *horizontalLayout_3;
-    QFrame *CardSearchFrame;
-    QGroupBox *CardgroupBoxVirtues;
-    QHBoxLayout *horizontalLayout_2;
-    DisciplineButton *def;
-    DisciplineButton *inn;
-    DisciplineButton *jud;
-    DisciplineButton *mar;
-    DisciplineButton *red;
-    DisciplineButton *ven;
-    DisciplineButton *vis2;
-    QGroupBox *CardgroupBoxCout;
-    QSpinBox *sBPoolCost;
-    QLabel *label_39;
-    QSpinBox *sBBloodCost;
-    QComboBox *cBPoolCost;
-    QLabel *label_41;
-    QSpinBox *sBConvictionCost;
-    QLabel *label_37;
-    QComboBox *cBBloodCost;
-    QComboBox *cBConvictionCost;
-    QGroupBox *CardgroupBoxGeneral;
-    QLineEdit *lENameCard_2;
-    QLabel *label_31;
-    QLabel *label_33;
-    QLabel *label_35;
-    QLineEdit *lEArtist_2;
-    QLineEdit *lETextCard_2;
-    QComboBox *cBSet;
-    QLabel *label_47;
-    QComboBox *cBRarity;
-    QLabel *label_45;
     QGroupBox *CardgroupBoxOptions;
+    QVBoxLayout *verticalLayout_2;
     QPushButton *pBCardSearch;
     QPushButton *pBCardClearForm;
-    QGroupBox *CardgroupBoxFilters;
-    QLabel *label_43;
-    QComboBox *cBType;
-    QLabel *label_4;
-    QComboBox *cBSousType;
+    QFrame *CardSearchFrame;
+    QGridLayout *gridLayout_8;
+    QGroupBox *CardgroupBoxOthers;
+    QGridLayout *gridLayout_3;
+    QCheckBox *BurnOption;
+    QCheckBox *Anarch_3_Way;
+    QCheckBox *Dual_discipline;
+    QCheckBox *Multi_discipline;
+    QCheckBox *Boon;
+    QCheckBox *Grapple;
+    QCheckBox *Frenzy;
+    QCheckBox *Aim;
+    QGroupBox *groupBox;
+    QGridLayout *gridLayout_6;
+    QLabel *label_47;
+    QComboBox *cBSet;
+    QLabel *label_45;
+    QComboBox *cBRarity;
+    QGroupBox *CardgroupBoxRequirements;
+    QGridLayout *gridLayout_4;
+    QLabel *label_49;
+    QComboBox *cBClan_2;
+    QCheckBox *Anarch;
+    QCheckBox *Flight;
+    QLabel *lSect_2;
+    QComboBox *cBSect_2;
+    QCheckBox *RedList;
+    QCheckBox *BlackHand;
+    QLabel *lTitle_2;
+    QComboBox *cBTitle_2;
+    QCheckBox *Infernal;
+    QCheckBox *Seraph;
     QGroupBox *CardgroupBoxDiscipline;
     QGridLayout *gridLayout;
     DisciplineButton *qui;
@@ -111,41 +108,55 @@ public:
     DisciplineButton *thn;
     DisciplineButton *mel;
     DisciplineButton *mal;
-    QGroupBox *CardgroupBoxRequirements;
-    QLabel *label_49;
-    QCheckBox *Flight;
-    QCheckBox *BlackHand;
-    QCheckBox *Infernal;
-    QCheckBox *RedList;
-    QComboBox *cBClan_2;
-    QComboBox *cBSect_2;
-    QLabel *lSect_2;
-    QCheckBox *Seraph;
-    QLabel *lFortitude_4;
-    QLabel *lTitle_2;
-    QComboBox *cBTitle_2;
-    QCheckBox *Anarch;
-    QGroupBox *CardgroupBoxOthers;
-    QCheckBox *BurnOption;
-    QCheckBox *Anarch_3_Way;
-    QCheckBox *Dual_discipline;
-    QCheckBox *Multi_discipline;
-    QLabel *lFortitude_3;
-    QCheckBox *Boon;
-    QCheckBox *Grapple;
-    QCheckBox *Frenzy;
-    QCheckBox *Aim;
+    QGroupBox *CardgroupBoxVirtues;
+    QHBoxLayout *horizontalLayout_2;
+    DisciplineButton *def;
+    DisciplineButton *inn;
+    DisciplineButton *jud;
+    DisciplineButton *mar;
+    DisciplineButton *red;
+    DisciplineButton *ven;
+    DisciplineButton *vis2;
+    QGroupBox *CardgroupBoxFilters;
+    QGridLayout *gridLayout_2;
+    QLabel *label_4;
+    QComboBox *cBSousType;
+    QComboBox *cBType;
+    QLabel *label_43;
+    QGroupBox *CardgroupBoxGeneral;
+    QGridLayout *gridLayout_7;
+    QLabel *label_31;
+    QLineEdit *lENameCard_2;
+    QLabel *label_35;
+    QLineEdit *lEArtist_2;
+    QLabel *label_33;
+    QLineEdit *lETextCard_2;
+    QGroupBox *CardgroupBoxCout;
+    QGridLayout *gridLayout_5;
+    QLabel *label_37;
+    QComboBox *cBBloodCost;
+    QSpinBox *sBBloodCost;
+    QLabel *label_39;
+    QComboBox *cBPoolCost;
+    QSpinBox *sBPoolCost;
+    QLabel *label_41;
+    QComboBox *cBConvictionCost;
+    QSpinBox *sBConvictionCost;
     QSpacerItem *horizontalSpacer;
     QFrame *frame;
     QHBoxLayout *horizontalLayout;
+    QFrame *frame_3;
+    QVBoxLayout *verticalLayout_3;
     QLabel *VisuelCarte;
+    QSpacerItem *verticalSpacer_3;
     PItemView *PTVCardsResults;
+    QSpacerItem *horizontalSpacer_2;
 
     void setupUi(QScrollArea *tab_search_library)
     {
         if (tab_search_library->objectName().isEmpty())
             tab_search_library->setObjectName(QStringLiteral("tab_search_library"));
-        tab_search_library->resize(1317, 830);
+        tab_search_library->resize(1609, 1183);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -160,198 +171,241 @@ public:
         tab_search_library->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1296, 890));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1609, 1183));
         verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(5, 5, 5, 5);
         frame_2 = new QFrame(scrollAreaWidgetContents);
         frame_2->setObjectName(QStringLiteral("frame_2"));
-        frame_2->setFrameShape(QFrame::StyledPanel);
-        frame_2->setFrameShadow(QFrame::Raised);
+        frame_2->setFrameShape(QFrame::NoFrame);
+        frame_2->setFrameShadow(QFrame::Plain);
         horizontalLayout_3 = new QHBoxLayout(frame_2);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        CardSearchFrame = new QFrame(frame_2);
-        CardSearchFrame->setObjectName(QStringLiteral("CardSearchFrame"));
+        horizontalLayout_3->setContentsMargins(10, 0, 10, 0);
+        CardgroupBoxOptions = new QGroupBox(frame_2);
+        CardgroupBoxOptions->setObjectName(QStringLiteral("CardgroupBoxOptions"));
+        verticalLayout_2 = new QVBoxLayout(CardgroupBoxOptions);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(10, 0, 10, 0);
+        pBCardSearch = new QPushButton(CardgroupBoxOptions);
+        pBCardSearch->setObjectName(QStringLiteral("pBCardSearch"));
         QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(CardSearchFrame->sizePolicy().hasHeightForWidth());
-        CardSearchFrame->setSizePolicy(sizePolicy1);
-        CardSearchFrame->setMinimumSize(QSize(1025, 315));
+        sizePolicy1.setHeightForWidth(pBCardSearch->sizePolicy().hasHeightForWidth());
+        pBCardSearch->setSizePolicy(sizePolicy1);
+        pBCardSearch->setMinimumSize(QSize(70, 40));
+        pBCardSearch->setMaximumSize(QSize(70, 40));
+
+        verticalLayout_2->addWidget(pBCardSearch);
+
+        pBCardClearForm = new QPushButton(CardgroupBoxOptions);
+        pBCardClearForm->setObjectName(QStringLiteral("pBCardClearForm"));
+        sizePolicy1.setHeightForWidth(pBCardClearForm->sizePolicy().hasHeightForWidth());
+        pBCardClearForm->setSizePolicy(sizePolicy1);
+        pBCardClearForm->setMinimumSize(QSize(70, 40));
+        pBCardClearForm->setMaximumSize(QSize(70, 40));
+
+        verticalLayout_2->addWidget(pBCardClearForm);
+
+
+        horizontalLayout_3->addWidget(CardgroupBoxOptions);
+
+        CardSearchFrame = new QFrame(frame_2);
+        CardSearchFrame->setObjectName(QStringLiteral("CardSearchFrame"));
+        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(CardSearchFrame->sizePolicy().hasHeightForWidth());
+        CardSearchFrame->setSizePolicy(sizePolicy2);
+        CardSearchFrame->setMinimumSize(QSize(1350, 300));
+        CardSearchFrame->setMaximumSize(QSize(1350, 300));
         CardSearchFrame->setFrameShape(QFrame::NoFrame);
         CardSearchFrame->setFrameShadow(QFrame::Plain);
         CardSearchFrame->setLineWidth(0);
-        CardgroupBoxVirtues = new QGroupBox(CardSearchFrame);
-        CardgroupBoxVirtues->setObjectName(QStringLiteral("CardgroupBoxVirtues"));
-        CardgroupBoxVirtues->setGeometry(QRect(700, 210, 391, 81));
-        horizontalLayout_2 = new QHBoxLayout(CardgroupBoxVirtues);
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        def = new DisciplineButton(CardgroupBoxVirtues);
-        def->setObjectName(QStringLiteral("def"));
-        sizePolicy1.setHeightForWidth(def->sizePolicy().hasHeightForWidth());
-        def->setSizePolicy(sizePolicy1);
-        def->setMinimumSize(QSize(40, 40));
-        def->setMaximumSize(QSize(40, 40));
+        gridLayout_8 = new QGridLayout(CardSearchFrame);
+        gridLayout_8->setObjectName(QStringLiteral("gridLayout_8"));
+        gridLayout_8->setContentsMargins(0, 0, 0, 0);
+        CardgroupBoxOthers = new QGroupBox(CardSearchFrame);
+        CardgroupBoxOthers->setObjectName(QStringLiteral("CardgroupBoxOthers"));
+        gridLayout_3 = new QGridLayout(CardgroupBoxOthers);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        gridLayout_3->setContentsMargins(5, 5, 5, 5);
+        BurnOption = new QCheckBox(CardgroupBoxOthers);
+        BurnOption->setObjectName(QStringLiteral("BurnOption"));
+        BurnOption->setLayoutDirection(Qt::RightToLeft);
 
-        horizontalLayout_2->addWidget(def);
+        gridLayout_3->addWidget(BurnOption, 0, 0, 1, 1);
 
-        inn = new DisciplineButton(CardgroupBoxVirtues);
-        inn->setObjectName(QStringLiteral("inn"));
-        sizePolicy1.setHeightForWidth(inn->sizePolicy().hasHeightForWidth());
-        inn->setSizePolicy(sizePolicy1);
-        inn->setMinimumSize(QSize(40, 40));
-        inn->setMaximumSize(QSize(40, 40));
+        Anarch_3_Way = new QCheckBox(CardgroupBoxOthers);
+        Anarch_3_Way->setObjectName(QStringLiteral("Anarch_3_Way"));
+        Anarch_3_Way->setLayoutDirection(Qt::RightToLeft);
 
-        horizontalLayout_2->addWidget(inn);
+        gridLayout_3->addWidget(Anarch_3_Way, 0, 1, 1, 1);
 
-        jud = new DisciplineButton(CardgroupBoxVirtues);
-        jud->setObjectName(QStringLiteral("jud"));
-        sizePolicy1.setHeightForWidth(jud->sizePolicy().hasHeightForWidth());
-        jud->setSizePolicy(sizePolicy1);
-        jud->setMinimumSize(QSize(40, 40));
-        jud->setMaximumSize(QSize(40, 40));
+        Dual_discipline = new QCheckBox(CardgroupBoxOthers);
+        Dual_discipline->setObjectName(QStringLiteral("Dual_discipline"));
+        Dual_discipline->setLayoutDirection(Qt::RightToLeft);
 
-        horizontalLayout_2->addWidget(jud);
+        gridLayout_3->addWidget(Dual_discipline, 1, 0, 1, 1);
 
-        mar = new DisciplineButton(CardgroupBoxVirtues);
-        mar->setObjectName(QStringLiteral("mar"));
-        sizePolicy1.setHeightForWidth(mar->sizePolicy().hasHeightForWidth());
-        mar->setSizePolicy(sizePolicy1);
-        mar->setMinimumSize(QSize(40, 40));
-        mar->setMaximumSize(QSize(40, 40));
+        Multi_discipline = new QCheckBox(CardgroupBoxOthers);
+        Multi_discipline->setObjectName(QStringLiteral("Multi_discipline"));
+        Multi_discipline->setLayoutDirection(Qt::RightToLeft);
 
-        horizontalLayout_2->addWidget(mar);
+        gridLayout_3->addWidget(Multi_discipline, 1, 1, 1, 1);
 
-        red = new DisciplineButton(CardgroupBoxVirtues);
-        red->setObjectName(QStringLiteral("red"));
-        sizePolicy1.setHeightForWidth(red->sizePolicy().hasHeightForWidth());
-        red->setSizePolicy(sizePolicy1);
-        red->setMinimumSize(QSize(40, 40));
-        red->setMaximumSize(QSize(40, 40));
+        Boon = new QCheckBox(CardgroupBoxOthers);
+        Boon->setObjectName(QStringLiteral("Boon"));
+        Boon->setLayoutDirection(Qt::RightToLeft);
 
-        horizontalLayout_2->addWidget(red);
+        gridLayout_3->addWidget(Boon, 2, 0, 1, 1);
 
-        ven = new DisciplineButton(CardgroupBoxVirtues);
-        ven->setObjectName(QStringLiteral("ven"));
-        sizePolicy1.setHeightForWidth(ven->sizePolicy().hasHeightForWidth());
-        ven->setSizePolicy(sizePolicy1);
-        ven->setMinimumSize(QSize(40, 40));
-        ven->setMaximumSize(QSize(40, 40));
+        Grapple = new QCheckBox(CardgroupBoxOthers);
+        Grapple->setObjectName(QStringLiteral("Grapple"));
+        Grapple->setLayoutDirection(Qt::RightToLeft);
 
-        horizontalLayout_2->addWidget(ven);
+        gridLayout_3->addWidget(Grapple, 2, 1, 1, 1);
 
-        vis2 = new DisciplineButton(CardgroupBoxVirtues);
-        vis2->setObjectName(QStringLiteral("vis2"));
-        sizePolicy1.setHeightForWidth(vis2->sizePolicy().hasHeightForWidth());
-        vis2->setSizePolicy(sizePolicy1);
-        vis2->setMinimumSize(QSize(40, 40));
-        vis2->setMaximumSize(QSize(40, 40));
+        Frenzy = new QCheckBox(CardgroupBoxOthers);
+        Frenzy->setObjectName(QStringLiteral("Frenzy"));
+        Frenzy->setLayoutDirection(Qt::RightToLeft);
 
-        horizontalLayout_2->addWidget(vis2);
+        gridLayout_3->addWidget(Frenzy, 3, 0, 1, 1);
 
-        CardgroupBoxCout = new QGroupBox(CardSearchFrame);
-        CardgroupBoxCout->setObjectName(QStringLiteral("CardgroupBoxCout"));
-        CardgroupBoxCout->setGeometry(QRect(189, 260, 501, 51));
-        sBPoolCost = new QSpinBox(CardgroupBoxCout);
-        sBPoolCost->setObjectName(QStringLiteral("sBPoolCost"));
-        sBPoolCost->setGeometry(QRect(256, 19, 41, 22));
-        QFont font;
-        font.setFamily(QStringLiteral("Comic Sans MS"));
-        font.setPointSize(9);
-        font.setBold(true);
-        font.setWeight(75);
-        sBPoolCost->setFont(font);
-        sBPoolCost->setMaximum(6);
-        label_39 = new QLabel(CardgroupBoxCout);
-        label_39->setObjectName(QStringLiteral("label_39"));
-        label_39->setGeometry(QRect(167, 21, 51, 16));
-        sBBloodCost = new QSpinBox(CardgroupBoxCout);
-        sBBloodCost->setObjectName(QStringLiteral("sBBloodCost"));
-        sBBloodCost->setGeometry(QRect(113, 20, 41, 22));
-        sBBloodCost->setFont(font);
-        sBBloodCost->setMaximum(6);
-        cBPoolCost = new QComboBox(CardgroupBoxCout);
-        cBPoolCost->setObjectName(QStringLiteral("cBPoolCost"));
-        cBPoolCost->setGeometry(QRect(221, 19, 31, 22));
-        label_41 = new QLabel(CardgroupBoxCout);
-        label_41->setObjectName(QStringLiteral("label_41"));
-        label_41->setGeometry(QRect(311, 21, 81, 20));
-        sBConvictionCost = new QSpinBox(CardgroupBoxCout);
-        sBConvictionCost->setObjectName(QStringLiteral("sBConvictionCost"));
-        sBConvictionCost->setGeometry(QRect(432, 21, 41, 22));
-        sBConvictionCost->setFont(font);
-        sBConvictionCost->setMaximum(6);
-        label_37 = new QLabel(CardgroupBoxCout);
-        label_37->setObjectName(QStringLiteral("label_37"));
-        label_37->setGeometry(QRect(18, 21, 61, 16));
-        cBBloodCost = new QComboBox(CardgroupBoxCout);
-        cBBloodCost->setObjectName(QStringLiteral("cBBloodCost"));
-        cBBloodCost->setGeometry(QRect(78, 20, 31, 22));
-        cBConvictionCost = new QComboBox(CardgroupBoxCout);
-        cBConvictionCost->setObjectName(QStringLiteral("cBConvictionCost"));
-        cBConvictionCost->setGeometry(QRect(397, 21, 31, 22));
-        CardgroupBoxGeneral = new QGroupBox(CardSearchFrame);
-        CardgroupBoxGeneral->setObjectName(QStringLiteral("CardgroupBoxGeneral"));
-        CardgroupBoxGeneral->setGeometry(QRect(0, 0, 431, 120));
-        lENameCard_2 = new QLineEdit(CardgroupBoxGeneral);
-        lENameCard_2->setObjectName(QStringLiteral("lENameCard_2"));
-        lENameCard_2->setGeometry(QRect(43, 23, 200, 22));
-        label_31 = new QLabel(CardgroupBoxGeneral);
-        label_31->setObjectName(QStringLiteral("label_31"));
-        label_31->setGeometry(QRect(6, 23, 32, 16));
-        label_33 = new QLabel(CardgroupBoxGeneral);
-        label_33->setObjectName(QStringLiteral("label_33"));
-        label_33->setGeometry(QRect(12, 56, 31, 16));
-        label_35 = new QLabel(CardgroupBoxGeneral);
-        label_35->setObjectName(QStringLiteral("label_35"));
-        label_35->setGeometry(QRect(254, 23, 31, 16));
-        lEArtist_2 = new QLineEdit(CardgroupBoxGeneral);
-        lEArtist_2->setObjectName(QStringLiteral("lEArtist_2"));
-        lEArtist_2->setGeometry(QRect(289, 23, 133, 22));
-        lETextCard_2 = new QLineEdit(CardgroupBoxGeneral);
-        lETextCard_2->setObjectName(QStringLiteral("lETextCard_2"));
-        lETextCard_2->setGeometry(QRect(43, 56, 379, 21));
-        lETextCard_2->setAutoFillBackground(false);
-        cBSet = new QComboBox(CardgroupBoxGeneral);
-        cBSet->setObjectName(QStringLiteral("cBSet"));
-        cBSet->setGeometry(QRect(42, 88, 181, 22));
-        label_47 = new QLabel(CardgroupBoxGeneral);
+        Aim = new QCheckBox(CardgroupBoxOthers);
+        Aim->setObjectName(QStringLiteral("Aim"));
+        Aim->setLayoutDirection(Qt::RightToLeft);
+
+        gridLayout_3->addWidget(Aim, 3, 1, 1, 1);
+
+
+        gridLayout_8->addWidget(CardgroupBoxOthers, 1, 1, 2, 1);
+
+        groupBox = new QGroupBox(CardSearchFrame);
+        groupBox->setObjectName(QStringLiteral("groupBox"));
+        gridLayout_6 = new QGridLayout(groupBox);
+        gridLayout_6->setObjectName(QStringLiteral("gridLayout_6"));
+        gridLayout_6->setContentsMargins(5, 5, 5, 5);
+        label_47 = new QLabel(groupBox);
         label_47->setObjectName(QStringLiteral("label_47"));
-        label_47->setGeometry(QRect(16, 88, 21, 16));
-        cBRarity = new QComboBox(CardgroupBoxGeneral);
-        cBRarity->setObjectName(QStringLiteral("cBRarity"));
-        cBRarity->setGeometry(QRect(281, 88, 141, 22));
-        label_45 = new QLabel(CardgroupBoxGeneral);
+        label_47->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_6->addWidget(label_47, 0, 0, 1, 1);
+
+        cBSet = new QComboBox(groupBox);
+        cBSet->setObjectName(QStringLiteral("cBSet"));
+
+        gridLayout_6->addWidget(cBSet, 0, 1, 1, 1);
+
+        label_45 = new QLabel(groupBox);
         label_45->setObjectName(QStringLiteral("label_45"));
-        label_45->setGeometry(QRect(233, 88, 41, 16));
-        CardgroupBoxOptions = new QGroupBox(CardSearchFrame);
-        CardgroupBoxOptions->setObjectName(QStringLiteral("CardgroupBoxOptions"));
-        CardgroupBoxOptions->setGeometry(QRect(0, 260, 181, 51));
-        pBCardSearch = new QPushButton(CardgroupBoxOptions);
-        pBCardSearch->setObjectName(QStringLiteral("pBCardSearch"));
-        pBCardSearch->setGeometry(QRect(19, 14, 71, 30));
-        pBCardClearForm = new QPushButton(CardgroupBoxOptions);
-        pBCardClearForm->setObjectName(QStringLiteral("pBCardClearForm"));
-        pBCardClearForm->setGeometry(QRect(100, 14, 71, 30));
-        CardgroupBoxFilters = new QGroupBox(CardSearchFrame);
-        CardgroupBoxFilters->setObjectName(QStringLiteral("CardgroupBoxFilters"));
-        CardgroupBoxFilters->setGeometry(QRect(438, 0, 251, 120));
-        label_43 = new QLabel(CardgroupBoxFilters);
-        label_43->setObjectName(QStringLiteral("label_43"));
-        label_43->setGeometry(QRect(40, 30, 31, 16));
-        cBType = new QComboBox(CardgroupBoxFilters);
-        cBType->setObjectName(QStringLiteral("cBType"));
-        cBType->setGeometry(QRect(80, 30, 161, 22));
-        label_4 = new QLabel(CardgroupBoxFilters);
-        label_4->setObjectName(QStringLiteral("label_4"));
-        label_4->setGeometry(QRect(10, 80, 61, 16));
-        cBSousType = new QComboBox(CardgroupBoxFilters);
-        cBSousType->setObjectName(QStringLiteral("cBSousType"));
-        cBSousType->setGeometry(QRect(80, 80, 161, 22));
+        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(label_45->sizePolicy().hasHeightForWidth());
+        label_45->setSizePolicy(sizePolicy3);
+        label_45->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_6->addWidget(label_45, 1, 0, 1, 1);
+
+        cBRarity = new QComboBox(groupBox);
+        cBRarity->setObjectName(QStringLiteral("cBRarity"));
+
+        gridLayout_6->addWidget(cBRarity, 1, 1, 1, 1);
+
+
+        gridLayout_8->addWidget(groupBox, 0, 2, 1, 1);
+
+        CardgroupBoxRequirements = new QGroupBox(CardSearchFrame);
+        CardgroupBoxRequirements->setObjectName(QStringLiteral("CardgroupBoxRequirements"));
+        gridLayout_4 = new QGridLayout(CardgroupBoxRequirements);
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        gridLayout_4->setContentsMargins(5, 5, 5, 5);
+        label_49 = new QLabel(CardgroupBoxRequirements);
+        label_49->setObjectName(QStringLiteral("label_49"));
+        sizePolicy3.setHeightForWidth(label_49->sizePolicy().hasHeightForWidth());
+        label_49->setSizePolicy(sizePolicy3);
+
+        gridLayout_4->addWidget(label_49, 0, 0, 1, 1);
+
+        cBClan_2 = new QComboBox(CardgroupBoxRequirements);
+        cBClan_2->setObjectName(QStringLiteral("cBClan_2"));
+        cBClan_2->setMinimumSize(QSize(160, 0));
+
+        gridLayout_4->addWidget(cBClan_2, 0, 1, 1, 1);
+
+        Anarch = new QCheckBox(CardgroupBoxRequirements);
+        Anarch->setObjectName(QStringLiteral("Anarch"));
+        Anarch->setLayoutDirection(Qt::RightToLeft);
+
+        gridLayout_4->addWidget(Anarch, 0, 2, 1, 1);
+
+        Flight = new QCheckBox(CardgroupBoxRequirements);
+        Flight->setObjectName(QStringLiteral("Flight"));
+        Flight->setLayoutDirection(Qt::RightToLeft);
+
+        gridLayout_4->addWidget(Flight, 0, 3, 1, 1);
+
+        lSect_2 = new QLabel(CardgroupBoxRequirements);
+        lSect_2->setObjectName(QStringLiteral("lSect_2"));
+        sizePolicy3.setHeightForWidth(lSect_2->sizePolicy().hasHeightForWidth());
+        lSect_2->setSizePolicy(sizePolicy3);
+
+        gridLayout_4->addWidget(lSect_2, 1, 0, 1, 1);
+
+        cBSect_2 = new QComboBox(CardgroupBoxRequirements);
+        cBSect_2->setObjectName(QStringLiteral("cBSect_2"));
+        cBSect_2->setMinimumSize(QSize(160, 0));
+
+        gridLayout_4->addWidget(cBSect_2, 1, 1, 1, 1);
+
+        RedList = new QCheckBox(CardgroupBoxRequirements);
+        RedList->setObjectName(QStringLiteral("RedList"));
+        RedList->setLayoutDirection(Qt::RightToLeft);
+
+        gridLayout_4->addWidget(RedList, 1, 2, 1, 1);
+
+        BlackHand = new QCheckBox(CardgroupBoxRequirements);
+        BlackHand->setObjectName(QStringLiteral("BlackHand"));
+        BlackHand->setLayoutDirection(Qt::RightToLeft);
+
+        gridLayout_4->addWidget(BlackHand, 1, 3, 1, 1);
+
+        lTitle_2 = new QLabel(CardgroupBoxRequirements);
+        lTitle_2->setObjectName(QStringLiteral("lTitle_2"));
+        sizePolicy3.setHeightForWidth(lTitle_2->sizePolicy().hasHeightForWidth());
+        lTitle_2->setSizePolicy(sizePolicy3);
+
+        gridLayout_4->addWidget(lTitle_2, 2, 0, 1, 1);
+
+        cBTitle_2 = new QComboBox(CardgroupBoxRequirements);
+        cBTitle_2->setObjectName(QStringLiteral("cBTitle_2"));
+        cBTitle_2->setMinimumSize(QSize(160, 0));
+
+        gridLayout_4->addWidget(cBTitle_2, 2, 1, 1, 1);
+
+        Infernal = new QCheckBox(CardgroupBoxRequirements);
+        Infernal->setObjectName(QStringLiteral("Infernal"));
+        Infernal->setLayoutDirection(Qt::RightToLeft);
+
+        gridLayout_4->addWidget(Infernal, 2, 2, 1, 1);
+
+        Seraph = new QCheckBox(CardgroupBoxRequirements);
+        Seraph->setObjectName(QStringLiteral("Seraph"));
+        Seraph->setLayoutDirection(Qt::RightToLeft);
+
+        gridLayout_4->addWidget(Seraph, 2, 3, 1, 1);
+
+
+        gridLayout_8->addWidget(CardgroupBoxRequirements, 1, 0, 2, 1);
+
         CardgroupBoxDiscipline = new QGroupBox(CardSearchFrame);
         CardgroupBoxDiscipline->setObjectName(QStringLiteral("CardgroupBoxDiscipline"));
-        CardgroupBoxDiscipline->setGeometry(QRect(697, 1, 381, 211));
+        CardgroupBoxDiscipline->setMinimumSize(QSize(0, 220));
         gridLayout = new QGridLayout(CardgroupBoxDiscipline);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setContentsMargins(5, 5, 5, 5);
         qui = new DisciplineButton(CardgroupBoxDiscipline);
         qui->setObjectName(QStringLiteral("qui"));
         sizePolicy1.setHeightForWidth(qui->sizePolicy().hasHeightForWidth());
@@ -622,98 +676,257 @@ public:
 
         gridLayout->addWidget(mal, 2, 7, 1, 1);
 
-        CardgroupBoxRequirements = new QGroupBox(CardSearchFrame);
-        CardgroupBoxRequirements->setObjectName(QStringLiteral("CardgroupBoxRequirements"));
-        CardgroupBoxRequirements->setGeometry(QRect(0, 121, 431, 141));
-        label_49 = new QLabel(CardgroupBoxRequirements);
-        label_49->setObjectName(QStringLiteral("label_49"));
-        label_49->setGeometry(QRect(12, 22, 41, 16));
-        Flight = new QCheckBox(CardgroupBoxRequirements);
-        Flight->setObjectName(QStringLiteral("Flight"));
-        Flight->setGeometry(QRect(353, 22, 61, 20));
-        Flight->setLayoutDirection(Qt::RightToLeft);
-        BlackHand = new QCheckBox(CardgroupBoxRequirements);
-        BlackHand->setObjectName(QStringLiteral("BlackHand"));
-        BlackHand->setGeometry(QRect(323, 62, 91, 20));
-        BlackHand->setLayoutDirection(Qt::RightToLeft);
-        Infernal = new QCheckBox(CardgroupBoxRequirements);
-        Infernal->setObjectName(QStringLiteral("Infernal"));
-        Infernal->setGeometry(QRect(242, 102, 71, 20));
-        Infernal->setLayoutDirection(Qt::RightToLeft);
-        RedList = new QCheckBox(CardgroupBoxRequirements);
-        RedList->setObjectName(QStringLiteral("RedList"));
-        RedList->setGeometry(QRect(242, 62, 71, 20));
-        RedList->setLayoutDirection(Qt::RightToLeft);
-        cBClan_2 = new QComboBox(CardgroupBoxRequirements);
-        cBClan_2->setObjectName(QStringLiteral("cBClan_2"));
-        cBClan_2->setGeometry(QRect(43, 22, 191, 22));
-        cBSect_2 = new QComboBox(CardgroupBoxRequirements);
-        cBSect_2->setObjectName(QStringLiteral("cBSect_2"));
-        cBSect_2->setGeometry(QRect(43, 62, 191, 21));
-        lSect_2 = new QLabel(CardgroupBoxRequirements);
-        lSect_2->setObjectName(QStringLiteral("lSect_2"));
-        lSect_2->setGeometry(QRect(12, 62, 31, 16));
-        Seraph = new QCheckBox(CardgroupBoxRequirements);
-        Seraph->setObjectName(QStringLiteral("Seraph"));
-        Seraph->setGeometry(QRect(333, 102, 81, 20));
-        Seraph->setLayoutDirection(Qt::RightToLeft);
-        lFortitude_4 = new QLabel(CardgroupBoxRequirements);
-        lFortitude_4->setObjectName(QStringLiteral("lFortitude_4"));
-        lFortitude_4->setGeometry(QRect(327, 22, 29, 19));
-        lFortitude_4->setPixmap(QPixmap(QString::fromUtf8(":/icons/flight.gif")));
-        lTitle_2 = new QLabel(CardgroupBoxRequirements);
-        lTitle_2->setObjectName(QStringLiteral("lTitle_2"));
-        lTitle_2->setGeometry(QRect(12, 102, 41, 16));
-        cBTitle_2 = new QComboBox(CardgroupBoxRequirements);
-        cBTitle_2->setObjectName(QStringLiteral("cBTitle_2"));
-        cBTitle_2->setGeometry(QRect(43, 102, 191, 21));
-        Anarch = new QCheckBox(CardgroupBoxRequirements);
-        Anarch->setObjectName(QStringLiteral("Anarch"));
-        Anarch->setGeometry(QRect(242, 22, 71, 20));
-        Anarch->setLayoutDirection(Qt::RightToLeft);
-        CardgroupBoxOthers = new QGroupBox(CardSearchFrame);
-        CardgroupBoxOthers->setObjectName(QStringLiteral("CardgroupBoxOthers"));
-        CardgroupBoxOthers->setGeometry(QRect(438, 121, 251, 141));
-        BurnOption = new QCheckBox(CardgroupBoxOthers);
-        BurnOption->setObjectName(QStringLiteral("BurnOption"));
-        BurnOption->setGeometry(QRect(32, 17, 91, 20));
-        BurnOption->setLayoutDirection(Qt::RightToLeft);
-        Anarch_3_Way = new QCheckBox(CardgroupBoxOthers);
-        Anarch_3_Way->setObjectName(QStringLiteral("Anarch_3_Way"));
-        Anarch_3_Way->setGeometry(QRect(132, 17, 102, 20));
-        Anarch_3_Way->setLayoutDirection(Qt::RightToLeft);
-        Dual_discipline = new QCheckBox(CardgroupBoxOthers);
-        Dual_discipline->setObjectName(QStringLiteral("Dual_discipline"));
-        Dual_discipline->setGeometry(QRect(12, 47, 111, 20));
-        Dual_discipline->setLayoutDirection(Qt::RightToLeft);
-        Multi_discipline = new QCheckBox(CardgroupBoxOthers);
-        Multi_discipline->setObjectName(QStringLiteral("Multi_discipline"));
-        Multi_discipline->setGeometry(QRect(122, 47, 112, 20));
-        Multi_discipline->setLayoutDirection(Qt::RightToLeft);
-        lFortitude_3 = new QLabel(CardgroupBoxOthers);
-        lFortitude_3->setObjectName(QStringLiteral("lFortitude_3"));
-        lFortitude_3->setGeometry(QRect(12, 19, 19, 19));
-        lFortitude_3->setPixmap(QPixmap(QString::fromUtf8(":/icons/burn_option.gif")));
-        Boon = new QCheckBox(CardgroupBoxOthers);
-        Boon->setObjectName(QStringLiteral("Boon"));
-        Boon->setGeometry(QRect(12, 77, 111, 20));
-        Boon->setLayoutDirection(Qt::RightToLeft);
-        Grapple = new QCheckBox(CardgroupBoxOthers);
-        Grapple->setObjectName(QStringLiteral("Grapple"));
-        Grapple->setGeometry(QRect(122, 77, 111, 20));
-        Grapple->setLayoutDirection(Qt::RightToLeft);
-        Frenzy = new QCheckBox(CardgroupBoxOthers);
-        Frenzy->setObjectName(QStringLiteral("Frenzy"));
-        Frenzy->setGeometry(QRect(12, 107, 111, 20));
-        Frenzy->setLayoutDirection(Qt::RightToLeft);
-        Aim = new QCheckBox(CardgroupBoxOthers);
-        Aim->setObjectName(QStringLiteral("Aim"));
-        Aim->setGeometry(QRect(122, 107, 111, 20));
-        Aim->setLayoutDirection(Qt::RightToLeft);
+
+        gridLayout_8->addWidget(CardgroupBoxDiscipline, 0, 3, 2, 1);
+
+        CardgroupBoxVirtues = new QGroupBox(CardSearchFrame);
+        CardgroupBoxVirtues->setObjectName(QStringLiteral("CardgroupBoxVirtues"));
+        horizontalLayout_2 = new QHBoxLayout(CardgroupBoxVirtues);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(5, 5, 5, 5);
+        def = new DisciplineButton(CardgroupBoxVirtues);
+        def->setObjectName(QStringLiteral("def"));
+        sizePolicy1.setHeightForWidth(def->sizePolicy().hasHeightForWidth());
+        def->setSizePolicy(sizePolicy1);
+        def->setMinimumSize(QSize(40, 40));
+        def->setMaximumSize(QSize(40, 40));
+
+        horizontalLayout_2->addWidget(def);
+
+        inn = new DisciplineButton(CardgroupBoxVirtues);
+        inn->setObjectName(QStringLiteral("inn"));
+        sizePolicy1.setHeightForWidth(inn->sizePolicy().hasHeightForWidth());
+        inn->setSizePolicy(sizePolicy1);
+        inn->setMinimumSize(QSize(40, 40));
+        inn->setMaximumSize(QSize(40, 40));
+
+        horizontalLayout_2->addWidget(inn);
+
+        jud = new DisciplineButton(CardgroupBoxVirtues);
+        jud->setObjectName(QStringLiteral("jud"));
+        sizePolicy1.setHeightForWidth(jud->sizePolicy().hasHeightForWidth());
+        jud->setSizePolicy(sizePolicy1);
+        jud->setMinimumSize(QSize(40, 40));
+        jud->setMaximumSize(QSize(40, 40));
+
+        horizontalLayout_2->addWidget(jud);
+
+        mar = new DisciplineButton(CardgroupBoxVirtues);
+        mar->setObjectName(QStringLiteral("mar"));
+        sizePolicy1.setHeightForWidth(mar->sizePolicy().hasHeightForWidth());
+        mar->setSizePolicy(sizePolicy1);
+        mar->setMinimumSize(QSize(40, 40));
+        mar->setMaximumSize(QSize(40, 40));
+
+        horizontalLayout_2->addWidget(mar);
+
+        red = new DisciplineButton(CardgroupBoxVirtues);
+        red->setObjectName(QStringLiteral("red"));
+        sizePolicy1.setHeightForWidth(red->sizePolicy().hasHeightForWidth());
+        red->setSizePolicy(sizePolicy1);
+        red->setMinimumSize(QSize(40, 40));
+        red->setMaximumSize(QSize(40, 40));
+
+        horizontalLayout_2->addWidget(red);
+
+        ven = new DisciplineButton(CardgroupBoxVirtues);
+        ven->setObjectName(QStringLiteral("ven"));
+        sizePolicy1.setHeightForWidth(ven->sizePolicy().hasHeightForWidth());
+        ven->setSizePolicy(sizePolicy1);
+        ven->setMinimumSize(QSize(40, 40));
+        ven->setMaximumSize(QSize(40, 40));
+
+        horizontalLayout_2->addWidget(ven);
+
+        vis2 = new DisciplineButton(CardgroupBoxVirtues);
+        vis2->setObjectName(QStringLiteral("vis2"));
+        sizePolicy1.setHeightForWidth(vis2->sizePolicy().hasHeightForWidth());
+        vis2->setSizePolicy(sizePolicy1);
+        vis2->setMinimumSize(QSize(40, 40));
+        vis2->setMaximumSize(QSize(40, 40));
+
+        horizontalLayout_2->addWidget(vis2);
+
+
+        gridLayout_8->addWidget(CardgroupBoxVirtues, 2, 3, 1, 1);
+
+        CardgroupBoxFilters = new QGroupBox(CardSearchFrame);
+        CardgroupBoxFilters->setObjectName(QStringLiteral("CardgroupBoxFilters"));
+        gridLayout_2 = new QGridLayout(CardgroupBoxFilters);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        gridLayout_2->setContentsMargins(5, 5, 5, 5);
+        label_4 = new QLabel(CardgroupBoxFilters);
+        label_4->setObjectName(QStringLiteral("label_4"));
+        sizePolicy3.setHeightForWidth(label_4->sizePolicy().hasHeightForWidth());
+        label_4->setSizePolicy(sizePolicy3);
+        label_4->setLayoutDirection(Qt::LeftToRight);
+        label_4->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_2->addWidget(label_4, 1, 0, 1, 1);
+
+        cBSousType = new QComboBox(CardgroupBoxFilters);
+        cBSousType->setObjectName(QStringLiteral("cBSousType"));
+
+        gridLayout_2->addWidget(cBSousType, 1, 1, 1, 1);
+
+        cBType = new QComboBox(CardgroupBoxFilters);
+        cBType->setObjectName(QStringLiteral("cBType"));
+
+        gridLayout_2->addWidget(cBType, 0, 1, 1, 1);
+
+        label_43 = new QLabel(CardgroupBoxFilters);
+        label_43->setObjectName(QStringLiteral("label_43"));
+        sizePolicy.setHeightForWidth(label_43->sizePolicy().hasHeightForWidth());
+        label_43->setSizePolicy(sizePolicy);
+        label_43->setLayoutDirection(Qt::LeftToRight);
+        label_43->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_2->addWidget(label_43, 0, 0, 1, 1);
+
+
+        gridLayout_8->addWidget(CardgroupBoxFilters, 0, 1, 1, 1);
+
+        CardgroupBoxGeneral = new QGroupBox(CardSearchFrame);
+        CardgroupBoxGeneral->setObjectName(QStringLiteral("CardgroupBoxGeneral"));
+        CardgroupBoxGeneral->setMinimumSize(QSize(0, 120));
+        gridLayout_7 = new QGridLayout(CardgroupBoxGeneral);
+        gridLayout_7->setObjectName(QStringLiteral("gridLayout_7"));
+        gridLayout_7->setContentsMargins(5, 5, 5, 5);
+        label_31 = new QLabel(CardgroupBoxGeneral);
+        label_31->setObjectName(QStringLiteral("label_31"));
+
+        gridLayout_7->addWidget(label_31, 0, 0, 1, 1);
+
+        lENameCard_2 = new QLineEdit(CardgroupBoxGeneral);
+        lENameCard_2->setObjectName(QStringLiteral("lENameCard_2"));
+
+        gridLayout_7->addWidget(lENameCard_2, 0, 1, 1, 1);
+
+        label_35 = new QLabel(CardgroupBoxGeneral);
+        label_35->setObjectName(QStringLiteral("label_35"));
+
+        gridLayout_7->addWidget(label_35, 0, 2, 1, 1);
+
+        lEArtist_2 = new QLineEdit(CardgroupBoxGeneral);
+        lEArtist_2->setObjectName(QStringLiteral("lEArtist_2"));
+
+        gridLayout_7->addWidget(lEArtist_2, 0, 3, 1, 1);
+
+        label_33 = new QLabel(CardgroupBoxGeneral);
+        label_33->setObjectName(QStringLiteral("label_33"));
+
+        gridLayout_7->addWidget(label_33, 1, 0, 1, 1);
+
+        lETextCard_2 = new QLineEdit(CardgroupBoxGeneral);
+        lETextCard_2->setObjectName(QStringLiteral("lETextCard_2"));
+        lETextCard_2->setAutoFillBackground(false);
+
+        gridLayout_7->addWidget(lETextCard_2, 1, 1, 1, 3);
+
+
+        gridLayout_8->addWidget(CardgroupBoxGeneral, 0, 0, 1, 1);
+
+        CardgroupBoxCout = new QGroupBox(CardSearchFrame);
+        CardgroupBoxCout->setObjectName(QStringLiteral("CardgroupBoxCout"));
+        gridLayout_5 = new QGridLayout(CardgroupBoxCout);
+        gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
+        gridLayout_5->setContentsMargins(5, 5, 5, 5);
+        label_37 = new QLabel(CardgroupBoxCout);
+        label_37->setObjectName(QStringLiteral("label_37"));
+        sizePolicy.setHeightForWidth(label_37->sizePolicy().hasHeightForWidth());
+        label_37->setSizePolicy(sizePolicy);
+        label_37->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_37, 0, 0, 1, 1);
+
+        cBBloodCost = new QComboBox(CardgroupBoxCout);
+        cBBloodCost->setObjectName(QStringLiteral("cBBloodCost"));
+        sizePolicy1.setHeightForWidth(cBBloodCost->sizePolicy().hasHeightForWidth());
+        cBBloodCost->setSizePolicy(sizePolicy1);
+        cBBloodCost->setMinimumSize(QSize(45, 0));
+        cBBloodCost->setMaximumSize(QSize(45, 16777215));
+
+        gridLayout_5->addWidget(cBBloodCost, 0, 1, 1, 1);
+
+        sBBloodCost = new QSpinBox(CardgroupBoxCout);
+        sBBloodCost->setObjectName(QStringLiteral("sBBloodCost"));
+        sizePolicy1.setHeightForWidth(sBBloodCost->sizePolicy().hasHeightForWidth());
+        sBBloodCost->setSizePolicy(sizePolicy1);
+        sBBloodCost->setMinimumSize(QSize(40, 0));
+        sBBloodCost->setMaximumSize(QSize(40, 16777215));
+        QFont font;
+        font.setFamily(QStringLiteral("Comic Sans MS"));
+        font.setPointSize(9);
+        font.setBold(true);
+        font.setWeight(75);
+        sBBloodCost->setFont(font);
+        sBBloodCost->setMaximum(6);
+
+        gridLayout_5->addWidget(sBBloodCost, 0, 2, 1, 1);
+
+        label_39 = new QLabel(CardgroupBoxCout);
+        label_39->setObjectName(QStringLiteral("label_39"));
+        sizePolicy.setHeightForWidth(label_39->sizePolicy().hasHeightForWidth());
+        label_39->setSizePolicy(sizePolicy);
+        label_39->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_39, 1, 0, 1, 1);
+
+        cBPoolCost = new QComboBox(CardgroupBoxCout);
+        cBPoolCost->setObjectName(QStringLiteral("cBPoolCost"));
+        sizePolicy1.setHeightForWidth(cBPoolCost->sizePolicy().hasHeightForWidth());
+        cBPoolCost->setSizePolicy(sizePolicy1);
+        cBPoolCost->setMinimumSize(QSize(45, 0));
+        cBPoolCost->setMaximumSize(QSize(45, 16777215));
+
+        gridLayout_5->addWidget(cBPoolCost, 1, 1, 1, 1);
+
+        sBPoolCost = new QSpinBox(CardgroupBoxCout);
+        sBPoolCost->setObjectName(QStringLiteral("sBPoolCost"));
+        sizePolicy1.setHeightForWidth(sBPoolCost->sizePolicy().hasHeightForWidth());
+        sBPoolCost->setSizePolicy(sizePolicy1);
+        sBPoolCost->setMinimumSize(QSize(40, 0));
+        sBPoolCost->setMaximumSize(QSize(40, 16777215));
+        sBPoolCost->setFont(font);
+        sBPoolCost->setMaximum(6);
+
+        gridLayout_5->addWidget(sBPoolCost, 1, 2, 1, 1);
+
+        label_41 = new QLabel(CardgroupBoxCout);
+        label_41->setObjectName(QStringLiteral("label_41"));
+        sizePolicy.setHeightForWidth(label_41->sizePolicy().hasHeightForWidth());
+        label_41->setSizePolicy(sizePolicy);
+        label_41->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_41, 2, 0, 1, 1);
+
+        cBConvictionCost = new QComboBox(CardgroupBoxCout);
+        cBConvictionCost->setObjectName(QStringLiteral("cBConvictionCost"));
+        sizePolicy1.setHeightForWidth(cBConvictionCost->sizePolicy().hasHeightForWidth());
+        cBConvictionCost->setSizePolicy(sizePolicy1);
+        cBConvictionCost->setMinimumSize(QSize(45, 0));
+        cBConvictionCost->setMaximumSize(QSize(45, 16777215));
+
+        gridLayout_5->addWidget(cBConvictionCost, 2, 1, 1, 1);
+
+        sBConvictionCost = new QSpinBox(CardgroupBoxCout);
+        sBConvictionCost->setObjectName(QStringLiteral("sBConvictionCost"));
+        sizePolicy1.setHeightForWidth(sBConvictionCost->sizePolicy().hasHeightForWidth());
+        sBConvictionCost->setSizePolicy(sizePolicy1);
+        sBConvictionCost->setMinimumSize(QSize(40, 0));
+        sBConvictionCost->setMaximumSize(QSize(40, 16777215));
+        sBConvictionCost->setFont(font);
+        sBConvictionCost->setMaximum(6);
+
+        gridLayout_5->addWidget(sBConvictionCost, 2, 2, 1, 1);
+
+
+        gridLayout_8->addWidget(CardgroupBoxCout, 1, 2, 2, 1);
+
 
         horizontalLayout_3->addWidget(CardSearchFrame);
 
-        horizontalSpacer = new QSpacerItem(215, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_3->addItem(horizontalSpacer);
 
@@ -727,7 +940,14 @@ public:
         frame->setLineWidth(0);
         horizontalLayout = new QHBoxLayout(frame);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        VisuelCarte = new QLabel(frame);
+        horizontalLayout->setContentsMargins(5, 5, 5, 5);
+        frame_3 = new QFrame(frame);
+        frame_3->setObjectName(QStringLiteral("frame_3"));
+        frame_3->setFrameShape(QFrame::StyledPanel);
+        frame_3->setFrameShadow(QFrame::Raised);
+        verticalLayout_3 = new QVBoxLayout(frame_3);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        VisuelCarte = new QLabel(frame_3);
         VisuelCarte->setObjectName(QStringLiteral("VisuelCarte"));
         sizePolicy1.setHeightForWidth(VisuelCarte->sizePolicy().hasHeightForWidth());
         VisuelCarte->setSizePolicy(sizePolicy1);
@@ -738,15 +958,32 @@ public:
         VisuelCarte->setLineWidth(0);
         VisuelCarte->setPixmap(QPixmap(QString::fromUtf8("../../jr/Desktop/Vtes_Grelarge.gif")));
 
-        horizontalLayout->addWidget(VisuelCarte);
+        verticalLayout_3->addWidget(VisuelCarte);
+
+        verticalSpacer_3 = new QSpacerItem(20, 310, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_3->addItem(verticalSpacer_3);
+
+
+        horizontalLayout->addWidget(frame_3);
 
         PTVCardsResults = new PItemView(frame);
         PTVCardsResults->setObjectName(QStringLiteral("PTVCardsResults"));
+        PTVCardsResults->setMinimumSize(QSize(1130, 0));
+        PTVCardsResults->setMaximumSize(QSize(16777215, 16777215));
+        PTVCardsResults->viewport()->setProperty("cursor", QVariant(QCursor(Qt::OpenHandCursor)));
+        PTVCardsResults->setFrameShape(QFrame::NoFrame);
+        PTVCardsResults->setFrameShadow(QFrame::Plain);
+        PTVCardsResults->setLineWidth(0);
         PTVCardsResults->setAlternatingRowColors(true);
         PTVCardsResults->setShowGrid(false);
         PTVCardsResults->setCornerButtonEnabled(false);
 
         horizontalLayout->addWidget(PTVCardsResults);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_2);
 
 
         verticalLayout->addWidget(frame);
@@ -761,31 +998,32 @@ public:
     void retranslateUi(QScrollArea *tab_search_library)
     {
         tab_search_library->setWindowTitle(QApplication::translate("tab_search_library", "ScrollArea", 0));
-        CardgroupBoxVirtues->setTitle(QApplication::translate("tab_search_library", "Virtues :  ", 0));
-        def->setText(QString());
-        inn->setText(QString());
-        jud->setText(QString());
-        mar->setText(QString());
-        red->setText(QString());
-        ven->setText(QString());
-        vis2->setText(QString());
-        CardgroupBoxCout->setTitle(QApplication::translate("tab_search_library", "Costs", 0));
-        label_39->setText(QApplication::translate("tab_search_library", "Pool cost :", 0));
-        label_41->setText(QApplication::translate("tab_search_library", "Conviction cost :", 0));
-        label_37->setText(QApplication::translate("tab_search_library", "Blood cost :", 0));
-        CardgroupBoxGeneral->setTitle(QApplication::translate("tab_search_library", "General ", 0));
-        label_31->setText(QApplication::translate("tab_search_library", "Name :", 0));
-        label_33->setText(QApplication::translate("tab_search_library", "Text ", 0));
-        label_35->setText(QApplication::translate("tab_search_library", "Artist :", 0));
-        label_47->setText(QApplication::translate("tab_search_library", "Set :", 0));
-        label_45->setText(QApplication::translate("tab_search_library", "Rarity", 0));
-        CardgroupBoxOptions->setTitle(QApplication::translate("tab_search_library", "Actions ", 0));
+        CardgroupBoxOptions->setTitle(QString());
         pBCardSearch->setText(QApplication::translate("tab_search_library", "Search", 0));
         pBCardClearForm->setText(QApplication::translate("tab_search_library", "Clear Form", 0));
-        CardgroupBoxFilters->setTitle(QApplication::translate("tab_search_library", "Filters ", 0));
-        label_43->setText(QApplication::translate("tab_search_library", "Type", 0));
-        label_4->setText(QApplication::translate("tab_search_library", "Sous type", 0));
-        CardgroupBoxDiscipline->setTitle(QApplication::translate("tab_search_library", "Disciplines : ", 0));
+        CardgroupBoxOthers->setTitle(QApplication::translate("tab_search_library", "Key words ", 0));
+        BurnOption->setText(QApplication::translate("tab_search_library", "Burn Option", 0));
+        Anarch_3_Way->setText(QApplication::translate("tab_search_library", "Anarch 3-way", 0));
+        Dual_discipline->setText(QApplication::translate("tab_search_library", "Dual disciplines", 0));
+        Multi_discipline->setText(QApplication::translate("tab_search_library", "Multi discipline", 0));
+        Boon->setText(QApplication::translate("tab_search_library", "Boon", 0));
+        Grapple->setText(QApplication::translate("tab_search_library", "Grapple", 0));
+        Frenzy->setText(QApplication::translate("tab_search_library", "Frenzy", 0));
+        Aim->setText(QApplication::translate("tab_search_library", "Aim", 0));
+        groupBox->setTitle(QApplication::translate("tab_search_library", "Edition", 0));
+        label_47->setText(QApplication::translate("tab_search_library", "Set", 0));
+        label_45->setText(QApplication::translate("tab_search_library", "Rarity", 0));
+        CardgroupBoxRequirements->setTitle(QApplication::translate("tab_search_library", "Requirements ", 0));
+        label_49->setText(QApplication::translate("tab_search_library", "Clan ", 0));
+        Anarch->setText(QApplication::translate("tab_search_library", "Anarch", 0));
+        Flight->setText(QApplication::translate("tab_search_library", "Flight", 0));
+        lSect_2->setText(QApplication::translate("tab_search_library", "Sect", 0));
+        RedList->setText(QApplication::translate("tab_search_library", "Red list", 0));
+        BlackHand->setText(QApplication::translate("tab_search_library", "Black hand", 0));
+        lTitle_2->setText(QApplication::translate("tab_search_library", "Title", 0));
+        Infernal->setText(QApplication::translate("tab_search_library", "Infernal", 0));
+        Seraph->setText(QApplication::translate("tab_search_library", "Seraph", 0));
+        CardgroupBoxDiscipline->setTitle(QApplication::translate("tab_search_library", "Disciplines", 0));
         qui->setText(QString());
         dom->setText(QString());
         obt->setText(QString());
@@ -816,27 +1054,25 @@ public:
         thn->setText(QString());
         mel->setText(QString());
         mal->setText(QString());
-        CardgroupBoxRequirements->setTitle(QApplication::translate("tab_search_library", "Requirements ", 0));
-        label_49->setText(QApplication::translate("tab_search_library", "Clan :", 0));
-        Flight->setText(QApplication::translate("tab_search_library", "Flight", 0));
-        BlackHand->setText(QApplication::translate("tab_search_library", "Black hand", 0));
-        Infernal->setText(QApplication::translate("tab_search_library", "Infernal", 0));
-        RedList->setText(QApplication::translate("tab_search_library", "Red list", 0));
-        lSect_2->setText(QApplication::translate("tab_search_library", "Sect", 0));
-        Seraph->setText(QApplication::translate("tab_search_library", "Seraph", 0));
-        lFortitude_4->setText(QString());
-        lTitle_2->setText(QApplication::translate("tab_search_library", "Title :", 0));
-        Anarch->setText(QApplication::translate("tab_search_library", "Anarch", 0));
-        CardgroupBoxOthers->setTitle(QApplication::translate("tab_search_library", "Key words ", 0));
-        BurnOption->setText(QApplication::translate("tab_search_library", "Burn Option", 0));
-        Anarch_3_Way->setText(QApplication::translate("tab_search_library", "Anarch 3-way", 0));
-        Dual_discipline->setText(QApplication::translate("tab_search_library", "Dual disciplines", 0));
-        Multi_discipline->setText(QApplication::translate("tab_search_library", "Multi discipline", 0));
-        lFortitude_3->setText(QString());
-        Boon->setText(QApplication::translate("tab_search_library", "Boon", 0));
-        Grapple->setText(QApplication::translate("tab_search_library", "Grapple", 0));
-        Frenzy->setText(QApplication::translate("tab_search_library", "Frenzy", 0));
-        Aim->setText(QApplication::translate("tab_search_library", "Aim", 0));
+        CardgroupBoxVirtues->setTitle(QApplication::translate("tab_search_library", "Virtues", 0));
+        def->setText(QString());
+        inn->setText(QString());
+        jud->setText(QString());
+        mar->setText(QString());
+        red->setText(QString());
+        ven->setText(QString());
+        vis2->setText(QString());
+        CardgroupBoxFilters->setTitle(QApplication::translate("tab_search_library", "Filters ", 0));
+        label_4->setText(QApplication::translate("tab_search_library", "Sous type", 0));
+        label_43->setText(QApplication::translate("tab_search_library", "   Type", 0));
+        CardgroupBoxGeneral->setTitle(QApplication::translate("tab_search_library", "General ", 0));
+        label_31->setText(QApplication::translate("tab_search_library", "Name :", 0));
+        label_35->setText(QApplication::translate("tab_search_library", "Artist :", 0));
+        label_33->setText(QApplication::translate("tab_search_library", "Text ", 0));
+        CardgroupBoxCout->setTitle(QApplication::translate("tab_search_library", "Costs", 0));
+        label_37->setText(QApplication::translate("tab_search_library", "Blood cost", 0));
+        label_39->setText(QApplication::translate("tab_search_library", "Pool cost", 0));
+        label_41->setText(QApplication::translate("tab_search_library", "Conviction cost", 0));
         VisuelCarte->setText(QString());
     } // retranslateUi
 

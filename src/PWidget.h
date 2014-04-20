@@ -7,7 +7,7 @@
 #include <QApplication>
 #include <QPushButton>
 
-///////////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////////
 // Ma Subclass de QFrame
 
 class PFrame : public QFrame
@@ -27,6 +27,8 @@ private:
     QPoint startPos;
 };
 
+// /////////////////////////////////////////////////////////////////////////////////////////
+//
 class DisciplineButton : public QAbstractButton
 {
 public:
@@ -45,6 +47,26 @@ private:
     QString discipline;
     QPixmap icone;
     QString sql_request;
+};
+
+// /////////////////////////////////////////////////////////////////////////////////////////
+//
+class PDeckDropArea : public QFrame
+{
+    Q_OBJECT
+
+public:
+    explicit PDeckDropArea(QWidget *parent = 0);
+    ~PDeckDropArea();
+
+protected:
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dragMoveEvent(QDragMoveEvent *event);
+    void dropEvent(QDropEvent *event);
+
+private:
+
+
 };
 
 #endif // PWIDGET_H
