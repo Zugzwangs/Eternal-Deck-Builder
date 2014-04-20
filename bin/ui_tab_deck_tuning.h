@@ -109,7 +109,6 @@ public:
 
         gridLayout->addWidget(frame_5, 0, 1, 1, 1);
 
-
         horizontalLayout->addWidget(frame);
 
         tab_deck_tuning->setWidget(scrollAreaWidgetContents);
@@ -126,6 +125,7 @@ public:
         label_3->setText(QApplication::translate("tab_deck_tuning", "Tirage de main et de sortie de crypt vers onglet 4 ??", 0));
         label->setText(QApplication::translate("tab_deck_tuning", "courbe de crypt (diagramme)", 0));
         label_2->setText(QApplication::translate("tab_deck_tuning", "repartition type de cartes library (pie chart)", 0));
+
     } // retranslateUi
 
 };
