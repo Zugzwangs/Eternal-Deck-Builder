@@ -30,7 +30,7 @@ private:
 
 // /////////////////////////////////////////////////////////////////////////////////////////
 //
-class DisciplineButton : public QAbstractButton
+class DisciplineButton : public QPushButton
 {
 public:
     explicit DisciplineButton(QWidget *parent = 0);
@@ -39,7 +39,7 @@ public:
     QString get_sql_request();
 
 protected:
-    void paintEvent(QPaintEvent *e);
+    //void paintEvent(QPaintEvent *e);
     void nextCheckState();
 
 private:

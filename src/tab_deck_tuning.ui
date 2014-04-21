@@ -65,6 +65,12 @@
       <layout class="QGridLayout" name="gridLayout">
        <item row="1" column="1">
         <widget class="QFrame" name="frame_2">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>200</height>
+          </size>
+         </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
@@ -88,6 +94,12 @@
        </item>
        <item row="1" column="0">
         <widget class="QFrame" name="frame_3">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>200</height>
+          </size>
+         </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
@@ -111,6 +123,12 @@
        </item>
        <item row="0" column="0">
         <widget class="QFrame" name="frame_4">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>200</height>
+          </size>
+         </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
@@ -134,25 +152,18 @@
        </item>
        <item row="0" column="1">
         <widget class="QFrame" name="frame_5">
+         <property name="minimumSize">
+          <size>
+           <width>350</width>
+           <height>350</height>
+          </size>
+         </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <widget class="QLabel" name="label_2">
-          <property name="geometry">
-           <rect>
-            <x>70</x>
-            <y>130</y>
-            <width>281</width>
-            <height>151</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>repartition type de cartes library (pie chart)</string>
-          </property>
-         </widget>
         </widget>
        </item>
       </layout>

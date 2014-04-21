@@ -92,7 +92,7 @@ PDeckDropArea::~PDeckDropArea() {}
 
 // /////////////////////////////////////////////////////////////////////////////////////////
 // Widget symbolisant une discipline
-DisciplineButton::DisciplineButton(QWidget *parent) : QAbstractButton(parent)
+DisciplineButton::DisciplineButton(QWidget *parent) : QPushButton(parent)
 {
     state = DisciplineButton::RequestNothing;
     sql_request ="";
@@ -105,11 +105,12 @@ void DisciplineButton::setupDiscipline(QString dis)
     else
         discipline = dis.left(3);
 
-    setText(discipline);
+    //setText(discipline);
     setToolTip(discipline);
     icone = QPixmap(":/icons/disc/" + discipline + ".png");
+    setIcon(icone);
 }
-
+/*
 void DisciplineButton::paintEvent(QPaintEvent *e)
 {
     QRect rect( e->rect() );
@@ -120,7 +121,6 @@ void DisciplineButton::paintEvent(QPaintEvent *e)
     switch (state)
     {
         case DisciplineButton::RequestNothing:
-
             painter.setPen( Qt::NoPen );
             painter.setBrush( QBrush(QColor(150,150,150,150), Qt::SolidPattern) );
             rect.adjust(5,5, -5,-5);
@@ -153,7 +153,7 @@ void DisciplineButton::paintEvent(QPaintEvent *e)
             painter.drawLine(rect.bottomLeft(), rect.topRight());
             break;
     }
-}
+}*/
 
 void DisciplineButton::nextCheckState()
 {

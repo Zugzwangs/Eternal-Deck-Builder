@@ -84,7 +84,7 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
     // Add the completer to the main search label ( card name)
     Completer = new QCompleter( this );
     Completer->setCaseSensitivity( Qt::CaseInsensitive );
-    Completer->setFilterMode( Qt::MatchStartsWith );
+    //Completer->setFilterMode( Qt::MatchStartsWith );
     Completer->setCompletionColumn( 1 );
     Completer->setCompletionRole( Qt::DisplayRole );
     Completer->setMaxVisibleItems( 8 );

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'tab_deck_tuning.ui'
 **
-** Created by: Qt User Interface Compiler version 5.2.1
+** Created by: Qt User Interface Compiler version 5.1.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -39,7 +39,6 @@ public:
     QFrame *frame_4;
     QLabel *label;
     QFrame *frame_5;
-    QLabel *label_2;
 
     void setupUi(QScrollArea *tab_deck_tuning)
     {
@@ -71,6 +70,7 @@ public:
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         frame_2 = new QFrame(frame);
         frame_2->setObjectName(QStringLiteral("frame_2"));
+        frame_2->setMinimumSize(QSize(200, 200));
         frame_2->setFrameShape(QFrame::StyledPanel);
         frame_2->setFrameShadow(QFrame::Raised);
         label_4 = new QLabel(frame_2);
@@ -81,6 +81,7 @@ public:
 
         frame_3 = new QFrame(frame);
         frame_3->setObjectName(QStringLiteral("frame_3"));
+        frame_3->setMinimumSize(QSize(200, 200));
         frame_3->setFrameShape(QFrame::StyledPanel);
         frame_3->setFrameShadow(QFrame::Raised);
         label_3 = new QLabel(frame_3);
@@ -91,6 +92,7 @@ public:
 
         frame_4 = new QFrame(frame);
         frame_4->setObjectName(QStringLiteral("frame_4"));
+        frame_4->setMinimumSize(QSize(200, 200));
         frame_4->setFrameShape(QFrame::StyledPanel);
         frame_4->setFrameShadow(QFrame::Raised);
         label = new QLabel(frame_4);
@@ -101,13 +103,12 @@ public:
 
         frame_5 = new QFrame(frame);
         frame_5->setObjectName(QStringLiteral("frame_5"));
+        frame_5->setMinimumSize(QSize(350, 350));
         frame_5->setFrameShape(QFrame::StyledPanel);
         frame_5->setFrameShadow(QFrame::Raised);
-        label_2 = new QLabel(frame_5);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(70, 130, 281, 151));
 
         gridLayout->addWidget(frame_5, 0, 1, 1, 1);
+
 
         horizontalLayout->addWidget(frame);
 
@@ -124,8 +125,6 @@ public:
         label_4->setText(QApplication::translate("tab_deck_tuning", "je sais pas quoi qui manque encore ", 0));
         label_3->setText(QApplication::translate("tab_deck_tuning", "Tirage de main et de sortie de crypt vers onglet 4 ??", 0));
         label->setText(QApplication::translate("tab_deck_tuning", "courbe de crypt (diagramme)", 0));
-        label_2->setText(QApplication::translate("tab_deck_tuning", "repartition type de cartes library (pie chart)", 0));
-
     } // retranslateUi
 
 };

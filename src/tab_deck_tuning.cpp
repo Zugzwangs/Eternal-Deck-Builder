@@ -15,6 +15,11 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     // on assigne le delegate
     PDelegateDeck *DelegateDeck = new PDelegateDeck();
     ui->PTreeViewDeckList->setItemDelegate(DelegateDeck);
+
+    testPie = new PieChart(ui->frame_5);
+    testPie->setGeometry(10, 10, 300, 300);
+    testPie->setModel(ModeleDeck);
+
 }
 
 tab_deck_tuning::~tab_deck_tuning()

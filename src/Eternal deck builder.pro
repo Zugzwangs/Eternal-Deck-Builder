@@ -28,7 +28,16 @@ SOURCES +=  main.cpp\
             game_element.cpp \
             update_manager.cpp \
             tab_deck_tuning.cpp \
-            tab_gold_fich.cpp
+            tab_gold_fich.cpp \
+            marbitemdelegate.cpp \
+            marbabstractitemview.cpp \
+            Charts/radialchart.cpp \
+            Charts/piechart3D.cpp \
+            Charts/piechart.cpp \
+            Charts/linearchart.cpp \
+            Charts/delegates.cpp \
+            Charts/chartstyle.cpp \
+            Charts/chart.cpp
 
 HEADERS  += mainwindow.h \
             pitemview.h \
@@ -43,7 +52,17 @@ HEADERS  += mainwindow.h \
             game_element.h \
             update_manager.h \
             tab_deck_tuning.h \
-            tab_gold_fich.h
+            tab_gold_fich.h \
+            marbitemdelegate.h \
+            marbabstractitemview.h \
+            Marb.h \
+            Charts/radialchart.h \
+            Charts/piechart3D.h \
+            Charts/piechart.h \
+            Charts/linearchart.h \
+            Charts/delegates.h \
+            Charts/chartstyle.h \
+            Charts/chart.h
 
 FORMS    += mainwindow.ui \
             dialogoptions.ui \

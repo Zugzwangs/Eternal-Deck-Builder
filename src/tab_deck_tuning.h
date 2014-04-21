@@ -5,6 +5,8 @@
 #include <QStandardItemModel>
 
 #include "pitemview.h"
+#include "Charts/piechart.h"
+
 
 namespace Ui {
 class tab_deck_tuning;
@@ -22,6 +24,8 @@ public:
 private:
     Ui::tab_deck_tuning *ui;
     PTreeModel *ModeleDeck;
+    PieChart *testPie;
+
 
 public slots:
 
