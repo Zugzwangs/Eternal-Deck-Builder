@@ -1,5 +1,5 @@
-#ifndef STATZOR_H
-#define STATZOR_H
+#ifndef STATISTIC_H
+#define STATISTIC_H
 
 #include<math.h>
 
@@ -9,4 +9,4 @@
 
 double fact(double n);
 
-#endif // STATZOR_H
+#endif // STATISTIC_H

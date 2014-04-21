@@ -16,11 +16,9 @@ TEMPLATE = app
 
 SOURCES +=  main.cpp\
             mainwindow.cpp \
-            Statzor.cpp \
             Global.cpp \
             Sauvegarde.cpp \
             pitemview.cpp \
-            PGraphics.cpp \
             PWidget.cpp \
             dialogoptions.cpp \
             tab_search_library.cpp \
@@ -37,14 +35,14 @@ SOURCES +=  main.cpp\
             Charts/linearchart.cpp \
             Charts/delegates.cpp \
             Charts/chartstyle.cpp \
-            Charts/chart.cpp
+            Charts/chart.cpp \
+            Statistic.cpp \
+    playground.cpp
 
 HEADERS  += mainwindow.h \
             pitemview.h \
             Global.h \
             Sauvegarde.h \
-            Statzor.h \
-            PGraphics.h \
             PWidget.h \
             dialogoptions.h \
             tab_search_library.h \
@@ -62,7 +60,9 @@ HEADERS  += mainwindow.h \
             Charts/linearchart.h \
             Charts/delegates.h \
             Charts/chartstyle.h \
-            Charts/chart.h
+            Charts/chart.h \
+            Statistic.h \
+    playground.h
 
 FORMS    += mainwindow.ui \
             dialogoptions.ui \

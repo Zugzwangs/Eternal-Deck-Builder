@@ -1,11 +1,9 @@
 INPUT(
 ./debug\main.o
 ./debug\mainwindow.o
-./debug\Statzor.o
 ./debug\Global.o
 ./debug\Sauvegarde.o
 ./debug\pitemview.o
-./debug\PGraphics.o
 ./debug\PWidget.o
 ./debug\dialogoptions.o
 ./debug\tab_search_library.o
@@ -23,10 +21,11 @@ INPUT(
 ./debug\delegates.o
 ./debug\chartstyle.o
 ./debug\chart.o
+./debug\Statistic.o
+./debug\playground.o
 ./debug\qrc_res.o
 ./debug\moc_mainwindow.o
 ./debug\moc_pitemview.o
-./debug\moc_PGraphics.o
 ./debug\moc_PWidget.o
 ./debug\moc_dialogoptions.o
 ./debug\moc_tab_search_library.o
@@ -43,4 +42,5 @@ INPUT(
 ./debug\moc_piechart.o
 ./debug\moc_linearchart.o
 ./debug\moc_chart.o
+./debug\moc_playground.o
 );

@@ -1,4 +1,4 @@
-#include "Statzor.h"
+#include "Statistic.h"
 
 double fact(double n)
     {

@@ -1,11 +1,9 @@
 INPUT(
 ./release\main.o
 ./release\mainwindow.o
-./release\Statzor.o
 ./release\Global.o
 ./release\Sauvegarde.o
 ./release\pitemview.o
-./release\PGraphics.o
 ./release\PWidget.o
 ./release\dialogoptions.o
 ./release\tab_search_library.o
@@ -23,10 +21,11 @@ INPUT(
 ./release\delegates.o
 ./release\chartstyle.o
 ./release\chart.o
+./release\Statistic.o
+./release\playground.o
 ./release\qrc_res.o
 ./release\moc_mainwindow.o
 ./release\moc_pitemview.o
-./release\moc_PGraphics.o
 ./release\moc_PWidget.o
 ./release\moc_dialogoptions.o
 ./release\moc_tab_search_library.o
@@ -43,4 +42,5 @@ INPUT(
 ./release\moc_piechart.o
 ./release\moc_linearchart.o
 ./release\moc_chart.o
+./release\moc_playground.o
 );

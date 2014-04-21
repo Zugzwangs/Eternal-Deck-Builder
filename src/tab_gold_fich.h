@@ -2,7 +2,7 @@
 #define TAB_GOLD_FICH_H
 
 #include <QScrollArea>
-#include "PGraphics.h"
+#include "playground.h"
 
 namespace Ui {  class tab_gold_fich;    }
 

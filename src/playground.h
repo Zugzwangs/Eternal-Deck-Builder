@@ -1,5 +1,5 @@
-#ifndef PGRAPHICS_H
-#define PGRAPHICS_H
+#ifndef PLAYGROUND_H
+#define PLAYGROUND_H
 
 #include <QDir>
 #include <QMenu>
@@ -11,8 +11,8 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneDragDropEvent>
 
-///////////////////////////////////////////////////////////////////////////////////////////
-// Ma Subclass de QGraphicsView
+// /////////////////////////////////////////////////////////////////////////////////////////
+// Custom graphic view that show the playground
 class PGraphicsView : public QGraphicsView
 {
    Q_OBJECT
@@ -30,8 +30,8 @@ private slots:
 };
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////
-//Ma Subclass de PGraphicsScene
+// ///////////////////////////////////////////////////////////////////////////////////////////
+// Custom graphic scene who host the game
 class PGraphicsScene : public QGraphicsScene
 {
    Q_OBJECT
@@ -48,8 +48,8 @@ private:
 
 };
 
-///////////////////////////////////////////////////////////////////////////////////////////
-// Ma Subclass de QGraphicsPixmapItem
+// /////////////////////////////////////////////////////////////////////////////////////////
+// Custom Graphics Item, represent game entity
 class PGraphicsPixmapItem : public QObject, public QGraphicsPixmapItem
 {
    Q_OBJECT
@@ -83,4 +83,4 @@ private slots:
 
 };
 
-#endif // PGRAPHICS_H
+#endif // PLAYGROUND_H
