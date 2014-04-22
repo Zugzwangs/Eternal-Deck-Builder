@@ -4,7 +4,7 @@
 #include <QScrollArea>
 #include <QStandardItemModel>
 
-#include "pitemview.h"
+#include "mvddeck.h"
 #include "Charts/piechart.h"
 
 

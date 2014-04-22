@@ -3,7 +3,6 @@ INPUT(
 ./release\mainwindow.o
 ./release\Global.o
 ./release\Sauvegarde.o
-./release\pitemview.o
 ./release\PWidget.o
 ./release\dialogoptions.o
 ./release\tab_search_library.o
@@ -23,9 +22,10 @@ INPUT(
 ./release\chart.o
 ./release\Statistic.o
 ./release\playground.o
+./release\mvddeck.o
+./release\mvdbdd.o
 ./release\qrc_res.o
 ./release\moc_mainwindow.o
-./release\moc_pitemview.o
 ./release\moc_PWidget.o
 ./release\moc_dialogoptions.o
 ./release\moc_tab_search_library.o
@@ -43,4 +43,6 @@ INPUT(
 ./release\moc_linearchart.o
 ./release\moc_chart.o
 ./release\moc_playground.o
+./release\moc_mvddeck.o
+./release\moc_mvdbdd.o
 );

@@ -3,13 +3,11 @@
 
 #include <QDir>
 #include <QMenu>
-#include <QAction>
-#include <QGraphicsSceneContextMenuEvent>
-#include <QWidget>
 #include <QGraphicsView>
-#include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
 #include <QGraphicsSceneDragDropEvent>
+#include <QGraphicsSceneContextMenuEvent>
 
 // /////////////////////////////////////////////////////////////////////////////////////////
 // Custom graphic view that show the playground

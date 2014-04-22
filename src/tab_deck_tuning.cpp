@@ -16,9 +16,17 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     PDelegateDeck *DelegateDeck = new PDelegateDeck();
     ui->PTreeViewDeckList->setItemDelegate(DelegateDeck);
 
-    testPie = new PieChart(ui->frame_5);
-    testPie->setGeometry(10, 10, 300, 300);
-    testPie->setModel(ModeleDeck);
+    // on test le pie chart
+    QStandardItemModel model( 6, 1 ); // Model with 1 column and 6 rows
+    qsrand( QDateTime::currentDateTime().toTime_t() );          // Init random function
+    for (int i = 0; i < model.rowCount(); ++i ) {              // Fill the model
+      qreal v = (qrand() % ( 30 - 10) + 10);                    // random value between 10 and 30
+      model.setData( model.index( i, 0 ), v, Qt::DisplayRole ); // Set data for the row 'i'
+    }
+    testPie = new PieChart(ui->frame);
+    //testPie->setGeometry(0, 0, 300, 300);
+    testPie->setModel(&model);
+    testPie->show();
 
 }
 

@@ -2017,7 +2017,7 @@
   <customwidget>
    <class>PItemView</class>
    <extends>QTableView</extends>
-   <header>pitemview.h</header>
+   <header>mvdbdd.h</header>
   </customwidget>
   <customwidget>
    <class>DisciplineButton</class>

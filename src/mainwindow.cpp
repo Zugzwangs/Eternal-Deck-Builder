@@ -1,9 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "Sauvegarde.h"
-#include "pitemview.h"
-#include "PWidget.h"
-#include "game_element.h"
+//#include "pitemview.h"
+//#include "PWidget.h"
+//#include "game_element.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow)
 {
@@ -83,8 +83,8 @@ this->setWindowState(Qt::WindowMaximized);
     test_tuning = new tab_deck_tuning();
     layout->addWidget(test_tuning);
     ui->OngletProba->setLayout(layout);
-    PTreeView *DeckView = test_tuning->DeckView;
-    ModelDeckCourant = dynamic_cast<PTreeModel *>(DeckView->model());
+    //PTreeView *DeckView = test_tuning->DeckView;
+    //ModelDeckCourant = dynamic_cast<PTreeModel *>(DeckView->model());
 }
 
 // ///////////////////////////////////////////////
@@ -104,12 +104,11 @@ this->setWindowState(Qt::WindowMaximized);
     connect(ui->actionImprimer_le_Deck, SIGNAL(triggered()), this, SLOT(ImprimeDeck()));
     connect(ui->actionOptions, SIGNAL(triggered()), this, SLOT(OuvrirMenuOption()));
 
-    connect( test_tuning, SIGNAL( card_picture_missing(QString) ), downloader, SLOT( seek_card_picture(QString) ) );
     //connect( downloader, SIGNAL( picture_downloaded() ), this, SLOT( AfficheImageCarte(QString) ) );
 
     connect( test_crypt, SIGNAL(card_dropped(QStringList)), test_tuning->DeckView, SLOT(fakeDrop(QStringList)) );
     connect( test_search, SIGNAL(card_dropped(QStringList)), test_tuning->DeckView, SLOT(fakeDrop(QStringList)) );
-    }
+}
 
 // ///////////////////////////////////////////////
 // FINITIONS
@@ -127,7 +126,7 @@ void MainWindow::EnregistreDeck()
 }
 
 void MainWindow::ImprimeDeck()
-{
+{/* TODO integrer ds deck model
 int NbPage,NbEx,k,x,y;
 float NbCarteParPage;
 QList<QStandardItem *> ItemCrypte = ModelDeckCourant->findItems("CRYPTE");
@@ -228,7 +227,7 @@ for(int i=0; i<Planches.count(); i++)
     PrintPainter.drawImage(QPoint(0,0),*Planches.at(i));
     DeckPrinter.newPage();
     }
-PrintPainter.end();
+PrintPainter.end();*/
 }
 
 void MainWindow::OuvrirMenuOption()

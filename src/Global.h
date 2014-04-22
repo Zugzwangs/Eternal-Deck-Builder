@@ -56,6 +56,10 @@ namespace VtesInfo
                                                            << "thn" << "val" << "vic" << "vis" << "mal" << "str";
 
     enum CardType{ NoType, CryptType, LibraryType, CounterType };
+
+    enum ItemTypes { ItemMetadataType = 1000,
+                     ItemCardType,
+                     ItemSortType };
 }
 
 #endif

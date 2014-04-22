@@ -3,7 +3,6 @@
 
 #include <QFrame>
 #include <QLabel>
-#include <QWidget>
 #include <QMouseEvent>
 #include <QApplication>
 #include <QPushButton>

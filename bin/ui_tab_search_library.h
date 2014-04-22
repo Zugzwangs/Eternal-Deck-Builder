@@ -29,7 +29,7 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "PWidget.h"
-#include "pitemview.h"
+#include "mvdbdd.h"
 
 QT_BEGIN_NAMESPACE
 

@@ -1,5 +1,12 @@
 #include "playground.h"
-#include "mainwindow.h"
+#include "math.h"
+
+#include <QWheelEvent>
+#include <QDebug>
+#include <QMimeData>
+#include <QCoreApplication>
+
+//#include "mainwindow.h"
 
 // ///////////////////////////////////////////////////////////////////////////////////////////
 //

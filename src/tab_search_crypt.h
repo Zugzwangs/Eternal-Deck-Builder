@@ -5,7 +5,7 @@
 #include <QCompleter>
 
 #include "Global.h"
-#include "pitemview.h"
+#include "mvdbdd.h"
 
 namespace Ui {
 class tab_search_crypt;

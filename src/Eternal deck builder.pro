@@ -18,7 +18,6 @@ SOURCES +=  main.cpp\
             mainwindow.cpp \
             Global.cpp \
             Sauvegarde.cpp \
-            pitemview.cpp \
             PWidget.cpp \
             dialogoptions.cpp \
             tab_search_library.cpp \
@@ -37,10 +36,11 @@ SOURCES +=  main.cpp\
             Charts/chartstyle.cpp \
             Charts/chart.cpp \
             Statistic.cpp \
-    playground.cpp
+            playground.cpp \
+            mvddeck.cpp \
+            mvdbdd.cpp
 
 HEADERS  += mainwindow.h \
-            pitemview.h \
             Global.h \
             Sauvegarde.h \
             PWidget.h \
@@ -62,7 +62,9 @@ HEADERS  += mainwindow.h \
             Charts/chartstyle.h \
             Charts/chart.h \
             Statistic.h \
-    playground.h
+            playground.h \
+            mvddeck.h \
+            mvdbdd.h
 
 FORMS    += mainwindow.ui \
             dialogoptions.ui \

@@ -7,15 +7,13 @@
 #include <QList>
 #include <QtSql>
 #include <QtPrintSupport/QPrinter>
-#include <math.h>
 
 #include "dialogoptions.h"
+#include "update_manager.h"
 #include "tab_search_library.h"
 #include "tab_search_crypt.h"
 #include "tab_gold_fich.h"
 #include "tab_deck_tuning.h"
-#include "update_manager.h"
-#include "pitemview.h"
 
 namespace Ui { class MainWindow; }
 
@@ -44,8 +42,8 @@ private:
     tab_search_crypt *test_crypt;
     tab_deck_tuning *test_tuning;
     tab_gold_fich * test_goldfish;
-    PTreeView *DeckView; //a virer depuis la refacto
-    PTreeModel *ModelDeckCourant;//
+    //PTreeView *DeckView; //a virer depuis la refacto
+    //PTreeModel *ModelDeckCourant;//
 
 private slots:
     void EnregistreDeck();
