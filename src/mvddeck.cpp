@@ -10,31 +10,24 @@
 /*****************************************************************************************/
 PTreeModel::PTreeModel(QObject *parent) : QStandardItemModel(parent)
 {
+
 QStandardItem *RootItem = this->invisibleRootItem();
 
-itemMeta = new QStandardItem("METADONNEES");
-itemMeta->setEditable(false);
-RootItem->appendRow(itemMeta);
+/* GESTION DES METADONNEES DU DECK A VOIR PLUS TARD !!!
+nom+format+commentaire+perfs+avatar+ ...
+caler toutes les données dans le invisible root item serait peut etre sympa avec un Qdatamapper vers un formulaire
+pour gerer tout ca !
+*itemMeta = new SortItem("METADONNEES");
+RootItem->appendRow( itemMeta );
+QList<MetaItem *> ListItemMeta;
+ListItemMeta.append( new MetaItem("Nom") );
+ListItemMeta.append( new MetaItem("Auteur") );
+ListItemMeta.append( new MetaItem("Commentaires") );
+itemMeta->appendColumn(ListItemMeta);*/
 
-QList<QStandardItem *> ListItemMeta;
-ListItemMeta.append(new QStandardItem("Nom"));
-ListItemMeta.append(new QStandardItem("Auteur"));
-ListItemMeta.append(new QStandardItem("Commentaires"));
-for (int i=0; i<ListItemMeta.length(); i++)
-    {
-    //ListItemMeta.at(i)->setEditable(false);
-    ListItemMeta.at(i)->setData( ListItemMeta.at(i)->data(Qt::DisplayRole) , Qt::UserRole );
-    ListItemMeta.at(i)->setData("meta",Qt::UserRole+1);
-    }
-itemMeta->appendColumn(ListItemMeta);
-
-itemMeta = new QStandardItem("CRYPTE");
-itemMeta->setEditable(false);
-RootItem->appendRow(itemMeta);
-
-itemMeta = new QStandardItem("BIBLIOTHEQUE");
-itemMeta->setEditable(false);
-RootItem->appendRow(itemMeta);
+RootItem->appendRow( new SortItem("CRYPTE") );
+RootItem->appendRow( new SortItem("BIBLIOTHEQUE") );
+RootItem->appendRow( new SortItem("SIDE") );
 }
 
 
@@ -112,45 +105,8 @@ PDelegateDeck::PDelegateDeck(QObject *parent) : QStyledItemDelegate(parent)
 
 void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    if ( index.isValid() && index.data(Qt::UserRole+1).toString() == "meta" )
-        {
-        //dessin spécifique pour les métadonnées:
-        // setup du contexte de dessin
-        QStyleOptionViewItemV4 opt(option);
-        QStyledItemDelegate::initStyleOption(&opt, index);
-        const QWidget *widget = option.widget;
-        QStyle *style = widget ? widget->style() : QApplication::style();
 
-        // setup du paintre
-        painter->save();
-        painter->setRenderHint(QPainter::Antialiasing);
-        painter->setClipRect(opt.rect, Qt::ReplaceClip);
-
-        QRect LRegion( opt.rect );
-        LRegion.setWidth( 100 );
-        QRect RRegion( opt.rect );
-        RRegion.setLeft( LRegion.right() );
-
-        // dessin de la case
-        opt.text = "";
-        if ( opt.state & QStyle::State_Selected )
-            {
-            painter->setBrush( option.palette.highlightedText() );
-            style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
-            }
-        else
-            {
-            painter->setPen( QPen(option.palette.windowText(), 0) );
-            }
-
-        // dessin du nom de la carte
-        painter->drawText( LRegion, Qt::AlignLeft, index.data(Qt::UserRole).toString());
-        painter->drawText( RRegion, Qt::AlignCenter, index.data(Qt::EditRole).toString());
-
-        painter->restore();
-        }
-
-    else if ( index.isValid() && ( index.data(Qt::UserRole+1).toString() == "CryptCard" ||  index.data(Qt::UserRole+1).toString() == "LibraryCard" ) )
+    if ( index.isValid() && index.data().toString() == "" )
         {
         // setup du contexte de dessin
         QStyleOptionViewItemV4 opt(option);
@@ -256,7 +212,8 @@ QSize PDelegateDeck::sizeHint(const QStyleOptionViewItem &option, const QModelIn
 //
 SortItem::SortItem(QString txt) : QStandardItem(txt)
 {
-
+    this->setEditable(false);
+    this->setData( this->data(Qt::DisplayRole), Qt::UserRole );
 }
 
 SortItem::~SortItem()
@@ -271,7 +228,9 @@ int SortItem::type() const
 //
 MetaItem::MetaItem(QString txt) : QStandardItem(txt)
 {
-
+    this->setEditable(true);
+    this->setData( this->data(Qt::DisplayRole) , Qt::ToolTipRole );
+    this->setData( this->data(Qt::DisplayRole) , Qt::UserRole );
 }
 
 MetaItem::~MetaItem()

@@ -6,16 +6,6 @@
 #include <QStandardItemModel>
 
 //
-class PTreeModel : public QStandardItemModel
-{
-    Q_OBJECT
-
-public:
-    PTreeModel(QObject *parent= 0);
-    QStandardItem *itemMeta;
-};
-
-//
 class PTreeView : public QTreeView
 {
     Q_OBJECT
@@ -63,6 +53,17 @@ public:
     explicit CardItem();
     ~CardItem();
     virtual int	type() const;
+};
+
+//
+class PTreeModel : public QStandardItemModel
+{
+    Q_OBJECT
+
+public:
+    PTreeModel(QObject *parent= 0);
+    SortItem *itemMeta; //*itemCrypt  *ItemLibrary ?
+
 };
 
 #endif // MVDDECK_H
