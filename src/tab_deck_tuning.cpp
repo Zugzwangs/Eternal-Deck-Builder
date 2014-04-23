@@ -23,8 +23,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
       qreal v = (qrand() % ( 30 - 10) + 10);                    // random value between 10 and 30
       model.setData( model.index( i, 0 ), v, Qt::DisplayRole ); // Set data for the row 'i'
     }
-    testPie = new PieChart(ui->frame);
-    //testPie->setGeometry(0, 0, 300, 300);
+    testPie = new PieChart(ui->frame_3);
     testPie->setModel(&model);
     testPie->show();
 

@@ -54,7 +54,7 @@ QString CardName;
 QString CardCat;
 QString Category;
 
-    // we've got the list of datas, we need to figure out the card's category and his name
+    // we've got the list of datas, we need to figure out the card's category and name
     CardName = StrL[1].trimmed();
     CardCat = StrL[7].trimmed();
 

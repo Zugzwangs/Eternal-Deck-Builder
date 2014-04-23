@@ -63,7 +63,6 @@ class PTreeModel : public QStandardItemModel
 public:
     PTreeModel(QObject *parent= 0);
     SortItem *itemMeta; //*itemCrypt  *ItemLibrary ?
-
 };
 
 #endif // MVDDECK_H
