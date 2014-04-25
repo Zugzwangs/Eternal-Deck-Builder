@@ -28,6 +28,7 @@ class SortItem : public QStandardItem
 public:
     explicit SortItem(QString txt);
     ~SortItem();
+    void Increment();
     virtual int	type() const;
 };
 

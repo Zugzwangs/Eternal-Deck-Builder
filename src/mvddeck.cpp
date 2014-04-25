@@ -49,6 +49,7 @@ for ( int i=0; i<Category->rowCount(); i++ )
     if ( TempItem->data(Qt::DisplayRole).toString() == CardName )
         {
         TempItem->Increment();
+        Category->Increment();
         delete newCard;
         return;
         }
@@ -56,6 +57,7 @@ for ( int i=0; i<Category->rowCount(); i++ )
 
 // the card is not there, so we add it in the right SortItem
 Category->appendRow(newCard);
+Category->Increment();
 }
 
 
@@ -115,7 +117,6 @@ deckModel = dynamic_cast<PTreeModel*>(model);
 void PTreeView::fakeDrop(QStringList StrL)
 {
     // query deck model to add a new card item:
-    qDebug() << "PLZ ADD THIS CARD FOR ME DUDE";
     deckModel->AddCardItem(StrL);
 }
 
@@ -130,7 +131,7 @@ PDelegateDeck::PDelegateDeck(QObject *parent) : QStyledItemDelegate(parent)
 void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
 
-    if ( index.isValid() && index.data().toString() == "" )
+    if ( index.isValid() && index.data(Qt::UserRole+3).toString() == "Card" )
         {
         // setup du contexte de dessin
         QStyleOptionViewItemV4 opt(option);
@@ -184,7 +185,6 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
         bt_rmex->rect = btMinusRegion;
         bt_rmex->icon = QIcon(":/icons/minus.png");
         bt_rmex->iconSize = btMinusRegion.size();
-
         style->drawControl( QStyle::CE_PushButton, bt_rmex, painter);
 
         // dessin du bouton + (ajouter exemplaire)
@@ -194,6 +194,7 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
         bt_addex->iconSize = btPlusRegion.size();
         style->drawControl( QStyle::CE_PushButton, bt_addex, painter);
 
+        //dessin boutton suppression carte
         QPushButton *fock = new QPushButton();
         fock->setGeometry(btDeleteRegion);
         fock->setIcon(QIcon(":/icons/delete.png"));
@@ -213,13 +214,53 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
         style->drawControl( QStyle::CE_PushButton, bt_delete, painter);*/
 
         // dessin du nombre d'exemplaires
-        style->drawItemText(painter, ExRegion, 1, opt.palette, true, "x" + index.data(Qt::UserRole+2).toString() );
+        style->drawItemText(painter, ExRegion, 1, opt.palette, true, "x" + index.data(Qt::UserRole+1).toString() );
 
         painter->restore();
         }
     else
         {
-        QStyledItemDelegate::paint(painter, option, index);
+        if (  index.isValid() && index.data(Qt::UserRole+3).toString() == "Cat" )
+            {
+            // setup du contexte de dessin
+            QStyleOptionViewItemV4 opt(option);
+            QStyledItemDelegate::initStyleOption(&opt, index);
+            const QWidget *widget = option.widget;
+            QStyle *style = widget ? widget->style() : QApplication::style();
+
+            // setup du paintre
+            painter->save();
+            painter->setRenderHint(QPainter::Antialiasing);
+            painter->setClipRect(opt.rect, Qt::ReplaceClip);
+
+            // découpage des régions
+            QRect TextRegion( opt.rect );
+            TextRegion.setWidth( opt.rect.width()-80 );
+            QRect ExRegion( opt.rect );
+            ExRegion.setLeft( TextRegion.right() );
+
+            // dessin de la case
+            opt.text = "";
+            if ( opt.state & QStyle::State_Selected )
+                {
+                painter->setBrush( option.palette.highlightedText() );
+                style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
+                }
+            else
+                {
+                painter->setPen( QPen(option.palette.windowText(), 0) );
+                }
+
+            // dessin du nom de la carte
+            painter->drawText( TextRegion, Qt::AlignLeft, index.data().toString());
+
+            // dessin du nombre de carte dans la catégorie
+            style->drawItemText(painter, ExRegion, 1, opt.palette, true, "[" + index.data(Qt::UserRole+1).toString() + "]" );
+
+            painter->restore();
+            }
+        else
+            QStyledItemDelegate::paint(painter, option, index);
         }
 }
 
@@ -236,8 +277,15 @@ QSize PDelegateDeck::sizeHint(const QStyleOptionViewItem &option, const QModelIn
 //
 SortItem::SortItem(QString txt) : QStandardItem(txt)
 {
-    this->setEditable(false);
-    this->setData( this->data(Qt::DisplayRole), Qt::UserRole );
+    setEditable(false);
+    setData( this->data(Qt::DisplayRole), Qt::UserRole );
+    setData( 0, Qt::UserRole+1 );
+    setData( "Cat", Qt::UserRole+3);
+}
+
+void SortItem::Increment()
+{
+    setData( data(Qt::UserRole+1).toInt()+1, Qt::UserRole+1 );
 }
 
 SortItem::~SortItem()   {}
@@ -247,12 +295,15 @@ int SortItem::type() const  { return (VtesInfo::ItemSortType); }
 //
 CardItem::CardItem(QStringList strL) : QStandardItem(strL[1])
 {
+    setEditable(false);
     setText(strL[1]);
     setData( strL[1], Qt::DisplayRole );
     setData( strL[7], Qt::UserRole );
     setData( 1, Qt::UserRole+1 );
     setData( strL, Qt::UserRole+2 );
+    setData( "Card", Qt::UserRole+3);
 }
+
 void CardItem::Increment()
 {
     setData( data(Qt::UserRole+1).toInt()+1, Qt::UserRole+1 );
