@@ -4,35 +4,99 @@
 #include <QApplication>
 #include <QPainter>
 #include <QPushButton>
+#include <QDebug>
 
 /*****************************************************************************************/
 /*   MODEL                                                                               */
 /*****************************************************************************************/
 PTreeModel::PTreeModel(QObject *parent) : QStandardItemModel(parent)
 {
+// metadatas are stored into a QMap
+meta_list.insert("name","choose a name");
+meta_list.insert("author","naruto[666]");
+meta_list.insert("description","more lame than this, you die");
 
 QStandardItem *RootItem = this->invisibleRootItem();
 
-/* GESTION DES METADONNEES DU DECK A VOIR PLUS TARD !!!
-nom+format+commentaire+perfs+avatar+ ...
-caler toutes les données dans le invisible root item serait peut etre sympa avec un Qdatamapper vers un formulaire
-pour gerer tout ca !
-*itemMeta = new SortItem("METADONNEES");
-RootItem->appendRow( itemMeta );
-QList<MetaItem *> ListItemMeta;
-ListItemMeta.append( new MetaItem("Nom") );
-ListItemMeta.append( new MetaItem("Auteur") );
-ListItemMeta.append( new MetaItem("Commentaires") );
-itemMeta->appendColumn(ListItemMeta);*/
+itemCrypt = new SortItem("CRYPTE");
+itemLib   = new SortItem("BIBLIOTHEQUE");
+itemSide  = new SortItem("SIDE");
 
-RootItem->appendRow( new SortItem("CRYPTE") );
-RootItem->appendRow( new SortItem("BIBLIOTHEQUE") );
-RootItem->appendRow( new SortItem("SIDE") );
+RootItem->appendRow( itemCrypt );
+RootItem->appendRow( itemLib );
+RootItem->appendRow( itemSide );
+}
+
+void PTreeModel::AddCardItem(QStringList strL)
+{
+// We create the new CardItem object
+CardItem* newCard = new CardItem(strL);
+
+// Checkout the kind of cards
+QString CardCat = newCard->data(Qt::UserRole).toString();
+
+// Checkout if this card already exists in the list
+CardItem* TempItem;
+QList<QStandardItem* >ItemPool = findItems(newCard->data(Qt::DisplayRole).toString(), Qt::MatchExactly, 0);
+if ( ItemPool.length() > 0 )
+    {
+    // card founded => increment ex counter and leave
+    qDebug() << "CARD FOUNDED => INCREMENTATION";
+    TempItem = dynamic_cast<CardItem *>( ItemPool[0] );
+    TempItem->Increment();
+    delete newCard;
+    return;
+    }
+
+// the card is not there, so we add it in the right SortItem
+SortItem* Category;
+if ( CardCat == "Vampire" || CardCat == "Imbued" )
+    { Category = itemCrypt; }
+else
+    { Category = itemLib; }
+
+    qDebug() << "CARD NOT THERE => WE CREATE NEW";
+    Category->appendRow(newCard);
 }
 
 
 /*****************************************************************************************/
-/*  VIEW                                                                               */
+/*  META MAPPER                                                                          */
+/*****************************************************************************************/
+WidgetMetaMapper::WidgetMetaMapper(QObject *parent) : QObject(parent)   {}
+
+void WidgetMetaMapper::SetModel( PTreeModel* mdl )
+{
+    model = mdl;
+}
+
+bool WidgetMetaMapper::AddWidget( QWidget* w, QString metadata )
+{
+    if ( model->meta_list.contains(metadata) )
+        {
+        connect( w, SIGNAL(textChanged(QString)), this, SLOT(synchroDatas(QString)) );
+        w->setAccessibleName(metadata);
+        w->setProperty("text", model->meta_list.value(metadata));
+        return true;
+        }
+    else
+        return false;
+}
+
+bool WidgetMetaMapper::RemoveWidget()
+{
+    return true;
+}
+
+void WidgetMetaMapper::synchroDatas(QString newData)
+{
+    QString crt_meta = sender()->property("setAccessibleName").toString();
+    model->meta_list.insert(crt_meta, newData );
+}
+
+
+/*****************************************************************************************/
+/*  VIEW                                                                                 */
 /*****************************************************************************************/
 PTreeView::PTreeView(QWidget *parent) : QTreeView(parent)
 {
@@ -46,53 +110,14 @@ setIndentation(10);
 void PTreeView::setModel(QAbstractItemModel *model)
 {
 QTreeView::setModel(model);
+deckModel = dynamic_cast<PTreeModel*>(model);
 }
 
 void PTreeView::fakeDrop(QStringList StrL)
 {
-QString CardName;
-QString CardCat;
-QString Category;
-
-    // we've got the list of datas, we need to figure out the card's category and name
-    CardName = StrL[1].trimmed();
-    CardCat = StrL[7].trimmed();
-
-    if ( CardCat == "Vampire" || CardCat == "Imbued" )
-        { Category = "CRYPTE"; }
-    else
-        { Category = "BIBLIOTHEQUE"; }
-
-    // Checkout if this card is already in the list
-    PTreeModel *modelcourant=dynamic_cast<PTreeModel*>(this->model());
-    QList<QStandardItem *> ItemPool = modelcourant->findItems(Category);
-    QStandardItem* TempItem;
-    for (int i=0; i<ItemPool[0]->rowCount(); i++)
-        {
-        TempItem = ItemPool[0]->child(i);
-        if ( CardName == TempItem->text())
-            {
-            //if true, increment the exemplair value and exit
-            TempItem->setData(TempItem->data(Qt::UserRole+2).toInt()+1,Qt::UserRole+2);
-            return;
-            }
-        }
-
-    // the card is not already in the model, so we add it
-    QStandardItem* NouvelItem = new QStandardItem(CardName);
-    NouvelItem->setData(StrL,Qt::UserRole);
-    NouvelItem->setData(1,Qt::UserRole+2);
-    NouvelItem->setEditable(false);
-    if ( Category == "BIBLIOTHEQUE" )
-        {
-        NouvelItem->setData("LibraryCard",Qt::UserRole+1);
-        ItemPool[0]->appendRow(NouvelItem);
-        }
-    else
-        {
-        NouvelItem->setData("CryptCard",Qt::UserRole+1);
-        ItemPool[0]->appendRow(NouvelItem);
-        }
+    // query deck model to add a new card item:
+    qDebug() << "PLZ ADD THIS CARD FOR ME DUDE";
+    deckModel->AddCardItem(StrL);
 }
 
 
@@ -216,46 +241,27 @@ SortItem::SortItem(QString txt) : QStandardItem(txt)
     this->setData( this->data(Qt::DisplayRole), Qt::UserRole );
 }
 
-SortItem::~SortItem()
-{
-}
+SortItem::~SortItem()   {}
 
-int SortItem::type() const
-{
-    return (VtesInfo::ItemSortType);
-}
+int SortItem::type() const  { return (VtesInfo::ItemSortType); }
 
 //
-MetaItem::MetaItem(QString txt) : QStandardItem(txt)
+CardItem::CardItem(QStringList strL) : QStandardItem()
 {
-    this->setEditable(true);
-    this->setData( this->data(Qt::DisplayRole) , Qt::ToolTipRole );
-    this->setData( this->data(Qt::DisplayRole) , Qt::UserRole );
+    setData( strL[1], Qt::DisplayRole );
+    setData( strL[7], Qt::UserRole );
+    setData( 1, Qt::UserRole+1 );
+    setData( strL, Qt::UserRole+2 );
+}
+void CardItem::Increment()
+{
+    setData( data(Qt::UserRole+1).toInt()+1, Qt::UserRole+1 );
 }
 
-MetaItem::~MetaItem()
-{
-}
 
-int MetaItem::type() const
-{
-    return VtesInfo::ItemMetadataType;
-}
+CardItem::~CardItem()   {}
 
-//
-CardItem::CardItem() : QStandardItem()
-{
-
-}
-
-CardItem::~CardItem()
-{
-}
-
-int CardItem::type() const
-{
-    return VtesInfo::ItemCardType;
-}
+int CardItem::type() const  { return VtesInfo::ItemCardType; }
 
 
 /*****************************************************************************************/
@@ -263,4 +269,10 @@ int CardItem::type() const
 /*****************************************************************************************/
 
 
-// ??
+
+
+
+
+
+
+

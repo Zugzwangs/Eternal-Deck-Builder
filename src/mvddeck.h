@@ -5,20 +5,10 @@
 #include <QStyledItemDelegate>
 #include <QStandardItemModel>
 
-//
-class PTreeView : public QTreeView
-{
-    Q_OBJECT
 
-public:
-    PTreeView(QWidget *parent=0);
-    void setModel(QAbstractItemModel *model);
-
-public slots:
-    void fakeDrop(QStringList StrL);
-};
-
-//
+/*****************************************************************************************/
+/* THE DELEGATE VIEW                                                                     */
+/*****************************************************************************************/
 class PDelegateDeck : public QStyledItemDelegate
 {
     Q_OBJECT
@@ -27,18 +17,12 @@ public:
     PDelegateDeck(QObject* parent=0);
     void paint(QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index ) const;
     virtual QSize sizeHint(const QStyleOptionViewItem & option, const QModelIndex & index ) const;
-
 };
 
-//
-class MetaItem : public QStandardItem
-{
-public:
-    explicit MetaItem(QString txt);
-    ~MetaItem();
-    virtual int	type() const;
-};
 
+/*****************************************************************************************/
+/* THE SPECIALISED ITEMS                                                                 */
+/*****************************************************************************************/
 class SortItem : public QStandardItem
 {
 public:
@@ -50,19 +34,71 @@ public:
 class CardItem : public QStandardItem
 {
 public:
-    explicit CardItem();
+    explicit CardItem(QStringList strL);
+    void Increment();
     ~CardItem();
     virtual int	type() const;
 };
 
-//
+
+/*****************************************************************************************/
+/*  THE MODEL                                                                            */
+/*****************************************************************************************/
 class PTreeModel : public QStandardItemModel
 {
     Q_OBJECT
 
 public:
     PTreeModel(QObject *parent= 0);
-    SortItem *itemMeta; //*itemCrypt  *ItemLibrary ?
+    QMap<QString, QString> meta_list;
+
+public slots:
+    void AddCardItem(QStringList strL);
+
+private:
+    SortItem *itemLib;
+    SortItem *itemCrypt;
+    SortItem *itemSide;
 };
+
+
+/*****************************************************************************************/
+/*  METADATAS TO WIDGET MAPPER                                                           */
+/*****************************************************************************************/
+class WidgetMetaMapper : public QObject
+{
+    Q_OBJECT
+
+public:
+    WidgetMetaMapper( QObject *parent=0 );
+    void SetModel( PTreeModel* model );
+    bool AddWidget( QWidget* w, QString metadata );
+    bool RemoveWidget();
+
+private:
+    PTreeModel* model;
+    //QList<Widget *> WidgetList; ?
+
+private slots:
+    void synchroDatas(QString newData);
+};
+
+
+/*****************************************************************************************/
+/*  THE DECK VIEW                                                                        */
+/*****************************************************************************************/
+class PTreeView : public QTreeView
+{
+    Q_OBJECT
+
+public:
+    PTreeView(QWidget *parent=0);
+    void setModel(QAbstractItemModel *model);
+    PTreeModel* deckModel;
+
+public slots:
+    void fakeDrop(QStringList StrL);
+};
+
 
 #endif // MVDDECK_H

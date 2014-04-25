@@ -21,6 +21,7 @@ public:
     PTreeView *DeckView;
     ~tab_deck_tuning();
 
+
 private:
     Ui::tab_deck_tuning *ui;
     PTreeModel *ModeleDeck;

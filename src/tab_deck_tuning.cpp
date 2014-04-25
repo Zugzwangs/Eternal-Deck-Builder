@@ -5,7 +5,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
 {
     ui->setupUi(this);
 
-    // on map la vue définie private dans l'ui vers un membre de classe public
+    // on map la deck view définie private dans l'ui vers un membre de classe public
     DeckView = ui->PTreeViewDeckList;
 
     // on assigne le model de données
@@ -15,6 +15,13 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     // on assigne le delegate
     PDelegateDeck *DelegateDeck = new PDelegateDeck();
     ui->PTreeViewDeckList->setItemDelegate(DelegateDeck);
+
+    //on setup le mapper des metadonnées du model
+    WidgetMetaMapper mapper(this);
+    mapper.SetModel(ModeleDeck);
+    mapper.AddWidget(ui->lE_name,"name");
+    mapper.AddWidget(ui->lE_author,"author");
+    mapper.AddWidget(ui->lE_description,"description");
 
     // on test le pie chart
     QStandardItemModel model( 6, 1 ); // Model with 1 column and 6 rows

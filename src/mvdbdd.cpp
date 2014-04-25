@@ -1,12 +1,15 @@
 #include "mvdbdd.h"
 #include "Global.h"
 
-#include <QMouseEvent>
 #include <QApplication>
+#include <QMouseEvent>
+#include <QHeaderView>
 #include <QDir>
+#include <QMap>
 #include <QMimeData>
 #include <QDrag>
 #include <QPainter>
+#include <QDebug>
 
 //*******************************************************************************************************
 //
@@ -22,7 +25,7 @@ PItemView::PItemView(QWidget *parent) : QTableView(parent)
 {
 setSelectionMode(SingleSelection);
 setSelectionBehavior(SelectRows);
-setAcceptDrops(true);
+//setAcceptDrops(true);
 setDropIndicatorShown(true);
 setDragEnabled(true);
 setDragDropOverwriteMode(false);
@@ -56,7 +59,7 @@ QModelIndex CurrentIndex;
 QString PathDragIcone;
 QDir DossierAppli;
 QImage IconeDrag;
-QString TempData;
+QStringList embeddedDatas;
 QMimeData *DraggedData = new QMimeData;
 QDrag *Drag = new QDrag(this);
 
@@ -65,17 +68,24 @@ if (DossierAppli.cd("Cartes"))
     { PathDragIcone = DossierAppli.absolutePath(); }
 PathDragIcone = PathDragIcone + "/" + "Vtes_Grelarge.gif";
 
-//On enregistre toutes les données de la carte dans le drag
+// We record card's datas into a QDrag object
 CurrentIndex = CurrentSelection.first();
-for (int i=0; i<=this->model()->columnCount(); i++)
+for (int i=0; i< model()->columnCount(); i++)
     {
-    TempData.append(CurrentIndex.model()->index(CurrentIndex.row(),i).data(Qt::DisplayRole).toString() + "\n");
+    //QString dataCat = model()->headerData(i, Qt::Horizontal, Qt::DisplayRole).toString();
+    QString dataValue = model()->index(CurrentIndex.row(),i).data(Qt::DisplayRole).toString().trimmed();
+    //qDebug() << QString::number(i) << dataCat << dataValue ;
+    //embeddedDatas.append( dataCat + " == " + dataValue );
+    embeddedDatas.append( dataValue );
     }
 
-DraggedData->setText(TempData);
+DraggedData->setText(embeddedDatas.join("\n"));
 
 if (IconeDrag.load(PathDragIcone))
-{Drag->setPixmap(QPixmap::fromImage(IconeDrag));}
+    {
+    Drag->setPixmap(QPixmap::fromImage(IconeDrag));
+    }
+
 Drag->setMimeData(DraggedData);
 Drag->exec(Qt::CopyAction);
 }
@@ -269,7 +279,6 @@ PDelegateCardResult::PDelegateCardResult(QObject *parent) : QStyledItemDelegate(
 {
 PathImages = QCoreApplication::applicationDirPath() + "/Images/";
 }
-
 
 void PDelegateCardResult::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {

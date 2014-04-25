@@ -74,17 +74,14 @@ void PDeckDropArea::dragMoveEvent(QDragMoveEvent *event){
 void PDeckDropArea::dropEvent(QDropEvent *event){
 
 QString TempData;
-QString NomCarte;
 QStringList ListofData;
 
-    //On recup les données du drop | on les split | on chope le nom de la carte
+    // on recup les données du drop | on les split | on chope le nom de la carte
     TempData = event->mimeData()->text();
     ListofData = TempData.split("\n",QString::KeepEmptyParts);
-    NomCarte = ListofData[1].trimmed();
+    //qDebug() << ListofData;
 
-    // TODO : checkout the drop's source and decide what to do !
-
-    //emit the datas
+    // emit the datas
     emit card_dropped( ListofData );
 }
 
