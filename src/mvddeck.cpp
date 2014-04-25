@@ -34,29 +34,28 @@ CardItem* newCard = new CardItem(strL);
 
 // Checkout the kind of cards
 QString CardCat = newCard->data(Qt::UserRole).toString();
-
-// Checkout if this card already exists in the list
-CardItem* TempItem;
-QList<QStandardItem* >ItemPool = findItems(newCard->data(Qt::DisplayRole).toString(), Qt::MatchExactly, 0);
-if ( ItemPool.length() > 0 )
-    {
-    // card founded => increment ex counter and leave
-    qDebug() << "CARD FOUNDED => INCREMENTATION";
-    TempItem = dynamic_cast<CardItem *>( ItemPool[0] );
-    TempItem->Increment();
-    delete newCard;
-    return;
-    }
-
-// the card is not there, so we add it in the right SortItem
+QString CardName = newCard->data(Qt::DisplayRole).toString();
 SortItem* Category;
 if ( CardCat == "Vampire" || CardCat == "Imbued" )
     { Category = itemCrypt; }
 else
     { Category = itemLib; }
 
-    qDebug() << "CARD NOT THERE => WE CREATE NEW";
-    Category->appendRow(newCard);
+// Checkout if this card already exists in the list
+CardItem* TempItem;
+for ( int i=0; i<Category->rowCount(); i++ )
+    {
+    TempItem = dynamic_cast<CardItem *>( Category->child(i) );
+    if ( TempItem->data(Qt::DisplayRole).toString() == CardName )
+        {
+        TempItem->Increment();
+        delete newCard;
+        return;
+        }
+    }
+
+// the card is not there, so we add it in the right SortItem
+Category->appendRow(newCard);
 }
 
 
@@ -246,8 +245,9 @@ SortItem::~SortItem()   {}
 int SortItem::type() const  { return (VtesInfo::ItemSortType); }
 
 //
-CardItem::CardItem(QStringList strL) : QStandardItem()
+CardItem::CardItem(QStringList strL) : QStandardItem(strL[1])
 {
+    setText(strL[1]);
     setData( strL[1], Qt::DisplayRole );
     setData( strL[7], Qt::UserRole );
     setData( 1, Qt::UserRole+1 );
