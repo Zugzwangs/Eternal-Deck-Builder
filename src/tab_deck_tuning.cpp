@@ -23,16 +23,35 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     mapper.AddWidget(ui->lE_author,"author");
     mapper.AddWidget(ui->lE_description,"description");
 
-    // on test le pie chart
-    QStandardItemModel model( 6, 1 ); // Model with 1 column and 6 rows
-    qsrand( QDateTime::currentDateTime().toTime_t() );          // Init random function
-    for (int i = 0; i < model.rowCount(); ++i ) {              // Fill the model
-      qreal v = (qrand() % ( 30 - 10) + 10);                    // random value between 10 and 30
-      model.setData( model.index( i, 0 ), v, Qt::DisplayRole ); // Set data for the row 'i'
+    // on setup un model de test
+    model_test = new QStandardItemModel( 6, 1 );                            // Model with 1 column and 6 rows
+    qsrand( QDateTime::currentDateTime().toTime_t() );                      // Init random function
+    for (int i = 0; i < model_test->rowCount(); ++i ) {                     // Fill the model
+      qreal v = (qrand() % ( 30 - 10) + 10);                                // random value between 10 and 30
+      model_test->setData( model_test->index( i, 0 ), v, Qt::DisplayRole ); // Set data for the row 'i'
     }
-    testPie = new PieChart(ui->frame_3);
-    testPie->setModel(&model);
-    testPie->show();
+
+    // on test le proxy pour la crypte
+    test_crypt_proxy = new CryptProxy();
+    test_crypt_proxy->setSourceModel(ModeleDeck);
+    test_crypt_view = new LinearChart();
+    test_crypt_view->setModel( test_crypt_proxy );
+    ui->frame_3->layout()->addWidget( test_crypt_view );
+    //test_crypt_view->setModel(ModeleDeck);
+    //test_crypt_view->setRootIndex(ModeleDeck->itemCrypt->index());
+
+    // on declare une vue camenbert
+    testPie = new PieChart();
+    ui->frame_3->layout()->addWidget( testPie );
+    testPie->setModel(model_test);
+
+    // on test l'histogramme
+    testLinear = new LinearChart();
+    ui->frame_3->layout()->addWidget( testLinear );
+    testLinear->setModel( model_test );
+    ChartStyle style = testLinear->columnStyle( 0 );
+    style.setType( Marb::Bar );
+    testLinear->setColumnStyle( 0, style );
 
 }
 

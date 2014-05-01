@@ -2,10 +2,12 @@
 #define TAB_DECK_TUNING_H
 
 #include <QScrollArea>
+//#include <QTableView>
 #include <QStandardItemModel>
 
 #include "mvddeck.h"
 #include "Charts/piechart.h"
+#include "Charts/linearchart.h"
 
 
 namespace Ui {
@@ -24,8 +26,18 @@ public:
 
 private:
     Ui::tab_deck_tuning *ui;
+
+    // Models
     PTreeModel *ModeleDeck;
+    QStandardItemModel *model_test;
+    // Proxies
+    CryptProxy *test_crypt_proxy;
+    // Views
     PieChart *testPie;
+    LinearChart *testLinear;
+    LinearChart *test_crypt_view;
+
+
 
 
 public slots:

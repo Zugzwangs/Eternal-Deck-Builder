@@ -4,6 +4,7 @@
 #include <QTreeView>
 #include <QStyledItemDelegate>
 #include <QStandardItemModel>
+#include <QSortFilterProxyModel>
 
 
 /*****************************************************************************************/
@@ -52,14 +53,12 @@ class PTreeModel : public QStandardItemModel
 public:
     PTreeModel(QObject *parent= 0);
     QMap<QString, QString> meta_list;
-
-public slots:
-    void AddCardItem(QStringList strL);
-
-private:
     SortItem *itemLib;
     SortItem *itemCrypt;
     SortItem *itemSide;
+
+public slots:
+    void AddCardItem(QStringList strL);
 };
 
 
@@ -99,6 +98,25 @@ public:
 
 public slots:
     void fakeDrop(QStringList StrL);
+};
+
+/*****************************************************************************************/
+/*  THE DECK VIEW                                                                        */
+/*****************************************************************************************/
+class CryptProxy : public QSortFilterProxyModel
+{
+    Q_OBJECT
+
+public:
+    CryptProxy( QObject *parent=0 );
+};
+
+class LibraryProxy : public QSortFilterProxyModel
+{
+    Q_OBJECT
+
+public:
+    LibraryProxy( QObject *parent=0 );
 };
 
 

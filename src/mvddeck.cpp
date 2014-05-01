@@ -318,8 +318,16 @@ int CardItem::type() const  { return VtesInfo::ItemCardType; }
 /*****************************************************************************************/
 /*  PROXY MODEL                                                                          */
 /*****************************************************************************************/
+CryptProxy::CryptProxy(QObject *parent) : QSortFilterProxyModel(parent)
+{
+    setFilterRole( Qt::UserRole );
+    setFilterRegExp( QRegExp("CRYPTE|Vampire|Imbued", Qt::CaseSensitive) ); //
+}
 
+LibraryProxy::LibraryProxy(QObject *parent) : QSortFilterProxyModel(parent)
+{
 
+}
 
 
 

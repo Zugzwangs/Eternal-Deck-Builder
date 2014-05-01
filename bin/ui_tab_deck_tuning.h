@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'tab_deck_tuning.ui'
 **
-** Created by: Qt User Interface Compiler version 5.2.1
+** Created by: Qt User Interface Compiler version 5.1.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -46,6 +46,7 @@ public:
     QLabel *label_2;
     QLineEdit *lE_description;
     QFrame *frame_3;
+    QGridLayout *gridLayout_2;
 
     void setupUi(QScrollArea *tab_deck_tuning)
     {
@@ -144,6 +145,8 @@ public:
         frame_3->setFrameShape(QFrame::NoFrame);
         frame_3->setFrameShadow(QFrame::Plain);
         frame_3->setLineWidth(0);
+        gridLayout_2 = new QGridLayout(frame_3);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
 
         verticalLayout->addWidget(frame_3);
 

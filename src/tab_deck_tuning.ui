@@ -208,6 +208,7 @@
          <property name="lineWidth">
           <number>0</number>
          </property>
+         <layout class="QGridLayout" name="gridLayout_2"/>
         </widget>
        </item>
       </layout>
