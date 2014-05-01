@@ -9,7 +9,6 @@
 #include "Charts/piechart.h"
 #include "Charts/linearchart.h"
 
-
 namespace Ui {
 class tab_deck_tuning;
 }
@@ -29,7 +28,7 @@ private:
 
     // Models
     PTreeModel *ModeleDeck;
-    QStandardItemModel *model_test;
+    StatsModel *model_test;
     // Proxies
     CryptProxy *test_crypt_proxy;
     // Views
@@ -37,10 +36,8 @@ private:
     LinearChart *testLinear;
     LinearChart *test_crypt_view;
 
-
-
-
-public slots:
+private slots:
+    void sync_stats_model(QModelIndex parent_index, QModelIndex new_item);
 
 signals:
 

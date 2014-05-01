@@ -22,7 +22,7 @@ public:
 
 
 /*****************************************************************************************/
-/* THE SPECIALISED ITEMS                                                                 */
+/* CARDS AND CATEGORIES ITEMS                                                            */
 /*****************************************************************************************/
 class SortItem : public QStandardItem
 {
@@ -51,7 +51,7 @@ class PTreeModel : public QStandardItemModel
     Q_OBJECT
 
 public:
-    PTreeModel(QObject *parent= 0);
+    PTreeModel(QObject *parent = 0);
     QMap<QString, QString> meta_list;
     SortItem *itemLib;
     SortItem *itemCrypt;
@@ -59,8 +59,21 @@ public:
 
 public slots:
     void AddCardItem(QStringList strL);
+
+signals:
+    void CardAdded(QModelIndex parent, QModelIndex AddedItem);
 };
 
+/*****************************************************************************************/
+/*  THE OVER VIEW MODEL                                                                  */
+/*****************************************************************************************/
+class StatsModel : public QStandardItemModel
+{
+    Q_OBJECT
+public:
+    explicit StatsModel(QObject *parent = 0);
+    //StatsModel(int r, int c, QObject *parent = 0); // no need
+};
 
 /*****************************************************************************************/
 /*  METADATAS TO WIDGET MAPPER                                                           */

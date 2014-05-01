@@ -11,54 +11,70 @@
 /*****************************************************************************************/
 PTreeModel::PTreeModel(QObject *parent) : QStandardItemModel(parent)
 {
-// metadatas are stored into a QMap
-meta_list.insert("name","choose a name");
-meta_list.insert("author","naruto[666]");
-meta_list.insert("description","more lame than this, you die");
+    // metadatas are stored into a QMap
+    meta_list.insert("name","choose a name");
+    meta_list.insert("author","naruto[666]");
+    meta_list.insert("description","more lame than this, you die");
 
-QStandardItem *RootItem = this->invisibleRootItem();
+    QStandardItem *RootItem = this->invisibleRootItem();
 
-itemCrypt = new SortItem("CRYPTE");
-itemLib   = new SortItem("BIBLIOTHEQUE");
-itemSide  = new SortItem("SIDE");
+    itemCrypt = new SortItem("CRYPTE");
+    itemLib   = new SortItem("BIBLIOTHEQUE");
+    itemSide  = new SortItem("SIDE");
 
-RootItem->appendRow( itemCrypt );
-RootItem->appendRow( itemLib );
-RootItem->appendRow( itemSide );
+    RootItem->appendRow( itemCrypt );
+    RootItem->appendRow( itemLib );
+    RootItem->appendRow( itemSide );
 }
 
 void PTreeModel::AddCardItem(QStringList strL)
 {
-// We create the new CardItem object
-CardItem* newCard = new CardItem(strL);
+    // We create the new CardItem object
+    CardItem* newCard = new CardItem(strL);
 
-// Checkout the kind of cards
-QString CardCat = newCard->data(Qt::UserRole).toString();
-QString CardName = newCard->data(Qt::DisplayRole).toString();
-SortItem* Category;
-if ( CardCat == "Vampire" || CardCat == "Imbued" )
-    { Category = itemCrypt; }
-else
-    { Category = itemLib; }
+    // Checkout the kind of cards
+    QString CardCat = newCard->data(Qt::UserRole).toString();
+    QString CardName = newCard->data(Qt::DisplayRole).toString();
+    SortItem* Category;
+    if ( CardCat == "Vampire" || CardCat == "Imbued" )
+        { Category = itemCrypt; }
+    else
+        { Category = itemLib; }
 
-// Checkout if this card already exists in the list
-CardItem* TempItem;
-for ( int i=0; i<Category->rowCount(); i++ )
-    {
-    TempItem = dynamic_cast<CardItem *>( Category->child(i) );
-    if ( TempItem->data(Qt::DisplayRole).toString() == CardName )
+    // Checkout if this card already exists in the list
+    CardItem* TempItem;
+    for ( int i=0; i<Category->rowCount(); i++ )
         {
-        TempItem->Increment();
-        Category->Increment();
-        delete newCard;
-        return;
+        TempItem = dynamic_cast<CardItem *>( Category->child(i) );
+        if ( TempItem->data(Qt::DisplayRole).toString() == CardName )
+            {
+            TempItem->Increment();
+            Category->Increment();
+            emit CardAdded(Category->index(), TempItem->index());
+            delete newCard;
+            return;
+            }
         }
-    }
 
-// the card is not there, so we add it in the right SortItem
-Category->appendRow(newCard);
-Category->Increment();
+    // the card is not there, so we add it in the right SortItem
+    Category->appendRow(newCard);
+    Category->Increment();
+
+    emit CardAdded(Category->index(), newCard->index());
 }
+
+/*****************************************************************************************/
+/*  THE OVER VIEW MODEL                                                                  */
+/*  THE FIRST COLUMN IS ABOUT THE CRYPT STATS. EACH ROW HOLD THE NUMBER OF VAMPIRE WHERE */
+/*  ROW == GENERATION                                                                    */
+/*  THE SECOND COLUMN HOLDS LIBRARY DATAS                                                */
+/*****************************************************************************************/
+StatsModel::StatsModel(QObject *parent) : QStandardItemModel(11, 1, parent)
+{
+
+}
+
+/*StatsModel::StatsModel(int r, int c, QObject *parent) : QStandardItemModel(r, c, parent){}*/
 
 
 /*****************************************************************************************/
@@ -285,6 +301,8 @@ SortItem::SortItem(QString txt) : QStandardItem(txt)
 
 void SortItem::Increment()
 {
+    // increment the item counter (should be equal to number of child pondered by each child multipliers)
+    // this is the responsability of the model to correctly increment this property !
     setData( data(Qt::UserRole+1).toInt()+1, Qt::UserRole+1 );
 }
 
