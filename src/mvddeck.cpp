@@ -29,52 +29,110 @@ PTreeModel::PTreeModel(QObject *parent) : QStandardItemModel(parent)
 
 void PTreeModel::AddCardItem(QStringList strL)
 {
-    // We create the new CardItem object
-    CardItem* newCard = new CardItem(strL);
+// Checkout the type of card
+QString CardName = strL[1];
+QString CardCat = strL[7];
+SortItem* Category;
 
-    // Checkout the kind of cards
-    QString CardCat = newCard->data(Qt::UserRole).toString();
-    QString CardName = newCard->data(Qt::DisplayRole).toString();
-    SortItem* Category;
     if ( CardCat == "Vampire" || CardCat == "Imbued" )
-        { Category = itemCrypt; }
-    else
-        { Category = itemLib; }
-
-    // Checkout if this card already exists in the list
-    CardItem* TempItem;
-    for ( int i=0; i<Category->rowCount(); i++ )
         {
-        TempItem = dynamic_cast<CardItem *>( Category->child(i) );
-        if ( TempItem->data(Qt::DisplayRole).toString() == CardName )
+        Category = itemCrypt;
+        CryptCardItem* newCard = new CryptCardItem(strL);
+        CryptCardItem* TempItem = FindCryptCard( CardName );
+        if ( TempItem )
             {
             TempItem->Increment();
             Category->Increment();
             emit CardAdded(Category->index(), TempItem->index());
             delete newCard;
-            return;
+            }
+        else
+            {
+            // the card is not there, so we add it in the right SortItem
+            Category->appendRow(newCard);
+            Category->Increment();
+            connect( newCard, SIGNAL(request_deleting(QModelIndex)), this, SLOT(RemoveCardITem(QModelIndex)) );
+            emit CardAdded(Category->index(), newCard->index());
+            delete TempItem;
             }
         }
 
-    // the card is not there, so we add it in the right SortItem
-    Category->appendRow(newCard);
-    Category->Increment();
+    else // LIBRARY CARD CASE
+        {
+        Category = itemLib;
+        LibraryCardItem* newCard = new LibraryCardItem(strL);
+        LibraryCardItem* TempItem = FindLibraryCard( CardName );
+        if ( TempItem )
+            {
+            TempItem->Increment();
+            Category->Increment();
+            emit CardAdded(Category->index(), TempItem->index());
+            delete newCard;
+            }
+        else
+            {
+            // the card is not there, so we add it in the right SortItem
+            Category->appendRow(newCard);
+            Category->Increment();
+            emit CardAdded(Category->index(), newCard->index());
+            delete TempItem;
+            }
+        }
+    return;
+}
 
-    emit CardAdded(Category->index(), newCard->index());
+void PTreeModel::RemoveCardITem( QModelIndex Idx )
+{
+    QModelIndex dady = Idx.parent();
+    if (dady.isValid() )
+        {
+        removeRow( Idx.row(), dady);
+        emit CardRemoved();
+        }
+}
+
+CryptCardItem* PTreeModel::FindCryptCard( QString CardName )
+{
+
+CryptCardItem* TempItem;
+
+    for ( int i=0; i<itemCrypt->rowCount(); i++ )
+        {
+        TempItem = dynamic_cast<CryptCardItem *>( itemCrypt->child(i) );
+        if ( TempItem->data(VtesInfo::NameRole).toString() == CardName )
+            {
+            return TempItem;
+            }
+        }
+return NULL;
+}
+
+LibraryCardItem* PTreeModel::FindLibraryCard( QString CardName )
+{
+
+LibraryCardItem* TempItem;
+
+    for ( int i=0; i<itemLib->rowCount(); i++ )
+        {
+        TempItem = dynamic_cast<LibraryCardItem *>( itemLib->child(i) );
+        if ( TempItem->data(VtesInfo::NameRole).toString() == CardName )
+            {
+            return TempItem;
+            }
+        }
+return NULL;
 }
 
 /*****************************************************************************************/
 /*  THE OVER VIEW MODEL                                                                  */
 /*  THE FIRST COLUMN IS ABOUT THE CRYPT STATS. EACH ROW HOLD THE NUMBER OF VAMPIRE WHERE */
 /*  ROW == GENERATION                                                                    */
-/*  THE SECOND COLUMN HOLDS LIBRARY DATAS                                                */
+/*  THE SECOND COLUMN HOLDS LIBRARY STATS                                                */
 /*****************************************************************************************/
-StatsModel::StatsModel(QObject *parent) : QStandardItemModel(11, 1, parent)
+StatsModel::StatsModel(QObject *parent) : QStandardItemModel(11, 2, parent)
 {
 
 }
-
-/*StatsModel::StatsModel(int r, int c, QObject *parent) : QStandardItemModel(r, c, parent){}*/
 
 
 /*****************************************************************************************/
@@ -117,17 +175,17 @@ void WidgetMetaMapper::synchroDatas(QString newData)
 /*****************************************************************************************/
 PTreeView::PTreeView(QWidget *parent) : QTreeView(parent)
 {
-setVisible(true);
-setDragDropOverwriteMode(false);
-setHeaderHidden("true");
-setAnimated(true);
-setIndentation(10);
+    setVisible(true);
+    setDragDropOverwriteMode(false);
+    setHeaderHidden("true");
+    setAnimated(true);
+    setIndentation(10);
 }
 
 void PTreeView::setModel(QAbstractItemModel *model)
 {
-QTreeView::setModel(model);
-deckModel = dynamic_cast<PTreeModel*>(model);
+    QTreeView::setModel(model);
+    deckModel = dynamic_cast<PTreeModel*>(model);
 }
 
 void PTreeView::fakeDrop(QStringList StrL)
@@ -146,97 +204,102 @@ PDelegateDeck::PDelegateDeck(QObject *parent) : QStyledItemDelegate(parent)
 
 void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    if ( !index.isValid() )
+        return;
 
-    if ( index.isValid() && index.data(Qt::UserRole+3).toString() == "Card" )
+    int cat = index.data(VtesInfo::ItemCategoryRole).toInt();
+
+    switch (cat)
         {
-        // setup du contexte de dessin
-        QStyleOptionViewItemV4 opt(option);
-        QStyledItemDelegate::initStyleOption(&opt, index);
-        const QWidget *widget = option.widget;
-        QStyle *style = widget ? widget->style() : QApplication::style();
+        case VtesInfo::LibraryItemType :
 
-        // setup du paintre
-        painter->save();
-        painter->setRenderHint(QPainter::Antialiasing);
-        painter->setClipRect(opt.rect, Qt::ReplaceClip);
-
-        // découpage des régions
-        // affichage de la forme : [ nbExp | Name card | - | + | x ]
-        QRect ExRegion( opt.rect );
-        ExRegion.setRight( 50 );
-        QRect ButtonsRegion( opt.rect );
-        ButtonsRegion.setLeft( ButtonsRegion.right() - 100 );
-        QRect btMinusRegion( ButtonsRegion);
-        btMinusRegion.setWidth( 30 );
-        QRect btPlusRegion( ButtonsRegion);
-        btPlusRegion.setLeft( btMinusRegion.right()+5 );
-        btPlusRegion.setWidth( 30 );
-        QRect btDeleteRegion( ButtonsRegion );
-        btDeleteRegion.setLeft( btPlusRegion.right()+5  );
-        btDeleteRegion.setWidth( 30 );
-        QRect NameRegion( opt.rect );
-        NameRegion.setLeft( ExRegion.right() );
-        NameRegion.setRight( ButtonsRegion.left() );
-
-        // dessin de la case
-        opt.text = "";
-        if ( opt.state & QStyle::State_Selected )
+        case VtesInfo::CryptItemType :
             {
-            //painter->setPen( QPen(option.palette.highlightedText(), 0) );
-            painter->setBrush( option.palette.highlightedText() );
-            // prend en charge l'affichage du focus
-            style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
-            }
-        else
-            {
-            painter->setPen( QPen(option.palette.windowText(), 0) );
-            //painter->setBrush(qvariant_cast<QBrush>(index.data(Qt::ForegroundRole)));
-            }
+            // setup du contexte de dessin
+            QStyleOptionViewItemV4 opt(option);
+            QStyledItemDelegate::initStyleOption(&opt, index);
+            const QWidget *widget = option.widget;
+            QStyle *style = widget ? widget->style() : QApplication::style();
 
-        // dessin du nom de la carte
-        painter->drawText( NameRegion, Qt::AlignLeft, index.data().toString());
+            // setup du paintre
+            painter->save();
+            painter->setRenderHint(QPainter::Antialiasing);
+            painter->setClipRect(opt.rect, Qt::ReplaceClip);
 
-        // dessin du bouton - (enlever exemplaire)
-        QStyleOptionButton*  bt_rmex = new QStyleOptionButton;
-        bt_rmex->rect = btMinusRegion;
-        bt_rmex->icon = QIcon(":/icons/minus.png");
-        bt_rmex->iconSize = btMinusRegion.size();
-        style->drawControl( QStyle::CE_PushButton, bt_rmex, painter);
+            // découpage des régions
+            // affichage de la forme : [ nbExp | Name card | - | + | x ]
+            QRect ExRegion( opt.rect );
+            ExRegion.setRight( 50 );
+            QRect ButtonsRegion( opt.rect );
+            ButtonsRegion.setLeft( ButtonsRegion.right() - 100 );
+            QRect btMinusRegion( ButtonsRegion);
+            btMinusRegion.setWidth( 30 );
+            QRect btPlusRegion( ButtonsRegion);
+            btPlusRegion.setLeft( btMinusRegion.right()+5 );
+            btPlusRegion.setWidth( 30 );
+            QRect btDeleteRegion( ButtonsRegion );
+            btDeleteRegion.setLeft( btPlusRegion.right()+5  );
+            btDeleteRegion.setWidth( 30 );
+            QRect NameRegion( opt.rect );
+            NameRegion.setLeft( ExRegion.right() );
+            NameRegion.setRight( ButtonsRegion.left() );
 
-        // dessin du bouton + (ajouter exemplaire)
-        QStyleOptionButton*  bt_addex = new QStyleOptionButton;
-        bt_addex->rect = btPlusRegion;
-        bt_addex->icon = QIcon(":/icons/plus.png");
-        bt_addex->iconSize = btPlusRegion.size();
-        style->drawControl( QStyle::CE_PushButton, bt_addex, painter);
+            // dessin de la case
+            opt.text = "";
+            if ( opt.state & QStyle::State_Selected )
+                {
+                // prend en charge l'affichage en mode focus
+                //painter->setPen(Qt::white);
+                painter->setBrush( option.palette.highlightedText() );
+                //style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
+                }
+            else
+                {
+                painter->setPen( QPen(option.palette.foreground(), 0) );
+                painter->setBrush(qvariant_cast<QBrush>(index.data(Qt::ForegroundRole)));
+                }
 
-        //dessin boutton suppression carte
-        QPushButton *fock = new QPushButton();
-        fock->setGeometry(btDeleteRegion);
-        fock->setIcon(QIcon(":/icons/delete.png"));
-        fock->setStyleSheet("border: none;");
-        fock->render(painter);
-        //fock->setIconSize(btDeleteRegion.size());
+            // dessin du nombre d'exemplaires
+            style->drawItemText(painter, ExRegion, 1, opt.palette, true, "x" + index.data(VtesInfo::ExemplairRole).toString() );
 
-        /*QStyleOptionButton* bt_delete = new QStyleOptionButton();
-        bt_delete->initFrom(fock);
-        style->drawControl(QStyle::CE_PushButton, bt_delete, painter);*/
+            // dessin du nom de la carte
+            painter->drawText( NameRegion, Qt::AlignLeft, index.data().toString());
 
-        // dessin du bouton delete
-        /*QStyleOptionButton* bt_delete = new QStyleOptionButton();
-        bt_delete->rect = btDeleteRegion;
-        bt_delete->icon = QIcon(":/icons/delete.png");
-        bt_delete->iconSize = btDeleteRegion.size();
-        style->drawControl( QStyle::CE_PushButton, bt_delete, painter);*/
+            // dessin du bouton - (enlever exemplaire)
+            QStyleOptionButton*  bt_rmex = new QStyleOptionButton;
+            bt_rmex->rect = btMinusRegion;
+            bt_rmex->icon = QIcon(":/icons/minus.png");
+            bt_rmex->iconSize = btMinusRegion.size();
+            style->drawControl( QStyle::CE_PushButton, bt_rmex, painter);
 
-        // dessin du nombre d'exemplaires
-        style->drawItemText(painter, ExRegion, 1, opt.palette, true, "x" + index.data(Qt::UserRole+1).toString() );
+            // dessin du bouton + (ajouter exemplaire)
+            QStyleOptionButton*  bt_addex = new QStyleOptionButton;
+            bt_addex->rect = btPlusRegion;
+            bt_addex->icon = QIcon(":/icons/plus.png");
+            bt_addex->iconSize = btPlusRegion.size();
+            style->drawControl( QStyle::CE_PushButton, bt_addex, painter);
 
-        painter->restore();
-        }
-    else
-        {
-        if (  index.isValid() && index.data(Qt::UserRole+3).toString() == "Cat" )
+            // dessin du bouton suppression carte
+            QStyleOptionButton* bt_delete = new QStyleOptionButton();
+            bt_delete->rect = btDeleteRegion;
+            bt_delete->icon = QIcon(":/icons/delete.png");
+            bt_delete->iconSize = btDeleteRegion.size();
+            style->drawControl( QStyle::CE_PushButton, bt_delete, painter);
+
+            // test autre méthode de dessin
+            /*
+            QPushButton *fock = new QPushButton();
+            fock->setGeometry(btDeleteRegion);
+            fock->setIcon(QIcon(":/icons/delete.png"));
+            fock->setIconSize(btDeleteRegion.size());
+            fock->setStyleSheet("border: none;");
+            fock->render(painter);
+            */
+
+            painter->restore();
+            }   break;
+
+        case VtesInfo::SortItemType:
             {
             // setup du contexte de dessin
             QStyleOptionViewItemV4 opt(option);
@@ -271,11 +334,11 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
             painter->drawText( TextRegion, Qt::AlignLeft, index.data().toString());
 
             // dessin du nombre de carte dans la catégorie
-            style->drawItemText(painter, ExRegion, 1, opt.palette, true, "[" + index.data(Qt::UserRole+1).toString() + "]" );
-
+            style->drawItemText(painter, ExRegion, 1, opt.palette, true, "[" + index.data(VtesInfo::ExemplairRole).toString() + "]" );
             painter->restore();
-            }
-        else
+            }   break;
+
+        default :
             QStyledItemDelegate::paint(painter, option, index);
         }
 }
@@ -294,43 +357,125 @@ QSize PDelegateDeck::sizeHint(const QStyleOptionViewItem &option, const QModelIn
 SortItem::SortItem(QString txt) : QStandardItem(txt)
 {
     setEditable(false);
-    setData( this->data(Qt::DisplayRole), Qt::UserRole );
-    setData( 0, Qt::UserRole+1 );
-    setData( "Cat", Qt::UserRole+3);
+    setData( data(Qt::DisplayRole), Qt::UserRole );
+    setData( 0, VtesInfo::ExemplairRole );
+    setData( VtesInfo::SortItemType, VtesInfo::ItemCategoryRole);
 }
 
-void SortItem::Increment()
+void SortItem::Increment(int i)
 {
     // increment the item counter (should be equal to number of child pondered by each child multipliers)
     // this is the responsability of the model to correctly increment this property !
-    setData( data(Qt::UserRole+1).toInt()+1, Qt::UserRole+1 );
+    setData( data(VtesInfo::ExemplairRole).toInt()+i, VtesInfo::ExemplairRole );
 }
+
+int SortItem::type() const  { return (VtesInfo::SortItemType); }
 
 SortItem::~SortItem()   {}
 
-int SortItem::type() const  { return (VtesInfo::ItemSortType); }
 
-//
-CardItem::CardItem(QStringList strL) : QStandardItem(strL[1])
+// A CRYPT CARD ITEM
+CryptCardItem::CryptCardItem(QStringList strL) : QObject(), QStandardItem(strL[1])
 {
     setEditable(false);
-    setText(strL[1]);
-    setData( strL[1], Qt::DisplayRole );
-    setData( strL[7], Qt::UserRole );
-    setData( 1, Qt::UserRole+1 );
-    setData( strL, Qt::UserRole+2 );
-    setData( "Card", Qt::UserRole+3);
+    // we set technicals datas
+    setData( 1, VtesInfo::ExemplairRole );
+    setData( VtesInfo::CryptItemType, VtesInfo::ItemCategoryRole);
+    // we set all game datas
+    setData( strL[1], VtesInfo::NameRole );
+    setData( strL[2], VtesInfo::SetsRole );
+    setData( strL[3], VtesInfo::ImageFileRole );
+    setData( strL[4], VtesInfo::URLCarteRole );
+    setData( strL[5], VtesInfo::ExpansionRole );
+    setData( strL[6], VtesInfo::RarityRole );
+    setData( strL[7], VtesInfo::TypeRole );
+    setData( strL[8], VtesInfo::ClanRole );
+    setData( strL[9], VtesInfo::GroupingRole );
+    setData( strL[10], VtesInfo::CapacityRole );
+    setData( strL[11], VtesInfo::DisciplineRole );
+    setData( strL[12], VtesInfo::SectRole );
+    setData( strL[13], VtesInfo::TitleRole );
+    setData( strL[14], VtesInfo::TraitRole );
+    setData( strL[15], VtesInfo::KeyWordsRole );
+    setData( strL[16], VtesInfo::LimitationRole );
+    setData( strL[17], VtesInfo::TextRole );
+    setData( strL[18], VtesInfo::ArtistRole );
+    setData( strL[19], VtesInfo::CommentaryRole );
 }
 
-void CardItem::Increment()
+void CryptCardItem::Increment() { setData( data(VtesInfo::ExemplairRole).toInt()+1, VtesInfo::ExemplairRole ); }
+
+void CryptCardItem::Decrement()
 {
-    setData( data(Qt::UserRole+1).toInt()+1, Qt::UserRole+1 );
+    int cpt = data(VtesInfo::ExemplairRole).toInt();
+    if ( cpt > 1 )
+        setData( data(VtesInfo::ExemplairRole).toInt()-1, VtesInfo::ExemplairRole );
+    else
+        {
+        setData( 0, VtesInfo::ExemplairRole );
+        emit request_deleting( index() );
+        }
 }
 
+int CryptCardItem::type() const  { return VtesInfo::CryptItemType; }
 
-CardItem::~CardItem()   {}
+CryptCardItem::~CryptCardItem()   {}
 
-int CardItem::type() const  { return VtesInfo::ItemCardType; }
+
+// A LIBRARY CARD ITEM
+LibraryCardItem::LibraryCardItem(QStringList strL) : QObject(),QStandardItem(strL[1])
+{
+    setEditable(false);
+
+    // we set technicals datas
+    setData( 1, VtesInfo::ExemplairRole );
+    setData( VtesInfo::LibraryItemType, VtesInfo::ItemCategoryRole);
+
+    // we set all game datas
+    setData( strL[1], VtesInfo::NameRole );
+    setData( strL[2], VtesInfo::SetsRole );
+    setData( strL[3], VtesInfo::ImageFileRole );
+    setData( strL[4], VtesInfo::URLCarteRole );
+    setData( strL[5], VtesInfo::ExpansionRole );
+    setData( strL[6], VtesInfo::RarityRole );
+    setData( strL[7], VtesInfo::TypeRole );
+    setData( strL[8], VtesInfo::SubTypeRole );
+    setData( strL[9], VtesInfo::ClanRole );
+    setData( strL[10], VtesInfo::CapacityRole );
+    setData( strL[11], VtesInfo::DisciplineRole );
+    setData( strL[12], VtesInfo::SectRole );
+    setData( strL[13], VtesInfo::PCostRole );
+    setData( strL[14], VtesInfo::BCostRole );
+    setData( strL[15], VtesInfo::CCostRole );
+    setData( strL[16], VtesInfo::TitleRole );
+    setData( strL[17], VtesInfo::TraitRole );
+    setData( strL[18], VtesInfo::KeyWordsRole );
+    setData( strL[19], VtesInfo::LimitationRole );
+    setData( strL[20], VtesInfo::TextRole );
+    setData( strL[21], VtesInfo::ArtistRole );
+    setData( strL[22], VtesInfo::CommentaryRole );
+}
+
+void LibraryCardItem::Increment()
+{
+    setData( data(VtesInfo::ExemplairRole).toInt()+1, VtesInfo::ExemplairRole );
+}
+
+void LibraryCardItem::Decrement()
+{
+    int cpt = data(VtesInfo::ExemplairRole).toInt();
+    if ( cpt > 1 )
+        setData( data(VtesInfo::ExemplairRole).toInt()-1, VtesInfo::ExemplairRole );
+    else
+        {
+        setData( 0, VtesInfo::ExemplairRole );
+        emit request_deleting( index() );
+        }
+}
+
+int LibraryCardItem::type() const  { return VtesInfo::LibraryItemType; }
+
+LibraryCardItem::~LibraryCardItem()   {}
 
 
 /*****************************************************************************************/

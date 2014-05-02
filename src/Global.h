@@ -57,9 +57,12 @@ namespace VtesInfo
 
     enum CardType{ NoType, CryptType, LibraryType, CounterType };
 
-    enum ItemTypes { ItemMetadataType = 1000,
-                     ItemCardType,
-                     ItemSortType };
+    enum ItemTypes { SortItemType = 1000, LibraryItemType, CryptItemType };
+
+    enum DeckItemRoles { NameRole = Qt::UserRole, SetsRole, ImageFileRole, URLCarteRole, ExpansionRole, RarityRole, TypeRole,
+                         SubTypeRole, ClanRole, GroupingRole, CapacityRole, DisciplineRole, SectRole, PCostRole, BCostRole,
+                         CCostRole, TitleRole, TraitRole, KeyWordsRole, LimitationRole, TextRole, ArtistRole, CommentaryRole,
+                         ExemplairRole, ItemCategoryRole};
 }
 
 #endif

@@ -6,7 +6,7 @@ Carte::Carte(QObject* parent) : QObject(parent)
 {
 }
 
-Carte::Carte(const Carte &c)
+Carte::Carte(const Carte &c) //: QObject(c)
 {
 }
 

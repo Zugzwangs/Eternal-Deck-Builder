@@ -413,9 +413,9 @@ void PDelegateCardResult::paint(QPainter *painter, const QStyleOptionViewItem &o
             // prise en charge de l'état hightlighted
             if ( opt.state & QStyle::State_Selected )
                 {
+                // prend en charge l'affichage en mode focus
                 painter->setPen(Qt::white);
                 painter->setBrush( option.palette.highlightedText() );
-                // prend en charge l'affichage du focus
                 style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
                 }
             else
@@ -447,9 +447,9 @@ void PDelegateCardResult::paint(QPainter *painter, const QStyleOptionViewItem &o
             // prise en charge de l'état hightlighted
             if ( opt.state & QStyle::State_Selected )
                 {
+                // prend en charge l'affichage en mode focus
                 painter->setPen(Qt::white);
                 painter->setBrush( option.palette.highlightedText() );
-                // prend en charge l'affichage du focus
                 style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
                 }
             else
@@ -488,3 +488,5 @@ QSize PDelegateCardResult::sizeHint(const QStyleOptionViewItem & option, const Q
         default: return QStyledItemDelegate::sizeHint(option, index);
         }
 }
+
+

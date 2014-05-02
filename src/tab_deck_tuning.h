@@ -38,6 +38,7 @@ private:
 
 private slots:
     void sync_stats_model(QModelIndex parent_index, QModelIndex new_item);
+    void sync_crypt_stat();
 
 signals:
 
