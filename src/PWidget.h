@@ -49,27 +49,6 @@ private:
     QString sql_request;
 };
 
-// /////////////////////////////////////////////////////////////////////////////////////////
-//
-class PDeckDropArea : public QLabel
-{
-    Q_OBJECT
-
-public:
-    explicit PDeckDropArea(QWidget *parent = 0);
-    ~PDeckDropArea();
-
-protected:
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dragMoveEvent(QDragMoveEvent *event);
-    void dropEvent(QDropEvent *event);
-
-signals:
-    void card_dropped(QStringList StrL);
-
-
-};
 
 #endif // PWIDGET_H
-
 

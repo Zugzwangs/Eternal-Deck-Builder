@@ -6,6 +6,7 @@
 
 #include "Global.h"
 #include "mvdbdd.h"
+#include "mvddeck.h"
 
 namespace Ui {
     class tab_search_library;
@@ -19,6 +20,7 @@ public:
     explicit tab_search_library(QWidget *parent = 0);
     ~tab_search_library();
     PSqlTableModel *ModelReponseCarte;
+    void setupDeckModel(PTreeModel* deckModel);
 
 protected:
     void keyPressEvent(QKeyEvent *);
@@ -33,6 +35,7 @@ private slots:
     void ClearForm();
     void RechercheCarte();
     void request_affichage(QModelIndex Idx);
+    void deck_request_affichage(QModelIndex Idx);
     void AfficheImageCarte(QString CardName);
 
 signals:

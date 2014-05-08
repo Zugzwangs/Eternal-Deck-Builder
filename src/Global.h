@@ -8,6 +8,20 @@ namespace VtesInfo
 
     // On déclare les listes contenant la base de connaissance du jeu
 
+    const QStringList DisciplinesList = QStringList()   << "Abombwe" << "Animalism" << "Auspex" << "Celerity" << "Chimerstry" << "Daimonion"
+                                                        << "Dementation" << "Dominate" << "Fortitude" << "Melpomine" << "Mytherceria" << "Necromancie"
+                                                        << "Obeah" << "Obfuscate" << "Obtenebration" << "Potence" << "Presence" << "Protean"
+                                                        << "Quietus" << "Sanguinus" << "Serpentis" << "Spiritus" << "Temporis" << "Thaumaturgie"
+                                                        << "Thanatosis" << "Valeren" << "Vicisitude" << "Viseratica" << "Maleficia" << "Striga";
+
+    const QStringList DisciplinesSigleList = QStringList() << "abo" << "ani" << "aus" << "cel" << "chi" << "dai"
+                                                           << "dem" << "dom" << "for" << "mel" << "myt" << "nec"
+                                                           << "obe" << "obf" << "obt" << "pot" << "pre" << "pro"
+                                                           << "qui" << "san" << "ser" << "spi" << "tem" << "tha"
+                                                           << "thn" << "val" << "vic" << "vis" << "mal" << "str";
+
+    const QStringList CreedSigleList = QStringList() << "def" << "inn" << "jud" << "mar" << "red" << "ven" << "vis2";
+
     const QStringList ExpList = QStringList()   << "Keepers of Tradition" << "Legacies of Blood" << "Third Edition" << "Bloodlines" << "Anarchs" << "Sabbat"
                                                 << "Ebony Kingdom" << "Camarilla Edition" << "Heirs to the Blood" << "Lords of The Night" << "Ancient Hearts"
                                                 << "Final Nights" << "Sword of Caine" << "Dark Sovereigns" << "Black Hand" << "10th Anniversary" << "Sabbat War"
@@ -28,10 +42,6 @@ namespace VtesInfo
 
     const QStringList SectsList = QStringList() << "Camarilla" << "Sabbat" << "Independent" << "Laibon" << "Imbued";
 
-    const QStringList DisciplineLvlList  = QStringList() << "Any" << "inf" << "inf+" << "SUP" << "None";
-
-    const QStringList OperatorList = QStringList() << "=" << "<=" << ">=";
-
     const QStringList RarityList = QStringList() << "Common" << "Uncommon" << "Rare";
 
     const QStringList CardTypeList = QStringList() << "Master" << "Conviction" << "Event" << "Action" << "Political Action"
@@ -43,17 +53,10 @@ namespace VtesInfo
 
     const QStringList EventSubTypeList = QStringList() << "Gehenna" << "Event" << "Government" << "Transient" << "Inconnu" << "Inquisition";
 
-    const QStringList DisciplinesList = QStringList()   << "Abombwe" << "Animalism" << "Auspex" << "Celerity" << "Chimerstry" << "Daimonion"
-                                                        << "Dementation" << "Dominate" << "Fortitude" << "Melpomine" << "Mytherceria" << "Necromancie"
-                                                        << "Obeah" << "Obfuscate" << "Obtenebration" << "Potence" << "Presence" << "Protean"
-                                                        << "Quietus" << "Sanguinus" << "Serpentis" << "Spiritus" << "Temporis" << "Thaumaturgie"
-                                                        << "Thanatosis" << "Valeren" << "Vicisitude" << "Viseratica" << "Maleficia" << "Striga";
+    const QStringList DisciplineLvlList  = QStringList() << "Any" << "inf" << "inf+" << "SUP" << "None";
 
-    const QStringList DisciplinesSigleList = QStringList() << "abo" << "ani" << "aus" << "cel" << "chi" << "dai"
-                                                           << "dem" << "dom" << "for" << "mel" << "myt" << "nec"
-                                                           << "obe" << "obf" << "obt" << "pot" << "pre" << "pro"
-                                                           << "qui" << "san" << "ser" << "spi" << "tem" << "tha"
-                                                           << "thn" << "val" << "vic" << "vis" << "mal" << "str";
+    const QStringList OperatorList = QStringList() << "=" << "<=" << ">=";
+
 
     enum CardType{ NoType, CryptType, LibraryType, CounterType };
 

@@ -28,7 +28,7 @@
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "PWidget.h"
+#include <mvddeck.h>
 #include "mvdbdd.h"
 
 QT_BEGIN_NAMESPACE
@@ -155,7 +155,8 @@ public:
     QCheckBox *ckBSterile;
     QCheckBox *ckBBloodCurse;
     QCheckBox *ckBRedList;
-    PDeckDropArea *dropLabel;
+    QSpacerItem *horizontalSpacer_2;
+    PartialDeckView *CryptView;
     QSpacerItem *horizontalSpacer;
     QFrame *frame;
     QHBoxLayout *horizontalLayout_4;
@@ -165,10 +166,10 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QPushButton *pBCryptSearch;
     QPushButton *pBCryptClearForm;
+    QSpacerItem *verticalSpacer_2;
     QLabel *VisuelCrypt;
     QSpacerItem *verticalSpacer;
     PItemView *PTVCryptResults;
-    QSpacerItem *horizontalSpacer_2;
 
     void setupUi(QScrollArea *tab_search_crypt)
     {
@@ -204,13 +205,13 @@ public:
         horizontalLayout_2->setContentsMargins(10, 0, 10, 0);
         CryptSearchFrame = new QFrame(frame_2);
         CryptSearchFrame->setObjectName(QStringLiteral("CryptSearchFrame"));
-        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(CryptSearchFrame->sizePolicy().hasHeightForWidth());
         CryptSearchFrame->setSizePolicy(sizePolicy1);
-        CryptSearchFrame->setMinimumSize(QSize(1350, 300));
-        CryptSearchFrame->setMaximumSize(QSize(1350, 300));
+        CryptSearchFrame->setMinimumSize(QSize(1250, 200));
+        CryptSearchFrame->setMaximumSize(QSize(1400, 350));
         CryptSearchFrame->setAutoFillBackground(true);
         CryptSearchFrame->setFrameShape(QFrame::NoFrame);
         CryptSearchFrame->setFrameShadow(QFrame::Plain);
@@ -222,7 +223,7 @@ public:
         gridLayout_5->setContentsMargins(0, 0, 0, 0);
         groupBoxText = new QGroupBox(CryptSearchFrame);
         groupBoxText->setObjectName(QStringLiteral("groupBoxText"));
-        groupBoxText->setMinimumSize(QSize(0, 130));
+        groupBoxText->setMinimumSize(QSize(0, 120));
         gridLayout_6 = new QGridLayout(groupBoxText);
         gridLayout_6->setObjectName(QStringLiteral("gridLayout_6"));
         gridLayout_6->setContentsMargins(5, 5, 5, 5);
@@ -300,7 +301,7 @@ public:
 
         groupBoxDiscipline = new QGroupBox(CryptSearchFrame);
         groupBoxDiscipline->setObjectName(QStringLiteral("groupBoxDiscipline"));
-        groupBoxDiscipline->setMinimumSize(QSize(0, 220));
+        groupBoxDiscipline->setMinimumSize(QSize(0, 200));
         groupBoxDiscipline->setAutoFillBackground(false);
         groupBoxDiscipline->setStyleSheet(QStringLiteral(""));
         gridLayout = new QGridLayout(groupBoxDiscipline);
@@ -858,6 +859,7 @@ public:
 
         groupBox = new QGroupBox(CryptSearchFrame);
         groupBox->setObjectName(QStringLiteral("groupBox"));
+        groupBox->setMinimumSize(QSize(150, 0));
         gridLayout_3 = new QGridLayout(groupBox);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         gridLayout_3->setContentsMargins(5, 5, 5, 5);
@@ -927,6 +929,7 @@ public:
 
         groupBoxVirtues = new QGroupBox(CryptSearchFrame);
         groupBoxVirtues->setObjectName(QStringLiteral("groupBoxVirtues"));
+        groupBoxVirtues->setMinimumSize(QSize(65, 0));
         horizontalLayout = new QHBoxLayout(groupBoxVirtues);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(10, 5, 10, 5);
@@ -1076,6 +1079,7 @@ public:
 
         groupBoxTrait = new QGroupBox(CryptSearchFrame);
         groupBoxTrait->setObjectName(QStringLiteral("groupBoxTrait"));
+        groupBoxTrait->setMinimumSize(QSize(150, 0));
         gridLayout_4 = new QGridLayout(groupBoxTrait);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
         gridLayout_4->setContentsMargins(5, 5, 5, 5);
@@ -1178,16 +1182,16 @@ public:
 
         horizontalLayout_2->addWidget(CryptSearchFrame);
 
-        dropLabel = new PDeckDropArea(frame_2);
-        dropLabel->setObjectName(QStringLiteral("dropLabel"));
-        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(dropLabel->sizePolicy().hasHeightForWidth());
-        dropLabel->setSizePolicy(sizePolicy4);
-        dropLabel->setPixmap(QPixmap(QString::fromUtf8(":/icons/deck.jpg")));
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        horizontalLayout_2->addWidget(dropLabel);
+        horizontalLayout_2->addItem(horizontalSpacer_2);
+
+        CryptView = new PartialDeckView(frame_2);
+        CryptView->setObjectName(QStringLiteral("CryptView"));
+        CryptView->setMinimumSize(QSize(220, 0));
+        CryptView->setMaximumSize(QSize(400, 16777215));
+
+        horizontalLayout_2->addWidget(CryptView);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1238,6 +1242,10 @@ public:
 
         verticalLayout->addWidget(frame_4);
 
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer_2);
+
         VisuelCrypt = new QLabel(frame_3);
         VisuelCrypt->setObjectName(QStringLiteral("VisuelCrypt"));
         sizePolicy3.setHeightForWidth(VisuelCrypt->sizePolicy().hasHeightForWidth());
@@ -1260,9 +1268,10 @@ public:
 
         PTVCryptResults = new PItemView(frame);
         PTVCryptResults->setObjectName(QStringLiteral("PTVCryptResults"));
-        sizePolicy4.setHeightForWidth(PTVCryptResults->sizePolicy().hasHeightForWidth());
-        PTVCryptResults->setSizePolicy(sizePolicy4);
+        sizePolicy1.setHeightForWidth(PTVCryptResults->sizePolicy().hasHeightForWidth());
+        PTVCryptResults->setSizePolicy(sizePolicy1);
         PTVCryptResults->setMinimumSize(QSize(1130, 100));
+        PTVCryptResults->setMaximumSize(QSize(1500, 16777215));
         PTVCryptResults->setFrameShape(QFrame::NoFrame);
         PTVCryptResults->setFrameShadow(QFrame::Plain);
         PTVCryptResults->setLineWidth(0);
@@ -1270,10 +1279,6 @@ public:
         PTVCryptResults->setShowGrid(false);
 
         horizontalLayout_4->addWidget(PTVCryptResults);
-
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_4->addItem(horizontalSpacer_2);
 
 
         verticalLayout_2->addWidget(frame);
@@ -1389,7 +1394,6 @@ public:
         ckBSterile->setText(QApplication::translate("tab_search_crypt", "Sterile", 0));
         ckBBloodCurse->setText(QApplication::translate("tab_search_crypt", "Blood curse", 0));
         ckBRedList->setText(QApplication::translate("tab_search_crypt", "Red List", 0));
-        dropLabel->setText(QString());
         pBCryptSearch->setText(QApplication::translate("tab_search_crypt", "Search", 0));
         pBCryptSearch->setShortcut(QApplication::translate("tab_search_crypt", "F1", 0));
         pBCryptClearForm->setText(QApplication::translate("tab_search_crypt", "Clear Form", 0));

@@ -25,6 +25,7 @@ PieChart::PieChart( QWidget* parent ) :
   myRing = false;
   mySplitted = false;
   myStartAngle = 0.0;
+  myActiveColumn = 0;
   myLegend = QString();
 }
 
@@ -75,7 +76,7 @@ QPainterPath PieChart::itemPath( const QModelIndex& index ) const {
   QPainterPath path;
   qreal angle = myStartAngle;
   for ( int r = 0; r < index.row(); ++r ) {
-    QModelIndex id = this->model()->index( r, 0 );
+    QModelIndex id = this->model()->index( r, myActiveColumn );
     qreal v = qAbs( this->model()->data( id ).toReal() );
     qreal delta = 360.0 * v/myTotal;
     angle += delta;
@@ -97,7 +98,7 @@ void PieChart::paintChart( QPainter &painter ) {
   int rows = this->model()->rowCount();
   qreal angle = myStartAngle;
   for ( int i = 0; i < rows; ++i ) {
-    QModelIndex index = this->model()->index( i, 0 );
+    QModelIndex index = this->model()->index( i, myActiveColumn );
     QColor color( this->model()->data( index, Qt::DecorationRole ).toString() );
     if ( !color.isValid() ) {
       color = Marb::predefinedColor( i );
@@ -106,10 +107,13 @@ void PieChart::paintChart( QPainter &painter ) {
     qreal delta = 360.0 * v/myTotal;
     bool isSelected = this->selectionModel()->selectedIndexes().contains( index )
                       || this->currentIndex() == index;
+
+    QString partText = this->model()->headerData(index.row(), Qt::Vertical, Qt::DisplayRole).toString();
+
     if ( mySplitted == false ) {
-      this->paintPart( painter, angle, delta, color, isSelected );
+      this->paintPart( painter, angle, delta, color, isSelected, partText );
     } else {
-      this->paintPartSplitted( painter, angle, delta, color, isSelected );
+      this->paintPartSplitted( painter, angle, delta, color, isSelected, partText );
     }
     angle += delta;
   }
@@ -130,9 +134,9 @@ void PieChart::paintEvent(QPaintEvent *event) {
 }
 
 
-void PieChart::paintPart( QPainter& painter, qreal angle, qreal delta, QColor color, bool isSelected ) {
+void PieChart::paintPart( QPainter& painter, qreal angle, qreal delta, QColor color, bool isSelected, QString partText) {
   if ( isSelected == true ) {
-    this->paintPartSplitted( painter, angle, delta, color );
+    this->paintPartSplitted( painter, angle, delta, color, false, partText );
     return;
   }
   QPainterPath part = this->itemPart( angle, delta );
@@ -141,12 +145,14 @@ void PieChart::paintPart( QPainter& painter, qreal angle, qreal delta, QColor co
   int flag = 0;
   this->configureColor( painter, color, flag );
   painter.drawPath( part );
+  painter.setPen(Qt::black);
+  painter.drawText(part.controlPointRect(), Qt::AlignCenter, partText);
   painter.restore();
 }
 
 
 void PieChart::paintPartSplitted( QPainter &painter, qreal angle, qreal delta,
-                                  QColor color, bool isSelected ) {
+                                  QColor color, bool isSelected, QString partText ) {
   QPainterPath part = this->itemPart( angle, delta, true );
   painter.save();
   if ( mySplitted == true
@@ -157,6 +163,8 @@ void PieChart::paintPartSplitted( QPainter &painter, qreal angle, qreal delta,
     this->configureColor( painter, color, 1 );
   }
   painter.drawPath( part );
+  painter.setPen(Qt::black);
+  painter.drawText(part.controlPointRect(), Qt::AlignCenter, partText);
   painter.restore();
 }
 
@@ -179,6 +187,10 @@ void PieChart::setLegend( QString legend ) {
   myLegend = legend;
 }
 
+void PieChart::setActiveColumn(int column) {
+    if ( column >= 0  && column < this->model()->columnCount() )
+        myActiveColumn = column;
+}
 
 void PieChart::setRing( bool ring ) {
   myRing = ring;
@@ -227,7 +239,7 @@ void PieChart::updateChart() {
   myRect.setHeight( 0.9 * myRect.height() );
   myTotal = 0;
   for ( int i = 0; i < this->model()->rowCount(); ++i ) {
-    QModelIndex index = this->model()->index( i, 0 );
+    QModelIndex index = this->model()->index( i, myActiveColumn );
     myTotal += qAbs( this->model()->data( index ).toReal() );
   }
 }

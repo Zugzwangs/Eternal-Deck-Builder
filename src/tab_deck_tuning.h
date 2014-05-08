@@ -21,16 +21,13 @@ public:
     explicit tab_deck_tuning(QWidget *parent = 0);
     PTreeView *DeckView;
     ~tab_deck_tuning();
-
+    // Main model !
+    PTreeModel *ModeleDeck;
 
 private:
     Ui::tab_deck_tuning *ui;
-
-    // Models
-    PTreeModel *ModeleDeck;
+    // Stats Model
     StatsModel *model_test;
-    // Proxies
-    CryptProxy *test_crypt_proxy;
     // Views
     PieChart *testPie;
     LinearChart *testLinear;

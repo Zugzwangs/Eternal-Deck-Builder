@@ -46,48 +46,6 @@ void PFrame::startDrag()
 }
 
 // /////////////////////////////////////////////////////////////////////////////////////////
-// Drop zone to add cards in the deck model
-PDeckDropArea::PDeckDropArea(QWidget *parent) : QLabel(parent){
-
-    setAcceptDrops(true);
-    setFrameStyle(QFrame::Sunken | QFrame::Box);
-}
-
-void PDeckDropArea::dragEnterEvent(QDragEnterEvent *event){
-
-    if (event->mimeData()->hasFormat("text/plain"))
-        {
-        event->setDropAction(Qt::CopyAction);
-        event->accept();
-        }
-}
-
-void PDeckDropArea::dragMoveEvent(QDragMoveEvent *event){
-
-    if (event->mimeData()->hasFormat("text/plain"))
-        {
-        event->setDropAction(Qt::CopyAction);
-        event->accept();
-        }
-}
-
-void PDeckDropArea::dropEvent(QDropEvent *event){
-
-QString TempData;
-QStringList ListofData;
-
-    // on recup les données du drop | on les split | on chope le nom de la carte
-    TempData = event->mimeData()->text();
-    ListofData = TempData.split("\n",QString::KeepEmptyParts);
-    //qDebug() << ListofData;
-
-    // emit the datas
-    emit card_dropped( ListofData );
-}
-
-PDeckDropArea::~PDeckDropArea() {}
-
-// /////////////////////////////////////////////////////////////////////////////////////////
 // Widget symbolisant une discipline
 DisciplineButton::DisciplineButton(QWidget *parent) : QPushButton(parent)
 {
@@ -97,6 +55,7 @@ DisciplineButton::DisciplineButton(QWidget *parent) : QPushButton(parent)
 
 void DisciplineButton::setupDiscipline(QString dis)
 {
+    // verrue pour une exception de merde !
     if ( dis.left(4) == "vis2" )
         discipline = "vis2";
     else
@@ -105,8 +64,10 @@ void DisciplineButton::setupDiscipline(QString dis)
     //setText(discipline);
     setToolTip(discipline);
     icone = QPixmap(":/icons/disc/" + discipline + ".png");
+    setIconSize(QSize(30,30));
     setIcon(icone);
 }
+
 /*
 void DisciplineButton::paintEvent(QPaintEvent *e)
 {

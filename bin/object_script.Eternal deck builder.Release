@@ -26,7 +26,6 @@ INPUT(
 ./release\mvdbdd.o
 ./release\qrc_res.o
 ./release\moc_mainwindow.o
-./release\moc_PWidget.o
 ./release\moc_dialogoptions.o
 ./release\moc_tab_search_library.o
 ./release\moc_tab_search_crypt.o

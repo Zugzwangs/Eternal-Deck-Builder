@@ -5,6 +5,9 @@
 #include <QStyledItemDelegate>
 #include <QStandardItemModel>
 #include <QSortFilterProxyModel>
+#include <QDragEnterEvent>
+#include <QDragMoveEvent>
+#include <QDropEvent>
 
 
 /*****************************************************************************************/
@@ -141,23 +144,20 @@ public slots:
 
 
 /*****************************************************************************************/
-/*  THE DECK VIEW                                                                        */
+/*  ANOTHER DECK VIEW (partial crypt/library)                                                                        */
 /*****************************************************************************************/
-class CryptProxy : public QSortFilterProxyModel
+class PartialDeckView : public QTreeView
 {
     Q_OBJECT
 
 public:
-    CryptProxy( QObject *parent=0 );
+    explicit PartialDeckView(QWidget *parent = 0);
+    ~PartialDeckView();
+
+protected:
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dragMoveEvent(QDragMoveEvent *event);
+    void dropEvent(QDropEvent *event);
 };
-
-class LibraryProxy : public QSortFilterProxyModel
-{
-    Q_OBJECT
-
-public:
-    LibraryProxy( QObject *parent=0 );
-};
-
 
 #endif // MVDDECK_H

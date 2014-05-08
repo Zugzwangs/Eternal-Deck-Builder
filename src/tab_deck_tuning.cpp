@@ -26,13 +26,21 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     mapper.AddWidget(ui->lE_author,"author");
     mapper.AddWidget(ui->lE_description,"description");
 
-    // Model de stats qui se construit sur le Deck model
-    model_test = new StatsModel;                                            // Model with 2 column and 11 rows (no choice)
-    qsrand( QDateTime::currentDateTime().toTime_t() );                      // Init random function
-    for (int i = 0; i < model_test->rowCount(); i++ ) {                     // Fill the model
-      qreal v = (qrand() % ( 30 - 10) + 10);                                // random value between 10 and 30
-      model_test->setData( model_test->index( i, 0 ), 0.1 /*v*/, Qt::DisplayRole ); // Set data for the row 'i'
+    // Model de stats qui se construit sur le Deck model (static size [11,2] )
+    model_test = new StatsModel;
+    model_test->setData( model_test->index( 0, 0 ), 5, Qt::DisplayRole );
+    model_test->setData( model_test->index( 0, 1 ), 5, Qt::DisplayRole );
+    model_test->setData( model_test->index( 0, 2 ), 5, Qt::DisplayRole );
+
+    for (int i = 1; i < model_test->rowCount(); i++ ) {
+        model_test->setData( model_test->index( i, 0 ), 0, Qt::DisplayRole );
+        model_test->setData( model_test->index( i, 1 ), 0, Qt::DisplayRole );
+        model_test->setData( model_test->index( i, 2 ), 0, Qt::DisplayRole );
     }
+    for (int i=0; i<VtesInfo::CardTypeList.count() && i<model_test->rowCount(); i++)
+        {
+        model_test->setHeaderData(i, Qt::Vertical, VtesInfo::CardTypeList[i], Qt::EditRole);
+        }
 
     // Connect Stats model to changes of the deck model for syncs purposes
     connect( ModeleDeck, SIGNAL( CardAdded(QModelIndex, QModelIndex) ), this, SLOT( sync_stats_model(QModelIndex, QModelIndex) ) );
@@ -40,8 +48,11 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
 
     // LA VUE PIECHART
     testPie = new PieChart();
+    testPie->setLegend("Type repartition");
+    //testPie->setRing(True);
     dynamic_cast<QGridLayout *>(ui->frame_3->layout())->addWidget( testPie, 0, 0 );
     testPie->setModel(model_test);
+    testPie->setActiveColumn(2);
 
     // LA VUE HISTOGRAMME
     testLinear = new LinearChart();
@@ -57,28 +68,44 @@ void tab_deck_tuning::sync_stats_model(QModelIndex parent_index, QModelIndex new
 {
     if ( parent_index.isValid() )
         {
-        // temporaire !!!
-        //qDebug() << "un item à été rajouter dans la catégortie : " << parent_index.data(Qt::DisplayRole).toString();
-        //qDebug() << "la carte s'appelle " << new_item.data(Qt::DisplayRole).toString();
-        //qDebug() << "elle contient maintenant " << parent_index.data(VtesInfo::ExemplairRole).toInt() << " cartes !";
-
         if ( parent_index.data(Qt::DisplayRole).toString() == "BIBLIOTHEQUE" )
             {
-            new_item.data(Qt::UserRole).toString();
+            QStandardItem *youpi;
+            QString TypeOfNewCard = new_item.data(VtesInfo::TypeRole).toString();
+            for (int i=0; i<VtesInfo::CardTypeList.count(); i++)
+                {
+                if ( VtesInfo::CardTypeList[i] == TypeOfNewCard )
+                    {
+                    youpi = model_test->item(i,2);
+                    youpi->setData( youpi->data(Qt::DisplayRole).toInt()+1, Qt::DisplayRole );
+                    }
+                }
             }
         else if ( parent_index.data(Qt::DisplayRole).toString() == "CRYPTE" )
             {
             //a new vamp is added, get his gen (X for exemple) then increment item(X,0) value by one
-            int generation = new_item.data(VtesInfo::CapacityRole).toInt() ;
+            int generation = new_item.data(VtesInfo::CapacityRole).toInt();
             QStandardItem *youpi = model_test->item( generation-1, 0);
-            youpi->setData( youpi->data(Qt::DisplayRole).toInt()+1 , Qt::DisplayRole );
+            if ( youpi )
+                youpi->setData( youpi->data(Qt::DisplayRole).toInt()+1 , Qt::DisplayRole );
+            else
+                qDebug() << "soucis de capacité ! capa =" << generation;
+
+            // same thing for grouping
+            int group = new_item.data(VtesInfo::GroupingRole).toInt();
+            youpi = model_test->item( group-1 ,1);
+            if ( youpi )
+                youpi->setData( youpi->data(Qt::DisplayRole).toInt()+1, Qt::DisplayRole );
+            else
+                qDebug() << "soucis de grouping ! group =" << group;
             }
         }
 }
 
 void tab_deck_tuning::sync_crypt_stat()
 {
- //TODO read all cryptItem then comput stats into the stats model
+    //TODO read all cryptItem then comput stats into the stats model
+
 }
 
 tab_deck_tuning::~tab_deck_tuning()

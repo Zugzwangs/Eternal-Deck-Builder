@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QPushButton>
 #include <QDebug>
+#include <QMimeData>
 
 /*****************************************************************************************/
 /*   MODEL                                                                               */
@@ -125,11 +126,11 @@ return NULL;
 
 /*****************************************************************************************/
 /*  THE OVER VIEW MODEL                                                                  */
-/*  THE FIRST COLUMN IS ABOUT THE CRYPT STATS. EACH ROW HOLD THE NUMBER OF VAMPIRE WHERE */
-/*  ROW == GENERATION                                                                    */
-/*  THE SECOND COLUMN HOLDS LIBRARY STATS                                                */
+/*  THE TWO FIRST COLUMNS ARE ABOUT THE CRYPT STATS. EACH ROW HOLD THE NUMBER OF VAMPIRE WHERE */
+/*  C1 == GENERATION   C2 == GROUPING                                                                 */
+/*  THE Third COLUMN HOLDS LIBRARY STATS                                                */
 /*****************************************************************************************/
-StatsModel::StatsModel(QObject *parent) : QStandardItemModel(11, 2, parent)
+StatsModel::StatsModel(QObject *parent) : QStandardItemModel(14, 3, parent)
 {
 
 }
@@ -479,22 +480,46 @@ LibraryCardItem::~LibraryCardItem()   {}
 
 
 /*****************************************************************************************/
-/*  PROXY MODEL                                                                          */
+/*  ANOTHER DECK VIEW (partial crypt/library)                                                                           */
 /*****************************************************************************************/
-CryptProxy::CryptProxy(QObject *parent) : QSortFilterProxyModel(parent)
+PartialDeckView::PartialDeckView(QWidget *parent) : QTreeView(parent)
 {
-    setFilterRole( Qt::UserRole );
-    setFilterRegExp( QRegExp("CRYPTE|Vampire|Imbued", Qt::CaseSensitive) ); //
+    setHeaderHidden(true);
+    setSelectionMode(QAbstractItemView::SingleSelection);
+    setAcceptDrops(true);
 }
 
-LibraryProxy::LibraryProxy(QObject *parent) : QSortFilterProxyModel(parent)
+void PartialDeckView::dragEnterEvent(QDragEnterEvent *event)
 {
-
+if (event->mimeData()->hasFormat("text/plain"))
+    {
+    event->setDropAction(Qt::CopyAction);
+    event->accept();
+    }
 }
 
+void PartialDeckView::dragMoveEvent(QDragMoveEvent *event)
+{
+if (event->mimeData()->hasFormat("text/plain"))
+    {
+    event->setDropAction(Qt::CopyAction);
+    event->accept();
+    }
+}
 
+void PartialDeckView::dropEvent(QDropEvent *event)
+{
+QString TempData;
+QStringList ListofData;
 
+    // on recup les données du drop | on les split | on chope le nom de la carte
+    TempData = event->mimeData()->text();
+    ListofData = TempData.split("\n",QString::KeepEmptyParts);
+    //qDebug() << ListofData;
 
+    // query the deck model to take the card
+    dynamic_cast<PTreeModel *>( model())->AddCardItem(ListofData);
+}
 
-
+PartialDeckView::~PartialDeckView() {}
 

@@ -1,9 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "Sauvegarde.h"
-//#include "pitemview.h"
-//#include "PWidget.h"
-//#include "game_element.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow)
 {
@@ -58,6 +55,15 @@ ui->setupUi(this);
 this->setWindowState(Qt::WindowMaximized);
 }
 
+// ///////////////////////////////////////////////
+// MISE EN FORME DU TAB 'DECK TUNING'
+{
+    QHBoxLayout *layout = new QHBoxLayout;
+    test_tuning = new tab_deck_tuning();
+    layout->addWidget(test_tuning);
+    ui->OngletProba->setLayout(layout);
+}
+
 // ////////////////////////////////////////////////
 // MISE EN FORME DU TAB 'RECHERCHE CARTE'
 {
@@ -65,6 +71,7 @@ this->setWindowState(Qt::WindowMaximized);
     test_search = new tab_search_library();
     layout->addWidget(test_search);
     ui->OngletRechercheCarte->setLayout(layout);
+    test_search->setupDeckModel(test_tuning->ModeleDeck);
 }
 
 // ///////////////////////////////////////////////
@@ -74,17 +81,7 @@ this->setWindowState(Qt::WindowMaximized);
     test_crypt = new tab_search_crypt();
     layout->addWidget(test_crypt);
     ui->OngletRechercheCrypte->setLayout(layout);
-}
-
-// ///////////////////////////////////////////////
-// MISE EN FORME DU TAB 'deck tuning'
-{
-    QHBoxLayout *layout = new QHBoxLayout;
-    test_tuning = new tab_deck_tuning();
-    layout->addWidget(test_tuning);
-    ui->OngletProba->setLayout(layout);
-    //PTreeView *DeckView = test_tuning->DeckView;
-    //ModelDeckCourant = dynamic_cast<PTreeModel *>(DeckView->model());
+    test_crypt->setupDeckModel(test_tuning->ModeleDeck);
 }
 
 // ///////////////////////////////////////////////
@@ -103,11 +100,7 @@ this->setWindowState(Qt::WindowMaximized);
     connect(ui->actionEnregistrer_le_Deck, SIGNAL(triggered()), this, SLOT(EnregistreDeck()));
     connect(ui->actionImprimer_le_Deck, SIGNAL(triggered()), this, SLOT(ImprimeDeck()));
     connect(ui->actionOptions, SIGNAL(triggered()), this, SLOT(OuvrirMenuOption()));
-
-    //connect( downloader, SIGNAL( picture_downloaded() ), this, SLOT( AfficheImageCarte(QString) ) );
-
-    connect( test_crypt, SIGNAL(card_dropped(QStringList)), test_tuning->DeckView, SLOT(fakeDrop(QStringList)) );
-    connect( test_search, SIGNAL(card_dropped(QStringList)), test_tuning->DeckView, SLOT(fakeDrop(QStringList)) );
+  //connect( downloader, SIGNAL( picture_downloaded() ), this, SLOT( AfficheImageCarte(QString) ) );
 }
 
 // ///////////////////////////////////////////////

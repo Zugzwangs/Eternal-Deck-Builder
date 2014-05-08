@@ -137,6 +137,5 @@
         <file>icons/delete.png</file>
         <file>icons/minus.png</file>
         <file>icons/plus.png</file>
-        <file>icons/deck.jpg</file>
     </qresource>
 </RCC>

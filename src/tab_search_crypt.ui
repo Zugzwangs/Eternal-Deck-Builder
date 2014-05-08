@@ -98,21 +98,21 @@
        <item>
         <widget class="QFrame" name="CryptSearchFrame">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
-           <width>1350</width>
-           <height>300</height>
+           <width>1250</width>
+           <height>200</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>1350</width>
-           <height>300</height>
+           <width>1400</width>
+           <height>350</height>
           </size>
          </property>
          <property name="autoFillBackground">
@@ -151,7 +151,7 @@
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>130</height>
+              <height>120</height>
              </size>
             </property>
             <property name="title">
@@ -284,7 +284,7 @@
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>220</height>
+              <height>200</height>
              </size>
             </property>
             <property name="autoFillBackground">
@@ -1744,6 +1744,12 @@
           </item>
           <item row="1" column="1" rowspan="2">
            <widget class="QGroupBox" name="groupBox">
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="title">
              <string>Generation</string>
             </property>
@@ -1907,6 +1913,12 @@
           </item>
           <item row="2" column="2">
            <widget class="QGroupBox" name="groupBoxVirtues">
+            <property name="minimumSize">
+             <size>
+              <width>65</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="title">
              <string>Virtues</string>
             </property>
@@ -2407,6 +2419,12 @@
           </item>
           <item row="1" column="0" rowspan="2">
            <widget class="QGroupBox" name="groupBoxTrait">
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="title">
              <string>Caracteristics</string>
             </property>
@@ -2589,18 +2607,31 @@
         </widget>
        </item>
        <item>
-        <widget class="PDeckDropArea" name="dropLabel">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
-         <property name="text">
-          <string/>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
          </property>
-         <property name="pixmap">
-          <pixmap resource="res.qrc">:/icons/deck.jpg</pixmap>
+        </spacer>
+       </item>
+       <item>
+        <widget class="PartialDeckView" name="CryptView">
+         <property name="minimumSize">
+          <size>
+           <width>220</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>400</width>
+           <height>16777215</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -2731,6 +2762,19 @@
            </widget>
           </item>
           <item>
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
            <widget class="QLabel" name="VisuelCrypt">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -2797,6 +2841,12 @@
            <height>100</height>
           </size>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>1500</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>
@@ -2814,19 +2864,6 @@
          </property>
         </widget>
        </item>
-       <item>
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
       </layout>
      </widget>
     </item>
@@ -2840,9 +2877,9 @@
    <header>mvdbdd.h</header>
   </customwidget>
   <customwidget>
-   <class>PDeckDropArea</class>
-   <extends>QLabel</extends>
-   <header>PWidget.h</header>
+   <class>PartialDeckView</class>
+   <extends>QTreeView</extends>
+   <header location="global">mvddeck.h</header>
   </customwidget>
  </customwidgets>
  <resources>

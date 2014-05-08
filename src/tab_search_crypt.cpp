@@ -68,22 +68,30 @@ tab_search_crypt::tab_search_crypt(QWidget *parent) : QScrollArea(parent), ui(ne
     // Add the completer to the main search label ( card name)
     Completer = new QCompleter( this );
     Completer->setCaseSensitivity( Qt::CaseInsensitive );
-    //Completer->setFilterMode( Qt::MatchStartsWith );
+    // Completer->setFilterMode( Qt::MatchStartsWith );
     Completer->setCompletionColumn( 1 );
     Completer->setCompletionRole( Qt::DisplayRole );
     Completer->setMaxVisibleItems( 8 );
     Completer->setModel( ModelReponseCrypt );
     ui->lENameCard->setCompleter( Completer );
 
-    // connections
+    // Connection des boutons
     connect(ui->pBCryptSearch, SIGNAL( clicked() ),    this, SLOT( RechercheCarte() ));
     connect(ui->pBCryptClearForm, SIGNAL( clicked() ), this, SLOT( ClearForm() ));
+    // Connection de la vue des resultats de recherche
     connect(ui->PTVCryptResults, SIGNAL( clicked(QModelIndex) ), this, SLOT(request_affichage(QModelIndex)));
     connect(ui->PTVCryptResults->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(request_affichage(QModelIndex)));
-
+    // Connection de la vue de la liste partielle du deck
+    connect(ui->CryptView, SIGNAL( clicked(QModelIndex)), this, SLOT( deck_request_affichage(QModelIndex)) );
+    // Connection du reste
     connect(this,  SIGNAL( new_card_selected(QString) ), this, SLOT( AfficheImageCrypt(QString) ));
-    //propagate the interne signal outside
-    connect( ui->dropLabel, SIGNAL(card_dropped(QStringList)), this, SIGNAL(card_dropped(QStringList)) );
+}
+
+// Setup the Library View
+void tab_search_crypt::setupDeckModel(PTreeModel* deckModel)
+{
+    ui->CryptView->setModel(deckModel);
+    ui->CryptView->setRootIndex(deckModel->itemCrypt->index());
 }
 
 void tab_search_crypt::RechercheCarte()
@@ -206,7 +214,16 @@ void tab_search_crypt::request_affichage(QModelIndex Idx)
         CurrentModel = Idx.model();
         QString CardName = CurrentModel->index(Idx.row(),3).data().toString();
         CardName = "/" + CardName + ".jpg";
+        emit new_card_selected(CardName);
+        }
+}
 
+void tab_search_crypt::deck_request_affichage(QModelIndex Idx)
+{
+    if ( Idx.isValid() )
+        {
+        QString CardName = Idx.data(VtesInfo::ImageFileRole).toString();
+        CardName = "/" + CardName + ".jpg";
         emit new_card_selected(CardName);
         }
 }

@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_tab_search_crypt_t {
-    QByteArrayData data[12];
-    char stringdata[150];
+    QByteArrayData data[13];
+    char stringdata[173];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,14 +39,15 @@ QT_MOC_LITERAL(6, 75, 9),
 QT_MOC_LITERAL(7, 85, 14),
 QT_MOC_LITERAL(8, 100, 17),
 QT_MOC_LITERAL(9, 118, 3),
-QT_MOC_LITERAL(10, 122, 17),
-QT_MOC_LITERAL(11, 140, 8)
+QT_MOC_LITERAL(10, 122, 22),
+QT_MOC_LITERAL(11, 145, 17),
+QT_MOC_LITERAL(12, 163, 8)
     },
     "tab_search_crypt\0new_card_selected\0\0"
     "card_picture_missing\0card_dropped\0"
     "StrL\0ClearForm\0RechercheCarte\0"
-    "request_affichage\0Idx\0AfficheImageCrypt\0"
-    "CardName\0"
+    "request_affichage\0Idx\0deck_request_affichage\0"
+    "AfficheImageCrypt\0CardName\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +57,7 @@ static const uint qt_meta_data_tab_search_crypt[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,15 +65,16 @@ static const uint qt_meta_data_tab_search_crypt[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   49,    2, 0x06,
-       3,    1,   52,    2, 0x06,
-       4,    1,   55,    2, 0x06,
+       1,    1,   54,    2, 0x06,
+       3,    1,   57,    2, 0x06,
+       4,    1,   60,    2, 0x06,
 
  // slots: name, argc, parameters, tag, flags
-       6,    0,   58,    2, 0x08,
-       7,    0,   59,    2, 0x08,
-       8,    1,   60,    2, 0x08,
-      10,    1,   63,    2, 0x08,
+       6,    0,   63,    2, 0x08,
+       7,    0,   64,    2, 0x08,
+       8,    1,   65,    2, 0x08,
+      10,    1,   68,    2, 0x08,
+      11,    1,   71,    2, 0x08,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    2,
@@ -83,7 +85,8 @@ static const uint qt_meta_data_tab_search_crypt[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QModelIndex,    9,
-    QMetaType::Void, QMetaType::QString,   11,
+    QMetaType::Void, QMetaType::QModelIndex,    9,
+    QMetaType::Void, QMetaType::QString,   12,
 
        0        // eod
 };
@@ -99,7 +102,8 @@ void tab_search_crypt::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 3: _t->ClearForm(); break;
         case 4: _t->RechercheCarte(); break;
         case 5: _t->request_affichage((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
-        case 6: _t->AfficheImageCrypt((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 6: _t->deck_request_affichage((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
+        case 7: _t->AfficheImageCrypt((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -151,13 +155,13 @@ int tab_search_crypt::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }

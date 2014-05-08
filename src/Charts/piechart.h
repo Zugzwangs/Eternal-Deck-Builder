@@ -31,6 +31,7 @@ public:
 
   virtual bool save( QString filename );
   void scrollTo( const QModelIndex& index, ScrollHint hint = EnsureVisible );
+  void setActiveColumn(int column);
   void setLegend( QString legend );
   void setSplitted( bool splitted = true );
   void setRing( bool ring = true );
@@ -42,6 +43,7 @@ protected:
   bool    myRing;
   qreal   myStartAngle;
   QString myLegend;
+  int     myActiveColumn;
 
   qreal startAngle() const;
 
@@ -52,8 +54,8 @@ protected:
 
   virtual void paintChart( QPainter& painter );
   virtual void paintEvent(QPaintEvent* event);
-  virtual void paintPart( QPainter& painter, qreal angle, qreal delta, QColor color, bool isSelected = false );
-  virtual void paintPartSplitted( QPainter& painter, qreal angle, qreal delta, QColor color, bool isSelected = false );
+  virtual void paintPart( QPainter& painter, qreal angle, qreal delta, QColor color, bool isSelected = false, QString partText = "" );
+  virtual void paintPartSplitted( QPainter& painter, qreal angle, qreal delta, QColor color, bool isSelected = false, QString partText = "" );
 
   //void setSelection(const QRect& rect, QItemSelectionModel::SelectionFlags command);
   virtual QPointF splittedOffset( qreal angle, qreal delta ) const;

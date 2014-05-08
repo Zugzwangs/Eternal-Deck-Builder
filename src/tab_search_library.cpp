@@ -32,14 +32,12 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
 
     //setup des boutons des disciplines et virtues
     QList<DisciplineButton *> ListDisciplineBt = ui->CardgroupBoxDiscipline->findChildren<DisciplineButton *>(QString(), Qt::FindDirectChildrenOnly);
-
     foreach( DisciplineButton* current_discipline_bt, ListDisciplineBt )
         {
         current_discipline_bt->setupDiscipline( current_discipline_bt->objectName() );
         }
 
     QList<DisciplineButton *> ListVirtuesCheckBox = ui->CardgroupBoxVirtues->findChildren<DisciplineButton *>(QString(), Qt::FindDirectChildrenOnly);
-
     foreach( DisciplineButton* current_virtues_bt, ListVirtuesCheckBox )
         {
         current_virtues_bt->setupDiscipline( current_virtues_bt->objectName() );
@@ -91,15 +89,25 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
     Completer->setModel( ModelReponseCarte );
     ui->lENameCard_2->setCompleter( Completer );
 
-    // connections du bordel
+    // Connection des boutons et formulaires
     connect( ui->cBType, SIGNAL( activated(int )),     this, SLOT( AdapteSousType() ) );
     connect( ui->pBCardClearForm, SIGNAL( clicked() ), this, SLOT( ClearForm() ) );
     connect( ui->pBCardSearch, SIGNAL( clicked() ),    this, SLOT( RechercheCarte() ) );
+    // Connection de la vue des resultats de recherche
     connect( ui->PTVCardsResults, SIGNAL( clicked(QModelIndex) ), this, SLOT( request_affichage(QModelIndex) ) );
     connect (ui->PTVCardsResults->selectionModel(), SIGNAL( currentRowChanged(QModelIndex,QModelIndex) ), this, SLOT( request_affichage(QModelIndex) ) );
-
+    // Connection de la vue de la liste partielle du deck
+    connect(ui->LibraryView, SIGNAL( clicked(QModelIndex)), this, SLOT( deck_request_affichage(QModelIndex)) );
+    // Connection du reste
     connect(this, SIGNAL( new_card_selected(QString) ), this, SLOT( AfficheImageCarte(QString) ));
-    connect( ui->dropLabel, SIGNAL(card_dropped(QStringList)), this, SIGNAL(card_dropped(QStringList)) );
+}
+
+
+// Setup the Library View
+void tab_search_library::setupDeckModel(PTreeModel* deckModel)
+{
+    ui->LibraryView->setModel(deckModel);
+    ui->LibraryView->setRootIndex(deckModel->itemLib->index());
 }
 
 void tab_search_library::RechercheCarte()
@@ -214,6 +222,16 @@ void tab_search_library::request_affichage(QModelIndex Idx)
         QString CardName = CurrentModel->index(Idx.row(),3).data().toString();
         CardName = "/" + CardName + ".jpg";
 
+        emit new_card_selected(CardName);
+        }
+}
+
+void tab_search_library::deck_request_affichage(QModelIndex Idx)
+{
+    if ( Idx.isValid() )
+        {
+        QString CardName = Idx.data(VtesInfo::ImageFileRole).toString();
+        CardName = "/" + CardName + ".jpg";
         emit new_card_selected(CardName);
         }
 }
