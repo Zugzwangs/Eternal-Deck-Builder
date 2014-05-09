@@ -65,7 +65,8 @@ namespace VtesInfo
     enum DeckItemRoles { NameRole = Qt::UserRole, SetsRole, ImageFileRole, URLCarteRole, ExpansionRole, RarityRole, TypeRole,
                          SubTypeRole, ClanRole, GroupingRole, CapacityRole, DisciplineRole, SectRole, PCostRole, BCostRole,
                          CCostRole, TitleRole, TraitRole, KeyWordsRole, LimitationRole, TextRole, ArtistRole, CommentaryRole,
-                         ExemplairRole, ItemCategoryRole};
+                         ExemplairRole, ItemCategoryRole,
+                         RegionButtonAddRole};
 }
 
 #endif

@@ -181,12 +181,60 @@ PTreeView::PTreeView(QWidget *parent) : QTreeView(parent)
     setHeaderHidden("true");
     setAnimated(true);
     setIndentation(10);
+    setSelectionMode(QAbstractItemView::SingleSelection);
 }
 
 void PTreeView::setModel(QAbstractItemModel *model)
 {
     QTreeView::setModel(model);
     deckModel = dynamic_cast<PTreeModel*>(model);
+}
+
+void PTreeView::mousePressEvent(QMouseEvent *event)
+{
+    QModelIndex index = indexAt(event->pos());
+    if ( !index.isValid() )
+        return;
+
+    int itemType = deckModel->itemFromIndex(index)->type();
+
+    switch ( itemType )
+        {
+        case VtesInfo::SortItemType:
+            {
+            QTreeView::mousePressEvent( event );
+            }   break;
+
+        //we add management for the nested buttons : check if user click on
+        case VtesInfo::CryptItemType:
+        case VtesInfo::LibraryItemType:
+            {
+            QTreeView::mousePressEvent( event );
+            int abscisse = event->pos().x();
+
+            if ( 350<=abscisse && abscisse<=370 )
+                {
+                qDebug() << "MOINS";
+                }
+            else
+                {
+                if ( 385<=abscisse && abscisse<=405 )
+                    {
+                    qDebug() << "PLUS";
+                    }
+                else
+                    {
+                    if ( 420<=abscisse && abscisse<=440 )
+                        qDebug() << "DELETE";
+                    }
+                }
+            }
+        }
+}
+
+void PTreeView::mouseReleaseEvent(QMouseEvent *event)
+{
+    QTreeView::mouseReleaseEvent(event);
 }
 
 void PTreeView::fakeDrop(QStringList StrL)
@@ -231,7 +279,7 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
             // prise en charge de l'état hightlighted
             if ( opt.state & QStyle::State_Selected )
                 {
-                painter->setBrush( option.palette.highlightedText() );
+                painter->setBrush( opt.palette.highlightedText() );
                 style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
                 }
             /*else
@@ -352,6 +400,7 @@ QSize PDelegateDeck::sizeHint(const QStyleOptionViewItem &option, const QModelIn
 SortItem::SortItem(QString txt) : QStandardItem(txt)
 {
     setEditable(false);
+    setSelectable(true);
     setData( data(Qt::DisplayRole), Qt::UserRole );
     setData( 0, VtesInfo::ExemplairRole );
     setData( VtesInfo::SortItemType, VtesInfo::ItemCategoryRole);
@@ -373,6 +422,7 @@ SortItem::~SortItem()   {}
 CryptCardItem::CryptCardItem(QStringList strL) : QObject(), QStandardItem(strL[1])
 {
     setEditable(false);
+    setSelectable(true);
     // we set technicals datas
     setData( 1, VtesInfo::ExemplairRole );
     setData( VtesInfo::CryptItemType, VtesInfo::ItemCategoryRole);
@@ -421,7 +471,7 @@ CryptCardItem::~CryptCardItem()   {}
 LibraryCardItem::LibraryCardItem(QStringList strL) : QObject(),QStandardItem(strL[1])
 {
     setEditable(false);
-
+    setSelectable(true);
     // we set technicals datas
     setData( 1, VtesInfo::ExemplairRole );
     setData( VtesInfo::LibraryItemType, VtesInfo::ItemCategoryRole);

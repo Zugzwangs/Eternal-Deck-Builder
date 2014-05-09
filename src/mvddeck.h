@@ -138,6 +138,10 @@ public:
     void setModel(QAbstractItemModel *model);
     PTreeModel* deckModel;
 
+protected:
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+
 public slots:
     void fakeDrop(QStringList StrL);
 };

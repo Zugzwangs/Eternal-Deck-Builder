@@ -9,6 +9,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     ui->setupUi(this);
 
     // on map la deck view définie private dans l'ui vers un membre de classe public
+    // TODO : verifié si ce lien est toujours utile
     DeckView = ui->PTreeViewDeckList;
 
     // on assigne le model de données
@@ -26,7 +27,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     mapper.AddWidget(ui->lE_author,"author");
     mapper.AddWidget(ui->lE_description,"description");
 
-    // Model de stats qui se construit sur le Deck model (static size [11,2] )
+    // On construit le modéle de stats qui se construit sur le DeckModel (static size [11,2] )
     model_test = new StatsModel;
     model_test->setData( model_test->index( 0, 0 ), 5, Qt::DisplayRole );
     model_test->setData( model_test->index( 0, 1 ), 5, Qt::DisplayRole );
