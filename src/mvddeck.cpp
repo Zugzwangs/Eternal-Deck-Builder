@@ -127,8 +127,8 @@ return NULL;
 /*****************************************************************************************/
 /*  THE OVER VIEW MODEL                                                                  */
 /*  THE TWO FIRST COLUMNS ARE ABOUT THE CRYPT STATS. EACH ROW HOLD THE NUMBER OF VAMPIRE WHERE */
-/*  C1 == GENERATION   C2 == GROUPING                                                                 */
-/*  THE Third COLUMN HOLDS LIBRARY STATS                                                */
+/*  C1 == GENERATION   C2 == GROUPING                                                    */
+/*  THE Third COLUMN HOLDS LIBRARY STATS                                                 */
 /*****************************************************************************************/
 StatsModel::StatsModel(QObject *parent) : QStandardItemModel(14, 3, parent)
 {
@@ -221,11 +221,24 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
             QStyledItemDelegate::initStyleOption(&opt, index);
             const QWidget *widget = option.widget;
             QStyle *style = widget ? widget->style() : QApplication::style();
+            opt.text = "";
 
             // setup du paintre
             painter->save();
             painter->setRenderHint(QPainter::Antialiasing);
             painter->setClipRect(opt.rect, Qt::ReplaceClip);
+
+            // prise en charge de l'état hightlighted
+            if ( opt.state & QStyle::State_Selected )
+                {
+                painter->setBrush( option.palette.highlightedText() );
+                style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
+                }
+            /*else
+                {
+                painter->setPen( QPen(option.palette.foreground(), 0) );
+                painter->setBrush(qvariant_cast<QBrush>(index.data(Qt::ForegroundRole)));
+                }*/
 
             // découpage des régions
             // affichage de la forme : [ nbExp | Name card | - | + | x ]
@@ -245,21 +258,6 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
             NameRegion.setLeft( ExRegion.right() );
             NameRegion.setRight( ButtonsRegion.left() );
 
-            // dessin de la case
-            opt.text = "";
-            if ( opt.state & QStyle::State_Selected )
-                {
-                // prend en charge l'affichage en mode focus
-                //painter->setPen(Qt::white);
-                painter->setBrush( option.palette.highlightedText() );
-                //style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
-                }
-            else
-                {
-                painter->setPen( QPen(option.palette.foreground(), 0) );
-                painter->setBrush(qvariant_cast<QBrush>(index.data(Qt::ForegroundRole)));
-                }
-
             // dessin du nombre d'exemplaires
             style->drawItemText(painter, ExRegion, 1, opt.palette, true, "x" + index.data(VtesInfo::ExemplairRole).toString() );
 
@@ -267,35 +265,31 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
             painter->drawText( NameRegion, Qt::AlignLeft, index.data().toString());
 
             // dessin du bouton - (enlever exemplaire)
-            QStyleOptionButton*  bt_rmex = new QStyleOptionButton;
-            bt_rmex->rect = btMinusRegion;
-            bt_rmex->icon = QIcon(":/icons/minus.png");
-            bt_rmex->iconSize = btMinusRegion.size();
-            style->drawControl( QStyle::CE_PushButton, bt_rmex, painter);
+            QStyleOptionButton bt_rmex;
+            bt_rmex.rect = btMinusRegion;
+            bt_rmex.icon = QIcon(":/icons/minus.png");
+            bt_rmex.iconSize = btMinusRegion.size();
+            bt_rmex.features |= QStyleOptionButton::Flat;
+            bt_rmex.state    |= QStyle::State_Enabled;
+            style->drawControl( QStyle::CE_PushButton, &bt_rmex, painter);
 
             // dessin du bouton + (ajouter exemplaire)
-            QStyleOptionButton*  bt_addex = new QStyleOptionButton;
-            bt_addex->rect = btPlusRegion;
-            bt_addex->icon = QIcon(":/icons/plus.png");
-            bt_addex->iconSize = btPlusRegion.size();
-            style->drawControl( QStyle::CE_PushButton, bt_addex, painter);
+            QStyleOptionButton bt_addex;
+            bt_addex.rect = btPlusRegion;
+            bt_addex.icon = QIcon(":/icons/plus.png");
+            bt_addex.iconSize = btPlusRegion.size();
+            bt_addex.features |= QStyleOptionButton::Flat;
+            bt_addex.state    |= QStyle::State_Enabled;
+            style->drawControl( QStyle::CE_PushButton, &bt_addex, painter);
 
             // dessin du bouton suppression carte
-            QStyleOptionButton* bt_delete = new QStyleOptionButton();
-            bt_delete->rect = btDeleteRegion;
-            bt_delete->icon = QIcon(":/icons/delete.png");
-            bt_delete->iconSize = btDeleteRegion.size();
-            style->drawControl( QStyle::CE_PushButton, bt_delete, painter);
-
-            // test autre méthode de dessin
-            /*
-            QPushButton *fock = new QPushButton();
-            fock->setGeometry(btDeleteRegion);
-            fock->setIcon(QIcon(":/icons/delete.png"));
-            fock->setIconSize(btDeleteRegion.size());
-            fock->setStyleSheet("border: none;");
-            fock->render(painter);
-            */
+            QStyleOptionButton bt_delete;
+            bt_delete.rect = btDeleteRegion;
+            bt_delete.icon = QIcon(":/icons/delete.png");
+            bt_delete.iconSize = btDeleteRegion.size();
+            bt_delete.features |= QStyleOptionButton::Flat;
+            bt_delete.state    |= QStyle::State_Enabled;
+            style->drawControl( QStyle::CE_PushButton, &bt_delete, painter);
 
             painter->restore();
             }   break;

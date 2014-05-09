@@ -401,7 +401,7 @@ public:
         aus->setSizePolicy(sizePolicy2);
         aus->setMinimumSize(QSize(40, 40));
         aus->setMaximumSize(QSize(40, 40));
-        aus->setFlat(true);
+        aus->setFlat(false);
 
         gridLayout->addWidget(aus, 2, 0, 1, 1);
 
@@ -564,8 +564,8 @@ public:
         ani->setSizePolicy(sizePolicy2);
         ani->setMinimumSize(QSize(40, 40));
         ani->setMaximumSize(QSize(40, 40));
-        ani->setCheckable(true);
-        ani->setFlat(true);
+        ani->setCheckable(false);
+        ani->setFlat(false);
 
         gridLayout->addWidget(ani, 1, 0, 1, 1);
 

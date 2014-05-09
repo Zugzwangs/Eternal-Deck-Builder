@@ -32,6 +32,7 @@ class Ui_tab_deck_tuning
 public:
     QWidget *scrollAreaWidgetContents;
     QGridLayout *gridLayout_3;
+    PTreeView *PTreeViewDeckList;
     QFrame *frame;
     QVBoxLayout *verticalLayout;
     QFrame *frame_meta;
@@ -44,13 +45,12 @@ public:
     QSpacerItem *horizontalSpacer_2;
     QLabel *label_2;
     QLineEdit *lE_description;
-    QTabWidget *tabWidget;
+    QTabWidget *tab_details;
     QWidget *tab_overView;
     QFrame *frame_3;
     QGridLayout *gridLayout_2;
     QWidget *tab_crypt;
     QWidget *tab_library;
-    PTreeView *PTreeViewDeckList;
 
     void setupUi(QScrollArea *tab_deck_tuning)
     {
@@ -64,6 +64,17 @@ public:
         gridLayout_3 = new QGridLayout(scrollAreaWidgetContents);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         gridLayout_3->setContentsMargins(7, 7, 7, 7);
+        PTreeViewDeckList = new PTreeView(scrollAreaWidgetContents);
+        PTreeViewDeckList->setObjectName(QStringLiteral("PTreeViewDeckList"));
+        PTreeViewDeckList->setMinimumSize(QSize(200, 0));
+        PTreeViewDeckList->setMaximumSize(QSize(450, 16777215));
+        PTreeViewDeckList->setSelectionBehavior(QAbstractItemView::SelectItems);
+        PTreeViewDeckList->setHeaderHidden(true);
+        PTreeViewDeckList->header()->setVisible(false);
+        PTreeViewDeckList->header()->setStretchLastSection(true);
+
+        gridLayout_3->addWidget(PTreeViewDeckList, 0, 0, 1, 1);
+
         frame = new QFrame(scrollAreaWidgetContents);
         frame->setObjectName(QStringLiteral("frame"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -131,13 +142,13 @@ public:
 
         verticalLayout->addWidget(frame_meta);
 
-        tabWidget = new QTabWidget(frame);
-        tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        tab_details = new QTabWidget(frame);
+        tab_details->setObjectName(QStringLiteral("tab_details"));
         tab_overView = new QWidget();
         tab_overView->setObjectName(QStringLiteral("tab_overView"));
         frame_3 = new QFrame(tab_overView);
         frame_3->setObjectName(QStringLiteral("frame_3"));
-        frame_3->setGeometry(QRect(11, 11, 881, 651));
+        frame_3->setGeometry(QRect(161, 151, 731, 511));
         sizePolicy.setHeightForWidth(frame_3->sizePolicy().hasHeightForWidth());
         frame_3->setSizePolicy(sizePolicy);
         frame_3->setFrameShape(QFrame::NoFrame);
@@ -145,35 +156,24 @@ public:
         frame_3->setLineWidth(0);
         gridLayout_2 = new QGridLayout(frame_3);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        tabWidget->addTab(tab_overView, QString());
+        tab_details->addTab(tab_overView, QString());
         tab_crypt = new QWidget();
         tab_crypt->setObjectName(QStringLiteral("tab_crypt"));
-        tabWidget->addTab(tab_crypt, QString());
+        tab_details->addTab(tab_crypt, QString());
         tab_library = new QWidget();
         tab_library->setObjectName(QStringLiteral("tab_library"));
-        tabWidget->addTab(tab_library, QString());
+        tab_details->addTab(tab_library, QString());
 
-        verticalLayout->addWidget(tabWidget);
+        verticalLayout->addWidget(tab_details);
 
 
         gridLayout_3->addWidget(frame, 0, 1, 1, 1);
-
-        PTreeViewDeckList = new PTreeView(scrollAreaWidgetContents);
-        PTreeViewDeckList->setObjectName(QStringLiteral("PTreeViewDeckList"));
-        PTreeViewDeckList->setMinimumSize(QSize(200, 0));
-        PTreeViewDeckList->setMaximumSize(QSize(450, 16777215));
-        PTreeViewDeckList->setSelectionBehavior(QAbstractItemView::SelectItems);
-        PTreeViewDeckList->setHeaderHidden(true);
-        PTreeViewDeckList->header()->setVisible(false);
-        PTreeViewDeckList->header()->setStretchLastSection(true);
-
-        gridLayout_3->addWidget(PTreeViewDeckList, 0, 0, 1, 1);
 
         tab_deck_tuning->setWidget(scrollAreaWidgetContents);
 
         retranslateUi(tab_deck_tuning);
 
-        tabWidget->setCurrentIndex(0);
+        tab_details->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(tab_deck_tuning);
@@ -185,9 +185,9 @@ public:
         label_3->setText(QApplication::translate("tab_deck_tuning", "author", 0));
         label->setText(QApplication::translate("tab_deck_tuning", "Name", 0));
         label_2->setText(QApplication::translate("tab_deck_tuning", "Description", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_overView), QApplication::translate("tab_deck_tuning", "OverView", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_crypt), QApplication::translate("tab_deck_tuning", "Tab 2", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_library), QApplication::translate("tab_deck_tuning", "Page", 0));
+        tab_details->setTabText(tab_details->indexOf(tab_overView), QApplication::translate("tab_deck_tuning", "OverView", 0));
+        tab_details->setTabText(tab_details->indexOf(tab_crypt), QApplication::translate("tab_deck_tuning", "Tab 2", 0));
+        tab_details->setTabText(tab_details->indexOf(tab_library), QApplication::translate("tab_deck_tuning", "Page", 0));
     } // retranslateUi
 
 };

@@ -46,6 +46,11 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     connect( ModeleDeck, SIGNAL( CardAdded(QModelIndex, QModelIndex) ), this, SLOT( sync_stats_model(QModelIndex, QModelIndex) ) );
     connect( ModeleDeck, SIGNAL( CardRemoved() ), this, SLOT( sync_crypt_stat() ) );
 
+    // mise en page des onglets :
+    QHBoxLayout *layout = new QHBoxLayout;
+    ui->tab_overView->setLayout(layout);
+    layout->addWidget(ui->frame_3);
+
     // LA VUE PIECHART
     testPie = new PieChart();
     testPie->setLegend("Type repartition");

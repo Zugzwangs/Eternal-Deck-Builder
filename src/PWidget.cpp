@@ -1,6 +1,7 @@
 #include "PWidget.h"
 #include "mainwindow.h"
 #include <QDrag>
+#include <QStyle>
 
 // /////////////////////////////////////////////////////////////////////////////////////////
 // Distributeur de blood
@@ -68,14 +69,44 @@ void DisciplineButton::setupDiscipline(QString dis)
     setIcon(icone);
 }
 
-/*
 void DisciplineButton::paintEvent(QPaintEvent *e)
 {
-    QRect rect( e->rect() );
-    QPainter painter( this );
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    //painter.setClipRect( rect );
+    switch (state)
+    {
+        case DisciplineButton::RequestNothing:
+            {
+            QStyleOptionButton option;
+            option.initFrom(this);
+            option.icon = this->icon();
+            option.iconSize = this->iconSize();
+            option.features |= QStyleOptionButton::Flat;
+            option.state = ! QStyle::State_Enabled;
+            QPainter painter(this);
+            style()->drawControl(QStyle::CE_PushButton, &option, &painter, this);
+            }   break;
 
+        case DisciplineButton::RequestDiscipline:
+            {
+            QPushButton::paintEvent(e);
+            }   break;
+
+        case DisciplineButton::RequestNotDiscipline:
+            {
+            // draw button
+            QStyleOptionButton option;
+            option.initFrom(this);
+            option.icon = this->icon();
+            option.iconSize = this->iconSize();
+            QPainter painter(this);
+            style()->drawControl(QStyle::CE_PushButton, &option, &painter, this);
+            // draw the cross
+            QRect myRect = option.rect;
+            myRect.adjust(6,6,-6,-6);
+            painter.drawPixmap( myRect, QPixmap(":icons/cross.png") );
+            }   break;
+    }
+
+/*
     switch (state)
     {
         case DisciplineButton::RequestNothing:
@@ -111,7 +142,8 @@ void DisciplineButton::paintEvent(QPaintEvent *e)
             painter.drawLine(rect.bottomLeft(), rect.topRight());
             break;
     }
-}*/
+*/
+}
 
 void DisciplineButton::nextCheckState()
 {
@@ -120,6 +152,7 @@ void DisciplineButton::nextCheckState()
         case DisciplineButton::RequestNothing:
             state = DisciplineButton::RequestDiscipline;
             sql_request = " AND Discipline like '%" + discipline + "%'";
+            setIconSize( QSize(34,34) );
             break;
 
         case DisciplineButton::RequestDiscipline:
@@ -130,7 +163,7 @@ void DisciplineButton::nextCheckState()
         case DisciplineButton::RequestNotDiscipline:
             state = DisciplineButton::RequestNothing;
             sql_request = "";
-
+            setIconSize(QSize(30,30));
             break;
     }
 }

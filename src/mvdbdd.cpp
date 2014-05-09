@@ -113,9 +113,9 @@ switch(index.column())
         // setup du contexte de dessin
         QStyleOptionViewItemV4 opt(option);
         QStyledItemDelegate::initStyleOption(&opt, index);
-        opt.text = "";
         const QWidget *widget = option.widget;
         QStyle *style = widget ? widget->style() : QApplication::style();
+        opt.text = "";
 
         // setup du peintre
         painter->save();
