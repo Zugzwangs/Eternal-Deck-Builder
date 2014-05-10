@@ -43,30 +43,65 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
         model_test->setHeaderData(i, Qt::Vertical, VtesInfo::CardTypeList[i], Qt::EditRole);
         }
 
+    // Connect the fake buttons nested in CardItem
+    connect( DeckView, SIGNAL(request_increment(QModelIndex)), ModeleDeck, SLOT(IncrementCardItem(QModelIndex)) );
+    connect( DeckView, SIGNAL(request_decrement(QModelIndex)), ModeleDeck, SLOT(DecrementCardItem(QModelIndex)) );
+    connect( DeckView, SIGNAL(request_delete(QModelIndex))   , ModeleDeck, SLOT(RemoveCardITem(QModelIndex))    );
+
     // Connect Stats model to changes of the deck model for syncs purposes
-    connect( ModeleDeck, SIGNAL( CardAdded(QModelIndex, QModelIndex) ), this, SLOT( sync_stats_model(QModelIndex, QModelIndex) ) );
-    connect( ModeleDeck, SIGNAL( CardRemoved() ), this, SLOT( sync_crypt_stat() ) );
+    connect( ModeleDeck, SIGNAL( DeckChanged(QModelIndex, QModelIndex) ), this, SLOT( sync_stats_model(QModelIndex, QModelIndex) ) );
 
-    // mise en page des onglets :
-    QHBoxLayout *layout = new QHBoxLayout;
-    ui->tab_overView->setLayout(layout);
-    layout->addWidget(ui->frame_3);
-
-    // LA VUE PIECHART
+    // Setup tab OverView
+    QHBoxLayout *layout_overView = new QHBoxLayout;
+    ui->tab_overView->setLayout(layout_overView);
+    layout_overView->addWidget(ui->frameOverView);
     testPie = new PieChart();
     testPie->setLegend("Type repartition");
-    //testPie->setRing(True);
-    dynamic_cast<QGridLayout *>(ui->frame_3->layout())->addWidget( testPie, 0, 0 );
+    dynamic_cast<QGridLayout *>(ui->frameOverView->layout())->addWidget( testPie, 0, 0 );
     testPie->setModel(model_test);
     testPie->setActiveColumn(2);
-
-    // LA VUE HISTOGRAMME
     testLinear = new LinearChart();
     testLinear->setModel( model_test );
     ChartStyle style = testLinear->columnStyle( 0 );
     style.setType( Marb::Bar );
     testLinear->setColumnStyle( 0, style );
-    dynamic_cast<QGridLayout *>(ui->frame_3->layout())->addWidget( testLinear, 0, 1 );
+    dynamic_cast<QGridLayout *>(ui->frameOverView->layout())->addWidget( testLinear, 0, 1 );
+
+    // Setup tab crypt
+    QHBoxLayout *layout_crypt = new QHBoxLayout;
+    ui->tab_crypt->setLayout(layout_crypt);
+    layout_crypt->addWidget(ui->frameCrypt);
+
+    cryptGalerie = new QListView();
+    cryptGalerie->setMinimumHeight(450);
+    cryptGalerie->setUniformItemSizes(true);
+    cryptGalerie->setGridSize( QSize(150,210) );
+    cryptGalerie->setIconSize( QSize(144,200) );
+    cryptGalerie->setWrapping(true);
+    cryptGalerie->setFrameShape(QFrame::NoFrame);
+    cryptGalerie->setModel(ModeleDeck);
+    cryptGalerie->setModelColumn(0);
+    cryptGalerie->setRootIndex(ModeleDeck->itemCrypt->index());
+
+    dynamic_cast<QVBoxLayout *>(ui->frameCrypt->layout())->addWidget( cryptGalerie );
+
+    // Setup tab crypt
+    QHBoxLayout *layout_library= new QHBoxLayout;
+    ui->tab_library->setLayout(layout_library);
+    layout_library->addWidget(ui->frameLibrary);
+
+    LibraryGalerie = new QListView();
+    LibraryGalerie->setMinimumHeight(450);
+    LibraryGalerie->setUniformItemSizes(true);
+    LibraryGalerie->setGridSize( QSize(150,210) );
+    LibraryGalerie->setIconSize( QSize(144,200) );
+    LibraryGalerie->setWrapping(true);
+    LibraryGalerie->setFrameShape(QFrame::NoFrame);
+    LibraryGalerie->setModel(ModeleDeck);
+    LibraryGalerie->setModelColumn(0);
+    LibraryGalerie->setRootIndex(ModeleDeck->itemLib->index());
+
+    dynamic_cast<QVBoxLayout *>(ui->frameLibrary->layout())->addWidget( LibraryGalerie );
 }
 
 // the deck model has been changed, so we update datas in the stats/overview model

@@ -19,6 +19,7 @@ public:
     explicit SortItem(QString txt);
     ~SortItem();
     void Increment(int i=1);
+    void Decrement(int i=1);
     virtual int	type() const;
 };
 
@@ -82,13 +83,15 @@ public:
 
 public slots:
     void AddCardItem(QStringList strL);
+    void IncrementCardItem( QModelIndex Idx );
+    void DecrementCardItem( QModelIndex Idx );
     void RemoveCardITem( QModelIndex Idx );
     CryptCardItem* FindCryptCard( QString CardName );
     LibraryCardItem* FindLibraryCard( QString CardName );
 
 signals:
-    void CardAdded(QModelIndex parent, QModelIndex AddedItem);
-    void CardRemoved();
+    void DeckChanged(QModelIndex parent, QModelIndex AddedItem);
+    //void CardRemoved();
 };
 
 
@@ -144,6 +147,11 @@ protected:
 
 public slots:
     void fakeDrop(QStringList StrL);
+
+signals:
+    void request_increment( QModelIndex );
+    void request_decrement( QModelIndex );
+    void request_delete( QModelIndex );
 };
 
 

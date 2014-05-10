@@ -2,8 +2,8 @@
 #define TAB_DECK_TUNING_H
 
 #include <QScrollArea>
-//#include <QTableView>
 #include <QStandardItemModel>
+#include <QListView>
 
 #include "mvddeck.h"
 #include "Charts/piechart.h"
@@ -29,6 +29,8 @@ private:
     // Stats Model
     StatsModel *model_test;
     // Views
+    QListView *cryptGalerie;
+    QListView *LibraryGalerie;
     PieChart *testPie;
     LinearChart *testLinear;
     LinearChart *test_crypt_view;

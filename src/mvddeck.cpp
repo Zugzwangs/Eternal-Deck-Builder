@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QDebug>
 #include <QMimeData>
+#include <QHeaderView>
 
 /*****************************************************************************************/
 /*   MODEL                                                                               */
@@ -38,22 +39,18 @@ SortItem* Category;
     if ( CardCat == "Vampire" || CardCat == "Imbued" )
         {
         Category = itemCrypt;
-        CryptCardItem* newCard = new CryptCardItem(strL);
         CryptCardItem* TempItem = FindCryptCard( CardName );
         if ( TempItem )
             {
-            TempItem->Increment();
-            Category->Increment();
-            emit CardAdded(Category->index(), TempItem->index());
-            delete newCard;
+            IncrementCardItem( TempItem->index() );
             }
         else
             {
-            // the card is not there, so we add it in the right SortItem
+            // the card is not already in the deck => we create it
+            CryptCardItem* newCard = new CryptCardItem(strL);
             Category->appendRow(newCard);
             Category->Increment();
-            connect( newCard, SIGNAL(request_deleting(QModelIndex)), this, SLOT(RemoveCardITem(QModelIndex)) );
-            emit CardAdded(Category->index(), newCard->index());
+            emit DeckChanged(Category->index(), newCard->index());
             delete TempItem;
             }
         }
@@ -61,34 +58,59 @@ SortItem* Category;
     else // LIBRARY CARD CASE
         {
         Category = itemLib;
-        LibraryCardItem* newCard = new LibraryCardItem(strL);
         LibraryCardItem* TempItem = FindLibraryCard( CardName );
         if ( TempItem )
             {
-            TempItem->Increment();
-            Category->Increment();
-            emit CardAdded(Category->index(), TempItem->index());
-            delete newCard;
+            IncrementCardItem( TempItem->index() );
             }
         else
             {
-            // the card is not there, so we add it in the right SortItem
+            // the card is not already in the deck => we create it
+            LibraryCardItem* newCard = new LibraryCardItem(strL);
             Category->appendRow(newCard);
             Category->Increment();
-            emit CardAdded(Category->index(), newCard->index());
+            emit DeckChanged(Category->index(), newCard->index());
             delete TempItem;
             }
         }
     return;
 }
 
+void PTreeModel::IncrementCardItem( QModelIndex Idx )
+{
+    if ( itemFromIndex(Idx)->type() == VtesInfo::CryptItemType )
+        {
+        dynamic_cast<CryptCardItem *>(itemFromIndex(Idx))->Increment();
+        }
+    else
+        dynamic_cast<LibraryCardItem *>(itemFromIndex(Idx))->Increment();
+
+    emit DeckChanged( Idx.parent(), Idx);
+}
+
+void PTreeModel::DecrementCardItem( QModelIndex Idx )
+{
+    if ( itemFromIndex(Idx)->type() == VtesInfo::CryptItemType )
+        {
+        dynamic_cast<CryptCardItem *>(itemFromIndex(Idx))->Decrement();;
+        }
+    else
+        {
+        dynamic_cast<LibraryCardItem *>(itemFromIndex(Idx))->Decrement();;
+        }
+
+    emit DeckChanged( Idx.parent(), Idx);
+}
+
 void PTreeModel::RemoveCardITem( QModelIndex Idx )
 {
-    QModelIndex dady = Idx.parent();
-    if (dady.isValid() )
+    if (Idx.parent().isValid() )
         {
-        removeRow( Idx.row(), dady);
-        emit CardRemoved();
+        int ex = Idx.data(VtesInfo::ExemplairRole).toInt();
+        removeRow( Idx.row(), Idx.parent() );
+        SortItem *dady = dynamic_cast<SortItem *>(itemFromIndex( Idx.parent() ));
+        dady->Decrement(ex);
+        emit DeckChanged( Idx.parent(), Idx);
         }
 }
 
@@ -178,10 +200,12 @@ PTreeView::PTreeView(QWidget *parent) : QTreeView(parent)
 {
     setVisible(true);
     setDragDropOverwriteMode(false);
+    header()->setStretchLastSection(true);
     setHeaderHidden("true");
     setAnimated(true);
     setIndentation(10);
     setSelectionMode(QAbstractItemView::SingleSelection);
+    setIconSize( QSize(0,0) );
 }
 
 void PTreeView::setModel(QAbstractItemModel *model)
@@ -214,18 +238,19 @@ void PTreeView::mousePressEvent(QMouseEvent *event)
 
             if ( 350<=abscisse && abscisse<=370 )
                 {
-                qDebug() << "MOINS";
+                emit request_decrement( index );
                 }
             else
                 {
                 if ( 385<=abscisse && abscisse<=405 )
                     {
-                    qDebug() << "PLUS";
+                    emit request_increment( index );
                     }
                 else
                     {
                     if ( 420<=abscisse && abscisse<=440 )
-                        qDebug() << "DELETE";
+
+                        emit request_delete( index );
                     }
                 }
             }
@@ -245,7 +270,7 @@ void PTreeView::fakeDrop(QStringList StrL)
 
 
 /*****************************************************************************************/
-/*    DELEGATE                                                                           */
+/*    DECK DELEGATE                                                                           */
 /*****************************************************************************************/
 PDelegateDeck::PDelegateDeck(QObject *parent) : QStyledItemDelegate(parent)
 {
@@ -261,37 +286,39 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
     switch (cat)
         {
         case VtesInfo::LibraryItemType :
-
-        case VtesInfo::CryptItemType :
+        case VtesInfo::CryptItemType   :
             {
             // setup du contexte de dessin
             QStyleOptionViewItemV4 opt(option);
             QStyledItemDelegate::initStyleOption(&opt, index);
             const QWidget *widget = option.widget;
             QStyle *style = widget ? widget->style() : QApplication::style();
-            opt.text = "";
+            opt.icon = QIcon();
 
             // setup du paintre
             painter->save();
             painter->setRenderHint(QPainter::Antialiasing);
             painter->setClipRect(opt.rect, Qt::ReplaceClip);
 
-            // prise en charge de l'état hightlighted
+            // dessin de la case de l'item
+            opt.text = "                                                                                 ";
             if ( opt.state & QStyle::State_Selected )
                 {
-                painter->setBrush( opt.palette.highlightedText() );
+                //painter->setPen( QPen(option.palette.highlightedText(), 0) );
+                //painter->setBrush( option.palette.highlightedText() );
                 style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
                 }
-            /*else
+             else
                 {
-                painter->setPen( QPen(option.palette.foreground(), 0) );
-                painter->setBrush(qvariant_cast<QBrush>(index.data(Qt::ForegroundRole)));
-                }*/
+                //painter->setPen( QPen(option.palette.foreground(), 0) );
+                //painter->setBrush( qvariant_cast<QBrush>(index.data(Qt::ForegroundRole)) );
+                style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
+                }
 
             // découpage des régions
             // affichage de la forme : [ nbExp | Name card | - | + | x ]
             QRect ExRegion( opt.rect );
-            ExRegion.setRight( 50 );
+            ExRegion.setRight( 60 );
             QRect ButtonsRegion( opt.rect );
             ButtonsRegion.setLeft( ButtonsRegion.right() - 100 );
             QRect btMinusRegion( ButtonsRegion);
@@ -307,7 +334,7 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
             NameRegion.setRight( ButtonsRegion.left() );
 
             // dessin du nombre d'exemplaires
-            style->drawItemText(painter, ExRegion, 1, opt.palette, true, "x" + index.data(VtesInfo::ExemplairRole).toString() );
+            style->drawItemText(painter, ExRegion, 1, opt.palette, true, " x" + index.data(VtesInfo::ExemplairRole).toString() );
 
             // dessin du nom de la carte
             painter->drawText( NameRegion, Qt::AlignLeft, index.data().toString());
@@ -365,15 +392,19 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
             opt.text = "";
             if ( opt.state & QStyle::State_Selected )
                 {
+                painter->setPen( QPen(option.palette.highlightedText(), 0) );
                 painter->setBrush( option.palette.highlightedText() );
                 style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
                 }
             else
                 {
-                painter->setPen( QPen(option.palette.windowText(), 0) );
+                painter->setPen( QPen(option.palette.foreground(), 0) );
+                painter->setBrush( qvariant_cast<QBrush>(index.data(Qt::ForegroundRole)) );
+                style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
                 }
 
-            // dessin du nom de la carte
+            // dessin du nom de la catégorie
+            painter->setFont(opt.font);
             painter->drawText( TextRegion, Qt::AlignLeft, index.data().toString());
 
             // dessin du nombre de carte dans la catégorie
@@ -388,7 +419,23 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
 
 QSize PDelegateDeck::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    return QStyledItemDelegate::sizeHint(option, index);
+    QSize current_size;
+    int _type = dynamic_cast<const PTreeModel * >(index.model())->itemFromIndex(index)->type();
+    switch ( _type )
+        {
+        case VtesInfo::SortItemType:
+            {
+            current_size.setHeight(28);
+            current_size.setWidth(100);
+            } break;
+        case VtesInfo::CryptItemType:
+        case VtesInfo::LibraryItemType:
+            {
+            current_size.setHeight(25);
+            current_size.setWidth(100);
+            } break;
+        }
+    return current_size;
 }
 
 
@@ -401,6 +448,9 @@ SortItem::SortItem(QString txt) : QStandardItem(txt)
 {
     setEditable(false);
     setSelectable(true);
+    setDropEnabled(true);
+    setData( QBrush(Qt::lightGray), Qt::BackgroundRole);
+    setData( QFont("Times", 10, QFont::Bold), Qt::FontRole);
     setData( data(Qt::DisplayRole), Qt::UserRole );
     setData( 0, VtesInfo::ExemplairRole );
     setData( VtesInfo::SortItemType, VtesInfo::ItemCategoryRole);
@@ -409,8 +459,13 @@ SortItem::SortItem(QString txt) : QStandardItem(txt)
 void SortItem::Increment(int i)
 {
     // increment the item counter (should be equal to number of child pondered by each child multipliers)
-    // this is the responsability of the model to correctly increment this property !
+    // this is the model's responsability to correctly increment this value
     setData( data(VtesInfo::ExemplairRole).toInt()+i, VtesInfo::ExemplairRole );
+}
+
+void SortItem::Decrement(int i)
+{
+    setData( data(VtesInfo::ExemplairRole).toInt()-i, VtesInfo::ExemplairRole );
 }
 
 int SortItem::type() const  { return (VtesInfo::SortItemType); }
@@ -419,14 +474,22 @@ SortItem::~SortItem()   {}
 
 
 // A CRYPT CARD ITEM
-CryptCardItem::CryptCardItem(QStringList strL) : QObject(), QStandardItem(strL[1])
+CryptCardItem::CryptCardItem(QStringList strL) : QObject(), QStandardItem()
 {
+    // set item properties
     setEditable(false);
     setSelectable(true);
+    setDropEnabled(false);
+
     // we set technicals datas
     setData( 1, VtesInfo::ExemplairRole );
     setData( VtesInfo::CryptItemType, VtesInfo::ItemCategoryRole);
+    QString CardName = strL[3] + ".jpg";
+    QString PathCartes = "D:\\Eternal-Deck-Builder\\bin\\debug\\Cartes\\";
+    setData( QIcon( PathCartes + CardName), Qt::DecorationRole);
+
     // we set all game datas
+    setData( strL[1], Qt::DisplayRole);
     setData( strL[1], VtesInfo::NameRole );
     setData( strL[2], VtesInfo::SetsRole );
     setData( strL[3], VtesInfo::ImageFileRole );
@@ -448,35 +511,52 @@ CryptCardItem::CryptCardItem(QStringList strL) : QObject(), QStandardItem(strL[1
     setData( strL[19], VtesInfo::CommentaryRole );
 }
 
-void CryptCardItem::Increment() { setData( data(VtesInfo::ExemplairRole).toInt()+1, VtesInfo::ExemplairRole ); }
+void CryptCardItem::Increment()
+{
+    setData( data(VtesInfo::ExemplairRole).toInt()+1, VtesInfo::ExemplairRole );
+    SortItem *dady = dynamic_cast<SortItem *>( model()->itemFromIndex(index().parent()) );
+    dady->Increment();
+}
 
 void CryptCardItem::Decrement()
 {
     int cpt = data(VtesInfo::ExemplairRole).toInt();
     if ( cpt > 1 )
+        {
         setData( data(VtesInfo::ExemplairRole).toInt()-1, VtesInfo::ExemplairRole );
+        SortItem *dady = dynamic_cast<SortItem *>( model()->itemFromIndex(index().parent()) );
+        dady->Decrement();
+        }
     else
         {
-        setData( 0, VtesInfo::ExemplairRole );
-        emit request_deleting( index() );
+        setData( 1, VtesInfo::ExemplairRole );
         }
 }
 
 int CryptCardItem::type() const  { return VtesInfo::CryptItemType; }
 
-CryptCardItem::~CryptCardItem()   {}
+CryptCardItem::~CryptCardItem()
+{
+}
 
 
 // A LIBRARY CARD ITEM
-LibraryCardItem::LibraryCardItem(QStringList strL) : QObject(),QStandardItem(strL[1])
+LibraryCardItem::LibraryCardItem(QStringList strL) : QObject(),QStandardItem()
 {
+    // set item properties
     setEditable(false);
     setSelectable(true);
+    setDropEnabled(false);
+
     // we set technicals datas
     setData( 1, VtesInfo::ExemplairRole );
     setData( VtesInfo::LibraryItemType, VtesInfo::ItemCategoryRole);
+    QString CardName = strL[3] + ".jpg";
+    QString PathCartes = "D:\\Eternal-Deck-Builder\\bin\\debug\\Cartes\\";
+    setData( QIcon( PathCartes + CardName), Qt::DecorationRole);
 
     // we set all game datas
+    setData( strL[1], Qt::DisplayRole);
     setData( strL[1], VtesInfo::NameRole );
     setData( strL[2], VtesInfo::SetsRole );
     setData( strL[3], VtesInfo::ImageFileRole );
@@ -504,23 +584,30 @@ LibraryCardItem::LibraryCardItem(QStringList strL) : QObject(),QStandardItem(str
 void LibraryCardItem::Increment()
 {
     setData( data(VtesInfo::ExemplairRole).toInt()+1, VtesInfo::ExemplairRole );
+    SortItem *dady = dynamic_cast<SortItem *>( model()->itemFromIndex(index().parent()) );
+    dady->Increment();
 }
 
 void LibraryCardItem::Decrement()
 {
     int cpt = data(VtesInfo::ExemplairRole).toInt();
     if ( cpt > 1 )
+        {
         setData( data(VtesInfo::ExemplairRole).toInt()-1, VtesInfo::ExemplairRole );
+        SortItem *dady = dynamic_cast<SortItem *>( model()->itemFromIndex(index().parent()) );
+        dady->Decrement();
+        }
     else
         {
-        setData( 0, VtesInfo::ExemplairRole );
-        emit request_deleting( index() );
+        setData( 1, VtesInfo::ExemplairRole );
         }
 }
 
 int LibraryCardItem::type() const  { return VtesInfo::LibraryItemType; }
 
-LibraryCardItem::~LibraryCardItem()   {}
+LibraryCardItem::~LibraryCardItem()
+{
+}
 
 
 /*****************************************************************************************/
@@ -531,6 +618,7 @@ PartialDeckView::PartialDeckView(QWidget *parent) : QTreeView(parent)
     setHeaderHidden(true);
     setSelectionMode(QAbstractItemView::SingleSelection);
     setAcceptDrops(true);
+    setIconSize( QSize(-1,-1) );
 }
 
 void PartialDeckView::dragEnterEvent(QDragEnterEvent *event)

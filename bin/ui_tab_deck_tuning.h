@@ -46,11 +46,15 @@ public:
     QLabel *label_2;
     QLineEdit *lE_description;
     QTabWidget *tab_details;
-    QWidget *tab_overView;
-    QFrame *frame_3;
-    QGridLayout *gridLayout_2;
     QWidget *tab_crypt;
+    QFrame *frameCrypt;
+    QVBoxLayout *verticalLayout_3;
     QWidget *tab_library;
+    QFrame *frameLibrary;
+    QVBoxLayout *verticalLayout_2;
+    QWidget *tab_overView;
+    QFrame *frameOverView;
+    QGridLayout *gridLayout_2;
 
     void setupUi(QScrollArea *tab_deck_tuning)
     {
@@ -66,7 +70,12 @@ public:
         gridLayout_3->setContentsMargins(7, 7, 7, 7);
         PTreeViewDeckList = new PTreeView(scrollAreaWidgetContents);
         PTreeViewDeckList->setObjectName(QStringLiteral("PTreeViewDeckList"));
-        PTreeViewDeckList->setMinimumSize(QSize(200, 0));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(PTreeViewDeckList->sizePolicy().hasHeightForWidth());
+        PTreeViewDeckList->setSizePolicy(sizePolicy);
+        PTreeViewDeckList->setMinimumSize(QSize(450, 0));
         PTreeViewDeckList->setMaximumSize(QSize(450, 16777215));
         PTreeViewDeckList->setSelectionBehavior(QAbstractItemView::SelectItems);
         PTreeViewDeckList->setHeaderHidden(true);
@@ -77,11 +86,11 @@ public:
 
         frame = new QFrame(scrollAreaWidgetContents);
         frame->setObjectName(QStringLiteral("frame"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(frame->sizePolicy().hasHeightForWidth());
-        frame->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(frame->sizePolicy().hasHeightForWidth());
+        frame->setSizePolicy(sizePolicy1);
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Raised);
         verticalLayout = new QVBoxLayout(frame);
@@ -89,11 +98,11 @@ public:
         verticalLayout->setContentsMargins(10, 0, 10, 0);
         frame_meta = new QFrame(frame);
         frame_meta->setObjectName(QStringLiteral("frame_meta"));
-        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(frame_meta->sizePolicy().hasHeightForWidth());
-        frame_meta->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(frame_meta->sizePolicy().hasHeightForWidth());
+        frame_meta->setSizePolicy(sizePolicy2);
         frame_meta->setMinimumSize(QSize(0, 130));
         frame_meta->setMaximumSize(QSize(16777215, 130));
         frame_meta->setFrameShape(QFrame::StyledPanel);
@@ -144,25 +153,44 @@ public:
 
         tab_details = new QTabWidget(frame);
         tab_details->setObjectName(QStringLiteral("tab_details"));
-        tab_overView = new QWidget();
-        tab_overView->setObjectName(QStringLiteral("tab_overView"));
-        frame_3 = new QFrame(tab_overView);
-        frame_3->setObjectName(QStringLiteral("frame_3"));
-        frame_3->setGeometry(QRect(161, 151, 731, 511));
-        sizePolicy.setHeightForWidth(frame_3->sizePolicy().hasHeightForWidth());
-        frame_3->setSizePolicy(sizePolicy);
-        frame_3->setFrameShape(QFrame::NoFrame);
-        frame_3->setFrameShadow(QFrame::Plain);
-        frame_3->setLineWidth(0);
-        gridLayout_2 = new QGridLayout(frame_3);
-        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        tab_details->addTab(tab_overView, QString());
+        tab_details->setTabPosition(QTabWidget::North);
+        tab_details->setTabShape(QTabWidget::Rounded);
+        tab_details->setElideMode(Qt::ElideNone);
+        tab_details->setUsesScrollButtons(true);
+        tab_details->setDocumentMode(false);
         tab_crypt = new QWidget();
         tab_crypt->setObjectName(QStringLiteral("tab_crypt"));
+        frameCrypt = new QFrame(tab_crypt);
+        frameCrypt->setObjectName(QStringLiteral("frameCrypt"));
+        frameCrypt->setGeometry(QRect(20, 20, 871, 671));
+        frameCrypt->setFrameShape(QFrame::StyledPanel);
+        frameCrypt->setFrameShadow(QFrame::Raised);
+        verticalLayout_3 = new QVBoxLayout(frameCrypt);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         tab_details->addTab(tab_crypt, QString());
         tab_library = new QWidget();
         tab_library->setObjectName(QStringLiteral("tab_library"));
+        frameLibrary = new QFrame(tab_library);
+        frameLibrary->setObjectName(QStringLiteral("frameLibrary"));
+        frameLibrary->setGeometry(QRect(20, 20, 881, 651));
+        frameLibrary->setFrameShape(QFrame::StyledPanel);
+        frameLibrary->setFrameShadow(QFrame::Raised);
+        verticalLayout_2 = new QVBoxLayout(frameLibrary);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         tab_details->addTab(tab_library, QString());
+        tab_overView = new QWidget();
+        tab_overView->setObjectName(QStringLiteral("tab_overView"));
+        frameOverView = new QFrame(tab_overView);
+        frameOverView->setObjectName(QStringLiteral("frameOverView"));
+        frameOverView->setGeometry(QRect(50, 40, 731, 511));
+        sizePolicy1.setHeightForWidth(frameOverView->sizePolicy().hasHeightForWidth());
+        frameOverView->setSizePolicy(sizePolicy1);
+        frameOverView->setFrameShape(QFrame::NoFrame);
+        frameOverView->setFrameShadow(QFrame::Plain);
+        frameOverView->setLineWidth(0);
+        gridLayout_2 = new QGridLayout(frameOverView);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        tab_details->addTab(tab_overView, QString());
 
         verticalLayout->addWidget(tab_details);
 
@@ -173,7 +201,7 @@ public:
 
         retranslateUi(tab_deck_tuning);
 
-        tab_details->setCurrentIndex(0);
+        tab_details->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(tab_deck_tuning);
@@ -185,9 +213,9 @@ public:
         label_3->setText(QApplication::translate("tab_deck_tuning", "author", 0));
         label->setText(QApplication::translate("tab_deck_tuning", "Name", 0));
         label_2->setText(QApplication::translate("tab_deck_tuning", "Description", 0));
+        tab_details->setTabText(tab_details->indexOf(tab_crypt), QApplication::translate("tab_deck_tuning", "Crypt details", 0));
+        tab_details->setTabText(tab_details->indexOf(tab_library), QApplication::translate("tab_deck_tuning", "Library details", 0));
         tab_details->setTabText(tab_details->indexOf(tab_overView), QApplication::translate("tab_deck_tuning", "OverView", 0));
-        tab_details->setTabText(tab_details->indexOf(tab_crypt), QApplication::translate("tab_deck_tuning", "Tab 2", 0));
-        tab_details->setTabText(tab_details->indexOf(tab_library), QApplication::translate("tab_deck_tuning", "Page", 0));
     } // retranslateUi
 
 };

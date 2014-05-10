@@ -87,7 +87,7 @@ tab_search_crypt::tab_search_crypt(QWidget *parent) : QScrollArea(parent), ui(ne
     connect(this,  SIGNAL( new_card_selected(QString) ), this, SLOT( AfficheImageCrypt(QString) ));
 }
 
-// Setup the Library View
+// Setup the Crypt View
 void tab_search_crypt::setupDeckModel(PTreeModel* deckModel)
 {
     ui->CryptView->setModel(deckModel);
