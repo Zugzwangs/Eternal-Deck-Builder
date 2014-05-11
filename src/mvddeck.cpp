@@ -154,16 +154,30 @@ return NULL;
 /*  C1 == GENERATION   C2 == GROUPING                                                    */
 /*  THE Third COLUMN HOLDS LIBRARY STATS                                                 */
 /*****************************************************************************************/
-StatsModel::StatsModel(QObject *parent) : QStandardItemModel(14, 3, parent)
+StatsModel::StatsModel(int rows, int columns, QObject *parent) : QStandardItemModel(rows, columns, parent)
 {
-
 }
 
-void StatsModel::clearColumnData(int col)
+void StatsModel::clearData(int columns, bool all)
 {
-    for (int i=0; i<rowCount(); i++)
+    if ( all )
         {
-        item(i, col)->setData( 0, Qt::DisplayRole );
+        for (int i=0; i<rowCount(); i++)
+            {
+            for (int j=0; j<columnCount(); j++)
+                item(i, j)->setData( 0, Qt::DisplayRole );
+            }
+        }
+    else
+        {
+        for (int i=0; i< rowCount(); i++)
+            {
+            QModelIndex temp_index = this->index(i, columns);
+            if ( temp_index.isValid() )
+                {
+                this->setData( temp_index, 0, Qt::DisplayRole );
+                }
+            }
         }
 }
 

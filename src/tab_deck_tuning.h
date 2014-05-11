@@ -4,6 +4,7 @@
 #include <QScrollArea>
 #include <QStandardItemModel>
 #include <QListView>
+#include <QTableView>
 
 #include "mvddeck.h"
 #include "Charts/piechart.h"
@@ -27,13 +28,19 @@ public:
 private:
     Ui::tab_deck_tuning *ui;
     // Stats Model
-    StatsModel *stats_model;
+    StatsModel *CardTypeModel;
+    StatsModel *CardCostModel;
+    StatsModel *CapacityModel;
+    StatsModel *GroupingModel;
+
     // Views
+    PieChart *CardTypeView;
+    PieChart *CardCostView;
+    LinearChart *CapacityView;
+    LinearChart *GroupingView;
+
     QListView *cryptGalerie;
     QListView *LibraryGalerie;
-    PieChart *testPie;
-    LinearChart *testLinear;
-    LinearChart *test_crypt_view;
 
 private slots:
     void sync_stats_model(QModelIndex new_item);

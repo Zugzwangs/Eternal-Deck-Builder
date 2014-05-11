@@ -104,8 +104,8 @@ class StatsModel : public QStandardItemModel
     Q_OBJECT
 
 public:
-    explicit StatsModel(QObject *parent = 0);
-    void clearColumnData(int col);
+    explicit StatsModel(int rows = 1, int columns = 1, QObject *parent = 0);
+    void clearData(int columns = 0, bool all = false);
 };
 
 

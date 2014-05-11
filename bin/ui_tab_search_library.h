@@ -323,7 +323,7 @@ public:
         CardgroupBoxGeneral->setObjectName(QStringLiteral("CardgroupBoxGeneral"));
         sizePolicy3.setHeightForWidth(CardgroupBoxGeneral->sizePolicy().hasHeightForWidth());
         CardgroupBoxGeneral->setSizePolicy(sizePolicy3);
-        CardgroupBoxGeneral->setMinimumSize(QSize(0, 100));
+        CardgroupBoxGeneral->setMinimumSize(QSize(450, 100));
         CardgroupBoxGeneral->setMaximumSize(QSize(16777215, 130));
         gridLayout_7 = new QGridLayout(CardgroupBoxGeneral);
         gridLayout_7->setObjectName(QStringLiteral("gridLayout_7"));
@@ -660,7 +660,7 @@ public:
 
         cBClan_2 = new QComboBox(CardgroupBoxRequirements);
         cBClan_2->setObjectName(QStringLiteral("cBClan_2"));
-        cBClan_2->setMinimumSize(QSize(160, 0));
+        cBClan_2->setMinimumSize(QSize(165, 0));
 
         gridLayout_4->addWidget(cBClan_2, 0, 1, 1, 1);
 
@@ -829,6 +829,7 @@ public:
         CardgroupBoxCout->setMaximumSize(QSize(16777215, 180));
         gridLayout_5 = new QGridLayout(CardgroupBoxCout);
         gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
+        gridLayout_5->setHorizontalSpacing(0);
         gridLayout_5->setContentsMargins(5, 5, 5, 5);
         label_37 = new QLabel(CardgroupBoxCout);
         label_37->setObjectName(QStringLiteral("label_37"));

@@ -414,7 +414,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>450</width>
               <height>100</height>
              </size>
             </property>
@@ -1310,7 +1310,7 @@
               <widget class="QComboBox" name="cBClan_2">
                <property name="minimumSize">
                 <size>
-                 <width>160</width>
+                 <width>165</width>
                  <height>0</height>
                 </size>
                </property>
@@ -1638,6 +1638,9 @@
              </property>
              <property name="bottomMargin">
               <number>5</number>
+             </property>
+             <property name="horizontalSpacing">
+              <number>0</number>
              </property>
              <item row="0" column="0">
               <widget class="QLabel" name="label_37">

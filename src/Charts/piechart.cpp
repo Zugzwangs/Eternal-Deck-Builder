@@ -19,9 +19,9 @@
 #include <QPainter>
 #include <QPaintEvent>
 
-PieChart::PieChart( QWidget* parent ) :
-  Chart( parent ) {
-  this->setEditTriggers( QAbstractItemView::NoEditTriggers );
+PieChart::PieChart( QWidget* parent ) :  Chart( parent )
+{
+  setEditTriggers( QAbstractItemView::NoEditTriggers );
   myRing = false;
   mySplitted = false;
   myStartAngle = 0.0;

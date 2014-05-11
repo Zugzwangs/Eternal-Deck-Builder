@@ -49,9 +49,11 @@ public:
     QWidget *tab_crypt;
     QFrame *frameCrypt;
     QVBoxLayout *verticalLayout_3;
+    QSpacerItem *verticalSpacer_2;
     QWidget *tab_library;
     QFrame *frameLibrary;
     QVBoxLayout *verticalLayout_2;
+    QSpacerItem *verticalSpacer;
     QWidget *tab_overView;
     QFrame *frameOverView;
     QGridLayout *gridLayout_2;
@@ -167,6 +169,10 @@ public:
         frameCrypt->setFrameShadow(QFrame::Raised);
         verticalLayout_3 = new QVBoxLayout(frameCrypt);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_3->addItem(verticalSpacer_2);
+
         tab_details->addTab(tab_crypt, QString());
         tab_library = new QWidget();
         tab_library->setObjectName(QStringLiteral("tab_library"));
@@ -177,6 +183,10 @@ public:
         frameLibrary->setFrameShadow(QFrame::Raised);
         verticalLayout_2 = new QVBoxLayout(frameLibrary);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_2->addItem(verticalSpacer);
+
         tab_details->addTab(tab_library, QString());
         tab_overView = new QWidget();
         tab_overView->setObjectName(QStringLiteral("tab_overView"));
@@ -201,7 +211,7 @@ public:
 
         retranslateUi(tab_deck_tuning);
 
-        tab_details->setCurrentIndex(1);
+        tab_details->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(tab_deck_tuning);

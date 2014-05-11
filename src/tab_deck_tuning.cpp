@@ -27,54 +27,69 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     mapper.AddWidget(ui->lE_author,"author");
     mapper.AddWidget(ui->lE_description,"description");
 
-    // On construit le modéle de stats qui se construit sur le DeckModel (static size [11,2] )
-    stats_model = new StatsModel;
-    stats_model->setData( stats_model->index( 0, 0 ), 5, Qt::DisplayRole );
-    stats_model->setData( stats_model->index( 0, 1 ), 5, Qt::DisplayRole );
-    stats_model->setData( stats_model->index( 0, 2 ), 5, Qt::DisplayRole );
-
-    for (int i = 1; i < stats_model->rowCount(); i++ ) {
-        stats_model->setData( stats_model->index( i, 0 ), 0, Qt::DisplayRole );
-        stats_model->setData( stats_model->index( i, 1 ), 0, Qt::DisplayRole );
-        stats_model->setData( stats_model->index( i, 2 ), 0, Qt::DisplayRole );
-    }
-    for (int i=0; i<VtesInfo::CardTypeList.count() && i<stats_model->rowCount(); i++)
-        {
-        stats_model->setHeaderData(i, Qt::Vertical, VtesInfo::CardTypeList[i], Qt::EditRole);
-        }
-
     // Connect the fake buttons nested in CardItem
     connect( DeckView, SIGNAL(request_increment(QModelIndex)), ModeleDeck, SLOT(IncrementCardItem(QModelIndex)) );
     connect( DeckView, SIGNAL(request_decrement(QModelIndex)), ModeleDeck, SLOT(DecrementCardItem(QModelIndex)) );
     connect( DeckView, SIGNAL(request_delete(QModelIndex))   , ModeleDeck, SLOT(RemoveCardITem(QModelIndex))    );
 
     // Connect Stats model to changes of the deck model for syncs purposes
-    connect( ModeleDeck, SIGNAL( CardItemChanged(QModelIndex) ), this, SLOT( sync_stats_model(QModelIndex) ) );
     connect( ModeleDeck, SIGNAL( DeckChanged(QModelIndex) ), this, SLOT( refresh_stat_model(QModelIndex) ) );
 
-    // Setup tab OverView
+    // SETUP TAB OVERVIEW
     QHBoxLayout *layout_overView = new QHBoxLayout;
     ui->tab_overView->setLayout(layout_overView);
     layout_overView->addWidget(ui->frameOverView);
-    testPie = new PieChart();
-    testPie->setLegend("Type repartition");
-    dynamic_cast<QGridLayout *>(ui->frameOverView->layout())->addWidget( testPie, 0, 0 );
-    testPie->setModel(stats_model);
-    testPie->setActiveColumn(2);
-    testLinear = new LinearChart();
-    testLinear->setModel( stats_model );
-    ChartStyle style = testLinear->columnStyle( 0 );
-    style.setType( Marb::Bar );
-    testLinear->setColumnStyle( 0, style );
-    dynamic_cast<QGridLayout *>(ui->frameOverView->layout())->addWidget( testLinear, 0, 1 );
 
-    // Setup tab crypt
+    // model that keep stats of card's types repartition
+    CardTypeModel = new StatsModel(15, 1, this);
+    CardTypeView = new PieChart();
+    CardTypeView->setLegend("Cards types");
+    for (int i=0; i<VtesInfo::CardTypeList.count(); i++)
+        {
+        CardTypeModel->setHeaderData(i, Qt::Vertical, VtesInfo::CardTypeList[i]);
+        }
+    CardTypeView->setModel(CardTypeModel);
+    dynamic_cast<QGridLayout *>(ui->frameOverView->layout())->addWidget( CardTypeView, 0, 0 );
+
+    // model that keep stats of card's cost repartition
+    CardCostModel = new StatsModel(7, 1, this);
+    for (int i=0; i<CardCostModel->rowCount(); i++)
+        {
+        CardCostModel->setHeaderData(i, Qt::Vertical, "Cost " + QString::number(i) );
+        }
+    CardCostView = new PieChart();
+    CardCostView->setLegend("Cards costs");
+    CardCostView->setModel(CardCostModel);
+    dynamic_cast<QGridLayout *>(ui->frameOverView->layout())->addWidget( CardCostView, 0, 1 );
+
+    // model that keep stats of crypt capacity repartition
+    CapacityModel = new StatsModel(11, 1, this);
+    CapacityModel->setData( CapacityModel->index(0,0), 10, Qt::DisplayRole);
+    CapacityModel->setHeaderData(0, Qt::Horizontal, "Capacity curve");
+    CapacityView = new LinearChart();
+    CapacityView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    CapacityView->setModel( CapacityModel );
+    dynamic_cast<QGridLayout *>(ui->frameOverView->layout())->addWidget( CapacityView, 1, 0 );
+
+    // model that keep stats of crypt grouping repartition
+    GroupingModel = new StatsModel(6, 1, this);
+    GroupingModel->setData( GroupingModel->index(0,0), 10, Qt::DisplayRole);
+    GroupingModel->setHeaderData(0, Qt::Horizontal, "Grouping repartition");
+    GroupingView = new LinearChart();
+    GroupingView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ChartStyle style = GroupingView->columnStyle( 0 );
+    style.setType( Marb::Bar );
+    GroupingView->setColumnStyle( 0, style );
+    GroupingView->setModel( GroupingModel );
+    dynamic_cast<QGridLayout *>(ui->frameOverView->layout())->addWidget( GroupingView, 1, 1 );
+
+    // SETUP TAB CRYPT DETAILS
     QHBoxLayout *layout_crypt = new QHBoxLayout;
     ui->tab_crypt->setLayout(layout_crypt);
     layout_crypt->addWidget(ui->frameCrypt);
 
     cryptGalerie = new QListView();
-    cryptGalerie->setMinimumHeight(450);
+    cryptGalerie->setFixedHeight(450);
     cryptGalerie->setUniformItemSizes(true);
     cryptGalerie->setGridSize( QSize(150,210) );
     cryptGalerie->setIconSize( QSize(144,200) );
@@ -86,13 +101,13 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
 
     dynamic_cast<QVBoxLayout *>(ui->frameCrypt->layout())->addWidget( cryptGalerie );
 
-    // Setup tab crypt
+    // SETUP TAB LIBRARY DETAILS
     QHBoxLayout *layout_library= new QHBoxLayout;
     ui->tab_library->setLayout(layout_library);
     layout_library->addWidget(ui->frameLibrary);
 
     LibraryGalerie = new QListView();
-    LibraryGalerie->setMinimumHeight(450);
+    LibraryGalerie->setFixedHeight(660);
     LibraryGalerie->setUniformItemSizes(true);
     LibraryGalerie->setGridSize( QSize(150,210) );
     LibraryGalerie->setIconSize( QSize(144,200) );
@@ -108,54 +123,17 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
 // the deck model has been changed, so we update datas in the stats/overview model
 void tab_deck_tuning::sync_stats_model( QModelIndex new_item )
 {
-/*  TODO : fonction à reécrire !!!
-    if ( parent_index.isValid() )
-        {
-
-        if ( parent_index.data(Qt::DisplayRole).toString() == "BIBLIOTHEQUE" )
-            {
-            QStandardItem *current_stat_item;
-            QString TypeOfNewCard = new_item.data(VtesInfo::TypeRole).toString();
-            for (int i=0; i<VtesInfo::CardTypeList.count(); i++)
-                {
-                if ( VtesInfo::CardTypeList[i] == TypeOfNewCard )
-                    {
-                    current_stat_item = stats_model->item(i,2);
-                    current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+1, Qt::DisplayRole );
-                    }
-                }
-            }
-
-        else if ( parent_index.data(Qt::DisplayRole).toString() == "CRYPTE" )
-            {
-            //a new vamp is added, get his gen (X for exemple) then increment item(X,0) value by one
-            int generation = new_item.data(VtesInfo::CapacityRole).toInt();
-            QStandardItem *current_stat_item = stats_model->item( generation-1, 0);
-            if ( current_stat_item )
-                current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+1 , Qt::DisplayRole );
-            else
-                qDebug() << "soucis de capacité ! capa =" << generation;
-
-            // same thing for grouping
-            int group = new_item.data(VtesInfo::GroupingRole).toInt();
-            current_stat_item = stats_model->item( group-1 ,1);
-            if ( current_stat_item )
-                current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+1, Qt::DisplayRole );
-            else
-                qDebug() << "soucis de grouping ! group =" << group;
-            }
-        }
-*/
+/*  TODO : fonction à reécrire !!! */
 }
 
 void tab_deck_tuning::refresh_stat_model(QModelIndex parent_index)
 {
     if ( parent_index.isValid() )
         {
-
         if ( parent_index.data(Qt::DisplayRole).toString() == "BIBLIOTHEQUE" )
             {
-            stats_model->clearColumnData(2);
+            CardTypeModel->clearData(0);
+            CardCostModel->clearData(0);
             QStandardItem *current_stat_item;
             QStandardItem *current_item;
             QStandardItem *parent_item = ModeleDeck->itemFromIndex(parent_index);
@@ -163,22 +141,39 @@ void tab_deck_tuning::refresh_stat_model(QModelIndex parent_index)
             for(int i=0; i<parent_item->rowCount(); i++)
                 {
                 current_item = parent_item->child(i,0);
-                QString TypeOfNewCard = current_item->data(VtesInfo::TypeRole).toString();
-                for (int i=0; i<VtesInfo::CardTypeList.count(); i++)
+                int multiplicateur = current_item->data(VtesInfo::ExemplairRole).toInt();
+
+                // compute Card Type stats
+                QString TypesOfNewCard = current_item->data(VtesInfo::TypeRole).toString();
+                QStringList TypeList = TypesOfNewCard.split(" /*|*/ ", QString::SkipEmptyParts);
+                /* !!!!! BUG : le type Action Modifier se split en 2 => formater la BDD "type1|type2|..." */
+                for ( int k=0; k<TypeList.count(); k++)
                     {
-                    if ( VtesInfo::CardTypeList[i] == TypeOfNewCard )
+                    for (int j=0; j<VtesInfo::CardTypeList.count(); j++)
                         {
-                        current_stat_item = stats_model->item(i,2);
-                        current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+1, Qt::DisplayRole );
+                        if ( (QString::compare(VtesInfo::CardTypeList[j], TypeList[k].trimmed(), Qt::CaseInsensitive)) == 0 )
+                            {
+                            current_stat_item = CardTypeModel->item(j, 0);
+                            current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+multiplicateur, Qt::DisplayRole );
+                            break;
+                            }
                         }
                     }
+
+                // compute card costs stats
+                int Bloodcost = current_item->data(VtesInfo::BCostRole).toInt();
+                int Poolcost = current_item->data(VtesInfo::PCostRole).toInt();
+                int cost = qMax( Bloodcost, Poolcost);
+                current_stat_item = CardCostModel->item(cost, 0);
+                current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+multiplicateur, Qt::DisplayRole );
+
                 }
             }
 
         else if ( parent_index.data(Qt::DisplayRole).toString() == "CRYPTE" )
             {
-            stats_model->clearColumnData(0);
-            stats_model->clearColumnData(1);
+            CapacityModel->clearData(0);
+            GroupingModel->clearData(0);
             QStandardItem *current_stat_item;
             QStandardItem *current_item;
             QStandardItem *parent_item = ModeleDeck->itemFromIndex(parent_index);
@@ -186,19 +181,20 @@ void tab_deck_tuning::refresh_stat_model(QModelIndex parent_index)
             for(int i=0; i<parent_item->rowCount(); i++)
                 {
                 current_item = parent_item->child(i,0);
-                //a new vamp is added, get his gen (X for exemple) then increment item(X,0) value by one
+                //for each different vampires, get his capa (X for exemple) then increment item(X,0) value by one per exemplair
                 int generation = current_item->data(VtesInfo::CapacityRole).toInt();
-                current_stat_item = stats_model->item( generation-1, 0);
+                int multiplicateur = current_item->data(VtesInfo::ExemplairRole).toInt();
+                current_stat_item = CapacityModel->item( generation-1, 0);
                 if ( current_stat_item )
-                    current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+1 , Qt::DisplayRole );
+                    current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+multiplicateur , Qt::DisplayRole );
                 else
                     qDebug() << "soucis de capacité ! capa =" << generation;
 
                 // same thing for grouping
-                int group = parent_item->data(VtesInfo::GroupingRole).toInt();
-                current_stat_item = stats_model->item( group-1 ,1);
+                int group = current_item->data(VtesInfo::GroupingRole).toInt();
+                current_stat_item = GroupingModel->item( group-1 ,0);
                 if ( current_stat_item )
-                    current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+1, Qt::DisplayRole );
+                    current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+multiplicateur, Qt::DisplayRole );
                 else
                     qDebug() << "soucis de grouping ! group =" << group;
                 }
