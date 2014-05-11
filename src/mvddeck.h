@@ -90,7 +90,8 @@ public slots:
     LibraryCardItem* FindLibraryCard( QString CardName );
 
 signals:
-    void DeckChanged(QModelIndex parent, QModelIndex AddedItem);
+    void CardItemChanged(QModelIndex ModifiedItem);
+    void DeckChanged(QModelIndex parent);
     //void CardRemoved();
 };
 
@@ -104,6 +105,7 @@ class StatsModel : public QStandardItemModel
 
 public:
     explicit StatsModel(QObject *parent = 0);
+    void clearColumnData(int col);
 };
 
 

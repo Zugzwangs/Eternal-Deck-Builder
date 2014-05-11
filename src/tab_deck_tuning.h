@@ -27,7 +27,7 @@ public:
 private:
     Ui::tab_deck_tuning *ui;
     // Stats Model
-    StatsModel *model_test;
+    StatsModel *stats_model;
     // Views
     QListView *cryptGalerie;
     QListView *LibraryGalerie;
@@ -36,8 +36,8 @@ private:
     LinearChart *test_crypt_view;
 
 private slots:
-    void sync_stats_model(QModelIndex parent_index, QModelIndex new_item);
-    void sync_crypt_stat();
+    void sync_stats_model(QModelIndex new_item);
+    void refresh_stat_model(QModelIndex parent_index);
 
 signals:
 

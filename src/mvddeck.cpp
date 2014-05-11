@@ -50,7 +50,7 @@ SortItem* Category;
             CryptCardItem* newCard = new CryptCardItem(strL);
             Category->appendRow(newCard);
             Category->Increment();
-            emit DeckChanged(Category->index(), newCard->index());
+            emit DeckChanged( Category->index() );
             delete TempItem;
             }
         }
@@ -69,7 +69,7 @@ SortItem* Category;
             LibraryCardItem* newCard = new LibraryCardItem(strL);
             Category->appendRow(newCard);
             Category->Increment();
-            emit DeckChanged(Category->index(), newCard->index());
+            emit DeckChanged( Category->index() );
             delete TempItem;
             }
         }
@@ -85,7 +85,8 @@ void PTreeModel::IncrementCardItem( QModelIndex Idx )
     else
         dynamic_cast<LibraryCardItem *>(itemFromIndex(Idx))->Increment();
 
-    emit DeckChanged( Idx.parent(), Idx);
+    emit CardItemChanged( Idx );
+    emit DeckChanged(Idx.parent());
 }
 
 void PTreeModel::DecrementCardItem( QModelIndex Idx )
@@ -99,7 +100,8 @@ void PTreeModel::DecrementCardItem( QModelIndex Idx )
         dynamic_cast<LibraryCardItem *>(itemFromIndex(Idx))->Decrement();;
         }
 
-    emit DeckChanged( Idx.parent(), Idx);
+    emit CardItemChanged( Idx );
+    emit DeckChanged(Idx.parent());
 }
 
 void PTreeModel::RemoveCardITem( QModelIndex Idx )
@@ -110,7 +112,7 @@ void PTreeModel::RemoveCardITem( QModelIndex Idx )
         removeRow( Idx.row(), Idx.parent() );
         SortItem *dady = dynamic_cast<SortItem *>(itemFromIndex( Idx.parent() ));
         dady->Decrement(ex);
-        emit DeckChanged( Idx.parent(), Idx);
+        emit DeckChanged( Idx.parent() );
         }
 }
 
@@ -157,6 +159,13 @@ StatsModel::StatsModel(QObject *parent) : QStandardItemModel(14, 3, parent)
 
 }
 
+void StatsModel::clearColumnData(int col)
+{
+    for (int i=0; i<rowCount(); i++)
+        {
+        item(i, col)->setData( 0, Qt::DisplayRole );
+        }
+}
 
 /*****************************************************************************************/
 /*  META MAPPER                                                                          */
