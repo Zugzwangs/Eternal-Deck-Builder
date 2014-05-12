@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
@@ -37,14 +38,16 @@ public:
     QVBoxLayout *verticalLayout;
     QFrame *frame_meta;
     QGridLayout *gridLayout;
-    QLabel *label_3;
+    QComboBox *cBFormat;
+    QLabel *label_4;
+    QLabel *label_5;
     QLineEdit *lE_author;
     QLineEdit *lE_name;
-    QSpacerItem *horizontalSpacer;
+    QLabel *label_3;
     QLabel *label;
-    QSpacerItem *horizontalSpacer_2;
     QLabel *label_2;
     QLineEdit *lE_description;
+    QSpacerItem *horizontalSpacer;
     QTabWidget *tab_details;
     QWidget *tab_crypt;
     QFrame *frameCrypt;
@@ -112,10 +115,21 @@ public:
         gridLayout = new QGridLayout(frame_meta);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
-        label_3 = new QLabel(frame_meta);
-        label_3->setObjectName(QStringLiteral("label_3"));
+        cBFormat = new QComboBox(frame_meta);
+        cBFormat->setObjectName(QStringLiteral("cBFormat"));
+        cBFormat->setMinimumSize(QSize(120, 0));
 
-        gridLayout->addWidget(label_3, 0, 3, 1, 1);
+        gridLayout->addWidget(cBFormat, 0, 6, 1, 1);
+
+        label_4 = new QLabel(frame_meta);
+        label_4->setObjectName(QStringLiteral("label_4"));
+
+        gridLayout->addWidget(label_4, 0, 5, 1, 1);
+
+        label_5 = new QLabel(frame_meta);
+        label_5->setObjectName(QStringLiteral("label_5"));
+
+        gridLayout->addWidget(label_5, 1, 5, 1, 1);
 
         lE_author = new QLineEdit(frame_meta);
         lE_author->setObjectName(QStringLiteral("lE_author"));
@@ -127,18 +141,15 @@ public:
 
         gridLayout->addWidget(lE_name, 0, 2, 1, 1);
 
-        horizontalSpacer = new QSpacerItem(419, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        label_3 = new QLabel(frame_meta);
+        label_3->setObjectName(QStringLiteral("label_3"));
 
-        gridLayout->addItem(horizontalSpacer, 0, 5, 1, 1);
+        gridLayout->addWidget(label_3, 0, 3, 1, 1);
 
         label = new QLabel(frame_meta);
         label->setObjectName(QStringLiteral("label"));
 
         gridLayout->addWidget(label, 0, 0, 1, 1);
-
-        horizontalSpacer_2 = new QSpacerItem(419, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer_2, 1, 5, 1, 1);
 
         label_2 = new QLabel(frame_meta);
         label_2->setObjectName(QStringLiteral("label_2"));
@@ -149,6 +160,10 @@ public:
         lE_description->setObjectName(QStringLiteral("lE_description"));
 
         gridLayout->addWidget(lE_description, 1, 2, 1, 3);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer, 0, 7, 1, 1);
 
 
         verticalLayout->addWidget(frame_meta);
@@ -220,6 +235,8 @@ public:
     void retranslateUi(QScrollArea *tab_deck_tuning)
     {
         tab_deck_tuning->setWindowTitle(QApplication::translate("tab_deck_tuning", "ScrollArea", 0));
+        label_4->setText(QApplication::translate("tab_deck_tuning", "Format", 0));
+        label_5->setText(QApplication::translate("tab_deck_tuning", "rating", 0));
         label_3->setText(QApplication::translate("tab_deck_tuning", "author", 0));
         label->setText(QApplication::translate("tab_deck_tuning", "Name", 0));
         label_2->setText(QApplication::translate("tab_deck_tuning", "Description", 0));

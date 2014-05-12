@@ -57,6 +57,7 @@ namespace VtesInfo
 
     const QStringList OperatorList = QStringList() << "=" << "<=" << ">=";
 
+    const QStringList DeckFormat = QStringList() << "Unlimited" << "Limited" << "Free";
 
     enum CardType{ NoType, CryptType, LibraryType, CounterType };
 

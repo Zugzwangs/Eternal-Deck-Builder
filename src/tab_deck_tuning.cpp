@@ -12,6 +12,10 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     // TODO : verifié si ce lien est toujours utile
     DeckView = ui->PTreeViewDeckList;
 
+    //setup des widgets
+    ui->cBFormat->addItem("Choose a format");
+    ui->cBFormat->addItems(VtesInfo::DeckFormat);
+
     // on assigne le model de données
     ModeleDeck = new PTreeModel();
     ui->PTreeViewDeckList->setModel(ModeleDeck);
