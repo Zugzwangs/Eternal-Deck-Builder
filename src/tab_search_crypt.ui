@@ -2715,14 +2715,14 @@
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>70</width>
-                 <height>40</height>
+                 <width>75</width>
+                 <height>45</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>70</width>
-                 <height>40</height>
+                 <width>75</width>
+                 <height>45</height>
                 </size>
                </property>
                <property name="text">
@@ -2743,18 +2743,43 @@
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>70</width>
-                 <height>40</height>
+                 <width>75</width>
+                 <height>45</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>70</width>
-                 <height>40</height>
+                 <width>75</width>
+                 <height>45</height>
                 </size>
                </property>
                <property name="text">
                 <string>Clear Form</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pBAddtoDeck">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>75</width>
+                 <height>45</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>75</width>
+                 <height>45</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Add to Deck</string>
                </property>
               </widget>
              </item>

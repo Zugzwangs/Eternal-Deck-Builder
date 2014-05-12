@@ -37,20 +37,18 @@ tab_search_crypt::tab_search_crypt(QWidget *parent) : QScrollArea(parent), ui(ne
     DosCrypt = QPixmap(":/icons/Vtes_Tanlarge.gif");
     ui->VisuelCrypt->setPixmap(DosCrypt);
 
-    // Init the MVC //
-
-    // Model
+    // SETUP THE BDD MODEL
     ModelReponseCrypt = new PSqlTableModel();
     ModelReponseCrypt->setTable("VampireList");
     ModelReponseCrypt->select();
 
-    // Delegate
-    PDelegateCryptResult *DelegateCrypt = new PDelegateCryptResult();
 
-    // View
+    // SETUP THE BDD VIEW
     ui->PTVCryptResults->setObjectName("PTVCryptResults");
+    PDelegateCryptResult *DelegateCrypt = new PDelegateCryptResult();
     ui->PTVCryptResults->setItemDelegate(DelegateCrypt);
     ui->PTVCryptResults->setModel(ModelReponseCrypt);
+    BddSelectionModel =  ui->PTVCryptResults->selectionModel();
     ui->PTVCryptResults->hideColumn(0);
     for (int i=2; i<=7; i++)        { ui->PTVCryptResults->hideColumn(i); }
     for (int i=15; i<=19; i++)      { ui->PTVCryptResults->hideColumn(i); }
@@ -65,10 +63,9 @@ tab_search_crypt::tab_search_crypt(QWidget *parent) : QScrollArea(parent), ui(ne
     ui->PTVCryptResults->horizontalHeader()->setStretchLastSection(true);
     ui->PTVCryptResults->verticalHeader()->setDefaultSectionSize( 40 ); //set the default height of rows a bit taller for a better lisibility
 
-    // Add the completer to the main search label ( card name)
+    // SETUP THE COMPLETER FOR CARD NAME FIELD
     Completer = new QCompleter( this );
     Completer->setCaseSensitivity( Qt::CaseInsensitive );
-    // Completer->setFilterMode( Qt::MatchStartsWith );
     Completer->setCompletionColumn( 1 );
     Completer->setCompletionRole( Qt::DisplayRole );
     Completer->setMaxVisibleItems( 8 );
@@ -76,8 +73,10 @@ tab_search_crypt::tab_search_crypt(QWidget *parent) : QScrollArea(parent), ui(ne
     ui->lENameCard->setCompleter( Completer );
 
     // Connection des boutons
-    connect(ui->pBCryptSearch, SIGNAL( clicked() ),    this, SLOT( RechercheCarte() ));
-    connect(ui->pBCryptClearForm, SIGNAL( clicked() ), this, SLOT( ClearForm() ));
+    connect( ui->pBCryptSearch,    SIGNAL( clicked() ), this, SLOT( RechercheCarte() ) );
+    connect( ui->pBCryptClearForm, SIGNAL( clicked() ), this, SLOT( ClearForm() )      );
+    connect( ui->pBAddtoDeck,      SIGNAL( clicked() ), this, SLOT( AddSelectedCard()) );
+
     // Connection de la vue des resultats de recherche
     connect(ui->PTVCryptResults, SIGNAL( clicked(QModelIndex) ), this, SLOT(request_affichage(QModelIndex)));
     connect(ui->PTVCryptResults->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(request_affichage(QModelIndex)));
@@ -92,6 +91,22 @@ void tab_search_crypt::setupDeckModel(PTreeModel* deckModel)
 {
     ui->CryptView->setModel(deckModel);
     ui->CryptView->setRootIndex(deckModel->itemCrypt->index());
+}
+
+void tab_search_crypt::AddSelectedCard()
+{
+    //we get all the card info from the bdd model:
+    QModelIndexList SelectedItems = BddSelectionModel->selectedIndexes();
+    if ( SelectedItems.isEmpty() )
+        return;
+
+    QModelIndex FirstSelectedItems = SelectedItems.first();
+    QStringList dataValue;
+    for (int i=0; i< ModelReponseCrypt->columnCount(); i++)
+        {
+        dataValue.append( ModelReponseCrypt->index(FirstSelectedItems.row(),i).data(Qt::DisplayRole).toString().trimmed() );
+        }
+    ui->CryptView->AddCardToDeck(dataValue.join("\n"));
 }
 
 void tab_search_crypt::RechercheCarte()

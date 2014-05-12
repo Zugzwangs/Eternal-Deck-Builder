@@ -29,6 +29,7 @@ private:
     Ui::tab_search_library *ui;
     QCompleter *Completer;
     QPixmap DosCarte;
+    QItemSelectionModel *BddSelectionModel;
 
 private slots:
     void AdapteSousType();
@@ -37,6 +38,7 @@ private slots:
     void request_affichage(QModelIndex Idx);
     void deck_request_affichage(QModelIndex Idx);
     void AfficheImageCarte(QString CardName);
+    void AddSelectedCard();
 
 signals:
     void new_card_selected(QString);

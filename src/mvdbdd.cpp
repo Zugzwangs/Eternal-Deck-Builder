@@ -25,7 +25,6 @@ PItemView::PItemView(QWidget *parent) : QTableView(parent)
 {
 setSelectionMode(SingleSelection);
 setSelectionBehavior(SelectRows);
-//setAcceptDrops(true);
 setDropIndicatorShown(true);
 setDragEnabled(true);
 setDragDropOverwriteMode(false);
@@ -120,6 +119,7 @@ switch(index.column())
         // setup du peintre
         painter->save();
         painter->setRenderHint(QPainter::Antialiasing);
+        painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
         painter->setClipRect(opt.rect, Qt::ReplaceClip);
 
         // prise en charge de l'état hightlighted
@@ -218,6 +218,7 @@ switch(index.column())
         // setup du peintre
         painter->save();
         painter->setRenderHint(QPainter::Antialiasing);
+        painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
         painter->setClipRect(opt.rect, Qt::ReplaceClip);
 
         // prise en charge de l'état hightlighted
@@ -237,17 +238,19 @@ switch(index.column())
             {
             if (ListeDisciplines.at(i) < ListeDisciplines.at(i).toLower())
                 {
-                QRect target( rect.x()+i*25+10, rect.center().y()-11, 22, 22 );
+                QRectF target( rect.x()+i*26+10, rect.center().y()-12, 24, 24 );
                 NomIconeDiscipline = ListeDisciplines.at(i).toLower() + "-sup.png";
                 QPixmap PixmapCourante(":/icons/disc/" + NomIconeDiscipline);
-                painter->drawPixmap(target, PixmapCourante);
+                QRectF source = PixmapCourante.rect();
+                painter->drawPixmap(target, PixmapCourante, source);
                 }
             else
                 {
-                QRect target( rect.x()+i*25+10, rect.center().y()-11, 22, 22 );
+                QRectF target( rect.x()+i*26+10, rect.center().y()-12, 24, 24 );
                 NomIconeDiscipline = ListeDisciplines.at(i) + ".png";
                 QPixmap PixmapCourante(":/icons/disc/" + NomIconeDiscipline);
-                painter->drawPixmap(target, PixmapCourante);
+                QRectF source = PixmapCourante.rect();
+                painter->drawPixmap(target, PixmapCourante, source);
                 }
             }
 
@@ -297,6 +300,7 @@ void PDelegateCardResult::paint(QPainter *painter, const QStyleOptionViewItem &o
             // setup du peintre
             painter->save();
             painter->setRenderHint(QPainter::Antialiasing);
+            painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
             painter->setClipRect(opt.rect, Qt::ReplaceClip);
 
             // prise en charge de l'état hightlighted
@@ -314,7 +318,7 @@ void PDelegateCardResult::paint(QPainter *painter, const QStyleOptionViewItem &o
             QStringList ListeTypesCarte = TypesCarte.split(" / ",QString::SkipEmptyParts);
             for (int i=0; i<ListeTypesCarte.size(); i++)
                 {
-                QRect target(rect.x()+i*25+10,rect.center().y()-11, 22.0, 22.0);
+                QRect target(rect.x()+i*26+10,rect.center().y()-12, 24, 24);
                 NomIconeTypeCarte = ListeTypesCarte.at(i) + ".gif";
                 QPixmap PixmapCourante(":/icons/type/" + NomIconeTypeCarte);
                 painter->drawPixmap(target, PixmapCourante);
@@ -335,6 +339,7 @@ void PDelegateCardResult::paint(QPainter *painter, const QStyleOptionViewItem &o
             // setup du peintre
             painter->save();
             painter->setRenderHint(QPainter::Antialiasing);
+            painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
             painter->setClipRect(opt.rect, Qt::ReplaceClip);
 
             // prise en charge de l'état hightlighted
@@ -366,6 +371,7 @@ void PDelegateCardResult::paint(QPainter *painter, const QStyleOptionViewItem &o
             // setup du peintre
             painter->save();
             painter->setRenderHint(QPainter::Antialiasing);
+            painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
             painter->setClipRect(opt.rect, Qt::ReplaceClip);
 
             // prise en charge de l'état hightlighted
@@ -386,7 +392,7 @@ void PDelegateCardResult::paint(QPainter *painter, const QStyleOptionViewItem &o
                 int j = VtesInfo::DisciplinesList.indexOf( ListeDisciplines.at(i) );
                 if ( j > 0 )
                     {
-                    QRect target(rect.x()+i*25+10, rect.center().y()-11, 22.0, 22.0);
+                    QRect target(rect.x()+i*26+10, rect.center().y()-12, 24, 24);
                     NomIconeDiscipline = VtesInfo::DisciplinesSigleList.at(j) + ".png";
                     QPixmap PixmapCourante(":/icons/disc/" + NomIconeDiscipline);
                     painter->drawPixmap(target, PixmapCourante);

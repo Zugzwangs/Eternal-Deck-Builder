@@ -166,6 +166,7 @@ class PartialDeckView : public QTreeView
 
 public:
     explicit PartialDeckView(QWidget *parent = 0);
+    void AddCardToDeck(QString str);
     ~PartialDeckView();
 
 protected:

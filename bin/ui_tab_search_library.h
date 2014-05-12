@@ -150,6 +150,7 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QPushButton *pBCardSearch;
     QPushButton *pBCardClearForm;
+    QPushButton *pBAddtoDeck;
     QLabel *VisuelCarte;
     QSpacerItem *verticalSpacer_3;
     PItemView *PTVCardsResults;
@@ -969,8 +970,8 @@ public:
         pBCardSearch->setObjectName(QStringLiteral("pBCardSearch"));
         sizePolicy2.setHeightForWidth(pBCardSearch->sizePolicy().hasHeightForWidth());
         pBCardSearch->setSizePolicy(sizePolicy2);
-        pBCardSearch->setMinimumSize(QSize(70, 40));
-        pBCardSearch->setMaximumSize(QSize(70, 40));
+        pBCardSearch->setMinimumSize(QSize(75, 45));
+        pBCardSearch->setMaximumSize(QSize(75, 45));
 
         horizontalLayout_4->addWidget(pBCardSearch);
 
@@ -978,10 +979,19 @@ public:
         pBCardClearForm->setObjectName(QStringLiteral("pBCardClearForm"));
         sizePolicy2.setHeightForWidth(pBCardClearForm->sizePolicy().hasHeightForWidth());
         pBCardClearForm->setSizePolicy(sizePolicy2);
-        pBCardClearForm->setMinimumSize(QSize(70, 40));
-        pBCardClearForm->setMaximumSize(QSize(70, 40));
+        pBCardClearForm->setMinimumSize(QSize(75, 45));
+        pBCardClearForm->setMaximumSize(QSize(75, 45));
 
         horizontalLayout_4->addWidget(pBCardClearForm);
+
+        pBAddtoDeck = new QPushButton(frame_4);
+        pBAddtoDeck->setObjectName(QStringLiteral("pBAddtoDeck"));
+        sizePolicy2.setHeightForWidth(pBAddtoDeck->sizePolicy().hasHeightForWidth());
+        pBAddtoDeck->setSizePolicy(sizePolicy2);
+        pBAddtoDeck->setMinimumSize(QSize(75, 45));
+        pBAddtoDeck->setMaximumSize(QSize(75, 45));
+
+        horizontalLayout_4->addWidget(pBAddtoDeck);
 
 
         verticalLayout_2->addWidget(frame_4);
@@ -1107,6 +1117,7 @@ public:
         label_41->setText(QApplication::translate("tab_search_library", "Conviction cost", 0));
         pBCardSearch->setText(QApplication::translate("tab_search_library", "Search", 0));
         pBCardClearForm->setText(QApplication::translate("tab_search_library", "Clear Form", 0));
+        pBAddtoDeck->setText(QApplication::translate("tab_search_library", "Add to deck", 0));
         VisuelCarte->setText(QString());
     } // retranslateUi
 

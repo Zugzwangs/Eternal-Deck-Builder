@@ -31,6 +31,9 @@ PTreeModel::PTreeModel(QObject *parent) : QStandardItemModel(parent)
 
 void PTreeModel::AddCardItem(QStringList strL)
 {
+    if (strL.count() < 7) // améliorer la robustesse si on recupere une QStringList incomplète!
+        return;
+
 // Checkout the type of card
 QString CardName = strL[1];
 QString CardCat = strL[7];
@@ -415,7 +418,7 @@ void PDelegateDeck::paint(QPainter *painter, const QStyleOptionViewItem &option,
             opt.text = "";
             if ( opt.state & QStyle::State_Selected )
                 {
-                painter->setPen( QPen(option.palette.highlightedText(), 0) );
+                //painter->setPen( QPen(option.palette.highlightedText(), 0) );
                 painter->setBrush( option.palette.highlightedText() );
                 style->drawControl(QStyle::CE_ItemViewItem, &opt, painter, widget);
                 }
@@ -472,8 +475,7 @@ SortItem::SortItem(QString txt) : QStandardItem(txt)
     setEditable(false);
     setSelectable(true);
     setDropEnabled(true);
-    setData( QBrush(Qt::lightGray), Qt::BackgroundRole);
-    setData( QFont("Times", 10, QFont::Bold), Qt::FontRole);
+    setData( QFont("Arial", 10, QFont::Bold), Qt::FontRole);
     setData( data(Qt::DisplayRole), Qt::UserRole );
     setData( 0, VtesInfo::ExemplairRole );
     setData( VtesInfo::SortItemType, VtesInfo::ItemCategoryRole);
@@ -634,7 +636,7 @@ LibraryCardItem::~LibraryCardItem()
 
 
 /*****************************************************************************************/
-/*  ANOTHER DECK VIEW (partial crypt/library)                                                                           */
+/*  QUICK DECK VIEW (partial crypt/library)                                                                           */
 /*****************************************************************************************/
 PartialDeckView::PartialDeckView(QWidget *parent) : QTreeView(parent)
 {
@@ -670,11 +672,17 @@ QStringList ListofData;
     // on recup les données du drop | on les split | on chope le nom de la carte
     TempData = event->mimeData()->text();
     ListofData = TempData.split("\n",QString::KeepEmptyParts);
-    //qDebug() << ListofData;
+    // query the deck model to take the card
+    dynamic_cast<PTreeModel *>( model())->AddCardItem(ListofData);
+}
 
+void PartialDeckView::AddCardToDeck(QString str)
+{
+    QStringList ListofData = str.split("\n",QString::KeepEmptyParts);
     // query the deck model to take the card
     dynamic_cast<PTreeModel *>( model())->AddCardItem(ListofData);
 }
 
 PartialDeckView::~PartialDeckView() {}
+
 

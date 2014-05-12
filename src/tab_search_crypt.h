@@ -29,6 +29,7 @@ private:
     Ui::tab_search_crypt *ui;
     QCompleter *Completer;
     QPixmap DosCrypt;
+    QItemSelectionModel *BddSelectionModel;
 
 private slots:
     void ClearForm();
@@ -36,6 +37,7 @@ private slots:
     void request_affichage(QModelIndex Idx);
     void deck_request_affichage(QModelIndex Idx);
     void AfficheImageCrypt(QString CardName);
+    void AddSelectedCard();
 
 signals:
     void new_card_selected(QString);

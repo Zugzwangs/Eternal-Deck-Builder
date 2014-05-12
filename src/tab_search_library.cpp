@@ -1,6 +1,8 @@
 #include "tab_search_library.h"
 #include "ui_tab_search_library.h"
 
+#include <QDebug>
+
 tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), ui(new Ui::tab_search_library)
 {
     ui->setupUi(this);
@@ -47,20 +49,17 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
     DosCarte = QPixmap(":/icons/Vtes_Grelarge.gif");
     ui->VisuelCarte->setPixmap(DosCarte);
 
-    // Init the MVC //
-
-    // Model
+    // SETUP THE BDD MODEL
     ModelReponseCarte = new PSqlTableModel();
     ModelReponseCarte->setTable("CardList");
     ModelReponseCarte->select();
 
-    // Delegate
-    PDelegateCardResult *DelegateCarte = new PDelegateCardResult();
-
-    // View
+    // SETUP THE BDD VIEW
     ui->PTVCardsResults->setObjectName("PTVCardsResults");
+    PDelegateCardResult *DelegateCarte = new PDelegateCardResult();
     ui->PTVCardsResults->setItemDelegate(DelegateCarte);
     ui->PTVCardsResults->setModel(ModelReponseCarte);
+    BddSelectionModel =  ui->PTVCardsResults->selectionModel();
     ui->PTVCardsResults->setFrameShape(QFrame::NoFrame);
     ui->PTVCardsResults->hideColumn(0);
     for (int i=2; i<=6; i++)    { ui->PTVCardsResults->hideColumn(i); }
@@ -79,10 +78,9 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
     ui->PTVCardsResults->horizontalHeader()->setStretchLastSection(true);
     ui->PTVCardsResults->verticalHeader()->setDefaultSectionSize( 40 ); //set the default height of rows a bit taller for a better lisibility
 
-    // Add the completer to the main search label ( card name)
+    // SETUP THE COMPLETER FOR CARD NAME FIELD
     Completer = new QCompleter( this );
     Completer->setCaseSensitivity( Qt::CaseInsensitive );
-    //Completer->setFilterMode( Qt::MatchStartsWith );
     Completer->setCompletionColumn( 1 );
     Completer->setCompletionRole( Qt::DisplayRole );
     Completer->setMaxVisibleItems( 8 );
@@ -90,9 +88,11 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
     ui->lENameCard_2->setCompleter( Completer );
 
     // Connection des boutons et formulaires
-    connect( ui->cBType, SIGNAL( activated(int )),     this, SLOT( AdapteSousType() ) );
-    connect( ui->pBCardClearForm, SIGNAL( clicked() ), this, SLOT( ClearForm() ) );
-    connect( ui->pBCardSearch, SIGNAL( clicked() ),    this, SLOT( RechercheCarte() ) );
+    connect( ui->cBType,          SIGNAL( activated(int )), this, SLOT( AdapteSousType() )  );
+    connect( ui->pBCardClearForm, SIGNAL( clicked() ),      this, SLOT( ClearForm() )       );
+    connect( ui->pBCardSearch,    SIGNAL( clicked() ),      this, SLOT( RechercheCarte() )  );
+    connect( ui->pBAddtoDeck,     SIGNAL( clicked() ),      this, SLOT( AddSelectedCard())  );
+
     // Connection de la vue des resultats de recherche
     connect( ui->PTVCardsResults, SIGNAL( clicked(QModelIndex) ), this, SLOT( request_affichage(QModelIndex) ) );
     connect (ui->PTVCardsResults->selectionModel(), SIGNAL( currentRowChanged(QModelIndex,QModelIndex) ), this, SLOT( request_affichage(QModelIndex) ) );
@@ -108,6 +108,22 @@ void tab_search_library::setupDeckModel(PTreeModel* deckModel)
 {
     ui->LibraryView->setModel(deckModel);
     ui->LibraryView->setRootIndex(deckModel->itemLib->index());
+}
+
+void tab_search_library::AddSelectedCard()
+{
+    //we get all the card info from the bdd model:
+    QModelIndexList SelectedItems = BddSelectionModel->selectedIndexes();
+    if ( SelectedItems.isEmpty() )
+        return;
+
+    QModelIndex FirstSelectedItems = SelectedItems.first();
+    QStringList dataValue;
+    for (int i=0; i< ModelReponseCarte->columnCount(); i++)
+        {
+        dataValue.append( ModelReponseCarte->index(FirstSelectedItems.row(),i).data(Qt::DisplayRole).toString().trimmed() );
+        }
+    ui->LibraryView->AddCardToDeck(dataValue.join("\n"));
 }
 
 void tab_search_library::RechercheCarte()

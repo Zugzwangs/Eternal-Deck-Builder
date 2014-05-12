@@ -166,6 +166,7 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QPushButton *pBCryptSearch;
     QPushButton *pBCryptClearForm;
+    QPushButton *pBAddtoDeck;
     QSpacerItem *verticalSpacer_2;
     QLabel *VisuelCrypt;
     QSpacerItem *verticalSpacer;
@@ -1225,8 +1226,8 @@ public:
         pBCryptSearch->setObjectName(QStringLiteral("pBCryptSearch"));
         sizePolicy3.setHeightForWidth(pBCryptSearch->sizePolicy().hasHeightForWidth());
         pBCryptSearch->setSizePolicy(sizePolicy3);
-        pBCryptSearch->setMinimumSize(QSize(70, 40));
-        pBCryptSearch->setMaximumSize(QSize(70, 40));
+        pBCryptSearch->setMinimumSize(QSize(75, 45));
+        pBCryptSearch->setMaximumSize(QSize(75, 45));
 
         horizontalLayout_3->addWidget(pBCryptSearch);
 
@@ -1234,10 +1235,19 @@ public:
         pBCryptClearForm->setObjectName(QStringLiteral("pBCryptClearForm"));
         sizePolicy3.setHeightForWidth(pBCryptClearForm->sizePolicy().hasHeightForWidth());
         pBCryptClearForm->setSizePolicy(sizePolicy3);
-        pBCryptClearForm->setMinimumSize(QSize(70, 40));
-        pBCryptClearForm->setMaximumSize(QSize(70, 40));
+        pBCryptClearForm->setMinimumSize(QSize(75, 45));
+        pBCryptClearForm->setMaximumSize(QSize(75, 45));
 
         horizontalLayout_3->addWidget(pBCryptClearForm);
+
+        pBAddtoDeck = new QPushButton(frame_4);
+        pBAddtoDeck->setObjectName(QStringLiteral("pBAddtoDeck"));
+        sizePolicy3.setHeightForWidth(pBAddtoDeck->sizePolicy().hasHeightForWidth());
+        pBAddtoDeck->setSizePolicy(sizePolicy3);
+        pBAddtoDeck->setMinimumSize(QSize(75, 45));
+        pBAddtoDeck->setMaximumSize(QSize(75, 45));
+
+        horizontalLayout_3->addWidget(pBAddtoDeck);
 
 
         verticalLayout->addWidget(frame_4);
@@ -1397,6 +1407,7 @@ public:
         pBCryptSearch->setText(QApplication::translate("tab_search_crypt", "Search", 0));
         pBCryptSearch->setShortcut(QApplication::translate("tab_search_crypt", "F1", 0));
         pBCryptClearForm->setText(QApplication::translate("tab_search_crypt", "Clear Form", 0));
+        pBAddtoDeck->setText(QApplication::translate("tab_search_crypt", "Add to Deck", 0));
         VisuelCrypt->setText(QString());
     } // retranslateUi
 
