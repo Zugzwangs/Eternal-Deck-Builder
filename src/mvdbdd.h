@@ -11,11 +11,7 @@ class PSqlTableModel : public QSqlTableModel
 
 public:
     PSqlTableModel(QObject *parent=0);
-
-protected:
-
-private:
-
+    virtual QVariant data(const QModelIndex &idx, int role) const;
 };
 
 class PItemView : public QTableView

@@ -42,29 +42,29 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <property name="documentMode">
        <bool>false</bool>
       </property>
       <widget class="QWidget" name="OngletRechercheCarte">
        <attribute name="title">
-        <string>Recherche Carte</string>
+        <string>Library search</string>
        </attribute>
       </widget>
       <widget class="QWidget" name="OngletRechercheCrypte">
        <attribute name="title">
-        <string>Recherche Crypte</string>
+        <string>Crypt search</string>
        </attribute>
       </widget>
       <widget class="QWidget" name="OngletProba">
        <attribute name="title">
-        <string>Atelier Probabilités</string>
+        <string>Deck View</string>
        </attribute>
       </widget>
       <widget class="QWidget" name="OngletGoldFish">
        <attribute name="title">
-        <string>Gold Fish</string>
+        <string>Playground</string>
        </attribute>
       </widget>
      </widget>

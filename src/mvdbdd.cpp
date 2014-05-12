@@ -14,10 +14,20 @@
 //*******************************************************************************************************
 //
 //*******************************************************************************************************
-PSqlTableModel::PSqlTableModel(QObject *parent) : QSqlTableModel()
+PSqlTableModel::PSqlTableModel(QObject *parent) : QSqlTableModel(parent)
 {
 }
 
+QVariant PSqlTableModel::data(const QModelIndex &idx, int role) const
+{
+QString sectionName = headerData(idx.column() ,Qt::Horizontal, Qt::DisplayRole).toString();
+
+if ( role==Qt::ToolTipRole && ( sectionName == "Clan" || sectionName == "Discipline" || sectionName == "Type" ) )
+        {
+        return idx.data(Qt::DisplayRole);
+        }
+    return QSqlTableModel::data(idx, role);
+}
 //*******************************************************************************************************
 //
 //*******************************************************************************************************
