@@ -9,6 +9,7 @@
 #include "mvddeck.h"
 #include "Charts/piechart.h"
 #include "Charts/linearchart.h"
+#include "Charts/radialchart.h"
 
 namespace Ui {
 class tab_deck_tuning;
@@ -20,10 +21,11 @@ class tab_deck_tuning : public QScrollArea
 
 public:
     explicit tab_deck_tuning(QWidget *parent = 0);
-    PTreeView *DeckView;
     ~tab_deck_tuning();
-    // Main model !
+
+public:
     PTreeModel *ModeleDeck;
+    PTreeView *DeckView; //a public pointer to make the view reachable from outside
 
 private:
     Ui::tab_deck_tuning *ui;
@@ -38,9 +40,11 @@ private:
     PieChart *CardCostView;
     LinearChart *CapacityView;
     LinearChart *GroupingView;
-
     QListView *cryptGalerie;
     QListView *LibraryGalerie;
+
+    // Metadatas
+    QMap<QString, int> VipedDatas;
 
 private slots:
     void sync_stats_model(QModelIndex new_item);

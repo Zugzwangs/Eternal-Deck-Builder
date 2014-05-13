@@ -179,3 +179,43 @@ QString DisciplineButton::get_sql_request()
 {
     return sql_request;
 }
+
+// /////////////////////////////////////////////////////////////////////////////////////////
+// Widget qui affiche un graph radial
+VipedViewer::VipedViewer(QWidget *parent) : QFrame(parent)
+{
+    setAutoFillBackground(true);
+    setBackgroundRole(QPalette::Base);
+    setMouseTracking(false); //otherwise VipedViewer will receive moveEvent even if user press no mousse buttons
+}
+
+QSize VipedViewer::sizeHint() const
+{
+
+}
+
+void VipedViewer::paintEvent(QPaintEvent * event)
+{
+
+}
+
+void VipedViewer::resizeEvent(QResizeEvent * event)
+{
+
+}
+
+void VipedViewer::mousePressEvent(QMouseEvent * event)
+{
+
+}
+
+void VipedViewer::mouseMoveEvent(QMouseEvent * event)
+{
+
+}
+
+void VipedViewer::mouseReleaseEvent(QMouseEvent * event)
+{
+
+}
+

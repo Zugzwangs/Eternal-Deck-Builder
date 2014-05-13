@@ -37,16 +37,15 @@ private:
     QString PathCartes;
     QString PathRessources;
     QString PathDeck;
-    //les contenus des onglets
-    tab_search_library  *test_search;
-    tab_search_crypt *test_crypt;
+    // Main Tabs
+    tab_search_library  *advanced_library_search_tab;
+    tab_search_crypt *advanced_crypt_search_tab;
     tab_deck_tuning *test_tuning;
-    tab_gold_fich * test_goldfish;
-    //PTreeView *DeckView; //a virer depuis la refacto
-    //PTreeModel *ModelDeckCourant;//
+    tab_gold_fich * playground_tab;
 
 private slots:
     void EnregistreDeck();
+    void ExportDeck(int Format);
     void ImprimeDeck();
     void OuvrirMenuOption();
 

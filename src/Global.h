@@ -59,6 +59,8 @@ namespace VtesInfo
 
     const QStringList DeckFormat = QStringList() << "Unlimited" << "Limited" << "Free";
 
+    const QStringList VipedList = QStringList() << "Speed" << "Combat" << "Bleed" << "Diplomacy" << "Defense";
+
     enum CardType{ NoType, CryptType, LibraryType, CounterType };
 
     enum ItemTypes { SortItemType = 1000, LibraryItemType, CryptItemType };

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Id="123534">
+    <Metadonnees>
+        <Nom></Nom>
+        <Auteur></Auteur>
+        <Descriptif></Descriptif>
+        <Resultat></Resultat>
+        <Date></Date>
+    </Metadonnees>
+    <Crypt Taille="12">
+        <CryptCard>vamp0</CryptCard>
+        <CryptCard>vamp1</CryptCard>
+        <CryptCard>vamp2</CryptCard>
+        <CryptCard>vamp3</CryptCard>
+    </Crypt>
+    <Bibliotheque Taille="12">
+        <MinionCard>MinionCard 0</MinionCard>
+        <MinionCard>MinionCard 1</MinionCard>
+        <MinionCard>MinionCard 2</MinionCard>
+        <MinionCard>MinionCard 3</MinionCard>
+    </Bibliotheque>
+</Deck>

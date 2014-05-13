@@ -7,115 +7,121 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
 // ////////////////////////////////////////////////
 //  INITIALISATION DES PATHS DE L'APPLI
-{
-DossierAppli.setPath(QCoreApplication::applicationDirPath());
-if (DossierAppli.cd("Cartes"))
-    {
-    PathCartes = DossierAppli.absolutePath();
-    qDebug() << "path des cartes = " << PathCartes;
-    }
-else
-    QMessageBox::warning(this, "Erreur","le dossier des cartes est manquant !");
+    int i=0;
+    DossierAppli.setPath(QCoreApplication::applicationDirPath());
+    while (DossierAppli.dirName() != "bin" && i<4)
+        {
+        i++;
+        DossierAppli.cdUp();
+        }
 
+    DossierAppli.cdUp();
+    if (DossierAppli.cd("Cartes"))
+        {
+        PathCartes = DossierAppli.absolutePath();
+        qDebug() << "path des cartes = " << PathCartes;
+        }
+    else
+        QMessageBox::warning(this, "Erreur","le dossier des cartes est manquant !");
 
-DossierAppli.cd("..");
-if (DossierAppli.cd("Decks"))
-    {
-    PathDeck = DossierAppli.absolutePath();
-    qDebug() << "path des Decks = " << PathDeck;
-    }
-else
-    QMessageBox::warning(this, "Erreur","le dossier des Decks est manquant !");
-}
+    DossierAppli.cdUp();
+    if (DossierAppli.cd("Decks"))
+        {
+        PathDeck = DossierAppli.absolutePath();
+        qDebug() << "path des Decks = " << PathDeck;
+        }
+    else
+        QMessageBox::warning(this, "Erreur","le dossier des Decks est manquant !");
+
 
 // ////////////////////////////////////////////////
 //  INITIALISATION DU MODULE DE TELECHARGEMENT
-{
-downloader = new update_manager( this );
-downloader->set_card_directory( PathCartes );
-downloader->set_serv_settings( "127.0.0.1", "jr", "pass" );
-}
+
+    downloader = new update_manager( this );
+    downloader->set_card_directory( PathCartes );
+    downloader->set_serv_settings( "127.0.0.1", "jr", "pass" );
+
 
 // ////////////////////////////////////////////////
 //  OUVERTURE DE LA BDD 'VtesCardsListDB'
-{
-this->SqlDB = QSqlDatabase::addDatabase("QSQLITE");
-this->SqlDB.setDatabaseName("VtesCardsListDB");
-if (!this->SqlDB.open())
-    {
-     QMessageBox::warning(this, "Erreur", this->SqlDB.lastError().text());
-     return;
-    }
-}
+
+    this->SqlDB = QSqlDatabase::addDatabase("QSQLITE");
+    this->SqlDB.setDatabaseName("VtesCardsListDB");
+    if (!this->SqlDB.open())
+        {
+         QMessageBox::warning(this, "Erreur", this->SqlDB.lastError().text());
+         return;
+        }
+
 
 // ////////////////////////////////////////////////
 //  MISE EN FORME DE LA FENETRE PRINCIPALE
-{
-ui->setupUi(this);
-this->setWindowState(Qt::WindowMaximized);
-}
+
+    ui->setupUi(this);
+    this->setWindowState(Qt::WindowMaximized);
+
 
 // ///////////////////////////////////////////////
 // MISE EN FORME DU TAB 'DECK TUNING'
-{
-    QHBoxLayout *layout = new QHBoxLayout;
+
+    QHBoxLayout *layout_deck = new QHBoxLayout;
     test_tuning = new tab_deck_tuning();
-    layout->addWidget(test_tuning);
-    ui->OngletProba->setLayout(layout);
-}
+    layout_deck->addWidget(test_tuning);
+    ui->OngletProba->setLayout(layout_deck);
+
 
 // ////////////////////////////////////////////////
 // MISE EN FORME DU TAB 'RECHERCHE CARTE'
-{
-    QHBoxLayout *layout = new QHBoxLayout;
-    test_search = new tab_search_library();
-    layout->addWidget(test_search);
-    ui->OngletRechercheCarte->setLayout(layout);
-    test_search->setupDeckModel(test_tuning->ModeleDeck);
-}
+
+    QHBoxLayout *layout_library = new QHBoxLayout;
+    advanced_library_search_tab = new tab_search_library();
+    layout_library->addWidget(advanced_library_search_tab);
+    ui->OngletRechercheCarte->setLayout(layout_library);
+    advanced_library_search_tab->setupDeckModel(test_tuning->ModeleDeck);
+
 
 // ///////////////////////////////////////////////
 // MISE EN FORME DU TAB 'RECHERCHE  CRYPT'
-{
-    QHBoxLayout *layout = new QHBoxLayout;
-    test_crypt = new tab_search_crypt();
-    layout->addWidget(test_crypt);
-    ui->OngletRechercheCrypte->setLayout(layout);
-    test_crypt->setupDeckModel(test_tuning->ModeleDeck);
-}
+
+    QHBoxLayout *layout_crypt = new QHBoxLayout;
+    advanced_crypt_search_tab = new tab_search_crypt();
+    layout_crypt->addWidget(advanced_crypt_search_tab);
+    ui->OngletRechercheCrypte->setLayout(layout_crypt);
+    advanced_crypt_search_tab->setupDeckModel(test_tuning->ModeleDeck);
+
 
 // ///////////////////////////////////////////////
 // MISE EN FORME DU TAB 'gold fish'
-{
-    QHBoxLayout *layout = new QHBoxLayout;
-    test_goldfish = new tab_gold_fich();
-    test_goldfish->initialisation(PathCartes);
-    layout->addWidget(test_goldfish);
-    ui->OngletGoldFish->setLayout(layout);
-}
+
+    QHBoxLayout *layout_playground = new QHBoxLayout;
+    playground_tab = new tab_gold_fich();
+    playground_tab->initialisation(PathCartes);
+    layout_playground->addWidget(playground_tab);
+    ui->OngletGoldFish->setLayout(layout_playground);
+
 
 // ///////////////////////////////////////////////
 // DEFINITION DES CONNEXIONS
-{
+
     connect(ui->actionEnregistrer_le_Deck, SIGNAL(triggered()), this, SLOT(EnregistreDeck()));
     connect(ui->actionImprimer_le_Deck, SIGNAL(triggered()), this, SLOT(ImprimeDeck()));
     connect(ui->actionOptions, SIGNAL(triggered()), this, SLOT(OuvrirMenuOption()));
-  //connect( downloader, SIGNAL( picture_downloaded() ), this, SLOT( AfficheImageCarte(QString) ) );
-}
-
-// ///////////////////////////////////////////////
-// FINITIONS
-{
-    ui->tabEditorModule->setCurrentIndex(0);
-}
+    //connect( downloader, SIGNAL( picture_downloaded() ), this, SLOT( AfficheImageCarte(QString) ) );
 
 }
+
 
 void MainWindow::EnregistreDeck()
 {
     QString fileName = "TestDeck3.xml";
     Deck *CurrentDeck = new Deck();
     Deck2Xml(*CurrentDeck, PathDeck + "/" + fileName);
+}
+
+
+void MainWindow::ExportDeck(int Format)
+{
+
 }
 
 void MainWindow::ImprimeDeck()

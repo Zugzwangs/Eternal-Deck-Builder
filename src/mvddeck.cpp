@@ -152,10 +152,7 @@ return NULL;
 }
 
 /*****************************************************************************************/
-/*  THE OVER VIEW MODEL                                                                  */
-/*  THE TWO FIRST COLUMNS ARE ABOUT THE CRYPT STATS. EACH ROW HOLD THE NUMBER OF VAMPIRE WHERE */
-/*  C1 == GENERATION   C2 == GROUPING                                                    */
-/*  THE Third COLUMN HOLDS LIBRARY STATS                                                 */
+/*                                                                                       */
 /*****************************************************************************************/
 StatsModel::StatsModel(int rows, int columns, QObject *parent) : QStandardItemModel(rows, columns, parent)
 {

@@ -49,6 +49,24 @@ private:
     QString sql_request;
 };
 
+class VipedViewer : public QFrame
+{
+    Q_OBJECT
+
+public:
+    explicit VipedViewer(QWidget *parent = 0 );
+    virtual QSize sizeHint() const;
+
+protected:
+    virtual void paintEvent(QPaintEvent * event);
+    virtual void resizeEvent(QResizeEvent * event);
+    virtual void mousePressEvent(QMouseEvent * event);
+    virtual void mouseMoveEvent(QMouseEvent * event);
+    virtual void mouseReleaseEvent(QMouseEvent * event);
+
+private:
+
+};
 
 #endif // PWIDGET_H
 

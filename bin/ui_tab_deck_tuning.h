@@ -9,6 +9,7 @@
 #ifndef UI_TAB_DECK_TUNING_H
 #define UI_TAB_DECK_TUNING_H
 
+#include <PWidget.h>
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
@@ -38,16 +39,17 @@ public:
     QVBoxLayout *verticalLayout;
     QFrame *frame_meta;
     QGridLayout *gridLayout;
-    QComboBox *cBFormat;
-    QLabel *label_4;
-    QLabel *label_5;
-    QLineEdit *lE_author;
+    QLabel *label;
     QLineEdit *lE_name;
     QLabel *label_3;
-    QLabel *label;
+    QLineEdit *lE_author;
+    VipedViewer *frame_viped;
     QLabel *label_2;
     QLineEdit *lE_description;
-    QSpacerItem *horizontalSpacer;
+    QLabel *label_4;
+    QComboBox *cBFormat;
+    QLabel *label_5;
+    QFrame *rating;
     QTabWidget *tab_details;
     QWidget *tab_crypt;
     QFrame *frameCrypt;
@@ -108,62 +110,80 @@ public:
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(frame_meta->sizePolicy().hasHeightForWidth());
         frame_meta->setSizePolicy(sizePolicy2);
-        frame_meta->setMinimumSize(QSize(0, 130));
-        frame_meta->setMaximumSize(QSize(16777215, 130));
+        frame_meta->setMinimumSize(QSize(0, 150));
+        frame_meta->setMaximumSize(QSize(16777215, 150));
         frame_meta->setFrameShape(QFrame::StyledPanel);
         frame_meta->setFrameShadow(QFrame::Raised);
         gridLayout = new QGridLayout(frame_meta);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        gridLayout->setContentsMargins(0, 0, 0, 0);
-        cBFormat = new QComboBox(frame_meta);
-        cBFormat->setObjectName(QStringLiteral("cBFormat"));
-        cBFormat->setMinimumSize(QSize(120, 0));
-
-        gridLayout->addWidget(cBFormat, 0, 6, 1, 1);
-
-        label_4 = new QLabel(frame_meta);
-        label_4->setObjectName(QStringLiteral("label_4"));
-
-        gridLayout->addWidget(label_4, 0, 5, 1, 1);
-
-        label_5 = new QLabel(frame_meta);
-        label_5->setObjectName(QStringLiteral("label_5"));
-
-        gridLayout->addWidget(label_5, 1, 5, 1, 1);
-
-        lE_author = new QLineEdit(frame_meta);
-        lE_author->setObjectName(QStringLiteral("lE_author"));
-
-        gridLayout->addWidget(lE_author, 0, 4, 1, 1);
-
-        lE_name = new QLineEdit(frame_meta);
-        lE_name->setObjectName(QStringLiteral("lE_name"));
-
-        gridLayout->addWidget(lE_name, 0, 2, 1, 1);
-
-        label_3 = new QLabel(frame_meta);
-        label_3->setObjectName(QStringLiteral("label_3"));
-
-        gridLayout->addWidget(label_3, 0, 3, 1, 1);
-
+        gridLayout->setVerticalSpacing(22);
+        gridLayout->setContentsMargins(15, 0, 20, 0);
         label = new QLabel(frame_meta);
         label->setObjectName(QStringLiteral("label"));
 
         gridLayout->addWidget(label, 0, 0, 1, 1);
 
+        lE_name = new QLineEdit(frame_meta);
+        lE_name->setObjectName(QStringLiteral("lE_name"));
+        lE_name->setStyleSheet(QStringLiteral(""));
+
+        gridLayout->addWidget(lE_name, 0, 1, 1, 1);
+
+        label_3 = new QLabel(frame_meta);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        gridLayout->addWidget(label_3, 0, 2, 1, 1);
+
+        lE_author = new QLineEdit(frame_meta);
+        lE_author->setObjectName(QStringLiteral("lE_author"));
+
+        gridLayout->addWidget(lE_author, 0, 3, 1, 1);
+
+        frame_viped = new VipedViewer(frame_meta);
+        frame_viped->setObjectName(QStringLiteral("frame_viped"));
+        sizePolicy1.setHeightForWidth(frame_viped->sizePolicy().hasHeightForWidth());
+        frame_viped->setSizePolicy(sizePolicy1);
+        frame_viped->setMinimumSize(QSize(100, 100));
+        frame_viped->setAutoFillBackground(false);
+        frame_viped->setFrameShape(QFrame::StyledPanel);
+        frame_viped->setFrameShadow(QFrame::Raised);
+        frame_viped->setLineWidth(3);
+
+        gridLayout->addWidget(frame_viped, 0, 4, 3, 1);
+
         label_2 = new QLabel(frame_meta);
         label_2->setObjectName(QStringLiteral("label_2"));
 
-        gridLayout->addWidget(label_2, 1, 0, 1, 2);
+        gridLayout->addWidget(label_2, 1, 0, 1, 1);
 
         lE_description = new QLineEdit(frame_meta);
         lE_description->setObjectName(QStringLiteral("lE_description"));
 
-        gridLayout->addWidget(lE_description, 1, 2, 1, 3);
+        gridLayout->addWidget(lE_description, 1, 1, 1, 3);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        label_4 = new QLabel(frame_meta);
+        label_4->setObjectName(QStringLiteral("label_4"));
 
-        gridLayout->addItem(horizontalSpacer, 0, 7, 1, 1);
+        gridLayout->addWidget(label_4, 2, 0, 1, 1);
+
+        cBFormat = new QComboBox(frame_meta);
+        cBFormat->setObjectName(QStringLiteral("cBFormat"));
+        cBFormat->setMinimumSize(QSize(100, 0));
+        cBFormat->setMaximumSize(QSize(180, 16777215));
+
+        gridLayout->addWidget(cBFormat, 2, 1, 1, 1);
+
+        label_5 = new QLabel(frame_meta);
+        label_5->setObjectName(QStringLiteral("label_5"));
+
+        gridLayout->addWidget(label_5, 2, 2, 1, 1);
+
+        rating = new QFrame(frame_meta);
+        rating->setObjectName(QStringLiteral("rating"));
+        rating->setFrameShape(QFrame::StyledPanel);
+        rating->setFrameShadow(QFrame::Raised);
+
+        gridLayout->addWidget(rating, 2, 3, 1, 1);
 
 
         verticalLayout->addWidget(frame_meta);
@@ -226,7 +246,7 @@ public:
 
         retranslateUi(tab_deck_tuning);
 
-        tab_details->setCurrentIndex(0);
+        tab_details->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(tab_deck_tuning);
@@ -235,11 +255,11 @@ public:
     void retranslateUi(QScrollArea *tab_deck_tuning)
     {
         tab_deck_tuning->setWindowTitle(QApplication::translate("tab_deck_tuning", "ScrollArea", 0));
+        label->setText(QApplication::translate("tab_deck_tuning", "Name", 0));
+        label_3->setText(QApplication::translate("tab_deck_tuning", "author", 0));
+        label_2->setText(QApplication::translate("tab_deck_tuning", "Description", 0));
         label_4->setText(QApplication::translate("tab_deck_tuning", "Format", 0));
         label_5->setText(QApplication::translate("tab_deck_tuning", "rating", 0));
-        label_3->setText(QApplication::translate("tab_deck_tuning", "author", 0));
-        label->setText(QApplication::translate("tab_deck_tuning", "Name", 0));
-        label_2->setText(QApplication::translate("tab_deck_tuning", "Description", 0));
         tab_details->setTabText(tab_details->indexOf(tab_crypt), QApplication::translate("tab_deck_tuning", "Crypt details", 0));
         tab_details->setTabText(tab_details->indexOf(tab_library), QApplication::translate("tab_deck_tuning", "Library details", 0));
         tab_details->setTabText(tab_details->indexOf(tab_overView), QApplication::translate("tab_deck_tuning", "OverView", 0));

@@ -183,3 +183,8 @@ void RadialChart::paintChart(QPainter& painter) {
   painter.drawText( myTitleRect, Qt::AlignHCenter | Qt::AlignTop | Qt::TextWordWrap, myTitle );
 
 }
+
+void RadialChart::updateRects()
+{
+
+}

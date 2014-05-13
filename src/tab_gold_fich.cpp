@@ -33,4 +33,6 @@ tab_gold_fich::~tab_gold_fich()
 {
     delete ui;
 }
-//#include <QGraphicsScene>
+
+
+

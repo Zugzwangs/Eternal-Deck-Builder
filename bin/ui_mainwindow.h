@@ -30,6 +30,7 @@ public:
     QAction *actionEnregistrer_le_Deck;
     QAction *actionImprimer_le_Deck;
     QAction *actionOptions;
+    QAction *actionExport_Deck;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QTabWidget *tabEditorModule;
@@ -54,6 +55,8 @@ public:
         actionImprimer_le_Deck->setObjectName(QStringLiteral("actionImprimer_le_Deck"));
         actionOptions = new QAction(MainWindow);
         actionOptions->setObjectName(QStringLiteral("actionOptions"));
+        actionExport_Deck = new QAction(MainWindow);
+        actionExport_Deck->setObjectName(QStringLiteral("actionExport_Deck"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -103,6 +106,7 @@ public:
         menuBar->addAction(menuFichier->menuAction());
         menuBar->addAction(menuParam_trages->menuAction());
         menuFichier->addAction(actionEnregistrer_le_Deck);
+        menuFichier->addAction(actionExport_Deck);
         menuFichier->addAction(actionImprimer_le_Deck);
         menuParam_trages->addAction(actionOptions);
 
@@ -122,6 +126,7 @@ public:
         actionImprimer_le_Deck->setText(QApplication::translate("MainWindow", "Imprimer le Deck", 0));
         actionImprimer_le_Deck->setShortcut(QApplication::translate("MainWindow", "Ctrl+P", 0));
         actionOptions->setText(QApplication::translate("MainWindow", "Options", 0));
+        actionExport_Deck->setText(QApplication::translate("MainWindow", "Export Deck", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletRechercheCarte), QApplication::translate("MainWindow", "Library search", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletRechercheCrypte), QApplication::translate("MainWindow", "Crypt search", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletProba), QApplication::translate("MainWindow", "Deck View", 0));

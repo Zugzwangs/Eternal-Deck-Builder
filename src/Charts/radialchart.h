@@ -35,6 +35,8 @@ protected:
   void paintTicks( QPainter& painter ) const;
   virtual void paintChart(QPainter &);
 
+  virtual void updateRects();
+
 public:
   RadialChart( QWidget* parent = 0 );
   void process();

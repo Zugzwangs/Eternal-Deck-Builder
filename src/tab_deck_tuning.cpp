@@ -12,31 +12,33 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     // TODO : verifié si ce lien est toujours utile
     DeckView = ui->PTreeViewDeckList;
 
-    //setup des widgets
+    // setup des widgets
     ui->cBFormat->addItem("Choose a format");
     ui->cBFormat->addItems(VtesInfo::DeckFormat);
 
-    // on assigne le model de données
+    // SETUP DECK MODEL
     ModeleDeck = new PTreeModel();
     ui->PTreeViewDeckList->setModel(ModeleDeck);
-
-    // on assigne le delegate
     PDelegateDeck *DelegateDeck = new PDelegateDeck();
     ui->PTreeViewDeckList->setItemDelegate(DelegateDeck);
 
-    //on setup le mapper des metadonnées du model
+    // SETUP VIPED VIEWER
+    for (int i=0; i<VtesInfo::VipedList.count(); i++)
+        VipedDatas.insert( VtesInfo::VipedList[i], 1);
+
+    // SETUP DECK METADATA MAPPER
     WidgetMetaMapper mapper(this);
     mapper.SetModel(ModeleDeck);
     mapper.AddWidget(ui->lE_name,"name");
     mapper.AddWidget(ui->lE_author,"author");
     mapper.AddWidget(ui->lE_description,"description");
 
-    // Connect the fake buttons nested in CardItem
-    connect( DeckView, SIGNAL(request_increment(QModelIndex)), ModeleDeck, SLOT(IncrementCardItem(QModelIndex)) );
-    connect( DeckView, SIGNAL(request_decrement(QModelIndex)), ModeleDeck, SLOT(DecrementCardItem(QModelIndex)) );
-    connect( DeckView, SIGNAL(request_delete(QModelIndex))   , ModeleDeck, SLOT(RemoveCardITem(QModelIndex))    );
-
-    // Connect Stats model to changes of the deck model for syncs purposes
+    // CONNECTIONS
+    /*connect the fake buttons nested in CardItem*/
+    connect( ui->PTreeViewDeckList, SIGNAL(request_increment(QModelIndex)), ModeleDeck, SLOT(IncrementCardItem(QModelIndex)) );
+    connect( ui->PTreeViewDeckList, SIGNAL(request_decrement(QModelIndex)), ModeleDeck, SLOT(DecrementCardItem(QModelIndex)) );
+    connect( ui->PTreeViewDeckList, SIGNAL(request_delete(QModelIndex))   , ModeleDeck, SLOT(RemoveCardITem(QModelIndex))    );
+    /*connect Stats model to changes of the deck model for syncs purposes*/
     connect( ModeleDeck, SIGNAL( DeckChanged(QModelIndex) ), this, SLOT( refresh_stat_model(QModelIndex) ) );
 
     // SETUP TAB OVERVIEW
@@ -45,7 +47,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     layout_overView->addWidget(ui->frameOverView);
 
     // model that keep stats of card's types repartition
-    CardTypeModel = new StatsModel(15, 1, this);
+    CardTypeModel = new StatsModel(VtesInfo::CardTypeList.count(), 1, this);
     CardTypeView = new PieChart();
     CardTypeView->setLegend("Cards types");
     for (int i=0; i<VtesInfo::CardTypeList.count(); i++)
@@ -58,9 +60,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     // model that keep stats of card's cost repartition
     CardCostModel = new StatsModel(7, 1, this);
     for (int i=0; i<CardCostModel->rowCount(); i++)
-        {
         CardCostModel->setHeaderData(i, Qt::Vertical, "Cost " + QString::number(i) );
-        }
     CardCostView = new PieChart();
     CardCostView->setLegend("Cards costs");
     CardCostView->setModel(CardCostModel);
@@ -77,7 +77,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
 
     // model that keep stats of crypt grouping repartition
     GroupingModel = new StatsModel(6, 1, this);
-    GroupingModel->setData( GroupingModel->index(0,0), 10, Qt::DisplayRole);
+    GroupingModel->setData( GroupingModel->index(0, 0), 10, Qt::DisplayRole);
     GroupingModel->setHeaderData(0, Qt::Horizontal, "Grouping repartition");
     GroupingView = new LinearChart();
     GroupingView->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -124,9 +124,8 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     dynamic_cast<QVBoxLayout *>(ui->frameLibrary->layout())->addWidget( LibraryGalerie );
 }
 
-// the deck model has been changed, so we update datas in the stats/overview model
 void tab_deck_tuning::sync_stats_model( QModelIndex new_item )
-{
+{// the deck model has been changed, so we update datas in the stats/overview model
 /*  TODO : fonction à reécrire !!! */
 }
 
