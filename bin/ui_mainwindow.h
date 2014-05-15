@@ -31,6 +31,8 @@ public:
     QAction *actionImprimer_le_Deck;
     QAction *actionOptions;
     QAction *actionExport_Deck;
+    QAction *actionNew_Deck;
+    QAction *actionOpen_a_deck;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QTabWidget *tabEditorModule;
@@ -57,6 +59,10 @@ public:
         actionOptions->setObjectName(QStringLiteral("actionOptions"));
         actionExport_Deck = new QAction(MainWindow);
         actionExport_Deck->setObjectName(QStringLiteral("actionExport_Deck"));
+        actionNew_Deck = new QAction(MainWindow);
+        actionNew_Deck->setObjectName(QStringLiteral("actionNew_Deck"));
+        actionOpen_a_deck = new QAction(MainWindow);
+        actionOpen_a_deck->setObjectName(QStringLiteral("actionOpen_a_deck"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -108,11 +114,13 @@ public:
         menuFichier->addAction(actionEnregistrer_le_Deck);
         menuFichier->addAction(actionExport_Deck);
         menuFichier->addAction(actionImprimer_le_Deck);
+        menuFichier->addAction(actionNew_Deck);
+        menuFichier->addAction(actionOpen_a_deck);
         menuParam_trages->addAction(actionOptions);
 
         retranslateUi(MainWindow);
 
-        tabEditorModule->setCurrentIndex(3);
+        tabEditorModule->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -127,6 +135,8 @@ public:
         actionImprimer_le_Deck->setShortcut(QApplication::translate("MainWindow", "Ctrl+P", 0));
         actionOptions->setText(QApplication::translate("MainWindow", "Options", 0));
         actionExport_Deck->setText(QApplication::translate("MainWindow", "Export Deck", 0));
+        actionNew_Deck->setText(QApplication::translate("MainWindow", "New Deck", 0));
+        actionOpen_a_deck->setText(QApplication::translate("MainWindow", "Open a deck", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletRechercheCarte), QApplication::translate("MainWindow", "Library search", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletRechercheCrypte), QApplication::translate("MainWindow", "Crypt search", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletProba), QApplication::translate("MainWindow", "Deck View", 0));

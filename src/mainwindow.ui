@@ -42,7 +42,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <property name="documentMode">
        <bool>false</bool>
@@ -87,6 +87,8 @@
     <addaction name="actionEnregistrer_le_Deck"/>
     <addaction name="actionExport_Deck"/>
     <addaction name="actionImprimer_le_Deck"/>
+    <addaction name="actionNew_Deck"/>
+    <addaction name="actionOpen_a_deck"/>
    </widget>
    <widget class="QMenu" name="menuParam_trages">
     <property name="title">
@@ -122,6 +124,16 @@
   <action name="actionExport_Deck">
    <property name="text">
     <string>Export Deck</string>
+   </property>
+  </action>
+  <action name="actionNew_Deck">
+   <property name="text">
+    <string>New Deck</string>
+   </property>
+  </action>
+  <action name="actionOpen_a_deck">
+   <property name="text">
+    <string>Open a deck</string>
    </property>
   </action>
  </widget>

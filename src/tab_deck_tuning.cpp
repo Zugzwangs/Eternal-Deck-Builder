@@ -12,43 +12,31 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     // TODO : verifié si ce lien est toujours utile
     DeckView = ui->PTreeViewDeckList;
 
-    // setup des widgets
-    ui->cBFormat->addItem("Choose a format");
-    ui->cBFormat->addItems(VtesInfo::DeckFormat);
-
     // SETUP DECK MODEL
     ModeleDeck = new PTreeModel();
     ui->PTreeViewDeckList->setModel(ModeleDeck);
     PDelegateDeck *DelegateDeck = new PDelegateDeck();
     ui->PTreeViewDeckList->setItemDelegate(DelegateDeck);
 
-    // SETUP VIPED VIEWER
+    // SETUP TAB OVERVIEW //
+
+    // setup des widgets affichant les metas
+    ui->cBFormat->addItem("Choose a format");
+    ui->cBFormat->addItems(VtesInfo::DeckFormat);
+
+    // setup viped viewer
     for (int i=0; i<VtesInfo::VipedList.count(); i++)
         VipedDatas.insert( VtesInfo::VipedList[i], 1);
     DeckViped = new VipedViewer(this);
     DeckViped->setModel(VipedDatas);
     ui->frame_viped->layout()->addWidget(DeckViped);
 
-
     // SETUP DECK METADATA MAPPER
     WidgetMetaMapper mapper(this);
     mapper.SetModel(ModeleDeck);
     mapper.AddWidget(ui->lE_name,"name");
     mapper.AddWidget(ui->lE_author,"author");
-    mapper.AddWidget(ui->lE_description,"description");
-
-    // CONNECTIONS
-    /*connect the fake buttons nested in CardItem*/
-    connect( ui->PTreeViewDeckList, SIGNAL(request_increment(QModelIndex)), ModeleDeck, SLOT(IncrementCardItem(QModelIndex)) );
-    connect( ui->PTreeViewDeckList, SIGNAL(request_decrement(QModelIndex)), ModeleDeck, SLOT(DecrementCardItem(QModelIndex)) );
-    connect( ui->PTreeViewDeckList, SIGNAL(request_delete(QModelIndex))   , ModeleDeck, SLOT(RemoveCardITem(QModelIndex))    );
-    /*connect Stats model to changes of the deck model for syncs purposes*/
-    connect( ModeleDeck, SIGNAL( DeckChanged(QModelIndex) ), this, SLOT( refresh_stat_model(QModelIndex) ) );
-
-    // SETUP TAB OVERVIEW
-    QHBoxLayout *layout_overView = new QHBoxLayout;
-    ui->tab_overView->setLayout(layout_overView);
-    layout_overView->addWidget(ui->frameOverView);
+    //mapper.AddWidget(ui->TE_description,"description");
 
     // model that keep stats of card's types repartition
     CardTypeModel = new StatsModel(VtesInfo::CardTypeList.count(), 1, this);
@@ -92,12 +80,8 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     dynamic_cast<QGridLayout *>(ui->frameOverView->layout())->addWidget( GroupingView, 1, 1 );
 
     // SETUP TAB CRYPT DETAILS
-    QHBoxLayout *layout_crypt = new QHBoxLayout;
-    ui->tab_crypt->setLayout(layout_crypt);
-    layout_crypt->addWidget(ui->frameCrypt);
-
     cryptGalerie = new QListView();
-    cryptGalerie->setFixedHeight(450);
+    //cryptGalerie->setFixedHeight(450);
     cryptGalerie->setUniformItemSizes(true);
     cryptGalerie->setGridSize( QSize(150,210) );
     cryptGalerie->setIconSize( QSize(144,200) );
@@ -106,16 +90,11 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     cryptGalerie->setModel(ModeleDeck);
     cryptGalerie->setModelColumn(0);
     cryptGalerie->setRootIndex(ModeleDeck->itemCrypt->index());
-
-    dynamic_cast<QVBoxLayout *>(ui->frameCrypt->layout())->addWidget( cryptGalerie );
+    ui->frameCrypt->layout()->addWidget( cryptGalerie );
 
     // SETUP TAB LIBRARY DETAILS
-    QHBoxLayout *layout_library= new QHBoxLayout;
-    ui->tab_library->setLayout(layout_library);
-    layout_library->addWidget(ui->frameLibrary);
-
     LibraryGalerie = new QListView();
-    LibraryGalerie->setFixedHeight(660);
+    //LibraryGalerie->setFixedHeight(660);
     LibraryGalerie->setUniformItemSizes(true);
     LibraryGalerie->setGridSize( QSize(150,210) );
     LibraryGalerie->setIconSize( QSize(144,200) );
@@ -124,8 +103,15 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     LibraryGalerie->setModel(ModeleDeck);
     LibraryGalerie->setModelColumn(0);
     LibraryGalerie->setRootIndex(ModeleDeck->itemLib->index());
+    ui->frameLibrary->layout()->addWidget( LibraryGalerie );
 
-    dynamic_cast<QVBoxLayout *>(ui->frameLibrary->layout())->addWidget( LibraryGalerie );
+    // CONNECTIONS
+    /*connect the fake buttons nested in CardItem*/
+    connect( ui->PTreeViewDeckList, SIGNAL(request_increment(QModelIndex)), ModeleDeck, SLOT(IncrementCardItem(QModelIndex)) );
+    connect( ui->PTreeViewDeckList, SIGNAL(request_decrement(QModelIndex)), ModeleDeck, SLOT(DecrementCardItem(QModelIndex)) );
+    connect( ui->PTreeViewDeckList, SIGNAL(request_delete(QModelIndex))   , ModeleDeck, SLOT(RemoveCardITem(QModelIndex))    );
+    /*connect Stats model to changes of the deck model for syncs purposes*/
+    connect( ModeleDeck, SIGNAL( DeckChanged(QModelIndex) ), this, SLOT( refresh_stat_model(QModelIndex) ) );
 }
 
 void tab_deck_tuning::sync_stats_model( QModelIndex new_item )

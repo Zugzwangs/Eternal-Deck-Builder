@@ -199,10 +199,10 @@ myChartRect = QRect();
 myValuesRect = QRect();
 myTitleRect = QRect();
 myTitle = "";
-myMarginX = 15;
-myMarginY = 15;
+myMarginX = 30;
+myMarginY = 20;
 
-    setAutoFillBackground(true);        //pour que ce soit utile, il faut
+    setAutoFillBackground(false);        //pour que ce soit utile, il faut
     setBackgroundRole(QPalette::Base);  //utiliser ces variables dans mon paintEvent
     setMouseTracking(false);    //otherwise VipedViewer will receive moveEvent even if user press no mousse buttons during moves
 }
@@ -320,9 +320,8 @@ void VipedViewer::paintAxis( QPainter& painter ) const
 {
     painter.save();
     paintTicks( painter );
-    //painter.setRenderHint( QPainter::Antialiasing, false );
     qreal currentAngle = 0;
-    QRect rectangle( -myMaxBound, -myMaxBound, 2*myMaxBound, 2*myMaxBound );
+    QRect rectangle( -(myMaxBound+5), -(myMaxBound+5), 2*(myMaxBound+5), 2*(myMaxBound+5) );
     rectangle.translate( myValuesRect.center() );
 
     QPainterPath pathCenter;
@@ -334,7 +333,7 @@ void VipedViewer::paintAxis( QPainter& painter ) const
         {
         QPainterPath AxisPath;
         AxisPath.moveTo( myValuesRect.center() );
-        AxisPath.arcTo( rectangle, currentAngle, mySectionAngle );
+        AxisPath.arcTo( rectangle, currentAngle, 1 );
         AxisPath.closeSubpath();
         AxisPath = AxisPath.subtracted( pathCenter );
         painter.drawPath( AxisPath );
@@ -371,7 +370,10 @@ painter.save();
     startPoint.setX( cos( currentRadAngle )*distance + mycenterChart.x() );
     startPoint.setY( sin( currentRadAngle )*distance + mycenterChart.y() );
 
-    QRectF textRect( startPoint.x(), startPoint.y() , 50, 20 );
+    QFontMetrics metrics( font() );
+    int h = metrics.height();
+    int w = metrics.width( textSection );
+    QRectF textRect( startPoint.x(), startPoint.y() , w, h );
 
     if ( 0<=startAngle && startAngle<90 )
         textRect.translate( 0, -textRect.height() );
@@ -440,8 +442,6 @@ void VipedViewer::resizeEvent(QResizeEvent * event)
     return QFrame::resizeEvent(event);
 }
 
-
-//
 void VipedViewer::mousePressEvent(QMouseEvent * event)
 {
     QPoint pos = event->pos();
