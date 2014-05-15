@@ -29,6 +29,8 @@ private:
     Ui::tab_search_library *ui;
     QCompleter *Completer;
     QPixmap DosCarte;
+    PathProvider path_list;
+    QString PathCartes;
     QItemSelectionModel *BddSelectionModel;
 
 private slots:

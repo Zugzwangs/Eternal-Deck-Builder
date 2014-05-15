@@ -7,6 +7,7 @@
 #include <QTableView>
 
 #include "mvddeck.h"
+#include "PWidget.h"
 #include "Charts/piechart.h"
 #include "Charts/linearchart.h"
 #include "Charts/radialchart.h"
@@ -45,6 +46,7 @@ private:
 
     // Metadatas
     QMap<QString, int> VipedDatas;
+    VipedViewer *DeckViped;
 
 private slots:
     void sync_stats_model(QModelIndex new_item);

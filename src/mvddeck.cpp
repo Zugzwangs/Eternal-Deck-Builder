@@ -465,8 +465,6 @@ QSize PDelegateDeck::sizeHint(const QStyleOptionViewItem &option, const QModelIn
 /*****************************************************************************************/
 /*  ITEMS                                                                                */
 /*****************************************************************************************/
-
-//
 SortItem::SortItem(QString txt) : QStandardItem(txt)
 {
     setEditable(false);
@@ -507,8 +505,9 @@ CryptCardItem::CryptCardItem(QStringList strL) : QObject(), QStandardItem()
     setData( 1, VtesInfo::ExemplairRole );
     setData( VtesInfo::CryptItemType, VtesInfo::ItemCategoryRole);
     QString CardName = strL[3] + ".jpg";
-    QString PathCartes = "D:\\Eternal-Deck-Builder\\bin\\debug\\Cartes\\";
-    setData( QIcon( PathCartes + CardName), Qt::DecorationRole);
+    path_list.initPaths();
+    QString PathCartes = path_list.getCardPath();
+    setData( QIcon( PathCartes + "/" + CardName), Qt::DecorationRole);
 
     // we set all game datas
     setData( strL[1], Qt::DisplayRole);
@@ -574,8 +573,9 @@ LibraryCardItem::LibraryCardItem(QStringList strL) : QObject(),QStandardItem()
     setData( 1, VtesInfo::ExemplairRole );
     setData( VtesInfo::LibraryItemType, VtesInfo::ItemCategoryRole);
     QString CardName = strL[3] + ".jpg";
-    QString PathCartes = "D:\\Eternal-Deck-Builder\\bin\\debug\\Cartes\\";
-    setData( QIcon( PathCartes + CardName), Qt::DecorationRole);
+    path_list.initPaths();
+    QString PathCartes = path_list.getCardPath();
+    setData( QIcon( PathCartes + "/" + CardName), Qt::DecorationRole);
 
     // we set all game datas
     setData( strL[1], Qt::DisplayRole);

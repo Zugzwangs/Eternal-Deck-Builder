@@ -8,9 +8,7 @@
 #include "mvdbdd.h"
 #include "mvddeck.h"
 
-namespace Ui {
-class tab_search_crypt;
-}
+namespace Ui { class tab_search_crypt; }
 
 class tab_search_crypt : public QScrollArea
 {
@@ -29,6 +27,8 @@ private:
     Ui::tab_search_crypt *ui;
     QCompleter *Completer;
     QPixmap DosCrypt;
+    PathProvider path_list;
+    QString PathCartes;
     QItemSelectionModel *BddSelectionModel;
 
 private slots:

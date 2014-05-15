@@ -33,8 +33,8 @@ protected:
   void paintValues( QPainter& painter, int column ) const;
   void paintAxis( QPainter& painter ) const;
   void paintTicks( QPainter& painter ) const;
-  virtual void paintChart(QPainter &);
 
+  virtual void paintChart(QPainter &);
   virtual void updateRects();
 
 public:

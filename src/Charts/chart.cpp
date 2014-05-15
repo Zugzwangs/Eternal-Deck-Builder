@@ -39,7 +39,6 @@ Chart::Chart( QWidget* parent ) : MarbAbstractItemView( parent ) {
   myValuesRect = QRect();
   myTitleRect = QRect();
   myTitle = "";
-  myTitleRect = QRect();
   myOrigin = QPoint(0,0);
   myNbDigits = 1;
   myMarginX = 20;
@@ -47,8 +46,7 @@ Chart::Chart( QWidget* parent ) : MarbAbstractItemView( parent ) {
 }
 
 
-Chart::~Chart() {
-}
+Chart::~Chart() {}
 
 
 void Chart::calculateBounds() {

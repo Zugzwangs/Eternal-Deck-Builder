@@ -72,4 +72,19 @@ namespace VtesInfo
                          RegionButtonAddRole};
 }
 
+// TODO : en faire une class static !
+class PathProvider
+{
+public:
+    explicit PathProvider();
+    bool initPaths();
+    QString getCardPath();
+    QString getDeckPath();
+
+private:
+    QString CardPath;
+    QString DeckPath;
+
+};
+
 #endif

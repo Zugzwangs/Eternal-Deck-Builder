@@ -7,31 +7,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
 // ////////////////////////////////////////////////
 //  INITIALISATION DES PATHS DE L'APPLI
-    int i=0;
-    DossierAppli.setPath(QCoreApplication::applicationDirPath());
-    while (DossierAppli.dirName() != "bin" && i<4)
-        {
-        i++;
-        DossierAppli.cdUp();
-        }
 
-    DossierAppli.cdUp();
-    if (DossierAppli.cd("Cartes"))
+    if ( ! path_list.initPaths() )
         {
-        PathCartes = DossierAppli.absolutePath();
-        qDebug() << "path des cartes = " << PathCartes;
+        qDebug() << "ca a chier !";
         }
-    else
-        QMessageBox::warning(this, "Erreur","le dossier des cartes est manquant !");
-
-    DossierAppli.cdUp();
-    if (DossierAppli.cd("Decks"))
-        {
-        PathDeck = DossierAppli.absolutePath();
-        qDebug() << "path des Decks = " << PathDeck;
-        }
-    else
-        QMessageBox::warning(this, "Erreur","le dossier des Decks est manquant !");
+    PathCartes = path_list.getCardPath();
+    PathDeck = path_list.getDeckPath();
 
 
 // ////////////////////////////////////////////////

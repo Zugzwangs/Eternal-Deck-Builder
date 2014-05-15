@@ -9,6 +9,8 @@
 #include <QDragMoveEvent>
 #include <QDropEvent>
 
+#include "Global.h"
+
 
 /*****************************************************************************************/
 /* CARDS AND CATEGORIES ITEMS                                                            */
@@ -34,9 +36,13 @@ public:
     ~CryptCardItem();
     virtual int	type() const;
 
+private:
+    PathProvider path_list;
+
 signals:
     void request_deleting( QModelIndex );
 };
+
 
 class LibraryCardItem : public QObject, public QStandardItem
 {
@@ -48,6 +54,9 @@ public:
     void Decrement();
     ~LibraryCardItem();
     virtual int	type() const;
+
+private:
+    PathProvider path_list;
 
 signals:
     void request_deleting( QModelIndex );

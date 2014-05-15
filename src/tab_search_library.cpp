@@ -49,6 +49,9 @@ tab_search_library::tab_search_library(QWidget *parent) : QScrollArea(parent), u
     DosCarte = QPixmap(":/icons/Vtes_Grelarge.gif");
     ui->VisuelCarte->setPixmap(DosCarte);
 
+    path_list.initPaths();
+    PathCartes = path_list.getCardPath();
+
     // SETUP THE BDD MODEL
     ModelReponseCarte = new PSqlTableModel();
     ModelReponseCarte->setTable("CardList");
@@ -236,7 +239,7 @@ void tab_search_library::request_affichage(QModelIndex Idx)
         const QAbstractItemModel *CurrentModel;
         CurrentModel = Idx.model();
         QString CardName = CurrentModel->index(Idx.row(),3).data().toString();
-        CardName = "/" + CardName + ".jpg";
+        CardName = CardName + ".jpg";
 
         emit new_card_selected(CardName);
         }
@@ -247,7 +250,7 @@ void tab_search_library::deck_request_affichage(QModelIndex Idx)
     if ( Idx.isValid() )
         {
         QString CardName = Idx.data(VtesInfo::ImageFileRole).toString();
-        CardName = "/" + CardName + ".jpg";
+        CardName = CardName + ".jpg";
         emit new_card_selected(CardName);
         }
 }
@@ -293,17 +296,13 @@ ModelReponseCarte->setFilter(""); //On nettoie le filtre
 
 void tab_search_library::AfficheImageCarte(QString CardName)
 {
-    // !!!!!!!!!! dépannage
-    QString PathCartes;
-    PathCartes = "D:\\Eternal-Deck-Builder\\bin\\debug\\Cartes\\";
-    // !!!!!!!!!! dépannage
     QImage Image;
-    if (Image.load(PathCartes + CardName))
+    if (Image.load(PathCartes + "/" + CardName))
         { ui->VisuelCarte->setPixmap(QPixmap::fromImage(Image)); }
     else
         {
-        emit card_picture_missing(CardName);
         /*Afficher un truc par defaut genre Vtes_Grelarge.gif*/
+        emit card_picture_missing(CardName);
         }
 }
 

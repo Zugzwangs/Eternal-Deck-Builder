@@ -181,7 +181,6 @@ void RadialChart::paintChart(QPainter& painter) {
   paintTextAxis( painter );
 
   painter.drawText( myTitleRect, Qt::AlignHCenter | Qt::AlignTop | Qt::TextWordWrap, myTitle );
-
 }
 
 void RadialChart::updateRects()

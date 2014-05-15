@@ -25,6 +25,10 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     // SETUP VIPED VIEWER
     for (int i=0; i<VtesInfo::VipedList.count(); i++)
         VipedDatas.insert( VtesInfo::VipedList[i], 1);
+    DeckViped = new VipedViewer(this);
+    DeckViped->setModel(VipedDatas);
+    ui->frame_viped->layout()->addWidget(DeckViped);
+
 
     // SETUP DECK METADATA MAPPER
     WidgetMetaMapper mapper(this);

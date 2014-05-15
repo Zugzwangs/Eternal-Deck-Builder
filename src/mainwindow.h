@@ -33,7 +33,7 @@ private:
     // On déclare le gestionnaire de téléchargements
     update_manager* downloader;
     // On déclare les variable de paths
-    QDir DossierAppli;
+    PathProvider path_list;
     QString PathCartes;
     QString PathRessources;
     QString PathDeck;

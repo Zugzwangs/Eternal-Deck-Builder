@@ -37,6 +37,9 @@ tab_search_crypt::tab_search_crypt(QWidget *parent) : QScrollArea(parent), ui(ne
     DosCrypt = QPixmap(":/icons/Vtes_Tanlarge.gif");
     ui->VisuelCrypt->setPixmap(DosCrypt);
 
+    path_list.initPaths();
+    PathCartes = path_list.getCardPath();
+
     // SETUP THE BDD MODEL
     ModelReponseCrypt = new PSqlTableModel();
     ModelReponseCrypt->setTable("VampireList");
@@ -228,7 +231,7 @@ void tab_search_crypt::request_affichage(QModelIndex Idx)
         const QAbstractItemModel *CurrentModel;
         CurrentModel = Idx.model();
         QString CardName = CurrentModel->index(Idx.row(),3).data().toString();
-        CardName = "/" + CardName + ".jpg";
+        CardName = CardName + ".jpg";
         emit new_card_selected(CardName);
         }
 }
@@ -238,7 +241,7 @@ void tab_search_crypt::deck_request_affichage(QModelIndex Idx)
     if ( Idx.isValid() )
         {
         QString CardName = Idx.data(VtesInfo::ImageFileRole).toString();
-        CardName = "/" + CardName + ".jpg";
+        CardName = CardName + ".jpg";
         emit new_card_selected(CardName);
         }
 }
@@ -257,12 +260,8 @@ void tab_search_crypt::keyPressEvent(QKeyEvent *e)
 
 void tab_search_crypt::AfficheImageCrypt(QString CardName)
 {
-    // !!!!!!!!!! dépannage
-    QString PathCartes;
-    PathCartes = "D:\\Eternal-Deck-Builder\\bin\\debug\\Cartes\\";
-    // !!!!!!!!!! dépannage
     QImage Image;
-    if (Image.load(PathCartes + CardName))
+    if (Image.load(PathCartes + "/" + CardName))
         {ui->VisuelCrypt->setPixmap(QPixmap::fromImage(Image));}
     else
         {
