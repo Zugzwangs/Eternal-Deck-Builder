@@ -22,6 +22,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QScrollArea>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTextEdit>
@@ -70,11 +71,15 @@ public:
     QWidget *tab_crypt;
     QVBoxLayout *verticalLayout;
     QFrame *disciplineCrypt;
+    QGridLayout *gridLayout_3;
+    QSpacerItem *verticalSpacer;
     QFrame *frameCrypt;
     QVBoxLayout *verticalLayout_3;
     QWidget *tab_library;
     QVBoxLayout *verticalLayout_6;
     QFrame *disciplineLibrary;
+    QGridLayout *gridLayout_4;
+    QSpacerItem *verticalSpacer_2;
     QFrame *frameLibrary;
     QVBoxLayout *verticalLayout_2;
 
@@ -199,6 +204,7 @@ public:
         formLayout = new QFormLayout(frame_results);
         formLayout->setObjectName(QStringLiteral("formLayout"));
         formLayout->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
+        formLayout->setContentsMargins(-1, 5, -1, 5);
         label_5 = new QLabel(frame_results);
         label_5->setObjectName(QStringLiteral("label_5"));
         label_5->setAlignment(Qt::AlignCenter);
@@ -291,15 +297,21 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         disciplineCrypt = new QFrame(tab_crypt);
         disciplineCrypt->setObjectName(QStringLiteral("disciplineCrypt"));
-        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(disciplineCrypt->sizePolicy().hasHeightForWidth());
         disciplineCrypt->setSizePolicy(sizePolicy3);
         disciplineCrypt->setMinimumSize(QSize(0, 260));
-        disciplineCrypt->setMaximumSize(QSize(16777215, 260));
+        disciplineCrypt->setMaximumSize(QSize(16777215, 400));
         disciplineCrypt->setFrameShape(QFrame::StyledPanel);
         disciplineCrypt->setFrameShadow(QFrame::Raised);
+        gridLayout_3 = new QGridLayout(disciplineCrypt);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        verticalSpacer = new QSpacerItem(20, 373, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_3->addItem(verticalSpacer, 0, 0, 1, 1);
+
 
         verticalLayout->addWidget(disciplineCrypt);
 
@@ -309,6 +321,7 @@ public:
         frameCrypt->setFrameShadow(QFrame::Raised);
         verticalLayout_3 = new QVBoxLayout(frameCrypt);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
 
         verticalLayout->addWidget(frameCrypt);
 
@@ -321,10 +334,16 @@ public:
         disciplineLibrary->setObjectName(QStringLiteral("disciplineLibrary"));
         sizePolicy3.setHeightForWidth(disciplineLibrary->sizePolicy().hasHeightForWidth());
         disciplineLibrary->setSizePolicy(sizePolicy3);
-        disciplineLibrary->setMinimumSize(QSize(0, 200));
-        disciplineLibrary->setMaximumSize(QSize(16777215, 200));
+        disciplineLibrary->setMinimumSize(QSize(0, 170));
+        disciplineLibrary->setMaximumSize(QSize(16777215, 400));
         disciplineLibrary->setFrameShape(QFrame::StyledPanel);
         disciplineLibrary->setFrameShadow(QFrame::Raised);
+        gridLayout_4 = new QGridLayout(disciplineLibrary);
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        verticalSpacer_2 = new QSpacerItem(20, 373, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_4->addItem(verticalSpacer_2, 0, 0, 1, 1);
+
 
         verticalLayout_6->addWidget(disciplineLibrary);
 
@@ -334,6 +353,7 @@ public:
         frameLibrary->setFrameShadow(QFrame::Raised);
         verticalLayout_2 = new QVBoxLayout(frameLibrary);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
 
         verticalLayout_6->addWidget(frameLibrary);
 
@@ -345,7 +365,7 @@ public:
 
         retranslateUi(tab_deck_tuning);
 
-        tab_details->setCurrentIndex(0);
+        tab_details->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(tab_deck_tuning);

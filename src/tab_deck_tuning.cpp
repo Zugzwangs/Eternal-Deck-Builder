@@ -82,7 +82,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
 
     // SETUP TAB CRYPT DETAILS
     cryptGalerie = new QListView();
-    //cryptGalerie->setFixedHeight(450);
+    cryptGalerie->setFixedHeight(450);
     cryptGalerie->setUniformItemSizes(true);
     cryptGalerie->setGridSize( QSize(150,210) );
     cryptGalerie->setIconSize( QSize(144,200) );
@@ -95,7 +95,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
 
     // SETUP TAB LIBRARY DETAILS
     LibraryGalerie = new QListView();
-    //LibraryGalerie->setFixedHeight(660);
+    LibraryGalerie->setFixedHeight(660);
     LibraryGalerie->setUniformItemSizes(true);
     LibraryGalerie->setGridSize( QSize(150,210) );
     LibraryGalerie->setIconSize( QSize(144,200) );
