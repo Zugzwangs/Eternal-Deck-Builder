@@ -47,6 +47,8 @@ protected:
 
   qreal startAngle() const;
 
+  void myPaintLegend(QPainter &painter);
+
   virtual void configureColor( QPainter& painter, QColor base, int flag ) const;
 
   virtual QPainterPath itemPath( const QModelIndex& index ) const;
@@ -54,8 +56,8 @@ protected:
 
   virtual void paintChart( QPainter& painter );
   virtual void paintEvent(QPaintEvent* event);
-  virtual void paintPart( QPainter& painter, qreal angle, qreal delta, QColor color, bool isSelected = false, QString partText = "" );
-  virtual void paintPartSplitted( QPainter& painter, qreal angle, qreal delta, QColor color, bool isSelected = false, QString partText = "" );
+  virtual void paintPart(QPainter& painter, qreal angle, qreal delta, QColor color, bool isSelected = false);
+  virtual void paintPartSplitted( QPainter& painter, qreal angle, qreal delta, QColor color, bool isSelected = false);
 
   //void setSelection(const QRect& rect, QItemSelectionModel::SelectionFlags command);
   virtual QPointF splittedOffset( qreal angle, qreal delta ) const;

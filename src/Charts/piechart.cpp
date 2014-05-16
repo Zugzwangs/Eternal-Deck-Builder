@@ -29,11 +29,9 @@ PieChart::PieChart( QWidget* parent ) :  Chart( parent )
   myLegend = QString();
 }
 
-
 qreal PieChart::startAngle() const {
   return myStartAngle;
 }
-
 
 void PieChart::configureColor(QPainter &painter, QColor base, int flag ) const {
   switch ( flag ) {
@@ -53,7 +51,6 @@ void PieChart::configureColor(QPainter &painter, QColor base, int flag ) const {
   }
 }
 
-
 QPainterPath PieChart::itemPart( qreal angle, qreal delta, bool splitted ) const {
   QPainterPath part;
   part.moveTo( myRect.center() );
@@ -70,7 +67,6 @@ QPainterPath PieChart::itemPart( qreal angle, qreal delta, bool splitted ) const
   }
   return part;
 }
-
 
 QPainterPath PieChart::itemPath( const QModelIndex& index ) const {
   QPainterPath path;
@@ -91,7 +87,6 @@ QPainterPath PieChart::itemPath( const QModelIndex& index ) const {
   return path;
 }
 
-
 void PieChart::paintChart( QPainter &painter ) {
   this->updateChart();
   painter.save();
@@ -108,20 +103,52 @@ void PieChart::paintChart( QPainter &painter ) {
     bool isSelected = this->selectionModel()->selectedIndexes().contains( index )
                       || this->currentIndex() == index;
 
-    QString partText = this->model()->headerData(index.row(), Qt::Vertical, Qt::DisplayRole).toString();
-
     if ( mySplitted == false ) {
-      this->paintPart( painter, angle, delta, color, isSelected, partText );
+      this->paintPart( painter, angle, delta, color, isSelected );
     } else {
-      this->paintPartSplitted( painter, angle, delta, color, isSelected, partText );
+      this->paintPartSplitted( painter, angle, delta, color, isSelected );
     }
     angle += delta;
   }
-  painter.drawText( 10, myRect.bottomLeft().y() + 10,
+    myPaintLegend(painter);
+    painter.drawText( 10, myRect.bottomLeft().y() + 10,
                     width() - 20, height() - myRect.height(), Qt::AlignHCenter | Qt::TextWordWrap, myLegend );
-  painter.restore();
+
+    painter.restore();
 }
 
+void PieChart::myPaintLegend(QPainter &painter)
+{
+painter.save();
+painter.setPen( QPen(Qt::black, 2) );
+QFontMetrics metrics( font() );
+int h = metrics.height();
+int j = 0;
+
+for ( int i = 0; i < model()->rowCount(); ++i )
+    {
+    QModelIndex index = this->model()->index( i, myActiveColumn );
+    if ( model()->data( index, Qt::DisplayRole ).toInt() > 0 )
+        {
+        QString texte = model()->headerData(i, Qt::Vertical).toString();
+        QColor color( this->model()->data( index, Qt::DecorationRole ).toString() );
+        if ( !color.isValid() ) {
+        color = Marb::predefinedColor( i );
+        }
+        painter.setBrush( QBrush(color) );
+        int w = metrics.width( texte );
+        QRectF iconRect( myMarginX , myMarginY , h-4, h-4 );
+        QRectF texteRect( myMarginX , myMarginY , w, h );
+        iconRect.translate(0, j*(h+2)+2);
+        texteRect.translate(h+2, j*(h+2));
+        painter.drawRect( iconRect );
+        painter.drawText( texteRect, texte);
+        j++;
+        }
+    }
+
+painter.restore();
+}
 
 void PieChart::paintEvent(QPaintEvent *event) {
   Q_UNUSED( event )
@@ -133,10 +160,9 @@ void PieChart::paintEvent(QPaintEvent *event) {
   paintChart( painter );
 }
 
-
-void PieChart::paintPart( QPainter& painter, qreal angle, qreal delta, QColor color, bool isSelected, QString partText) {
+void PieChart::paintPart( QPainter& painter, qreal angle, qreal delta, QColor color, bool isSelected) {
   if ( isSelected == true ) {
-    this->paintPartSplitted( painter, angle, delta, color, false, partText );
+    this->paintPartSplitted( painter, angle, delta, color, false );
     return;
   }
   QPainterPath part = this->itemPart( angle, delta );
@@ -145,14 +171,11 @@ void PieChart::paintPart( QPainter& painter, qreal angle, qreal delta, QColor co
   int flag = 0;
   this->configureColor( painter, color, flag );
   painter.drawPath( part );
-  painter.setPen(Qt::black);
-  painter.drawText(part.controlPointRect(), Qt::AlignCenter, partText);
   painter.restore();
 }
 
-
-void PieChart::paintPartSplitted( QPainter &painter, qreal angle, qreal delta,
-                                  QColor color, bool isSelected, QString partText ) {
+void PieChart::paintPartSplitted(QPainter &painter, qreal angle, qreal delta,
+                                  QColor color, bool isSelected) {
   QPainterPath part = this->itemPart( angle, delta, true );
   painter.save();
   if ( mySplitted == true
@@ -163,11 +186,8 @@ void PieChart::paintPartSplitted( QPainter &painter, qreal angle, qreal delta,
     this->configureColor( painter, color, 1 );
   }
   painter.drawPath( part );
-  painter.setPen(Qt::black);
-  painter.drawText(part.controlPointRect(), Qt::AlignCenter, partText);
   painter.restore();
 }
-
 
 bool PieChart::save( QString filename ) {
   QPixmap pix( size() );
@@ -178,10 +198,8 @@ bool PieChart::save( QString filename ) {
   return pix.save( filename );
 }
 
-
 void PieChart::scrollTo(const QModelIndex &/*index*/, ScrollHint /*hint*/) {
 }
-
 
 void PieChart::setLegend( QString legend ) {
   myLegend = legend;
@@ -196,17 +214,14 @@ void PieChart::setRing( bool ring ) {
   myRing = ring;
 }
 
-
 void PieChart::setSplitted( bool splitted ) {
   mySplitted = splitted;
 }
-
 
 void PieChart::setStartAngle( qreal angle ) {
   myStartAngle = angle;
   this->viewport()->update();
 }
-
 
 QPointF PieChart::splittedOffset( qreal angle, qreal delta ) const {
   QPainterPath part;
@@ -219,7 +234,6 @@ QPointF PieChart::splittedOffset( qreal angle, qreal delta ) const {
   p = line.p2();
   return myRect.center() - p;
 }
-
 
 void PieChart::updateChart() {
   qreal w = ( width() - 40 );
@@ -244,7 +258,6 @@ void PieChart::updateChart() {
   }
 }
 
-
 void PieChart::updateRects() {
   if ( this->model() == 0 )  {
     return;
@@ -253,7 +266,6 @@ void PieChart::updateRects() {
   myTitleRect.moveTo( myValuesRect.bottomLeft() );
   myTitleRect.translate( (myValuesRect.width() - myTitleRect.width())/2, 20 );
 }
-
 
 QRect PieChart::visualRect( const QModelIndex& index ) const {
   Q_UNUSED(index)

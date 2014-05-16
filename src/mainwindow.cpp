@@ -49,10 +49,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     ui->OngletProba->layout()->addWidget(test_tuning);
 
     advanced_library_search_tab = new tab_search_library();
+    advanced_library_search_tab->setupDeckModel(test_tuning->ModeleDeck);
     ui->OngletRechercheCarte->layout()->addWidget(advanced_library_search_tab);
 
     advanced_crypt_search_tab = new tab_search_crypt();
     ui->OngletRechercheCrypte->layout()->addWidget(advanced_crypt_search_tab);
+    advanced_crypt_search_tab->setupDeckModel(test_tuning->ModeleDeck);
 
     playground_tab = new tab_gold_fich();
     playground_tab->initialisation(PathCartes);

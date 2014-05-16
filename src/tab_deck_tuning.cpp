@@ -46,6 +46,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
         {
         CardTypeModel->setHeaderData(i, Qt::Vertical, VtesInfo::CardTypeList[i]);
         }
+    //CardTypeModel->setHeaderData(0, Qt::Horizontal, "test legend");
     CardTypeView->setModel(CardTypeModel);
     dynamic_cast<QGridLayout *>(ui->frameOverView->layout())->addWidget( CardTypeView, 0, 0 );
 

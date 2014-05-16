@@ -45,8 +45,8 @@ protected:
   QRect myChartRect;
   QRect myValuesRect;
   QRect myLegendRect;
-  QString myTitle;
   QRect myTitleRect;
+  QString myTitle;
   QMap<int, ChartStyle> myStyle;
 
   int myX;
