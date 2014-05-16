@@ -201,31 +201,48 @@ myTitleRect = QRect();
 myTitle = "";
 myMarginX = 30;
 myMarginY = 20;
+mySelectedSection = "";
 
     setAutoFillBackground(false);        //pour que ce soit utile, il faut
     setBackgroundRole(QPalette::Base);  //utiliser ces variables dans mon paintEvent
     setMouseTracking(false);    //otherwise VipedViewer will receive moveEvent even if user press no mousse buttons during moves
 }
 
-void VipedViewer::setModel(QMap<QString, int> model)
+void VipedViewer::setModel(QMap<QString, int> &model)
 {
-    // a default model fot tests
-    setData("Bleed", 4);
-    setData("Defense", 2);
-    setData("Combat", 0);
-    setData("Diplomaty", 5);
-    setData("Pentex", 0);
+    myModel.clear();
+    myModel.unite(model);
+    checkModelConformity();
+    updateChart();
+}
+
+void VipedViewer::checkModelConformity()
+{
+    QMap<QString, int>::iterator i;
+    for (i = myModel.begin(); i != myModel.end(); ++i)
+        {
+        if ( i.value() < 0 )
+            i.value() = 0;
+        myMax = qMax(i.value(), myMax);
+        }
 }
 
 bool VipedViewer::setData(QString key, int value)
 {
     //only positive values accepted
     if ( value < 0 )
+        {
+        myModel.insert( key, 0 );
+        updateChart();
+        update();
         return false;
+        }
     //insert new data and keep model's max value
     myModel.insert( key, value );
     myMax = qMax(value, myMax);
     updateChart();
+    update();
+    return true;
 }
 
 void VipedViewer::setTickNumber(int Nb)
@@ -400,7 +417,7 @@ painter.setBrush( QBrush( 0x68B9FF ) );
 
     // compute param of the visual shape of value v at section i
     int value = v.toInt();
-    qreal DiamValue = value*myTickSize + myCenterHoleDiam/2;
+    qreal DiamValue = valueToPx(value);
     qreal startAngle = mySectionAngle*i;
     QRect rectangle( -DiamValue, -DiamValue, 2*DiamValue, 2*DiamValue );
     rectangle.translate( myValuesRect.center() );
@@ -428,7 +445,34 @@ void VipedViewer::paintTitle(QPainter &painter) const
 
 qreal VipedViewer::valueToPx(int value) const
 {
- return value*myTickSize;
+    return value*myTickSize + myCenterHoleDiam/2;
+}
+
+int VipedViewer::PxToValue(qreal px) const
+{
+    return floor( (px - myCenterHoleDiam/2)/ myTickSize );
+}
+
+int VipedViewer::PointToValue(QPoint p) const
+{
+    QPoint distVect = p-mycenterChart;
+    qreal dist = sqrt(pow(distVect.x(), 2) + pow(distVect.y(), 2));
+    return PxToValue(dist);
+}
+
+int VipedViewer::PointToSection(QPoint p) const
+{
+    QPoint distVect = p-mycenterChart;
+    qreal dist = sqrt(pow(distVect.x(), 2) + pow(distVect.y(), 2));
+    if (dist == 0)
+        return 0;
+
+    qreal alpha = acos( distVect.x() / dist );
+    if ( distVect.y() < 0 )
+        alpha = 2*PI-alpha;
+
+    qreal beta = 2*PI-alpha;
+    return floor( (beta*180/PI) /mySectionAngle );
 }
 
 QSize VipedViewer::sizeHint() const
@@ -445,6 +489,12 @@ void VipedViewer::resizeEvent(QResizeEvent * event)
 void VipedViewer::mousePressEvent(QMouseEvent * event)
 {
     QPoint pos = event->pos();
+    int section = PointToSection(pos);
+    QMap<QString, int>::const_iterator i = myModel.constBegin();
+    int j = section;
+    while ( j>0 && i != myModel.constEnd() ) { i++;  j--; }
+    mySelectedSection = i.key();
+    // change mousepointer
 }
 
 void VipedViewer::mouseMoveEvent(QMouseEvent * event)
@@ -454,6 +504,12 @@ void VipedViewer::mouseMoveEvent(QMouseEvent * event)
 
 void VipedViewer::mouseReleaseEvent(QMouseEvent * event)
 {
+    // change mousepointer
     QPoint pos = event->pos();
+    int newValue = PointToValue(pos);
+    if ( newValue > myNbTicks+1 )
+        newValue = myNbTicks+1;
+
+    setData(mySelectedSection, newValue );
 }
 

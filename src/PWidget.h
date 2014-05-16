@@ -56,8 +56,9 @@ class VipedViewer : public QFrame
 public:
     explicit VipedViewer(QWidget *parent = 0 );
     virtual QSize sizeHint() const;
-    void setModel(QMap<QString, int> model);
+    void setModel(QMap<QString, int> &model);
     bool setData(QString key, int value);
+    void checkModelConformity();
     void setTitle(QString title);
     void setTickNumber(int Nb = 5);
     void setMargin(int x, int y);
@@ -87,8 +88,12 @@ private:
     QRect myChartRect;
     QRect myValuesRect;
     QMap<QString, int> myModel;
+    QString mySelectedSection;
 
     qreal valueToPx( int value) const;
+    int PxToValue(qreal px) const;
+    int PointToValue(QPoint p) const;
+    int PointToSection(QPoint p) const;
     void updateChart();
     void updateRects();
     void updateValues();

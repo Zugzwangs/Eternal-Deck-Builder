@@ -177,7 +177,7 @@ public:
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1815, 1213));
         verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(5, 5, 5, 5);
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
         frame_2 = new QFrame(scrollAreaWidgetContents);
         frame_2->setObjectName(QStringLiteral("frame_2"));
         frame_2->setFrameShape(QFrame::NoFrame);

@@ -189,7 +189,7 @@ public:
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1789, 1131));
         verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(5, 5, 5, 5);
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         frame_2 = new QFrame(scrollAreaWidgetContents);
         frame_2->setObjectName(QStringLiteral("frame_2"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);

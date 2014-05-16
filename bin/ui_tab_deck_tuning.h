@@ -83,12 +83,16 @@ public:
         if (tab_deck_tuning->objectName().isEmpty())
             tab_deck_tuning->setObjectName(QStringLiteral("tab_deck_tuning"));
         tab_deck_tuning->resize(1426, 926);
+        tab_deck_tuning->setFrameShape(QFrame::NoFrame);
+        tab_deck_tuning->setFrameShadow(QFrame::Plain);
+        tab_deck_tuning->setLineWidth(0);
         tab_deck_tuning->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1627, 903));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1605, 905));
         horizontalLayout_2 = new QHBoxLayout(scrollAreaWidgetContents);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
         PTreeViewDeckList = new PTreeView(scrollAreaWidgetContents);
         PTreeViewDeckList->setObjectName(QStringLiteral("PTreeViewDeckList"));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
@@ -341,7 +345,7 @@ public:
 
         retranslateUi(tab_deck_tuning);
 
-        tab_details->setCurrentIndex(1);
+        tab_details->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(tab_deck_tuning);

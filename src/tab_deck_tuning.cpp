@@ -12,7 +12,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     // TODO : verifié si ce lien est toujours utile
     DeckView = ui->PTreeViewDeckList;
 
-    // SETUP DECK MODEL
+    // SETUP DECK MODEL //
     ModeleDeck = new PTreeModel();
     ui->PTreeViewDeckList->setModel(ModeleDeck);
     PDelegateDeck *DelegateDeck = new PDelegateDeck();
@@ -26,7 +26,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
 
     // setup viped viewer
     for (int i=0; i<VtesInfo::VipedList.count(); i++)
-        VipedDatas.insert( VtesInfo::VipedList[i], 1);
+        VipedDatas.insert( VtesInfo::VipedList[i], i);
     DeckViped = new VipedViewer(this);
     DeckViped->setModel(VipedDatas);
     ui->frame_viped->layout()->addWidget(DeckViped);
