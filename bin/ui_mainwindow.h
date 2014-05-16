@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
@@ -37,9 +38,13 @@ public:
     QGridLayout *gridLayout;
     QTabWidget *tabEditorModule;
     QWidget *OngletRechercheCarte;
+    QHBoxLayout *horizontalLayout;
     QWidget *OngletRechercheCrypte;
+    QHBoxLayout *horizontalLayout_2;
     QWidget *OngletProba;
+    QHBoxLayout *horizontalLayout_3;
     QWidget *OngletGoldFish;
+    QHBoxLayout *horizontalLayout_4;
     QMenuBar *menuBar;
     QMenu *menuFichier;
     QMenu *menuParam_trages;
@@ -83,15 +88,31 @@ public:
         tabEditorModule->setDocumentMode(false);
         OngletRechercheCarte = new QWidget();
         OngletRechercheCarte->setObjectName(QStringLiteral("OngletRechercheCarte"));
+        horizontalLayout = new QHBoxLayout(OngletRechercheCarte);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         tabEditorModule->addTab(OngletRechercheCarte, QString());
         OngletRechercheCrypte = new QWidget();
         OngletRechercheCrypte->setObjectName(QStringLiteral("OngletRechercheCrypte"));
+        horizontalLayout_2 = new QHBoxLayout(OngletRechercheCrypte);
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         tabEditorModule->addTab(OngletRechercheCrypte, QString());
         OngletProba = new QWidget();
         OngletProba->setObjectName(QStringLiteral("OngletProba"));
+        horizontalLayout_3 = new QHBoxLayout(OngletProba);
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         tabEditorModule->addTab(OngletProba, QString());
         OngletGoldFish = new QWidget();
         OngletGoldFish->setObjectName(QStringLiteral("OngletGoldFish"));
+        horizontalLayout_4 = new QHBoxLayout(OngletGoldFish);
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         tabEditorModule->addTab(OngletGoldFish, QString());
 
         gridLayout->addWidget(tabEditorModule, 0, 0, 1, 1);
@@ -120,7 +141,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabEditorModule->setCurrentIndex(2);
+        tabEditorModule->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

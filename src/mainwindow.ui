@@ -42,7 +42,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <property name="documentMode">
        <bool>false</bool>
@@ -51,21 +51,25 @@
        <attribute name="title">
         <string>Library search</string>
        </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout"/>
       </widget>
       <widget class="QWidget" name="OngletRechercheCrypte">
        <attribute name="title">
         <string>Crypt search</string>
        </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_2"/>
       </widget>
       <widget class="QWidget" name="OngletProba">
        <attribute name="title">
         <string>Deck View</string>
        </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_3"/>
       </widget>
       <widget class="QWidget" name="OngletGoldFish">
        <attribute name="title">
         <string>Playground</string>
        </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_4"/>
       </widget>
      </widget>
     </item>

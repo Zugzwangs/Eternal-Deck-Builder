@@ -44,42 +44,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
 
 // ///////////////////////////////////////////////
-// MISE EN FORME DU TAB 'DECK TUNING'
-
-    QHBoxLayout *layout_deck = new QHBoxLayout;
+// SETUP MAIN TABS
     test_tuning = new tab_deck_tuning();
-    layout_deck->addWidget(test_tuning);
-    ui->OngletProba->setLayout(layout_deck);
+    ui->OngletProba->layout()->addWidget(test_tuning);
 
-
-// ////////////////////////////////////////////////
-// MISE EN FORME DU TAB 'RECHERCHE CARTE'
-
-    QHBoxLayout *layout_library = new QHBoxLayout;
     advanced_library_search_tab = new tab_search_library();
-    layout_library->addWidget(advanced_library_search_tab);
-    ui->OngletRechercheCarte->setLayout(layout_library);
-    advanced_library_search_tab->setupDeckModel(test_tuning->ModeleDeck);
+    ui->OngletRechercheCarte->layout()->addWidget(advanced_library_search_tab);
 
-
-// ///////////////////////////////////////////////
-// MISE EN FORME DU TAB 'RECHERCHE  CRYPT'
-
-    QHBoxLayout *layout_crypt = new QHBoxLayout;
     advanced_crypt_search_tab = new tab_search_crypt();
-    layout_crypt->addWidget(advanced_crypt_search_tab);
-    ui->OngletRechercheCrypte->setLayout(layout_crypt);
-    advanced_crypt_search_tab->setupDeckModel(test_tuning->ModeleDeck);
+    ui->OngletRechercheCrypte->layout()->addWidget(advanced_crypt_search_tab);
 
-
-// ///////////////////////////////////////////////
-// MISE EN FORME DU TAB 'gold fish'
-
-    QHBoxLayout *layout_playground = new QHBoxLayout;
     playground_tab = new tab_gold_fich();
     playground_tab->initialisation(PathCartes);
-    layout_playground->addWidget(playground_tab);
-    ui->OngletGoldFish->setLayout(layout_playground);
+    ui->OngletGoldFish->layout()->addWidget(playground_tab);
 
 
 // ///////////////////////////////////////////////
