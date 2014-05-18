@@ -48,5 +48,7 @@ protected:
   void paintValues( QPainter& painter, int column);
   virtual void paintColumnLegend(QPainter &painter, int column, QPoint pos, int maxHeight);
   virtual void paintChart( QPainter& painter );
+
+  void HackedCalculateBounds();
 };
 #endif // LINEARCHART_H

@@ -20,23 +20,26 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
 
     // SETUP TAB OVERVIEW //
 
-    // setup des widgets affichant les metas
-    ui->cBFormat->addItem("Choose a format");
+    // setup widgets that show decks metas and link them to the model
     ui->cBFormat->addItems(VtesInfo::DeckFormat);
 
-    // setup viped viewer
-    for (int i=0; i<VtesInfo::VipedList.count(); i++)
-        VipedDatas.insert( VtesInfo::VipedList[i], i);
-    DeckViped = new VipedViewer(this);
-    DeckViped->setModel(VipedDatas);
-    ui->frame_viped->layout()->addWidget(DeckViped);
-
-    // SETUP DECK METADATA MAPPER
-    WidgetMetaMapper mapper(this);
     mapper.SetModel(ModeleDeck);
-    mapper.AddWidget(ui->lE_name,"name");
-    mapper.AddWidget(ui->lE_author,"author");
-    //mapper.AddWidget(ui->TE_description,"description");
+    mapper.AddWidget( ui->lE_name,    VtesInfo::MetasList[VtesInfo::indexName] );
+    mapper.AddWidget( ui->lE_author,  VtesInfo::MetasList[VtesInfo::indexAuthor] );
+    mapper.AddWidget( ui->pT_summary, VtesInfo::MetasList[VtesInfo::indexdescription] );
+    mapper.AddWidget( ui->cBFormat,   VtesInfo::MetasList[VtesInfo::indexFormat] );
+    mapper.AddWidget( ui->sB_gp,      VtesInfo::MetasList[VtesInfo::indexGamesPlayed] );
+    mapper.AddWidget( ui->sB_gw,      VtesInfo::MetasList[VtesInfo::indexGameWin] );
+    mapper.AddWidget( ui->sB_tw,      VtesInfo::MetasList[VtesInfo::indexTournamentWin] );
+    mapper.AddWidget( ui->sB_vp,      VtesInfo::MetasList[VtesInfo::indexVictoryPoint] );
+
+    // setup viped viewer and link it to the model
+    DeckViped = new VipedViewer(this);
+    for (int i=0; i<VtesInfo::VipedList.count(); i++)
+        DeckViped->setData( VtesInfo::VipedList.at(i), 0 );
+    ui->frame_viped->layout()->addWidget(DeckViped);
+    connect( DeckViped, SIGNAL(dataChanged(QString, int)), ModeleDeck, SLOT(setVipedMeta(QString,int))  );
+
 
     // model that keep stats of card's types repartition
     CardTypeModel = new StatsModel(VtesInfo::CardTypeList.count(), 1, this);
@@ -46,7 +49,6 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
         {
         CardTypeModel->setHeaderData(i, Qt::Vertical, VtesInfo::CardTypeList[i]);
         }
-    //CardTypeModel->setHeaderData(0, Qt::Horizontal, "test legend");
     CardTypeView->setModel(CardTypeModel);
     dynamic_cast<QGridLayout *>(ui->frameOverView->layout())->addWidget( CardTypeView, 0, 0 );
 
@@ -61,7 +63,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
 
     // model that keep stats of crypt capacity repartition
     CapacityModel = new StatsModel(11, 1, this);
-    CapacityModel->setData( CapacityModel->index(0,0), 10, Qt::DisplayRole);
+    //CapacityModel->setData( CapacityModel->index(0,0), 10, Qt::DisplayRole);
     CapacityModel->setHeaderData(0, Qt::Horizontal, "Capacity curve");
     CapacityView = new LinearChart();
     CapacityView->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -70,7 +72,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
 
     // model that keep stats of crypt grouping repartition
     GroupingModel = new StatsModel(6, 1, this);
-    GroupingModel->setData( GroupingModel->index(0, 0), 10, Qt::DisplayRole);
+    //GroupingModel->setData( GroupingModel->index(0, 0), 10, Qt::DisplayRole);
     GroupingModel->setHeaderData(0, Qt::Horizontal, "Grouping repartition");
     GroupingView = new LinearChart();
     GroupingView->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -87,6 +89,8 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     cryptGalerie->setGridSize( QSize(150,210) );
     cryptGalerie->setIconSize( QSize(144,200) );
     cryptGalerie->setWrapping(true);
+    cryptGalerie->setMovement(QListView::Snap);
+    cryptGalerie->setDragDropMode(QAbstractItemView::InternalMove);
     cryptGalerie->setFrameShape(QFrame::NoFrame);
     cryptGalerie->setModel(ModeleDeck);
     cryptGalerie->setModelColumn(0);
@@ -100,6 +104,8 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     LibraryGalerie->setGridSize( QSize(150,210) );
     LibraryGalerie->setIconSize( QSize(144,200) );
     LibraryGalerie->setWrapping(true);
+    LibraryGalerie->setMovement(QListView::Snap);
+    LibraryGalerie->setDragDropMode(QAbstractItemView::InternalMove);
     LibraryGalerie->setFrameShape(QFrame::NoFrame);
     LibraryGalerie->setModel(ModeleDeck);
     LibraryGalerie->setModelColumn(0);
@@ -113,6 +119,29 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     connect( ui->PTreeViewDeckList, SIGNAL(request_delete(QModelIndex))   , ModeleDeck, SLOT(RemoveCardITem(QModelIndex))    );
     /*connect Stats model to changes of the deck model for syncs purposes*/
     connect( ModeleDeck, SIGNAL( DeckChanged(QModelIndex) ), this, SLOT( refresh_stat_model(QModelIndex) ) );
+    connect( ModeleDeck, SIGNAL( DeckCleared() ), this, SLOT( clear_stat_model() ) );
+    connect( ModeleDeck, SIGNAL( DeckCleared() ), this, SLOT( clear_widgets()) );
+}
+
+void tab_deck_tuning::clear_widgets()
+{
+    DeckViped->clearData();
+    ui->lE_author->setText("");
+    ui->lE_name->setText("");
+    ui->sB_gp->setValue(0);
+    ui->sB_gw->setValue(0);
+    ui->sB_tw->setValue(0);
+    ui->sB_vp->setValue(0);
+    ui->cBFormat->setCurrentIndex(0);
+    ui->pT_summary->clear();
+}
+
+void tab_deck_tuning::clear_stat_model()
+{
+    CardTypeModel->clearData();
+    CardCostModel->clearData();
+    CapacityModel->clearData();
+    GroupingModel->clearData();
 }
 
 void tab_deck_tuning::sync_stats_model( QModelIndex new_item )

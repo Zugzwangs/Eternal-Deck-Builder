@@ -1,3 +1,7 @@
+#include <QMessageBox>
+#include <QFile>
+#include <QFileDialog>
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "Sauvegarde.h"
@@ -45,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
 // ///////////////////////////////////////////////
 // SETUP MAIN TABS
+
     test_tuning = new tab_deck_tuning();
     ui->OngletProba->layout()->addWidget(test_tuning);
 
@@ -53,8 +58,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     ui->OngletRechercheCarte->layout()->addWidget(advanced_library_search_tab);
 
     advanced_crypt_search_tab = new tab_search_crypt();
-    ui->OngletRechercheCrypte->layout()->addWidget(advanced_crypt_search_tab);
     advanced_crypt_search_tab->setupDeckModel(test_tuning->ModeleDeck);
+    ui->OngletRechercheCrypte->layout()->addWidget(advanced_crypt_search_tab);
 
     playground_tab = new tab_gold_fich();
     playground_tab->initialisation(PathCartes);
@@ -64,143 +69,114 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 // ///////////////////////////////////////////////
 // DEFINITION DES CONNEXIONS
 
-    connect(ui->actionEnregistrer_le_Deck, SIGNAL(triggered()), this, SLOT(EnregistreDeck()));
-    connect(ui->actionImprimer_le_Deck, SIGNAL(triggered()), this, SLOT(ImprimeDeck()));
-    connect(ui->actionOptions, SIGNAL(triggered()), this, SLOT(OuvrirMenuOption()));
+    connect( ui->actionEnregistrer_le_Deck, SIGNAL( triggered() ), this, SLOT( SaveDeck() ) ) ;
+    connect( ui->actionImprimer_le_Deck,    SIGNAL( triggered() ), this, SLOT( PrintDeck() ) );
+    connect( ui->actionOptions,             SIGNAL( triggered() ), this, SLOT( OuvrirMenuOption() ) );
+    connect( ui->actionOpen_a_deck,         SIGNAL( triggered() ), this, SLOT( OpenDeck() ) );
+    connect( ui->actionClose_deck,          SIGNAL( triggered() ), this, SLOT( CloseDeck()) );
+    connect( ui->actionNew_Deck,            SIGNAL( triggered() ), this, SLOT( NewDeck()  ) );
     //connect( downloader, SIGNAL( picture_downloaded() ), this, SLOT( AfficheImageCarte(QString) ) );
 
 }
 
-
-void MainWindow::EnregistreDeck()
+void MainWindow::SaveDeck()
 {
-    QString fileName = "TestDeck3.xml";
-    Deck *CurrentDeck = new Deck();
-    Deck2Xml(*CurrentDeck, PathDeck + "/" + fileName);
+    QString fileName = test_tuning->ModeleDeck->deckName();
+    if ( !fileName.isEmpty() /* ajouter test de robustesse ici !*/ )
+        {
+        fileName.append(".edb");
+        }
+    else
+        {
+        fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
+                                   PathDeck, tr("Images (*.edb)"));
+        }
+
+    deckModelToEdb( test_tuning->ModeleDeck, PathDeck + fileName );
 }
 
+void MainWindow::ExportDeck(QString fileName, int Format)
+{
+    switch (Format)
+    {
+    case VtesInfo::format_edb:
+        {
 
-void MainWindow::ExportDeck(int Format)
+        } break;
+
+    case VtesInfo::format_ardb:
+        {
+
+        } break;
+
+    case VtesInfo::format_txt:
+        {
+
+        } break;
+
+    default:
+        break;
+    }
+}
+
+void MainWindow::PrintDeck()
 {
 
 }
 
-void MainWindow::ImprimeDeck()
-{/* TODO integrer ds deck model
-int NbPage,NbEx,k,x,y;
-float NbCarteParPage;
-QList<QStandardItem *> ItemCrypte = ModelDeckCourant->findItems("CRYPTE");
-QList<QStandardItem *> ItemLibrary = ModelDeckCourant->findItems("BIBLIOTHEQUE");
-QList<QStandardItem *> ItemMetadonnees = ModelDeckCourant->findItems("METADONNEES");
-QList<QString> ListPathImageCarte;
-QList<QImage *> Planches;
-QPainter PlanchePainter;
-QString DeckName, PrintFormat;
+void MainWindow::OpenDeck()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+        tr("Open Deck"), PathDeck, tr("Deck Files (*.edb)"));
 
-//On recupère le nom du deck
-DeckName = ItemMetadonnees[0]->child(0)->data(Qt::DisplayRole).toString();
+    EdbToDeckModel(test_tuning->ModeleDeck, fileName);
+}
 
-//On crée la liste de tous les chemins vers les images necesaires
-for (int i=0; i<ItemCrypte[0]->rowCount(); i++)
-    {
-    NbEx = ItemCrypte[0]->child(i)->data(Qt::UserRole+2).toInt();
-    for (int j=1; j<=NbEx; j++)
+void MainWindow::CloseDeck()
+{
+    if ( test_tuning->ModeleDeck->isModified() )
         {
-        ListPathImageCarte.append(PathCartes + "/" + ItemCrypte[0]->child(i)->data(Qt::UserRole).toStringList().at(3) + ".jpg");
-        }
-    }
-for (int i=0; i<ItemLibrary[0]->rowCount(); i++)
-    {
-    NbEx = ItemLibrary[0]->child(i)->data(Qt::UserRole+2).toInt();
-    for (int j=1; j<=NbEx; j++)
-        {
-        ListPathImageCarte.append(PathCartes + "/" + ItemLibrary[0]->child(i)->data(Qt::UserRole).toStringList().at(3) + ".jpg");
-        }
-    }
-
-//On va chercher les options d'impression.
-QSettings settings("./cfg.ini", QSettings::IniFormat);
-PrintFormat = settings.value("PrintFormat", "A4").toString();
-if (PrintFormat == "A4")
-   {
-    NbCarteParPage = 8;
-    //En fonction du nombre de carte trouvées, on détermine le nombre de planches nécessaires
-    NbPage = ceil(ListPathImageCarte.count()/NbCarteParPage);
-    //On construit les planches
-    for (int i=1; i<=NbPage; i++)
-        {
-        Planches.append(new QImage(1440,1000,QImage::Format_RGB666));
-        PlanchePainter.begin(Planches.at(i-1));
-        for(int j=(i-1)*NbCarteParPage; (j<=(i*NbCarteParPage)-1) && (j<ListPathImageCarte.count()); j++)
+        QMessageBox msgBox;
+        msgBox.setText("Close Without save changes ?");
+        msgBox.setInformativeText("All your modifications will be lost");
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Save);
+        int ret = msgBox.exec();
+        switch ( ret )
             {
-            k = j-((i-1)*NbCarteParPage)+1;
-            x = (k-1)%4;
-            y = ceil(k/4.0)-1;
-            QPixmap CarteCourante(ListPathImageCarte.at(j));
-            PlanchePainter.drawPixmap(x*360,y*500,CarteCourante);
+            case QMessageBox::Save:
+                {
+                SaveDeck();
+                test_tuning->ModeleDeck->clearDeck();
+                }   break;
+
+            case QMessageBox::Discard:
+                {
+                test_tuning->ModeleDeck->clearDeck();
+                }   break;
+
+            case QMessageBox::Cancel:
+                {
+                return;
+                }   break;
+
+            default:
+                break;
             }
-        PlanchePainter.end();
         }
-    }
-else
-   {
-    NbCarteParPage = 18;
-    //En fonction du nombre de carte trouvées, on détermine le nombre de planches nécessaires
-    NbPage = ceil(ListPathImageCarte.count()/NbCarteParPage);
-    //On construit les planches
-    for (int i=1; i<=NbPage; i++)
-        {
-        Planches.append(new QImage(2160,1500,QImage::Format_RGB666));
-        PlanchePainter.begin(Planches.at(i-1));
-        for(int j=(i-1)*NbCarteParPage; (j<=(i*NbCarteParPage)-1) && (j<ListPathImageCarte.count()); j++)
-            {
-            k = j-((i-1)*NbCarteParPage)+1;
-            x = (k-1)%6;
-            y = ceil(k/6.0)-1;
-            QPixmap CarteCourante(ListPathImageCarte.at(j));
-            PlanchePainter.drawPixmap(x*360,y*500,CarteCourante);
-            }
-        PlanchePainter.end();
-        }
-    }
+}
 
-//On crée la page de garde et on l'imprime:
-//QString html;
-//QWebView webView;
-//webView.setHtml(html);
-//webView.print(&printer);
-
-//Maitenant on imprime les planches que l'on a créé :
-QPrinter DeckPrinter(QPrinter::ScreenResolution);
-QPainter PrintPainter;
-
-DeckPrinter.setOrientation(QPrinter::Landscape);
-if ( PrintFormat == "A4" ) DeckPrinter.setPaperSize(QPrinter::A4); else DeckPrinter.setPaperSize(QPrinter::A3);
-DeckPrinter.setOutputFormat(QPrinter::PdfFormat);
-DeckPrinter.setOutputFileName("./Decks/" + DeckName + ".pdf");
-DeckPrinter.setPageMargins(10,10,0,0,QPrinter::Millimeter);
-DeckPrinter.setResolution(150);
-
-PrintPainter.begin(&DeckPrinter);
-for(int i=0; i<Planches.count(); i++)
-    {
-    PrintPainter.drawImage(QPoint(0,0),*Planches.at(i));
-    DeckPrinter.newPage();
-    }
-PrintPainter.end();*/
+void MainWindow::NewDeck()
+{
+    CloseDeck();
 }
 
 void MainWindow::OuvrirMenuOption()
 {
- // Création de notre fenêtre modale
- DialogOptions test(this);
- // On rend visible et modale notre fenêtre avec la méthode exec()
- test.exec();
-}
-
-QString MainWindow::getPathCartes()
-{
-    return(PathCartes);
+     // Création de notre fenêtre modale
+     DialogOptions Options(this);
+     // On rend visible et modale notre fenêtre avec la méthode exec()
+     Options.exec();
 }
 
 MainWindow::~MainWindow()

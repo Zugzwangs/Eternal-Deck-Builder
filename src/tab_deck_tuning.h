@@ -26,7 +26,7 @@ public:
 
 public:
     PTreeModel *ModeleDeck;
-    PTreeView *DeckView; //a public pointer to make the view reachable from outside
+    PTreeView *DeckView; //to make the view reachable from outside
 
 private:
     Ui::tab_deck_tuning *ui;
@@ -43,12 +43,13 @@ private:
     LinearChart *GroupingView;
     QListView *cryptGalerie;
     QListView *LibraryGalerie;
-
-    // Metadatas
-    QMap<QString, int> VipedDatas;
     VipedViewer *DeckViped;
 
+    WidgetMetaMapper mapper;
+
 private slots:
+    void clear_widgets();
+    void clear_stat_model();
     void sync_stats_model(QModelIndex new_item);
     void refresh_stat_model(QModelIndex parent_index);
 

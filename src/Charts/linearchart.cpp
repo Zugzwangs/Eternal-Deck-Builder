@@ -18,6 +18,7 @@
 #include <QPaintEvent>
 #include <QItemDelegate>
 #include <QStyleOptionViewItem>
+#include <QDebug>
 
 
 LinearChart::LinearChart( QWidget* parent ) : Chart( parent ) {
@@ -42,6 +43,7 @@ QList<int> LinearChart::barStyleColumns() const {
 
 
 QList<int> LinearChart::calculateColumnsOrder() {
+
   QList<int> bars;
   QList<int> lines;
   QList<int> points;
@@ -69,6 +71,7 @@ Marb::Types LinearChart::columnType( int column ) const {
 
 
 QRectF LinearChart::itemRect( const QModelIndex& index ) const {
+
   QRect r;
   Marb::Types t = this->columnType( index.column() );
   QVariant var = index.data();
@@ -98,16 +101,8 @@ QRectF LinearChart::itemRect( const QModelIndex& index ) const {
 }
 
 
-void LinearChart::paintAxis( QPainter& painter) {
-    painter.save();
-    painter.setPen( QPen( QColor(Marb::LightGray), 1.5 ) );
-    paintXAxis(painter);
-    paintYAxis(painter);
-    painter.restore();
-}
-
-
 void LinearChart::paintChart( QPainter& painter ) {
+
       painter.setRenderHints( QPainter::Antialiasing | QPainter::TextAntialiasing );
       this->paintAxis(painter);
       QList<int> orderedColumns = this->calculateColumnsOrder();
@@ -121,6 +116,7 @@ void LinearChart::paintChart( QPainter& painter ) {
 
 
 void LinearChart::paintColumnLegend(QPainter &painter, int column, QPoint pos, int maxHeight) {
+
     QPoint p1 = pos + QPoint( 10, - maxHeight/2 );
     QPoint p2 = pos + QPoint( 40, - maxHeight/2 );
     QPoint posText = pos + QPoint( 45, 0 );
@@ -152,6 +148,7 @@ void LinearChart::paintColumnLegend(QPainter &painter, int column, QPoint pos, i
 
 
 void LinearChart::paintTextAxis( QPainter& painter) {
+
     painter.save();
     QFontMetrics metrics( font() );
     qreal h = metrics.height();
@@ -198,7 +195,55 @@ void LinearChart::paintTextAxis( QPainter& painter) {
 }
 
 
+void LinearChart::paintAxis( QPainter& painter) {
+
+    painter.save();
+    painter.setPen( QPen( QColor(Marb::LightGray), 1.5 ) );
+    paintXAxis(painter);
+    paintYAxis(painter);
+    painter.restore();
+}
+
+
+void LinearChart::paintXAxis( QPainter& painter ) {
+
+    QPoint p1( myOrigin.x(), myOrigin.y() );
+    QPoint p2( myChartRect.topRight().x(), myOrigin.y() );
+    painter.drawLine( p1, p2 );
+    qreal x = myX + myOrigin.x();
+    int i = 0;
+    while (i < this->model()->rowCount() ) {
+      QPoint p1( x, myOrigin.y() - 3  );
+      QPoint p2 = p1 + QPoint( 0, 6 );
+      painter.drawLine( p1, p2 );
+      ++i;
+      x += myX;
+    }
+}
+
+
+void LinearChart::paintYAxis( QPainter& painter ) {
+
+  QPoint p1( myOrigin.x(), myChartRect.y() );
+    QPoint p2 = p1 + QPoint( 0, myChartRect.height() );
+    painter.drawLine( p1, p2 );
+    painter.save();
+    QColor c = painter.pen().color();
+    c.setAlpha( 150 );
+    painter.setPen( QPen( c , 1 ) );
+    qreal y = myMinBound;
+    while ( y <= myMaxBound ) {
+        QPoint p1( myOrigin.x(), valueToPx(y)  );
+        QPoint p2 = p1 + QPoint( myValuesRect.width(), 0 );
+        painter.drawLine( p1, p2 );
+      y += myTickSize;
+    }
+    painter.restore();
+}
+
+
 void LinearChart::paintValues( QPainter& painter, int column ) {
+
   Marb::Types t = this->columnType( column );
   QStyledItemDelegate* delegate = 0;
   if ( t.testFlag( Marb::Point ) ) {
@@ -273,47 +318,14 @@ void LinearChart::paintValues( QPainter& painter, int column ) {
 }
 
 
-void LinearChart::paintXAxis( QPainter& painter ) {
-    QPoint p1( myOrigin.x(), myOrigin.y() );
-    QPoint p2( myChartRect.topRight().x(), myOrigin.y() );
-    painter.drawLine( p1, p2 );
-    qreal x = myX + myOrigin.x();
-    int i = 0;
-    while (i < this->model()->rowCount() ) {
-      QPoint p1( x, myOrigin.y() - 3  );
-      QPoint p2 = p1 + QPoint( 0, 6 );
-      painter.drawLine( p1, p2 );
-      ++i;
-      x += myX;
-    }
-}
-
-
-void LinearChart::paintYAxis( QPainter& painter ) {
-  QPoint p1( myOrigin.x(), myChartRect.y() );
-    QPoint p2 = p1 + QPoint( 0, myChartRect.height() );
-    painter.drawLine( p1, p2 );
-    painter.save();
-    QColor c = painter.pen().color();
-    c.setAlpha( 150 );
-    painter.setPen( QPen( c , 1 ) );
-    qreal y = myMinBound;
-    while ( y <= myMaxBound ) {
-      QPoint p1( myOrigin.x(), valueToPx(y)  );
-      QPoint p2 = p1 + QPoint( myValuesRect.width(), 0 );
-      painter.drawLine( p1, p2 );
-      y += myTickSize;
-    }
-    painter.restore();
-}
-
 void LinearChart::updateRects() {
+
   if ( this->model() == 0 ) {
         return;
   }
   this->defineRects();
   QFontMetrics metrics( this->font() );
-  this->calculateBounds();
+  this->HackedCalculateBounds();
   myOrigin.setX( metrics.width( QString::number(-1 * myOrder) ) + metrics.width("0") * myNbDigits + myMarginX );
   myValuesRect = QRect( myChartRect );
   myValuesRect.setX( myOrigin.x() );
@@ -328,3 +340,22 @@ void LinearChart::updateRects() {
   myTitleRect.translate( ( myChartRect.width() - myTitleRect.width())/2, 20 );
 }
 
+
+void LinearChart::HackedCalculateBounds() {
+  myMinBound = 0;
+  myMaxBound = 10;
+  if ( myMaxBound == myMinBound ) {
+    ++myMaxBound;
+    --myMinBound;
+  }
+  myOrder = calculateOrder( 10 );
+  myTickSize = ( 10 ) / (myNbTicks - 1);
+  if ( myOrder >= 10 ) {
+    myNbDigits = 0;
+  } else if ( myOrder == 1 ) {
+    myNbDigits = 2;
+  } else {
+    int nbZero = QString::number(myOrder).count( "0" );
+    myNbDigits = nbZero + 2;
+  }
+}

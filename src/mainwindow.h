@@ -2,8 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QMessageBox>
-#include <Qfile>
 #include <QList>
 #include <QtSql>
 #include <QtPrintSupport/QPrinter>
@@ -23,17 +21,13 @@ class MainWindow : public QMainWindow
     
 public:
     explicit MainWindow(QWidget *parent = 0);
-    QString getPathCartes();
     ~MainWindow();
 
 private:
     Ui::MainWindow *ui;
-    // On déclare l'objet BDD
-    QSqlDatabase SqlDB;
-    // On déclare le gestionnaire de téléchargements
-    update_manager* downloader;
-    // On déclare les variable de paths
-    PathProvider path_list;
+    QSqlDatabase SqlDB;         // La BDD embarquée
+    update_manager* downloader; // gestionnaire de téléchargement
+    PathProvider path_list;     // gestionnaire de path de paths
     QString PathCartes;
     QString PathRessources;
     QString PathDeck;
@@ -44,9 +38,13 @@ private:
     tab_gold_fich * playground_tab;
 
 private slots:
-    void EnregistreDeck();
-    void ExportDeck(int Format);
-    void ImprimeDeck();
+    void SaveDeck();
+    void ExportDeck(QString fileName, int Format);
+    void PrintDeck();
+    void OpenDeck();
+    void CloseDeck();
+    void NewDeck();
+
     void OuvrirMenuOption();
 
 signals:

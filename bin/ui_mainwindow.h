@@ -34,6 +34,7 @@ public:
     QAction *actionExport_Deck;
     QAction *actionNew_Deck;
     QAction *actionOpen_a_deck;
+    QAction *actionClose_deck;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QTabWidget *tabEditorModule;
@@ -68,6 +69,8 @@ public:
         actionNew_Deck->setObjectName(QStringLiteral("actionNew_Deck"));
         actionOpen_a_deck = new QAction(MainWindow);
         actionOpen_a_deck->setObjectName(QStringLiteral("actionOpen_a_deck"));
+        actionClose_deck = new QAction(MainWindow);
+        actionClose_deck->setObjectName(QStringLiteral("actionClose_deck"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -137,11 +140,12 @@ public:
         menuFichier->addAction(actionImprimer_le_Deck);
         menuFichier->addAction(actionNew_Deck);
         menuFichier->addAction(actionOpen_a_deck);
+        menuFichier->addAction(actionClose_deck);
         menuParam_trages->addAction(actionOptions);
 
         retranslateUi(MainWindow);
 
-        tabEditorModule->setCurrentIndex(3);
+        tabEditorModule->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -156,8 +160,13 @@ public:
         actionImprimer_le_Deck->setShortcut(QApplication::translate("MainWindow", "Ctrl+P", 0));
         actionOptions->setText(QApplication::translate("MainWindow", "Options", 0));
         actionExport_Deck->setText(QApplication::translate("MainWindow", "Export Deck", 0));
+        actionExport_Deck->setShortcut(QApplication::translate("MainWindow", "Ctrl+E", 0));
         actionNew_Deck->setText(QApplication::translate("MainWindow", "New Deck", 0));
+        actionNew_Deck->setShortcut(QApplication::translate("MainWindow", "Ctrl+N", 0));
         actionOpen_a_deck->setText(QApplication::translate("MainWindow", "Open a deck", 0));
+        actionOpen_a_deck->setShortcut(QApplication::translate("MainWindow", "Ctrl+O", 0));
+        actionClose_deck->setText(QApplication::translate("MainWindow", "Close deck", 0));
+        actionClose_deck->setShortcut(QApplication::translate("MainWindow", "Ctrl+X", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletRechercheCarte), QApplication::translate("MainWindow", "Library search", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletRechercheCrypte), QApplication::translate("MainWindow", "Crypt search", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletProba), QApplication::translate("MainWindow", "Deck View", 0));

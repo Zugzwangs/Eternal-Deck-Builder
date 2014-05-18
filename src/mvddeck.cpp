@@ -7,30 +7,81 @@
 #include <QDebug>
 #include <QMimeData>
 #include <QHeaderView>
+#include <QLineEdit>
+#include <QPlainTextEdit>
+#include <QSpinBox>
+#include <QComboBox>
 
 /*****************************************************************************************/
 /*   MODEL                                                                               */
 /*****************************************************************************************/
 PTreeModel::PTreeModel(QObject *parent) : QStandardItemModel(parent)
 {
-    // metadatas are stored into a QMap
-    meta_list.insert("name","choose a name");
-    meta_list.insert("author","naruto[666]");
-    meta_list.insert("description","more lame than this, you die");
+    setupModel();
+}
 
+void PTreeModel::setupModel()
+{
+    modified = false;
+    // setup metadatas into a QMap
+    for (int i=0; i<VtesInfo::MetasList.count(); i++)
+        meta_list.insert( VtesInfo::MetasList.at(i), "0" );
+    for (int i=0; i<VtesInfo::VipedList.count(); i++)
+        meta_list.insert( VtesInfo::VipedList.at(i), "0" );
+
+    // setup item structure
     QStandardItem *RootItem = this->invisibleRootItem();
-
     itemCrypt = new SortItem("CRYPTE");
     itemLib   = new SortItem("BIBLIOTHEQUE");
     itemSide  = new SortItem("SIDE");
-
     RootItem->appendRow( itemCrypt );
     RootItem->appendRow( itemLib );
     RootItem->appendRow( itemSide );
 }
 
+void PTreeModel::clearDeck()
+{
+    modified = false;
+    clearMeta();
+    itemCrypt->removeRows(0, itemCrypt->rowCount());
+    itemLib->removeRows(0, itemLib->rowCount());
+    itemCrypt->resetCount();
+    itemLib->resetCount();
+
+    emit DeckCleared();
+}
+
+void PTreeModel::clearMeta()
+{
+    QMap<QString, QString>::iterator i;
+    for ( i=meta_list.begin(); i!=meta_list.end(); i++)
+        {
+        i.value() = "";
+        }
+}
+
+QString PTreeModel::deckName()
+{
+    QMap<QString, QString>::const_iterator i;
+    i= meta_list.find(VtesInfo::MetasList[VtesInfo::indexName]);
+    return i.value();
+}
+
+bool PTreeModel::isModified()
+{
+    return modified;
+}
+
+void PTreeModel::loadDeck() // ??? mauvais design ???
+{
+    clearDeck();
+    modified = false;
+}
+
 void PTreeModel::AddCardItem(QStringList strL)
 {
+    modified = true;
+
     if (strL.count() < 7) // améliorer la robustesse si on recupere une QStringList incomplète!
         return;
 
@@ -119,9 +170,20 @@ void PTreeModel::RemoveCardITem( QModelIndex Idx )
         }
 }
 
+void PTreeModel::setVipedMeta( QString metaName, int value )
+{
+    modified = true;
+    meta_list.insert( metaName, QString::number(value) );
+}
+
+void PTreeModel::setMeta(QString metaName, QString value)
+{
+    modified = true;
+    meta_list.insert( metaName, value );
+}
+
 CryptCardItem* PTreeModel::FindCryptCard( QString CardName )
 {
-
 CryptCardItem* TempItem;
 
     for ( int i=0; i<itemCrypt->rowCount(); i++ )
@@ -132,6 +194,7 @@ CryptCardItem* TempItem;
             return TempItem;
             }
         }
+
 return NULL;
 }
 
@@ -165,17 +228,23 @@ void StatsModel::clearData(int columns, bool all)
         for (int i=0; i<rowCount(); i++)
             {
             for (int j=0; j<columnCount(); j++)
-                item(i, j)->setData( 0, Qt::DisplayRole );
+                {
+                QModelIndex temp_index = index(i, columns);
+                if ( temp_index.isValid() )
+                    {
+                    setData( temp_index, 0, Qt::DisplayRole );
+                    }
+                }
             }
         }
     else
         {
         for (int i=0; i< rowCount(); i++)
             {
-            QModelIndex temp_index = this->index(i, columns);
+            QModelIndex temp_index = index(i, columns);
             if ( temp_index.isValid() )
                 {
-                this->setData( temp_index, 0, Qt::DisplayRole );
+                setData( temp_index, 0, Qt::DisplayRole );
                 }
             }
         }
@@ -193,11 +262,28 @@ void WidgetMetaMapper::SetModel( PTreeModel* mdl )
 
 bool WidgetMetaMapper::AddWidget( QWidget* w, QString metadata )
 {
-    if ( model->meta_list.contains(metadata) )
+    if ( w && model->meta_list.contains(metadata) )
         {
-        connect( w, SIGNAL(textChanged(QString)), this, SLOT(synchroDatas(QString)) );
-        w->setAccessibleName(metadata);
-        w->setProperty("text", model->meta_list.value(metadata));
+        // 'tatoo' the widget with metadata
+        w->setProperty("meta", metadata);
+
+        if ( qobject_cast<QLineEdit *>(w) )
+            connect( w, SIGNAL(textChanged(QString)), this, SLOT(syncLineEdit(QString)) );
+        else
+            {
+            if ( qobject_cast<QPlainTextEdit *>(w) )
+                connect( w, SIGNAL(textChanged()), this, SLOT(syncPlainTextEdit()) );
+            else
+                {
+                if ( qobject_cast<QSpinBox *>(w) )
+                    connect( w, SIGNAL(valueChanged(const QString &)), this, SLOT(syncSpinBox(const QString &)) );
+                else
+                    {
+                    if ( qobject_cast<QComboBox *>(w) )
+                        connect( w, SIGNAL(currentTextChanged(const QString &)), this, SLOT(syncComboBox(const QString &)) );
+                    }
+                }
+            }
         return true;
         }
     else
@@ -209,12 +295,41 @@ bool WidgetMetaMapper::RemoveWidget()
     return true;
 }
 
-void WidgetMetaMapper::synchroDatas(QString newData)
+void WidgetMetaMapper::syncLineEdit(QString newData)
 {
-    QString crt_meta = sender()->property("setAccessibleName").toString();
-    model->meta_list.insert(crt_meta, newData );
+    QString crt_meta = sender()->property("meta").toString();
+    if ( !crt_meta.isNull() )
+        model->setMeta( crt_meta, newData );
 }
 
+void WidgetMetaMapper::syncPlainTextEdit()
+{
+    QString crt_meta = sender()->property("meta").toString();
+    if ( !crt_meta.isNull() )
+        {
+        QPlainTextEdit *w = qobject_cast<QPlainTextEdit *>( sender() );
+        QTextDocument *doc = w->document();
+        model->setMeta( crt_meta, doc->toPlainText() );
+    }
+}
+
+void WidgetMetaMapper::syncSpinBox(const QString & txt)
+{
+    QString crt_meta = sender()->property("meta").toString();
+    if ( !crt_meta.isNull() )
+        {
+        model->setMeta( crt_meta, txt );
+    }
+}
+
+void WidgetMetaMapper::syncComboBox(const QString & newData)
+{
+    QString crt_meta = sender()->property("meta").toString();
+    if ( !crt_meta.isNull() )
+        {
+        model->setMeta( crt_meta, newData );
+    }
+}
 
 /*****************************************************************************************/
 /*  VIEW                                                                                 */
@@ -468,9 +583,10 @@ QSize PDelegateDeck::sizeHint(const QStyleOptionViewItem &option, const QModelIn
 SortItem::SortItem(QString txt) : QStandardItem(txt)
 {
     setEditable(false);
-    setSelectable(true);
+    setSelectable(false);
     setDropEnabled(true);
-    setData( QFont("Arial", 10, QFont::Bold), Qt::FontRole);
+
+    setData( QFont("Arial", 9, QFont::Bold), Qt::FontRole);
     setData( data(Qt::DisplayRole), Qt::UserRole );
     setData( 0, VtesInfo::ExemplairRole );
     setData( VtesInfo::SortItemType, VtesInfo::ItemCategoryRole);
@@ -485,7 +601,13 @@ void SortItem::Increment(int i)
 
 void SortItem::Decrement(int i)
 {
-    setData( data(VtesInfo::ExemplairRole).toInt()-i, VtesInfo::ExemplairRole );
+    if ( data(VtesInfo::ExemplairRole).toInt() > 0 )
+        setData( data(VtesInfo::ExemplairRole).toInt()-i, VtesInfo::ExemplairRole );
+}
+
+void SortItem::resetCount()
+{
+    setData( 0, VtesInfo::ExemplairRole );
 }
 
 int SortItem::type() const  { return (VtesInfo::SortItemType); }

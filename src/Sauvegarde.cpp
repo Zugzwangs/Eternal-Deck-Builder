@@ -1,66 +1,167 @@
 #include "Sauvegarde.h"
-#include "game_element.h"
 
-bool Deck2Xml(Deck & D, QString filePath)
+bool deckModelToEdb(PTreeModel *D, QString filePath)
 {
-
+// open file in write mode and put the xml stream on it
 QFile file(filePath);
-file.open(QFile::WriteOnly | QFile::Text);
+if ( !file.open(QFile::WriteOnly | QFile::Text) )
+    return false;
+
 QXmlStreamWriter writer(&file);
 
-writer.setAutoFormatting(true);                        //Permet l'indentation du fichier XML
-writer.writeStartDocument();                           // Écrit l'en-tête du fichier XML : <?xml version="1.0" encoding="UTF-8" ?>
-writer.writeStartElement("Deck");                      // Ajoute l'élément racine du fichier XML
-writer.writeAttribute("Id","123534");                  //
+writer.setAutoFormatting(true);             //Permet l'indentation du fichier XML
+writer.writeStartDocument();                // Écrit l'en-tête du fichier XML : <?xml version="1.0" encoding="UTF-8" ?>
+writer.writeStartElement("Deck");           // Ajoute l'élément racine du fichier XML
+writer.writeAttribute("Id","123534");       //
 
-/********** Elements Métadonnées **********/
-writer.writeStartElement("Metadonnees");                // Ajoute l'élément Metadonnees
-writer.writeTextElement("Nom", D.Nom);                  // M
-writer.writeTextElement("Auteur", D.Auteur);            // E
-writer.writeTextElement("Descriptif", D.Commentaire);   // T
-writer.writeTextElement("Resultat", D.Resultat);        // A
-writer.writeTextElement("Date", D.Date);                //
-writer.writeEndElement();                               // Ferme l'élément Metadonnees
+    /********** Elements Métadonnées **********/
+    writer.writeStartElement("Metadonnees");
+        QMap<QString, QString>::const_iterator i;
+        for (i = D->meta_list.constBegin(); i != D->meta_list.constEnd(); i++)
+            {
+            writer.writeTextElement( i.key(), i.value() );
+            }
+    writer.writeEndElement();
 
-/**********   Element Crypte    **********/
-writer.writeStartElement("Crypt");
-writer.writeAttribute( "Taille", QString::number(D.Crypt.length()) );                  // Ajoute un attribut a l'élément Crypt
-for (int i=0; i<D.Crypt.length(); i++)
-    {
-    //writer.writeTextElement("CryptCard", D.Crypt.at(i)->Name()); // Ajoute un element CryptCard et le ferme
-    }
-writer.writeEndElement();                              // Ferme l'élément Crypt
+    /**********   Element Crypte    **********/
+    writer.writeStartElement("Crypt");
+    writer.writeAttribute( "Taille", D->itemCrypt->data(VtesInfo::ExemplairRole).toString() );
+    for ( int i=0; i<D->itemCrypt->rowCount(); i++ )
+        {
+        writer.writeStartElement( "CryptCard" );
+        writer.writeAttribute("Number", D->itemCrypt->child(i,0)->data(VtesInfo::ExemplairRole).toString() );
+        writer.writeCharacters( D->itemCrypt->child(i,0)->data(VtesInfo::NameRole).toString() );
+        writer.writeEndElement();
+        }
+    writer.writeEndElement();
 
-/********** Element Bibliotheque **********/
-writer.writeStartElement("Bibliotheque");
-writer.writeAttribute( "Taille", QString::number(D.Bibliotheque.length()) );                  // Ajoute un attribut a l'élément Crypt
-for (int i=0; i<D.Bibliotheque.length(); i++)
-    {
-    //writer.writeTextElement("MinionCard", D.Bibliotheque.at(i)->Name); // Ajoute un element MinionCard et le ferme
-    }
-writer.writeEndElement();                              // Ferme l'élément Bibliotheque
+    /********** Element Bibliotheque **********/
+    writer.writeStartElement("Bibliotheque");
+        writer.writeAttribute( "Taille", D->itemLib->data(VtesInfo::ExemplairRole).toString() );
+        for ( int i=0; i<D->itemLib->rowCount(); i++ )
+            {
+            writer.writeStartElement( "LibraryCard" );
+            writer.writeAttribute("Number", D->itemLib->child(i,0)->data(VtesInfo::ExemplairRole).toString() );
+            writer.writeCharacters( D->itemLib->child(i,0)->data(VtesInfo::NameRole).toString() );
+            writer.writeEndElement();
+            }
+    writer.writeEndElement();                   // Ferme l'élément Bibliotheque
 
+writer.writeEndElement();
 writer.writeEndDocument();  // Finalise le document XML
 file.close();               // Fermer le fichier pour bien enregistrer le document et ferme l'élément Deck (l'élément Root)
 
 return true;
 }
 
-
-/*
-Deck Xml2Deck(QString PathXMLFileDeck)
+bool EdbToDeckModel(PTreeModel *D, QString filePath)
 {
-VtesInfo::Deck D;
-return D;
+
 }
 
-
-bool Deck2TXT(Deck D, QString fileName)
+bool deckModelToPDF(PTreeModel *D, QString filePath)
 {
-    return true;
-}
+    /* TODO integrer ds deck model
+int NbPage,NbEx,k,x,y;
+float NbCarteParPage;
+QList<QStandardItem *> ItemCrypte = ModelDeckCourant->findItems("CRYPTE");
+QList<QStandardItem *> ItemLibrary = ModelDeckCourant->findItems("BIBLIOTHEQUE");
+QList<QStandardItem *> ItemMetadonnees = ModelDeckCourant->findItems("METADONNEES");
+QList<QString> ListPathImageCarte;
+QList<QImage *> Planches;
+QPainter PlanchePainter;
+QString DeckName, PrintFormat;
 
-Deck TXT2Deck(QString PathXMLFileDeck)
-{
-}
+//On recupère le nom du deck
+DeckName = ItemMetadonnees[0]->child(0)->data(Qt::DisplayRole).toString();
+
+//On crée la liste de tous les chemins vers les images necesaires
+for (int i=0; i<ItemCrypte[0]->rowCount(); i++)
+    {
+    NbEx = ItemCrypte[0]->child(i)->data(Qt::UserRole+2).toInt();
+    for (int j=1; j<=NbEx; j++)
+        {
+        ListPathImageCarte.append(PathCartes + "/" + ItemCrypte[0]->child(i)->data(Qt::UserRole).toStringList().at(3) + ".jpg");
+        }
+    }
+for (int i=0; i<ItemLibrary[0]->rowCount(); i++)
+    {
+    NbEx = ItemLibrary[0]->child(i)->data(Qt::UserRole+2).toInt();
+    for (int j=1; j<=NbEx; j++)
+        {
+        ListPathImageCarte.append(PathCartes + "/" + ItemLibrary[0]->child(i)->data(Qt::UserRole).toStringList().at(3) + ".jpg");
+        }
+    }
+
+//On va chercher les options d'impression.
+QSettings settings("./cfg.ini", QSettings::IniFormat);
+PrintFormat = settings.value("PrintFormat", "A4").toString();
+if (PrintFormat == "A4")
+   {
+    NbCarteParPage = 8;
+    //En fonction du nombre de carte trouvées, on détermine le nombre de planches nécessaires
+    NbPage = ceil(ListPathImageCarte.count()/NbCarteParPage);
+    //On construit les planches
+    for (int i=1; i<=NbPage; i++)
+        {
+        Planches.append(new QImage(1440,1000,QImage::Format_RGB666));
+        PlanchePainter.begin(Planches.at(i-1));
+        for(int j=(i-1)*NbCarteParPage; (j<=(i*NbCarteParPage)-1) && (j<ListPathImageCarte.count()); j++)
+            {
+            k = j-((i-1)*NbCarteParPage)+1;
+            x = (k-1)%4;
+            y = ceil(k/4.0)-1;
+            QPixmap CarteCourante(ListPathImageCarte.at(j));
+            PlanchePainter.drawPixmap(x*360,y*500,CarteCourante);
+            }
+        PlanchePainter.end();
+        }
+    }
+else
+   {
+    NbCarteParPage = 18;
+    //En fonction du nombre de carte trouvées, on détermine le nombre de planches nécessaires
+    NbPage = ceil(ListPathImageCarte.count()/NbCarteParPage);
+    //On construit les planches
+    for (int i=1; i<=NbPage; i++)
+        {
+        Planches.append(new QImage(2160,1500,QImage::Format_RGB666));
+        PlanchePainter.begin(Planches.at(i-1));
+        for(int j=(i-1)*NbCarteParPage; (j<=(i*NbCarteParPage)-1) && (j<ListPathImageCarte.count()); j++)
+            {
+            k = j-((i-1)*NbCarteParPage)+1;
+            x = (k-1)%6;
+            y = ceil(k/6.0)-1;
+            QPixmap CarteCourante(ListPathImageCarte.at(j));
+            PlanchePainter.drawPixmap(x*360,y*500,CarteCourante);
+            }
+        PlanchePainter.end();
+        }
+    }
+
+//On crée la page de garde et on l'imprime:
+//QString html;
+//QWebView webView;
+//webView.setHtml(html);
+//webView.print(&printer);
+
+//Maitenant on imprime les planches que l'on a créé :
+QPrinter DeckPrinter(QPrinter::ScreenResolution);
+QPainter PrintPainter;
+
+DeckPrinter.setOrientation(QPrinter::Landscape);
+if ( PrintFormat == "A4" ) DeckPrinter.setPaperSize(QPrinter::A4); else DeckPrinter.setPaperSize(QPrinter::A3);
+DeckPrinter.setOutputFormat(QPrinter::PdfFormat);
+DeckPrinter.setOutputFileName("./Decks/" + DeckName + ".pdf");
+DeckPrinter.setPageMargins(10,10,0,0,QPrinter::Millimeter);
+DeckPrinter.setResolution(150);
+
+PrintPainter.begin(&DeckPrinter);
+for(int i=0; i<Planches.count(); i++)
+    {
+    PrintPainter.drawImage(QPoint(0,0),*Planches.at(i));
+    DeckPrinter.newPage();
+    }
+PrintPainter.end();
 */
+}

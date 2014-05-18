@@ -22,6 +22,7 @@ public:
     ~SortItem();
     void Increment(int i=1);
     void Decrement(int i=1);
+    void resetCount();
     virtual int	type() const;
 };
 
@@ -38,9 +39,6 @@ public:
 
 private:
     PathProvider path_list;
-
-signals:
-    void request_deleting( QModelIndex );
 };
 
 
@@ -57,9 +55,6 @@ public:
 
 private:
     PathProvider path_list;
-
-signals:
-    void request_deleting( QModelIndex );
 };
 
 /*****************************************************************************************/
@@ -85,22 +80,35 @@ class PTreeModel : public QStandardItemModel
 
 public:
     PTreeModel(QObject *parent = 0);
-    QMap<QString, QString> meta_list;
+    void setupModel();
+    void clearMeta();
+    void clearDeck();
+    void loadDeck();
+    QString deckName();
+    bool isModified();
     SortItem *itemLib;
     SortItem *itemCrypt;
     SortItem *itemSide;
+    QMap<QString, QString> meta_list;
 
 public slots:
     void AddCardItem(QStringList strL);
     void IncrementCardItem( QModelIndex Idx );
     void DecrementCardItem( QModelIndex Idx );
     void RemoveCardITem( QModelIndex Idx );
+    void setVipedMeta( QString metaName, int value );
+    void setMeta(QString metaName, QString value);
+
     CryptCardItem* FindCryptCard( QString CardName );
     LibraryCardItem* FindLibraryCard( QString CardName );
+
+private:
+    bool modified;
 
 signals:
     void CardItemChanged(QModelIndex ModifiedItem);
     void DeckChanged(QModelIndex parent);
+    void DeckCleared();
     //void CardRemoved();
 };
 
@@ -136,7 +144,10 @@ private:
     //QList<Widget *> WidgetList; ?
 
 private slots:
-    void synchroDatas(QString newData);
+    void syncLineEdit(QString newData);
+    void syncPlainTextEdit();
+    void syncSpinBox(const QString &txt);
+    void syncComboBox(const QString &newData);
 };
 
 

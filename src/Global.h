@@ -59,7 +59,13 @@ namespace VtesInfo
 
     const QStringList DeckFormat = QStringList() << "Unlimited" << "Limited" << "Free";
 
+    const QStringList MetasList = QStringList() << "name" << "author" << "description" << "format"
+                                               << "game win" << "victory point" << "tournament win" << "games played";
+
     const QStringList VipedList = QStringList() << "Speed" << "Combat" << "Bleed" << "Diplomacy" << "Defense";
+
+    enum MetaIndex { indexName = 0, indexAuthor, indexdescription, indexFormat,
+                     indexGameWin, indexVictoryPoint, indexTournamentWin, indexGamesPlayed};
 
     enum CardType{ NoType, CryptType, LibraryType, CounterType };
 
@@ -70,6 +76,8 @@ namespace VtesInfo
                          CCostRole, TitleRole, TraitRole, KeyWordsRole, LimitationRole, TextRole, ArtistRole, CommentaryRole,
                          ExemplairRole, ItemCategoryRole,
                          RegionButtonAddRole};
+
+    enum ExportFormats { format_edb = 0, format_ardb, format_txt };
 }
 
 // TODO : en faire une class static !
@@ -84,7 +92,6 @@ public:
 private:
     QString CardPath;
     QString DeckPath;
-
 };
 
 #endif

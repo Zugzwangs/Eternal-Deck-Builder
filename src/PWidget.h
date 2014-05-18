@@ -58,6 +58,7 @@ public:
     virtual QSize sizeHint() const;
     void setModel(QMap<QString, int> &model);
     bool setData(QString key, int value);
+    void clearData();
     void checkModelConformity();
     void setTitle(QString title);
     void setTickNumber(int Nb = 5);
@@ -103,6 +104,9 @@ private:
     void paintValue( QPainter& painter, int i, QVariant v ) const;
     void paintTextAxis(QPainter& painter, int i, QVariant v) const;
     void paintTitle(QPainter &painter) const;
+
+signals:
+    void dataChanged(QString key, int value);
 };
 
 #endif // PWIDGET_H

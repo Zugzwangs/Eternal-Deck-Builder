@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_CryptCardItem_t {
-    QByteArrayData data[3];
-    char stringdata[33];
+    QByteArrayData data[1];
+    char stringdata[15];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -29,11 +29,9 @@ struct qt_meta_stringdata_CryptCardItem_t {
     )
 static const qt_meta_stringdata_CryptCardItem_t qt_meta_stringdata_CryptCardItem = {
     {
-QT_MOC_LITERAL(0, 0, 13),
-QT_MOC_LITERAL(1, 14, 16),
-QT_MOC_LITERAL(2, 31, 0)
+QT_MOC_LITERAL(0, 0, 13)
     },
-    "CryptCardItem\0request_deleting\0\0"
+    "CryptCardItem\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -43,40 +41,22 @@ static const uint qt_meta_data_CryptCardItem[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       0,    0, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
-
- // signals: name, argc, parameters, tag, flags
-       1,    1,   19,    2, 0x06,
-
- // signals: parameters
-    QMetaType::Void, QMetaType::QModelIndex,    2,
+       0,       // signalCount
 
        0        // eod
 };
 
 void CryptCardItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    if (_c == QMetaObject::InvokeMetaMethod) {
-        CryptCardItem *_t = static_cast<CryptCardItem *>(_o);
-        switch (_id) {
-        case 0: _t->request_deleting((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
-        default: ;
-        }
-    } else if (_c == QMetaObject::IndexOfMethod) {
-        int *result = reinterpret_cast<int *>(_a[0]);
-        void **func = reinterpret_cast<void **>(_a[1]);
-        {
-            typedef void (CryptCardItem::*_t)(QModelIndex );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&CryptCardItem::request_deleting)) {
-                *result = 0;
-            }
-        }
-    }
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
 }
 
 const QMetaObject CryptCardItem::staticMetaObject = {
@@ -105,27 +85,11 @@ int CryptCardItem::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
-    if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
-            qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
-            *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
-    }
     return _id;
 }
-
-// SIGNAL 0
-void CryptCardItem::request_deleting(QModelIndex _t1)
-{
-    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
-    QMetaObject::activate(this, &staticMetaObject, 0, _a);
-}
 struct qt_meta_stringdata_LibraryCardItem_t {
-    QByteArrayData data[3];
-    char stringdata[35];
+    QByteArrayData data[1];
+    char stringdata[17];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -134,11 +98,9 @@ struct qt_meta_stringdata_LibraryCardItem_t {
     )
 static const qt_meta_stringdata_LibraryCardItem_t qt_meta_stringdata_LibraryCardItem = {
     {
-QT_MOC_LITERAL(0, 0, 15),
-QT_MOC_LITERAL(1, 16, 16),
-QT_MOC_LITERAL(2, 33, 0)
+QT_MOC_LITERAL(0, 0, 15)
     },
-    "LibraryCardItem\0request_deleting\0\0"
+    "LibraryCardItem\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -148,40 +110,22 @@ static const uint qt_meta_data_LibraryCardItem[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       0,    0, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
-
- // signals: name, argc, parameters, tag, flags
-       1,    1,   19,    2, 0x06,
-
- // signals: parameters
-    QMetaType::Void, QMetaType::QModelIndex,    2,
+       0,       // signalCount
 
        0        // eod
 };
 
 void LibraryCardItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    if (_c == QMetaObject::InvokeMetaMethod) {
-        LibraryCardItem *_t = static_cast<LibraryCardItem *>(_o);
-        switch (_id) {
-        case 0: _t->request_deleting((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
-        default: ;
-        }
-    } else if (_c == QMetaObject::IndexOfMethod) {
-        int *result = reinterpret_cast<int *>(_a[0]);
-        void **func = reinterpret_cast<void **>(_a[1]);
-        {
-            typedef void (LibraryCardItem::*_t)(QModelIndex );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&LibraryCardItem::request_deleting)) {
-                *result = 0;
-            }
-        }
-    }
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
 }
 
 const QMetaObject LibraryCardItem::staticMetaObject = {
@@ -210,23 +154,7 @@ int LibraryCardItem::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
-    if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
-            qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
-            *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
-    }
     return _id;
-}
-
-// SIGNAL 0
-void LibraryCardItem::request_deleting(QModelIndex _t1)
-{
-    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
-    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 struct qt_meta_stringdata_PDelegateDeck_t {
     QByteArrayData data[1];
@@ -296,8 +224,8 @@ int PDelegateDeck::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     return _id;
 }
 struct qt_meta_stringdata_PTreeModel_t {
-    QByteArrayData data[17];
-    char stringdata[204];
+    QByteArrayData data[22];
+    char stringdata[252];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -313,23 +241,29 @@ QT_MOC_LITERAL(3, 28, 12),
 QT_MOC_LITERAL(4, 41, 11),
 QT_MOC_LITERAL(5, 53, 6),
 QT_MOC_LITERAL(6, 60, 11),
-QT_MOC_LITERAL(7, 72, 4),
-QT_MOC_LITERAL(8, 77, 17),
-QT_MOC_LITERAL(9, 95, 3),
-QT_MOC_LITERAL(10, 99, 17),
-QT_MOC_LITERAL(11, 117, 14),
-QT_MOC_LITERAL(12, 132, 13),
-QT_MOC_LITERAL(13, 146, 14),
-QT_MOC_LITERAL(14, 161, 8),
-QT_MOC_LITERAL(15, 170, 15),
-QT_MOC_LITERAL(16, 186, 16)
+QT_MOC_LITERAL(7, 72, 11),
+QT_MOC_LITERAL(8, 84, 4),
+QT_MOC_LITERAL(9, 89, 17),
+QT_MOC_LITERAL(10, 107, 3),
+QT_MOC_LITERAL(11, 111, 17),
+QT_MOC_LITERAL(12, 129, 14),
+QT_MOC_LITERAL(13, 144, 12),
+QT_MOC_LITERAL(14, 157, 8),
+QT_MOC_LITERAL(15, 166, 5),
+QT_MOC_LITERAL(16, 172, 7),
+QT_MOC_LITERAL(17, 180, 13),
+QT_MOC_LITERAL(18, 194, 14),
+QT_MOC_LITERAL(19, 209, 8),
+QT_MOC_LITERAL(20, 218, 15),
+QT_MOC_LITERAL(21, 234, 16)
     },
     "PTreeModel\0CardItemChanged\0\0ModifiedItem\0"
-    "DeckChanged\0parent\0AddCardItem\0strL\0"
-    "IncrementCardItem\0Idx\0DecrementCardItem\0"
-    "RemoveCardITem\0FindCryptCard\0"
-    "CryptCardItem*\0CardName\0FindLibraryCard\0"
-    "LibraryCardItem*\0"
+    "DeckChanged\0parent\0DeckCleared\0"
+    "AddCardItem\0strL\0IncrementCardItem\0"
+    "Idx\0DecrementCardItem\0RemoveCardITem\0"
+    "setVipedMeta\0metaName\0value\0setMeta\0"
+    "FindCryptCard\0CryptCardItem*\0CardName\0"
+    "FindLibraryCard\0LibraryCardItem*\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -339,36 +273,42 @@ static const uint qt_meta_data_PTreeModel[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   54,    2, 0x06,
-       4,    1,   57,    2, 0x06,
+       1,    1,   69,    2, 0x06,
+       4,    1,   72,    2, 0x06,
+       6,    0,   75,    2, 0x06,
 
  // slots: name, argc, parameters, tag, flags
-       6,    1,   60,    2, 0x0a,
-       8,    1,   63,    2, 0x0a,
-      10,    1,   66,    2, 0x0a,
-      11,    1,   69,    2, 0x0a,
-      12,    1,   72,    2, 0x0a,
-      15,    1,   75,    2, 0x0a,
+       7,    1,   76,    2, 0x0a,
+       9,    1,   79,    2, 0x0a,
+      11,    1,   82,    2, 0x0a,
+      12,    1,   85,    2, 0x0a,
+      13,    2,   88,    2, 0x0a,
+      16,    2,   93,    2, 0x0a,
+      17,    1,   98,    2, 0x0a,
+      20,    1,  101,    2, 0x0a,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QModelIndex,    3,
     QMetaType::Void, QMetaType::QModelIndex,    5,
+    QMetaType::Void,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QStringList,    7,
-    QMetaType::Void, QMetaType::QModelIndex,    9,
-    QMetaType::Void, QMetaType::QModelIndex,    9,
-    QMetaType::Void, QMetaType::QModelIndex,    9,
-    0x80000000 | 13, QMetaType::QString,   14,
-    0x80000000 | 16, QMetaType::QString,   14,
+    QMetaType::Void, QMetaType::QStringList,    8,
+    QMetaType::Void, QMetaType::QModelIndex,   10,
+    QMetaType::Void, QMetaType::QModelIndex,   10,
+    QMetaType::Void, QMetaType::QModelIndex,   10,
+    QMetaType::Void, QMetaType::QString, QMetaType::Int,   14,   15,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,   14,   15,
+    0x80000000 | 18, QMetaType::QString,   19,
+    0x80000000 | 21, QMetaType::QString,   19,
 
        0        // eod
 };
@@ -380,13 +320,16 @@ void PTreeModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->CardItemChanged((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
         case 1: _t->DeckChanged((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
-        case 2: _t->AddCardItem((*reinterpret_cast< QStringList(*)>(_a[1]))); break;
-        case 3: _t->IncrementCardItem((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
-        case 4: _t->DecrementCardItem((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
-        case 5: _t->RemoveCardITem((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
-        case 6: { CryptCardItem* _r = _t->FindCryptCard((*reinterpret_cast< QString(*)>(_a[1])));
+        case 2: _t->DeckCleared(); break;
+        case 3: _t->AddCardItem((*reinterpret_cast< QStringList(*)>(_a[1]))); break;
+        case 4: _t->IncrementCardItem((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
+        case 5: _t->DecrementCardItem((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
+        case 6: _t->RemoveCardITem((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
+        case 7: _t->setVipedMeta((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 8: _t->setMeta((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 9: { CryptCardItem* _r = _t->FindCryptCard((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< CryptCardItem**>(_a[0]) = _r; }  break;
-        case 7: { LibraryCardItem* _r = _t->FindLibraryCard((*reinterpret_cast< QString(*)>(_a[1])));
+        case 10: { LibraryCardItem* _r = _t->FindLibraryCard((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< LibraryCardItem**>(_a[0]) = _r; }  break;
         default: ;
         }
@@ -403,6 +346,12 @@ void PTreeModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             typedef void (PTreeModel::*_t)(QModelIndex );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&PTreeModel::DeckChanged)) {
                 *result = 1;
+            }
+        }
+        {
+            typedef void (PTreeModel::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&PTreeModel::DeckCleared)) {
+                *result = 2;
             }
         }
     }
@@ -433,13 +382,13 @@ int PTreeModel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 11;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 11)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 8;
+        _id -= 11;
     }
     return _id;
 }
@@ -456,6 +405,12 @@ void PTreeModel::DeckChanged(QModelIndex _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+
+// SIGNAL 2
+void PTreeModel::DeckCleared()
+{
+    QMetaObject::activate(this, &staticMetaObject, 2, 0);
 }
 struct qt_meta_stringdata_StatsModel_t {
     QByteArrayData data[1];
@@ -525,8 +480,8 @@ int StatsModel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     return _id;
 }
 struct qt_meta_stringdata_WidgetMetaMapper_t {
-    QByteArrayData data[4];
-    char stringdata[40];
+    QByteArrayData data[8];
+    char stringdata[87];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -538,9 +493,15 @@ static const qt_meta_stringdata_WidgetMetaMapper_t qt_meta_stringdata_WidgetMeta
 QT_MOC_LITERAL(0, 0, 16),
 QT_MOC_LITERAL(1, 17, 12),
 QT_MOC_LITERAL(2, 30, 0),
-QT_MOC_LITERAL(3, 31, 7)
+QT_MOC_LITERAL(3, 31, 7),
+QT_MOC_LITERAL(4, 39, 17),
+QT_MOC_LITERAL(5, 57, 11),
+QT_MOC_LITERAL(6, 69, 3),
+QT_MOC_LITERAL(7, 73, 12)
     },
-    "WidgetMetaMapper\0synchroDatas\0\0newData\0"
+    "WidgetMetaMapper\0syncLineEdit\0\0newData\0"
+    "syncPlainTextEdit\0syncSpinBox\0txt\0"
+    "syncComboBox\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -550,7 +511,7 @@ static const uint qt_meta_data_WidgetMetaMapper[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -558,9 +519,15 @@ static const uint qt_meta_data_WidgetMetaMapper[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   19,    2, 0x08,
+       1,    1,   34,    2, 0x08,
+       4,    0,   37,    2, 0x08,
+       5,    1,   38,    2, 0x08,
+       7,    1,   41,    2, 0x08,
 
  // slots: parameters
+    QMetaType::Void, QMetaType::QString,    3,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    6,
     QMetaType::Void, QMetaType::QString,    3,
 
        0        // eod
@@ -571,7 +538,10 @@ void WidgetMetaMapper::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
     if (_c == QMetaObject::InvokeMetaMethod) {
         WidgetMetaMapper *_t = static_cast<WidgetMetaMapper *>(_o);
         switch (_id) {
-        case 0: _t->synchroDatas((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 0: _t->syncLineEdit((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 1: _t->syncPlainTextEdit(); break;
+        case 2: _t->syncSpinBox((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 3: _t->syncComboBox((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -602,13 +572,13 @@ int WidgetMetaMapper::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        _id -= 4;
     }
     return _id;
 }

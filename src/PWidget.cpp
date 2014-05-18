@@ -229,20 +229,36 @@ void VipedViewer::checkModelConformity()
 
 bool VipedViewer::setData(QString key, int value)
 {
+    bool flag;
     //only positive values accepted
     if ( value < 0 )
         {
         myModel.insert( key, 0 );
         updateChart();
         update();
-        return false;
+        emit dataChanged( key, value);
+        flag = false;
         }
     //insert new data and keep model's max value
-    myModel.insert( key, value );
-    myMax = qMax(value, myMax);
-    updateChart();
+    else
+        {
+        myModel.insert( key, value );
+        myMax = qMax(value, myMax);
+        updateChart();
+        update();
+        emit dataChanged( key, value);
+        flag = true;
+        }
+    return flag;
+}
+
+void VipedViewer::clearData()
+{
+    QMap<QString, int>::iterator i;
+    for (i = myModel.begin(); i != myModel.end(); ++i)
+        i.value() = 0;
+
     update();
-    return true;
 }
 
 void VipedViewer::setTickNumber(int Nb)

@@ -21,11 +21,11 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "mvddeck.h"
@@ -45,14 +45,14 @@ public:
     QHBoxLayout *horizontalLayout;
     QFrame *frame_refs;
     QGridLayout *gridLayout;
-    QLabel *label;
-    QLabel *label_2;
     QLineEdit *lE_author;
     QLabel *label_3;
     QLineEdit *lE_name;
     QLabel *label_4;
+    QLabel *label;
+    QLabel *label_2;
     QComboBox *cBFormat;
-    QTextEdit *TE_description;
+    QPlainTextEdit *pT_summary;
     QFrame *frame_results;
     QFormLayout *formLayout;
     QLabel *label_5;
@@ -60,10 +60,10 @@ public:
     QLabel *label_7;
     QLabel *label_8;
     QLabel *label_9;
-    QSpinBox *spinBox;
-    QSpinBox *spinBox_2;
-    QSpinBox *spinBox_3;
-    QSpinBox *spinBox_4;
+    QSpinBox *sB_gw;
+    QSpinBox *sB_vp;
+    QSpinBox *sB_tw;
+    QSpinBox *sB_gp;
     QFrame *frame_viped;
     QVBoxLayout *verticalLayout_4;
     QFrame *frameOverView;
@@ -148,16 +148,6 @@ public:
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setVerticalSpacing(20);
         gridLayout->setContentsMargins(-1, 5, -1, 5);
-        label = new QLabel(frame_refs);
-        label->setObjectName(QStringLiteral("label"));
-
-        gridLayout->addWidget(label, 0, 0, 1, 1);
-
-        label_2 = new QLabel(frame_refs);
-        label_2->setObjectName(QStringLiteral("label_2"));
-
-        gridLayout->addWidget(label_2, 2, 0, 1, 1);
-
         lE_author = new QLineEdit(frame_refs);
         lE_author->setObjectName(QStringLiteral("lE_author"));
         lE_author->setMinimumSize(QSize(200, 0));
@@ -181,6 +171,16 @@ public:
 
         gridLayout->addWidget(label_4, 0, 4, 1, 1);
 
+        label = new QLabel(frame_refs);
+        label->setObjectName(QStringLiteral("label"));
+
+        gridLayout->addWidget(label, 0, 0, 1, 1);
+
+        label_2 = new QLabel(frame_refs);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        gridLayout->addWidget(label_2, 2, 0, 1, 1);
+
         cBFormat = new QComboBox(frame_refs);
         cBFormat->setObjectName(QStringLiteral("cBFormat"));
         cBFormat->setMinimumSize(QSize(100, 0));
@@ -188,10 +188,10 @@ public:
 
         gridLayout->addWidget(cBFormat, 0, 5, 1, 1);
 
-        TE_description = new QTextEdit(frame_refs);
-        TE_description->setObjectName(QStringLiteral("TE_description"));
+        pT_summary = new QPlainTextEdit(frame_refs);
+        pT_summary->setObjectName(QStringLiteral("pT_summary"));
 
-        gridLayout->addWidget(TE_description, 2, 1, 1, 5);
+        gridLayout->addWidget(pT_summary, 2, 1, 1, 5);
 
 
         horizontalLayout->addWidget(frame_refs);
@@ -231,25 +231,25 @@ public:
 
         formLayout->setWidget(4, QFormLayout::FieldRole, label_9);
 
-        spinBox = new QSpinBox(frame_results);
-        spinBox->setObjectName(QStringLiteral("spinBox"));
+        sB_gw = new QSpinBox(frame_results);
+        sB_gw->setObjectName(QStringLiteral("sB_gw"));
 
-        formLayout->setWidget(1, QFormLayout::LabelRole, spinBox);
+        formLayout->setWidget(1, QFormLayout::LabelRole, sB_gw);
 
-        spinBox_2 = new QSpinBox(frame_results);
-        spinBox_2->setObjectName(QStringLiteral("spinBox_2"));
+        sB_vp = new QSpinBox(frame_results);
+        sB_vp->setObjectName(QStringLiteral("sB_vp"));
 
-        formLayout->setWidget(2, QFormLayout::LabelRole, spinBox_2);
+        formLayout->setWidget(2, QFormLayout::LabelRole, sB_vp);
 
-        spinBox_3 = new QSpinBox(frame_results);
-        spinBox_3->setObjectName(QStringLiteral("spinBox_3"));
+        sB_tw = new QSpinBox(frame_results);
+        sB_tw->setObjectName(QStringLiteral("sB_tw"));
 
-        formLayout->setWidget(3, QFormLayout::LabelRole, spinBox_3);
+        formLayout->setWidget(3, QFormLayout::LabelRole, sB_tw);
 
-        spinBox_4 = new QSpinBox(frame_results);
-        spinBox_4->setObjectName(QStringLiteral("spinBox_4"));
+        sB_gp = new QSpinBox(frame_results);
+        sB_gp->setObjectName(QStringLiteral("sB_gp"));
 
-        formLayout->setWidget(4, QFormLayout::LabelRole, spinBox_4);
+        formLayout->setWidget(4, QFormLayout::LabelRole, sB_gp);
 
 
         horizontalLayout->addWidget(frame_results);
@@ -365,7 +365,7 @@ public:
 
         retranslateUi(tab_deck_tuning);
 
-        tab_details->setCurrentIndex(2);
+        tab_details->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(tab_deck_tuning);
@@ -374,10 +374,10 @@ public:
     void retranslateUi(QScrollArea *tab_deck_tuning)
     {
         tab_deck_tuning->setWindowTitle(QApplication::translate("tab_deck_tuning", "ScrollArea", 0));
-        label->setText(QApplication::translate("tab_deck_tuning", "Name", 0));
-        label_2->setText(QApplication::translate("tab_deck_tuning", "Sum up", 0));
         label_3->setText(QApplication::translate("tab_deck_tuning", "author", 0));
         label_4->setText(QApplication::translate("tab_deck_tuning", "Format", 0));
+        label->setText(QApplication::translate("tab_deck_tuning", "Name", 0));
+        label_2->setText(QApplication::translate("tab_deck_tuning", "Sum up", 0));
         label_5->setText(QApplication::translate("tab_deck_tuning", "Decks Results", 0));
         label_6->setText(QApplication::translate("tab_deck_tuning", "Game Win", 0));
         label_7->setText(QApplication::translate("tab_deck_tuning", "Victory points", 0));

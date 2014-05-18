@@ -90,7 +90,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideNone</enum>
@@ -175,20 +175,6 @@
               <property name="verticalSpacing">
                <number>20</number>
               </property>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label">
-                <property name="text">
-                 <string>Name</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_2">
-                <property name="text">
-                 <string>Sum up</string>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="3">
                <widget class="QLineEdit" name="lE_author">
                 <property name="minimumSize">
@@ -226,6 +212,20 @@
                 </property>
                </widget>
               </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>Name</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>Sum up</string>
+                </property>
+               </widget>
+              </item>
               <item row="0" column="5">
                <widget class="QComboBox" name="cBFormat">
                 <property name="minimumSize">
@@ -243,7 +243,7 @@
                </widget>
               </item>
               <item row="2" column="1" colspan="5">
-               <widget class="QTextEdit" name="TE_description"/>
+               <widget class="QPlainTextEdit" name="pT_summary"/>
               </item>
              </layout>
             </widget>
@@ -311,16 +311,16 @@
                </widget>
               </item>
               <item row="1" column="0">
-               <widget class="QSpinBox" name="spinBox"/>
+               <widget class="QSpinBox" name="sB_gw"/>
               </item>
               <item row="2" column="0">
-               <widget class="QSpinBox" name="spinBox_2"/>
+               <widget class="QSpinBox" name="sB_vp"/>
               </item>
               <item row="3" column="0">
-               <widget class="QSpinBox" name="spinBox_3"/>
+               <widget class="QSpinBox" name="sB_tw"/>
               </item>
               <item row="4" column="0">
-               <widget class="QSpinBox" name="spinBox_4"/>
+               <widget class="QSpinBox" name="sB_gp"/>
               </item>
              </layout>
             </widget>
