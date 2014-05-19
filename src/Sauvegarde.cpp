@@ -1,4 +1,5 @@
 #include "Sauvegarde.h"
+#include <QDebug>
 
 bool deckModelToEdb(PTreeModel *D, QString filePath)
 {
@@ -51,12 +52,34 @@ writer.writeEndElement();
 writer.writeEndDocument();  // Finalise le document XML
 file.close();               // Fermer le fichier pour bien enregistrer le document et ferme l'élément Deck (l'élément Root)
 
+D->setUnmodified();
 return true;
 }
 
 bool EdbToDeckModel(PTreeModel *D, QString filePath)
 {
-
+    // open file in read mode and put the xml stream on it
+    QFile file(filePath);
+    if ( !file.open(QFile::ReadOnly | QFile::Text) ) {
+        qDebug() << "An error has been encounter when opening deck file";
+        return false;
+    }
+    //
+    QXmlStreamReader reader(&file);
+    while (!reader.atEnd()) {
+        reader.readNextStartElement();
+        qDebug() << "*********** New Xml element ***********";
+        qDebug() << reader.name();
+        //qDebug() << reader.attributes();
+        qDebug() << reader.text();
+        qDebug() << "***************************************";
+    }
+    if (reader.hasError()) {
+        qDebug() << "An error has been encounter when parsing deck file"; // do error handling
+        qDebug() << reader.errorString() << reader.lineNumber() << reader.columnNumber();
+        return false;
+    }
+    return true;
 }
 
 bool deckModelToPDF(PTreeModel *D, QString filePath)

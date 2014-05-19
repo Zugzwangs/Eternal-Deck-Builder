@@ -72,6 +72,11 @@ bool PTreeModel::isModified()
     return modified;
 }
 
+void PTreeModel::setUnmodified()
+{
+    modified = false;
+}
+
 void PTreeModel::loadDeck() // ??? mauvais design ???
 {
     clearDeck();

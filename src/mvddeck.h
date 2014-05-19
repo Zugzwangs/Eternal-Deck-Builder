@@ -86,6 +86,7 @@ public:
     void loadDeck();
     QString deckName();
     bool isModified();
+    void setUnmodified();
     SortItem *itemLib;
     SortItem *itemCrypt;
     SortItem *itemSide;

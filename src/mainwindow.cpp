@@ -82,8 +82,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 void MainWindow::SaveDeck()
 {
     QString fileName = test_tuning->ModeleDeck->deckName();
-    if ( !fileName.isEmpty() /* ajouter test de robustesse ici !*/ )
+    if ( fileName.length() > 2 )
         {
+        fileName.prepend("/");
+        fileName.prepend(PathDeck);
         fileName.append(".edb");
         }
     else
@@ -92,7 +94,7 @@ void MainWindow::SaveDeck()
                                    PathDeck, tr("Images (*.edb)"));
         }
 
-    deckModelToEdb( test_tuning->ModeleDeck, PathDeck + fileName );
+    deckModelToEdb( test_tuning->ModeleDeck, fileName );
 }
 
 void MainWindow::ExportDeck(QString fileName, int Format)

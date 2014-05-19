@@ -60,7 +60,7 @@ namespace VtesInfo
     const QStringList DeckFormat = QStringList() << "Unlimited" << "Limited" << "Free";
 
     const QStringList MetasList = QStringList() << "name" << "author" << "description" << "format"
-                                               << "game win" << "victory point" << "tournament win" << "games played";
+                                               << "game_win" << "victory_point" << "tournament_win" << "games_played";
 
     const QStringList VipedList = QStringList() << "Speed" << "Combat" << "Bleed" << "Diplomacy" << "Defense";
 
