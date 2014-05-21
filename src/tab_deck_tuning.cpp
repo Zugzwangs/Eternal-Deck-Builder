@@ -89,7 +89,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     cryptGalerie->setGridSize( QSize(150,210) );
     cryptGalerie->setIconSize( QSize(144,200) );
     cryptGalerie->setWrapping(true);
-    cryptGalerie->setMovement(QListView::Snap);
+    cryptGalerie->setMovement(QListView::Static);
     cryptGalerie->setDragDropMode(QAbstractItemView::InternalMove);
     cryptGalerie->setFrameShape(QFrame::NoFrame);
     cryptGalerie->setModel(ModeleDeck);
@@ -104,7 +104,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     LibraryGalerie->setGridSize( QSize(150,210) );
     LibraryGalerie->setIconSize( QSize(144,200) );
     LibraryGalerie->setWrapping(true);
-    LibraryGalerie->setMovement(QListView::Snap);
+    LibraryGalerie->setMovement(QListView::Static);
     LibraryGalerie->setDragDropMode(QAbstractItemView::InternalMove);
     LibraryGalerie->setFrameShape(QFrame::NoFrame);
     LibraryGalerie->setModel(ModeleDeck);
@@ -121,6 +121,22 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     connect( ModeleDeck, SIGNAL( DeckChanged(QModelIndex) ), this, SLOT( refresh_stat_model(QModelIndex) ) );
     connect( ModeleDeck, SIGNAL( DeckCleared() ), this, SLOT( clear_stat_model() ) );
     connect( ModeleDeck, SIGNAL( DeckCleared() ), this, SLOT( clear_widgets()) );
+}
+
+void tab_deck_tuning::refresh_widgets()
+{   //get meta value from model and set widgets with !
+
+    ui->lE_author->setText(ModeleDeck->meta_list.value( VtesInfo::MetasList[VtesInfo::indexAuthor] ));
+    ui->lE_name->setText(ModeleDeck->meta_list.value( VtesInfo::MetasList[VtesInfo::indexName] ));
+    ui->sB_gp->setValue( ModeleDeck->meta_list.value( VtesInfo::MetasList[VtesInfo::indexGamesPlayed] ).toInt() );
+    ui->sB_gw->setValue( ModeleDeck->meta_list.value( VtesInfo::MetasList[VtesInfo::indexGameWin] ).toInt() );
+    ui->sB_tw->setValue( ModeleDeck->meta_list.value( VtesInfo::MetasList[VtesInfo::indexTournamentWin] ).toInt() );
+    ui->sB_vp->setValue( ModeleDeck->meta_list.value( VtesInfo::MetasList[VtesInfo::indexVictoryPoint] ).toInt() );
+    int formatIndex = ui->cBFormat->findText( ModeleDeck->meta_list.value( VtesInfo::MetasList[VtesInfo::indexFormat] ) );
+    ui->cBFormat->setCurrentIndex(formatIndex);
+    ui->pT_summary->setPlainText( ModeleDeck->meta_list.value( VtesInfo::MetasList[VtesInfo::indexdescription] ) );
+    for (int i=0; i<VtesInfo::VipedList.count(); i++)
+        DeckViped->setData( VtesInfo::VipedList[i], ModeleDeck->meta_list.value(VtesInfo::VipedList[i]).toInt() );
 }
 
 void tab_deck_tuning::clear_widgets()

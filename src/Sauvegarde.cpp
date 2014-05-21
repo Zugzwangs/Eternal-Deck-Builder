@@ -1,62 +1,115 @@
 #include "Sauvegarde.h"
 #include <QDebug>
-
-bool deckModelToEdb(PTreeModel *D, QString filePath)
+#include <QSqlRecord>
+#include <QSqlField>
+#include <QSqlError>
+FFFF::FFFF()
 {
-// open file in write mode and put the xml stream on it
-QFile file(filePath);
-if ( !file.open(QFile::WriteOnly | QFile::Text) )
-    return false;
-
-QXmlStreamWriter writer(&file);
-
-writer.setAutoFormatting(true);             //Permet l'indentation du fichier XML
-writer.writeStartDocument();                // Écrit l'en-tête du fichier XML : <?xml version="1.0" encoding="UTF-8" ?>
-writer.writeStartElement("Deck");           // Ajoute l'élément racine du fichier XML
-writer.writeAttribute("Id","123534");       //
-
-    /********** Elements Métadonnées **********/
-    writer.writeStartElement("Metadonnees");
-        QMap<QString, QString>::const_iterator i;
-        for (i = D->meta_list.constBegin(); i != D->meta_list.constEnd(); i++)
-            {
-            writer.writeTextElement( i.key(), i.value() );
-            }
-    writer.writeEndElement();
-
-    /**********   Element Crypte    **********/
-    writer.writeStartElement("Crypt");
-    writer.writeAttribute( "Taille", D->itemCrypt->data(VtesInfo::ExemplairRole).toString() );
-    for ( int i=0; i<D->itemCrypt->rowCount(); i++ )
-        {
-        writer.writeStartElement( "CryptCard" );
-        writer.writeAttribute("Number", D->itemCrypt->child(i,0)->data(VtesInfo::ExemplairRole).toString() );
-        writer.writeCharacters( D->itemCrypt->child(i,0)->data(VtesInfo::NameRole).toString() );
-        writer.writeEndElement();
-        }
-    writer.writeEndElement();
-
-    /********** Element Bibliotheque **********/
-    writer.writeStartElement("Bibliotheque");
-        writer.writeAttribute( "Taille", D->itemLib->data(VtesInfo::ExemplairRole).toString() );
-        for ( int i=0; i<D->itemLib->rowCount(); i++ )
-            {
-            writer.writeStartElement( "LibraryCard" );
-            writer.writeAttribute("Number", D->itemLib->child(i,0)->data(VtesInfo::ExemplairRole).toString() );
-            writer.writeCharacters( D->itemLib->child(i,0)->data(VtesInfo::NameRole).toString() );
-            writer.writeEndElement();
-            }
-    writer.writeEndElement();                   // Ferme l'élément Bibliotheque
-
-writer.writeEndElement();
-writer.writeEndDocument();  // Finalise le document XML
-file.close();               // Fermer le fichier pour bien enregistrer le document et ferme l'élément Deck (l'élément Root)
-
-D->setUnmodified();
-return true;
+   D = NULL;
+   B = NULL;
 }
 
-bool EdbToDeckModel(PTreeModel *D, QString filePath)
+FFFF::FFFF(PTreeModel* DeckModel, QSqlQueryModel* BddModel)
+{
+    D = DeckModel;
+    B = BddModel;
+}
+
+void FFFF::setDeckModel(PTreeModel* DeckModel)
+{
+    D = DeckModel;
+}
+
+void FFFF::setBddModel(QSqlQueryModel *BddModel)
+{
+    B = BddModel;
+}
+
+QStringList FFFF::queryCardsInfo( const QString CardName, const QString TableName )
+{
+    QStringList infos = QStringList();
+    B->setQuery("SELECT * FROM " + TableName + " WHERE Name = '" + CardName + "'");
+    if ( B->lastError().isValid())
+        {
+        qDebug() << "an error as occured during SQL query" << endl << B->lastError();
+        return infos;
+        }
+
+    if ( B->record(0).isEmpty() )
+        {
+        return infos; //card not found
+        }
+    else
+        {
+        for (int i=0; i<(B->record(0)).count(); i++)
+            {
+            infos.append( B->record(0).value(i).toString() );
+            }
+        }
+
+    return infos;
+}
+
+bool FFFF::deckModelToEdb( QString filePath )
+{
+    // open file in write mode and put the xml stream on it
+    QFile file(filePath);
+    if ( !file.open(QFile::WriteOnly | QFile::Text) )
+        return false;
+
+    QXmlStreamWriter writer(&file);
+
+    writer.setAutoFormatting(true);             //Permet l'indentation du fichier XML
+    writer.writeStartDocument();                // Écrit l'en-tête du fichier XML : <?xml version="1.0" encoding="UTF-8" ?>
+    writer.writeStartElement("Deck");           // Ajoute l'élément racine du fichier XML
+    writer.writeAttribute("Id","123534");       //
+
+        /********** Elements Métadonnées **********/
+        writer.writeStartElement("Metadatas");
+            QMap<QString, QString>::const_iterator i;
+            for (i = D->meta_list.constBegin(); i != D->meta_list.constEnd(); i++)
+                {
+                writer.writeStartElement("Metadata");
+                writer.writeAttribute("name", i.key());
+                writer.writeAttribute("value", i.value());
+                writer.writeEndElement();
+                }
+        writer.writeEndElement();
+
+        /**********   Element Crypte    **********/
+        writer.writeStartElement("Crypt");
+        writer.writeAttribute( "Taille", D->itemCrypt->data(VtesInfo::ExemplairRole).toString() );
+        for ( int i=0; i<D->itemCrypt->rowCount(); i++ )
+            {
+            writer.writeStartElement( "CryptCard" );
+            writer.writeAttribute( "Number", D->itemCrypt->child(i,0)->data(VtesInfo::ExemplairRole).toString() );
+            writer.writeAttribute( "name", D->itemCrypt->child(i,0)->data(VtesInfo::NameRole).toString() );
+            writer.writeEndElement();
+            }
+        writer.writeEndElement();
+
+        /********** Element Bibliotheque **********/
+        writer.writeStartElement("Bibliotheque");
+            writer.writeAttribute( "Taille", D->itemLib->data(VtesInfo::ExemplairRole).toString() );
+            for ( int i=0; i<D->itemLib->rowCount(); i++ )
+                {
+                writer.writeStartElement( "LibraryCard" );
+                writer.writeAttribute( "Number", D->itemLib->child(i,0)->data(VtesInfo::ExemplairRole).toString() );
+                writer.writeAttribute( "name", D->itemLib->child(i,0)->data(VtesInfo::NameRole).toString() );
+                writer.writeEndElement();
+                }
+        writer.writeEndElement();                   // Ferme l'élément Bibliotheque
+
+    writer.writeEndElement();
+    writer.writeEndDocument();  // Finalise le document XML
+    file.close();               // Fermer le fichier pour bien enregistrer le document et ferme l'élément Deck (l'élément Root)
+
+    D->setUnmodified();
+    return true;
+}
+
+
+bool FFFF::EdbToDeckModel( QString filePath )
 {
     // open file in read mode and put the xml stream on it
     QFile file(filePath);
@@ -64,27 +117,57 @@ bool EdbToDeckModel(PTreeModel *D, QString filePath)
         qDebug() << "An error has been encounter when opening deck file";
         return false;
     }
-    //
+
     QXmlStreamReader reader(&file);
-    while (!reader.atEnd()) {
-        reader.readNextStartElement();
-        qDebug() << "*********** New Xml element ***********";
-        qDebug() << reader.name();
-        //qDebug() << reader.attributes();
-        qDebug() << reader.text();
-        qDebug() << "***************************************";
+
+    // read file until reach of <Metadonnees> element
+    while (!reader.atEnd() && reader.name() != "Metadatas" ) {
+        reader.readNext();
     }
     if (reader.hasError()) {
-        qDebug() << "An error has been encounter when parsing deck file"; // do error handling
+        qDebug() << "An error has been encounter when parsing deck file";
         qDebug() << reader.errorString() << reader.lineNumber() << reader.columnNumber();
         return false;
-    }
+        }
+    reader.readNextStartElement();
+
+    while (!reader.atEnd() && reader.name() != "Metadatas" )
+        {
+        if ( reader.isStartElement() )
+            { // marche pas ici !
+            D->setMeta(reader.attributes().value("name").toString(), reader.attributes().value("value").toString());
+            }
+        reader.readNextStartElement();
+        }
+    reader.readNextStartElement();
+    reader.readNextStartElement();
+
+    while (!reader.atEnd() && reader.name() != "Crypt" )
+        {
+        if ( reader.isStartElement() )
+            {
+            D->AddCardItem( queryCardsInfo(reader.attributes().value("name").toString(), "VampireList"), reader.attributes().value("Number").toInt() );
+            }
+        reader.readNextStartElement();
+        }
+    reader.readNextStartElement();
+    reader.readNextStartElement();
+
+    while (!reader.atEnd() && reader.name() != "Bibliotheque" )
+        {
+        if ( reader.isStartElement() )
+            {
+            D->AddCardItem( queryCardsInfo(reader.attributes().value("name").toString(), "CardList"), reader.attributes().value("Number").toInt() );
+            }
+        reader.readNextStartElement();
+        }
+
     return true;
 }
 
-bool deckModelToPDF(PTreeModel *D, QString filePath)
+bool FFFF::deckModelToPDF( QString filePath )
 {
-    /* TODO integrer ds deck model
+/*
 int NbPage,NbEx,k,x,y;
 float NbCarteParPage;
 QList<QStandardItem *> ItemCrypte = ModelDeckCourant->findItems("CRYPTE");

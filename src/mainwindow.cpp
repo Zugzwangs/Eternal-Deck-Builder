@@ -4,7 +4,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "Sauvegarde.h"
+
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow)
 {
@@ -39,7 +39,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
          return;
         }
 
-
 // ////////////////////////////////////////////////
 //  MISE EN FORME DE LA FENETRE PRINCIPALE
 
@@ -65,6 +64,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     playground_tab->initialisation(PathCartes);
     ui->OngletGoldFish->layout()->addWidget(playground_tab);
 
+// ////////////////////////////////////////////////
+//  SETUP MANAGER IMPORT/EXPORT DECK DATAS
+
+    queryModel = new QSqlQueryModel;
+    inOutDecksManager = FFFF(test_tuning->ModeleDeck, queryModel );
 
 // ///////////////////////////////////////////////
 // DEFINITION DES CONNEXIONS
@@ -75,6 +79,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect( ui->actionOpen_a_deck,         SIGNAL( triggered() ), this, SLOT( OpenDeck() ) );
     connect( ui->actionClose_deck,          SIGNAL( triggered() ), this, SLOT( CloseDeck()) );
     connect( ui->actionNew_Deck,            SIGNAL( triggered() ), this, SLOT( NewDeck()  ) );
+    connect( this,                          SIGNAL( DeckLoaded()), test_tuning, SLOT(refresh_widgets() ) );
+
     //connect( downloader, SIGNAL( picture_downloaded() ), this, SLOT( AfficheImageCarte(QString) ) );
 
 }
@@ -90,11 +96,14 @@ void MainWindow::SaveDeck()
         }
     else
         {
-        fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
-                                   PathDeck, tr("Images (*.edb)"));
+        fileName = QFileDialog::getSaveFileName(this, tr("Save File"), PathDeck, tr("Images (*.edb)"));
+        if ( fileName.isEmpty() )
+            return;
         }
 
-    deckModelToEdb( test_tuning->ModeleDeck, fileName );
+
+    emit DeckSaved();
+    inOutDecksManager.deckModelToEdb( fileName );
 }
 
 void MainWindow::ExportDeck(QString fileName, int Format)
@@ -128,10 +137,12 @@ void MainWindow::PrintDeck()
 
 void MainWindow::OpenDeck()
 {
-    QString fileName = QFileDialog::getOpenFileName(this,
-        tr("Open Deck"), PathDeck, tr("Deck Files (*.edb)"));
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Deck"), PathDeck, tr("Deck Files (*.edb)"));
+    if ( fileName.isEmpty() )
+        return;
 
-    EdbToDeckModel(test_tuning->ModeleDeck, fileName);
+    if ( inOutDecksManager.EdbToDeckModel( fileName ) );
+        emit DeckLoaded();
 }
 
 void MainWindow::CloseDeck()
@@ -139,7 +150,7 @@ void MainWindow::CloseDeck()
     if ( test_tuning->ModeleDeck->isModified() )
         {
         QMessageBox msgBox;
-        msgBox.setText("Close Without save changes ?");
+        msgBox.setText("Close current deck without save changes ?");
         msgBox.setInformativeText("All your modifications will be lost");
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         msgBox.setDefaultButton(QMessageBox::Save);
@@ -166,12 +177,19 @@ void MainWindow::CloseDeck()
                 break;
             }
         }
+    else
+        {
+        test_tuning->ModeleDeck->clearDeck();
+        emit DeckClosed();
+        }
 }
+
 
 void MainWindow::NewDeck()
 {
     CloseDeck();
 }
+
 
 void MainWindow::OuvrirMenuOption()
 {
@@ -180,6 +198,7 @@ void MainWindow::OuvrirMenuOption()
      // On rend visible et modale notre fenêtre avec la méthode exec()
      Options.exec();
 }
+
 
 MainWindow::~MainWindow()
 {

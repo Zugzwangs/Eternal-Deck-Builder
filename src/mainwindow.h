@@ -12,6 +12,7 @@
 #include "tab_search_crypt.h"
 #include "tab_gold_fich.h"
 #include "tab_deck_tuning.h"
+#include "Sauvegarde.h"
 
 namespace Ui { class MainWindow; }
 
@@ -28,6 +29,8 @@ private:
     QSqlDatabase SqlDB;         // La BDD embarquée
     update_manager* downloader; // gestionnaire de téléchargement
     PathProvider path_list;     // gestionnaire de path de paths
+    FFFF inOutDecksManager;     // implémente import/export des decks
+    QSqlQueryModel *queryModel;
     QString PathCartes;
     QString PathRessources;
     QString PathDeck;
@@ -48,6 +51,9 @@ private slots:
     void OuvrirMenuOption();
 
 signals:
+    void DeckLoaded();
+    void DeckClosed();
+    void DeckSaved();
 
 };
 

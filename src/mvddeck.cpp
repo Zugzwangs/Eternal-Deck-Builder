@@ -83,13 +83,18 @@ void PTreeModel::loadDeck() // ??? mauvais design ???
     modified = false;
 }
 
-void PTreeModel::AddCardItem(QStringList strL)
+void PTreeModel::AddCardItem(QStringList strL, int number)
 {
     modified = true;
 
-    if (strL.count() < 7) // améliorer la robustesse si on recupere une QStringList incomplète!
-        return;
+    if ( number < 1 || number > 255)
+        number = 1;
 
+    if (strL.count() < 7) // améliorer la robustesse si on recupere une QStringList incomplète!
+        {
+        qDebug() << "manque d'informations sur la carte à ajouter !!";
+        return;
+        }
 // Checkout the type of card
 QString CardName = strL[1];
 QString CardCat = strL[7];
@@ -101,7 +106,8 @@ SortItem* Category;
         CryptCardItem* TempItem = FindCryptCard( CardName );
         if ( TempItem )
             {
-            IncrementCardItem( TempItem->index() );
+            for (int i=1; i<=number; i++)
+                IncrementCardItem( TempItem->index() );
             }
         else
             {
@@ -109,6 +115,9 @@ SortItem* Category;
             CryptCardItem* newCard = new CryptCardItem(strL);
             Category->appendRow(newCard);
             Category->Increment();
+            for (int i=1; i<number; i++)
+                newCard->Increment();
+
             emit DeckChanged( Category->index() );
             delete TempItem;
             }
@@ -120,7 +129,8 @@ SortItem* Category;
         LibraryCardItem* TempItem = FindLibraryCard( CardName );
         if ( TempItem )
             {
-            IncrementCardItem( TempItem->index() );
+            for (int i=1; i<=number; i++)
+                IncrementCardItem( TempItem->index() );
             }
         else
             {
@@ -128,6 +138,10 @@ SortItem* Category;
             LibraryCardItem* newCard = new LibraryCardItem(strL);
             Category->appendRow(newCard);
             Category->Increment();
+            for (int i=1; i<number; i++)
+                {
+                newCard->Increment();
+                }
             emit DeckChanged( Category->index() );
             delete TempItem;
             }

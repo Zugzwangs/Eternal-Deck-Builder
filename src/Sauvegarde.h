@@ -8,16 +8,31 @@
 
 #include "Global.h"
 #include "mvddeck.h"
+#include "mvdbdd.h"
 
 /************************************************************************************/
 /*    */
 /*    */
 /************************************************************************************/
 
-bool deckModelToEdb(PTreeModel *D, QString filePath);
+class FFFF
+{
 
-bool EdbToDeckModel(PTreeModel *D, QString filePath);
+public:
+    FFFF();
+    FFFF(PTreeModel* DeckModel, QSqlQueryModel* BddModel);
+    void setDeckModel(PTreeModel* DeckModel);
+    void setBddModel(QSqlQueryModel* BddModel);
 
-bool deckModelToPDF(PTreeModel *D, QString filePath);
+public slots:
+    bool deckModelToEdb( QString filePath );
+    bool EdbToDeckModel( QString filePath );
+    bool deckModelToPDF( QString filePath );
+    QStringList queryCardsInfo( const QString CardName, const QString TableName );
+
+private:
+    PTreeModel* D;
+    QSqlQueryModel* B;
+};
 
 #endif // SAUVEGARDE_H

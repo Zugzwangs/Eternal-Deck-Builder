@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[11];
-    char stringdata[103];
+    QByteArrayData data[14];
+    char stringdata[135];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,20 +30,24 @@ struct qt_meta_stringdata_MainWindow_t {
 static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
     {
 QT_MOC_LITERAL(0, 0, 10),
-QT_MOC_LITERAL(1, 11, 8),
-QT_MOC_LITERAL(2, 20, 0),
-QT_MOC_LITERAL(3, 21, 10),
-QT_MOC_LITERAL(4, 32, 8),
-QT_MOC_LITERAL(5, 41, 6),
-QT_MOC_LITERAL(6, 48, 9),
-QT_MOC_LITERAL(7, 58, 8),
-QT_MOC_LITERAL(8, 67, 9),
-QT_MOC_LITERAL(9, 77, 7),
-QT_MOC_LITERAL(10, 85, 16)
+QT_MOC_LITERAL(1, 11, 10),
+QT_MOC_LITERAL(2, 22, 0),
+QT_MOC_LITERAL(3, 23, 10),
+QT_MOC_LITERAL(4, 34, 9),
+QT_MOC_LITERAL(5, 44, 8),
+QT_MOC_LITERAL(6, 53, 10),
+QT_MOC_LITERAL(7, 64, 8),
+QT_MOC_LITERAL(8, 73, 6),
+QT_MOC_LITERAL(9, 80, 9),
+QT_MOC_LITERAL(10, 90, 8),
+QT_MOC_LITERAL(11, 99, 9),
+QT_MOC_LITERAL(12, 109, 7),
+QT_MOC_LITERAL(13, 117, 16)
     },
-    "MainWindow\0SaveDeck\0\0ExportDeck\0"
-    "fileName\0Format\0PrintDeck\0OpenDeck\0"
-    "CloseDeck\0NewDeck\0OuvrirMenuOption\0"
+    "MainWindow\0DeckLoaded\0\0DeckClosed\0"
+    "DeckSaved\0SaveDeck\0ExportDeck\0fileName\0"
+    "Format\0PrintDeck\0OpenDeck\0CloseDeck\0"
+    "NewDeck\0OuvrirMenuOption\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -53,25 +57,35 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       3,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags
+       1,    0,   64,    2, 0x06,
+       3,    0,   65,    2, 0x06,
+       4,    0,   66,    2, 0x06,
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x08,
-       3,    2,   50,    2, 0x08,
-       6,    0,   55,    2, 0x08,
-       7,    0,   56,    2, 0x08,
-       8,    0,   57,    2, 0x08,
-       9,    0,   58,    2, 0x08,
-      10,    0,   59,    2, 0x08,
+       5,    0,   67,    2, 0x08,
+       6,    2,   68,    2, 0x08,
+       9,    0,   73,    2, 0x08,
+      10,    0,   74,    2, 0x08,
+      11,    0,   75,    2, 0x08,
+      12,    0,   76,    2, 0x08,
+      13,    0,   77,    2, 0x08,
+
+ // signals: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, QMetaType::Int,    4,    5,
+    QMetaType::Void, QMetaType::QString, QMetaType::Int,    7,    8,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -86,14 +100,38 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     if (_c == QMetaObject::InvokeMetaMethod) {
         MainWindow *_t = static_cast<MainWindow *>(_o);
         switch (_id) {
-        case 0: _t->SaveDeck(); break;
-        case 1: _t->ExportDeck((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 2: _t->PrintDeck(); break;
-        case 3: _t->OpenDeck(); break;
-        case 4: _t->CloseDeck(); break;
-        case 5: _t->NewDeck(); break;
-        case 6: _t->OuvrirMenuOption(); break;
+        case 0: _t->DeckLoaded(); break;
+        case 1: _t->DeckClosed(); break;
+        case 2: _t->DeckSaved(); break;
+        case 3: _t->SaveDeck(); break;
+        case 4: _t->ExportDeck((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 5: _t->PrintDeck(); break;
+        case 6: _t->OpenDeck(); break;
+        case 7: _t->CloseDeck(); break;
+        case 8: _t->NewDeck(); break;
+        case 9: _t->OuvrirMenuOption(); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        void **func = reinterpret_cast<void **>(_a[1]);
+        {
+            typedef void (MainWindow::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&MainWindow::DeckLoaded)) {
+                *result = 0;
+            }
+        }
+        {
+            typedef void (MainWindow::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&MainWindow::DeckClosed)) {
+                *result = 1;
+            }
+        }
+        {
+            typedef void (MainWindow::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&MainWindow::DeckSaved)) {
+                *result = 2;
+            }
         }
     }
 }
@@ -123,14 +161,32 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 10;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 10)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 10;
     }
     return _id;
+}
+
+// SIGNAL 0
+void MainWindow::DeckLoaded()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, 0);
+}
+
+// SIGNAL 1
+void MainWindow::DeckClosed()
+{
+    QMetaObject::activate(this, &staticMetaObject, 1, 0);
+}
+
+// SIGNAL 2
+void MainWindow::DeckSaved()
+{
+    QMetaObject::activate(this, &staticMetaObject, 2, 0);
 }
 QT_END_MOC_NAMESPACE

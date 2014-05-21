@@ -93,7 +93,7 @@ public:
     QMap<QString, QString> meta_list;
 
 public slots:
-    void AddCardItem(QStringList strL);
+    void AddCardItem(QStringList strL, int number=1);
     void IncrementCardItem( QModelIndex Idx );
     void DecrementCardItem( QModelIndex Idx );
     void RemoveCardITem( QModelIndex Idx );
@@ -110,7 +110,6 @@ signals:
     void CardItemChanged(QModelIndex ModifiedItem);
     void DeckChanged(QModelIndex parent);
     void DeckCleared();
-    //void CardRemoved();
 };
 
 
