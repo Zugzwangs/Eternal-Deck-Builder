@@ -1,8 +1,14 @@
 #include "Sauvegarde.h"
+#include "math.h"
+
 #include <QDebug>
 #include <QSqlRecord>
 #include <QSqlField>
 #include <QSqlError>
+#include <QSettings>
+#include <QPainter>
+#include <QPrinter>
+
 FFFF::FFFF()
 {
    D = NULL;
@@ -108,7 +114,6 @@ bool FFFF::deckModelToEdb( QString filePath )
     return true;
 }
 
-
 bool FFFF::EdbToDeckModel( QString filePath )
 {
     // open file in read mode and put the xml stream on it
@@ -167,41 +172,50 @@ bool FFFF::EdbToDeckModel( QString filePath )
 
 bool FFFF::deckModelToPDF( QString filePath )
 {
-/*
-int NbPage,NbEx,k,x,y;
-float NbCarteParPage;
-QList<QStandardItem *> ItemCrypte = ModelDeckCourant->findItems("CRYPTE");
-QList<QStandardItem *> ItemLibrary = ModelDeckCourant->findItems("BIBLIOTHEQUE");
-QList<QStandardItem *> ItemMetadonnees = ModelDeckCourant->findItems("METADONNEES");
+int NbEx;
+PathProvider path_list;
+path_list.initPaths();
+QString CardPath = path_list.getCardPath();
 QList<QString> ListPathImageCarte;
-QList<QImage *> Planches;
-QPainter PlanchePainter;
-QString DeckName, PrintFormat;
 
-//On recupère le nom du deck
-DeckName = ItemMetadonnees[0]->child(0)->data(Qt::DisplayRole).toString();
+// Gathering all datas to print
 
 //On crée la liste de tous les chemins vers les images necesaires
-for (int i=0; i<ItemCrypte[0]->rowCount(); i++)
+for (int i=0; i<D->itemCrypt->rowCount(); i++)
     {
-    NbEx = ItemCrypte[0]->child(i)->data(Qt::UserRole+2).toInt();
+    NbEx = D->itemCrypt->child(i,0)->data(VtesInfo::ExemplairRole).toInt();
     for (int j=1; j<=NbEx; j++)
         {
-        ListPathImageCarte.append(PathCartes + "/" + ItemCrypte[0]->child(i)->data(Qt::UserRole).toStringList().at(3) + ".jpg");
+        ListPathImageCarte.append(CardPath + "/" + D->itemCrypt->child(i,0)->data(VtesInfo::ImageFileRole).toString() + ".jpg");
         }
     }
-for (int i=0; i<ItemLibrary[0]->rowCount(); i++)
+for (int i=0; i<D->itemLib->rowCount(); i++)
     {
-    NbEx = ItemLibrary[0]->child(i)->data(Qt::UserRole+2).toInt();
+    NbEx = D->itemLib->child(i,0)->data(VtesInfo::ExemplairRole).toInt();
     for (int j=1; j<=NbEx; j++)
         {
-        ListPathImageCarte.append(PathCartes + "/" + ItemLibrary[0]->child(i)->data(Qt::UserRole).toStringList().at(3) + ".jpg");
+        ListPathImageCarte.append(CardPath + "/" + D->itemLib->child(i,0)->data(VtesInfo::ImageFileRole).toString() + ".jpg");
         }
     }
 
-//On va chercher les options d'impression.
+qDebug() << "*******************************************";
+foreach (QString s, ListPathImageCarte) {
+    qDebug() << s;
+}
+qDebug() << "*******************************************";
+
+// Get print options.
+QString PrintFormat;
 QSettings settings("./cfg.ini", QSettings::IniFormat);
 PrintFormat = settings.value("PrintFormat", "A4").toString();
+
+// Print procedure :
+int NbPage,k,x,y;
+float NbCarteParPage;
+QList<QImage *> Planches;
+QPainter PlanchePainter;
+
+
 if (PrintFormat == "A4")
    {
     NbCarteParPage = 8;
@@ -256,18 +270,21 @@ QPrinter DeckPrinter(QPrinter::ScreenResolution);
 QPainter PrintPainter;
 
 DeckPrinter.setOrientation(QPrinter::Landscape);
-if ( PrintFormat == "A4" ) DeckPrinter.setPaperSize(QPrinter::A4); else DeckPrinter.setPaperSize(QPrinter::A3);
+if ( PrintFormat == "A4" )
+    DeckPrinter.setPaperSize(QPrinter::A4);
+else
+    DeckPrinter.setPaperSize(QPrinter::A3);
 DeckPrinter.setOutputFormat(QPrinter::PdfFormat);
-DeckPrinter.setOutputFileName("./Decks/" + DeckName + ".pdf");
+DeckPrinter.setOutputFileName( filePath );
 DeckPrinter.setPageMargins(10,10,0,0,QPrinter::Millimeter);
 DeckPrinter.setResolution(150);
 
 PrintPainter.begin(&DeckPrinter);
 for(int i=0; i<Planches.count(); i++)
     {
-    PrintPainter.drawImage(QPoint(0,0),*Planches.at(i));
+    PrintPainter.drawImage( QPoint(0,0), *Planches.at(i) );
     DeckPrinter.newPage();
     }
 PrintPainter.end();
-*/
+
 }

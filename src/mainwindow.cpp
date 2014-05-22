@@ -101,7 +101,6 @@ void MainWindow::SaveDeck()
             return;
         }
 
-
     emit DeckSaved();
     inOutDecksManager.deckModelToEdb( fileName );
 }
@@ -132,7 +131,21 @@ void MainWindow::ExportDeck(QString fileName, int Format)
 
 void MainWindow::PrintDeck()
 {
+    QString fileName = test_tuning->ModeleDeck->deckName();
+    if ( fileName.length() > 2 )
+        {
+        fileName.prepend("/");
+        fileName.prepend(PathDeck);
+        fileName.append(".pdf");
+        }
+    else
+        {
+        fileName = QFileDialog::getSaveFileName(this, tr("Save File"), PathDeck, tr("Images (*.pdf)"));
+        if ( fileName.isEmpty() )
+            return;
+        }
 
+    inOutDecksManager.deckModelToPDF( fileName );
 }
 
 void MainWindow::OpenDeck()
