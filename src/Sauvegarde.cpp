@@ -8,6 +8,7 @@
 #include <QSettings>
 #include <QPainter>
 #include <QPrinter>
+#include <QSqlQuery>
 
 FFFF::FFFF()
 {
@@ -34,9 +35,15 @@ void FFFF::setBddModel(QSqlQueryModel *BddModel)
 QStringList FFFF::queryCardsInfo( const QString CardName, const QString TableName )
 {
     QStringList infos = QStringList();
-    B->setQuery("SELECT * FROM " + TableName + " WHERE Name = '" + CardName + "'");
+    QSqlQuery myQuery;
+    myQuery.prepare( "SELECT * FROM " + TableName + " WHERE Name = :CardName" );
+    myQuery.bindValue(":CardName", CardName);
+    myQuery.exec();
+    B->setQuery( myQuery );
+    //
     if ( B->lastError().isValid())
         {
+        qDebug() << "query for card " << CardName;
         qDebug() << "an error as occured during SQL query" << endl << B->lastError();
         return infos;
         }
@@ -198,23 +205,16 @@ for (int i=0; i<D->itemLib->rowCount(); i++)
         }
     }
 
-qDebug() << "*******************************************";
-foreach (QString s, ListPathImageCarte) {
-    qDebug() << s;
-}
-qDebug() << "*******************************************";
-
 // Get print options.
 QString PrintFormat;
 QSettings settings("./cfg.ini", QSettings::IniFormat);
 PrintFormat = settings.value("PrintFormat", "A4").toString();
 
-// Print procedure :
+// Paint procedure :
 int NbPage,k,x,y;
 float NbCarteParPage;
 QList<QImage *> Planches;
 QPainter PlanchePainter;
-
 
 if (PrintFormat == "A4")
    {
