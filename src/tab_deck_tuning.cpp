@@ -63,7 +63,6 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
 
     // model that keep stats of crypt capacity repartition
     CapacityModel = new StatsModel(11, 1, this);
-    //CapacityModel->setData( CapacityModel->index(0,0), 10, Qt::DisplayRole);
     CapacityModel->setHeaderData(0, Qt::Horizontal, "Capacity curve");
     CapacityView = new LinearChart();
     CapacityView->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -72,7 +71,6 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
 
     // model that keep stats of crypt grouping repartition
     GroupingModel = new StatsModel(6, 1, this);
-    //GroupingModel->setData( GroupingModel->index(0, 0), 10, Qt::DisplayRole);
     GroupingModel->setHeaderData(0, Qt::Horizontal, "Grouping repartition");
     GroupingView = new LinearChart();
     GroupingView->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -113,14 +111,15 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     ui->frameLibrary->layout()->addWidget( LibraryGalerie );
 
     // CONNECTIONS
-    /*connect the fake buttons nested in CardItem*/
+    /* connect the fake buttons nested in CardItem */
     connect( ui->PTreeViewDeckList, SIGNAL(request_increment(QModelIndex)), ModeleDeck, SLOT(IncrementCardItem(QModelIndex)) );
     connect( ui->PTreeViewDeckList, SIGNAL(request_decrement(QModelIndex)), ModeleDeck, SLOT(DecrementCardItem(QModelIndex)) );
     connect( ui->PTreeViewDeckList, SIGNAL(request_delete(QModelIndex))   , ModeleDeck, SLOT(RemoveCardITem(QModelIndex))    );
-    /*connect Stats model to changes of the deck model for syncs purposes*/
+    /* connect Stats model to changes of the deck model for syncs purposes */
     connect( ModeleDeck, SIGNAL( DeckChanged(QModelIndex) ), this, SLOT( refresh_stat_model(QModelIndex) ) );
     connect( ModeleDeck, SIGNAL( DeckCleared() ), this, SLOT( clear_stat_model() ) );
     connect( ModeleDeck, SIGNAL( DeckCleared() ), this, SLOT( clear_widgets()) );
+
 }
 
 void tab_deck_tuning::refresh_widgets()
@@ -237,6 +236,8 @@ void tab_deck_tuning::refresh_stat_model(QModelIndex parent_index)
                 else
                     qDebug() << "soucis de grouping ! group =" << group;
                 }
+            GroupingView->repaint();
+            CapacityView->repaint();
             }
 
         }

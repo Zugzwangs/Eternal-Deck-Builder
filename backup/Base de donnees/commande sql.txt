@@ -15,3 +15,19 @@ Requete Sql pour separer ds 2 tables les vampire des cartes :
 insert into VampireList (id,Name,Sets,ImageFile,Expansion,Rarity,Type,Clan,Grouping,Capacity,Discipline,Text,Artist) select id,Name,Sets,ImageFile,Expansion,Rarity,Type,Clan,Grouping,Capacity,Discipline,Text,Artist from VtesCardList where Type = 'Vampire' or Type = 'Imbued'
 
 insert into CardList (id,Name,Sets,ImageFile,Expansion,Rarity,Type,Clan,Capacity,Discipline,PCost,BCost,Text,Artist) select id,Name,Sets,ImageFile,Expansion,Rarity,Type,Clan,Capacity,Discipline,PCost,BCost,Text,Artist from VtesCardList where Type != 'Vampire' and Type !='Imbued'
+
+
+Requete sql pour remplacer toutes les occurences du partern P1 d'une colonne par une string P2
+
+Format de la requete pour recup toutes les occurrences de P1 d'une colonne:
+SELECT * FROM CardList  WHERE Discipline LIKE '%P1%'
+
+exemple :
+SELECT * FROM CardList  WHERE Discipline LIKE '%/%'
+
+Requete pour remplacer P2
+
+UPDATE CardList 
+	SET Discipline = REPLACE(Discipline, '/', ' ') 
+	WHERE Discipline LIKE '%/%'
+

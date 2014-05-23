@@ -399,7 +399,7 @@ void PDelegateCardResult::paint(QPainter *painter, const QStyleOptionViewItem &o
             QStringList ListeDisciplines = Disciplines.split(" ",QString::SkipEmptyParts);
             for (int i=0; i<ListeDisciplines.size(); i++)
                 {
-                int j = VtesInfo::DisciplinesList.indexOf( ListeDisciplines.at(i) );
+                int j = VtesInfo::DisciplinesSigleList.indexOf( ListeDisciplines.at(i) );
                 if ( j > 0 )
                     {
                     QRect target(rect.x()+i*26+10, rect.center().y()-12, 24, 24);

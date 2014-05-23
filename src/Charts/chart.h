@@ -38,7 +38,7 @@ protected:
   qreal myMinBound;
   qreal myMaxBound;
   qreal myOrder;
-  int myNbTicks;
+  int   myNbTicks;
   qreal myTickSize;
   qreal myAlpha;
   qreal myBeta;

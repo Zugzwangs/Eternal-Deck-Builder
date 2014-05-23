@@ -30,7 +30,6 @@ LinearChart::LinearChart( QWidget* parent ) : Chart( parent ) {
     myVerticalXAxis = false;
 }
 
-
 QList<int> LinearChart::barStyleColumns() const {
     QList<int> bars;
     for ( int c = 0;  c < this->model()->columnCount(); ++c ) {
@@ -40,7 +39,6 @@ QList<int> LinearChart::barStyleColumns() const {
     }
     return bars;
 }
-
 
 QList<int> LinearChart::calculateColumnsOrder() {
 
@@ -61,14 +59,12 @@ QList<int> LinearChart::calculateColumnsOrder() {
   return bars;
 }
 
-
 Marb::Types LinearChart::columnType( int column ) const {
     if ( myStyle.contains( column ) ) {
       return myStyle[ column ].type();
     }
     return ChartStyle().type();
 }
-
 
 QRectF LinearChart::itemRect( const QModelIndex& index ) const {
 
@@ -100,6 +96,46 @@ QRectF LinearChart::itemRect( const QModelIndex& index ) const {
   return r.normalized();
 }
 
+void LinearChart::updateRects() {
+
+  if ( this->model() == 0 ) {
+        return;
+  }
+  this->defineRects();
+  QFontMetrics metrics( this->font() );
+  this->HackedCalculateBounds();
+  myOrigin.setX( metrics.width( QString::number(-1 * myOrder) ) + metrics.width("0") * myNbDigits + myMarginX );
+  myValuesRect = QRect( myChartRect );
+  myValuesRect.setX( myOrigin.x() );
+  myX = qreal( myValuesRect.width() ) / ( this->model()->rowCount() );
+  this->setAlphaBeta();
+  qreal delta = myValuesRect.bottom() - ( myOrigin.y() + myMinBottomMargin );
+  if ( delta < 0 ) {
+    myValuesRect.setHeight( myValuesRect.height() + delta );
+    this->setAlphaBeta();
+  }
+  myTitleRect.moveTo( myChartRect.bottomLeft() );
+  myTitleRect.translate( ( myChartRect.width() - myTitleRect.width())/2, 20 );
+}
+
+void LinearChart::HackedCalculateBounds() {
+  myMinBound = 0;
+  myMaxBound = 10;
+  if ( myMaxBound == myMinBound ) {
+    ++myMaxBound;
+    --myMinBound;
+  }
+  myOrder = calculateOrder( 10 );
+  myTickSize = ( 10 ) / (myNbTicks - 1);
+  if ( myOrder >= 10 ) {
+    myNbDigits = 0;
+  } else if ( myOrder == 1 ) {
+    myNbDigits = 2;
+  } else {
+    int nbZero = QString::number(myOrder).count( "0" );
+    myNbDigits = nbZero + 2;
+  }
+}
 
 void LinearChart::paintChart( QPainter& painter ) {
 
@@ -114,6 +150,49 @@ void LinearChart::paintChart( QPainter& painter ) {
       this->paintLegend( painter );
 }
 
+void LinearChart::paintAxis( QPainter& painter) {
+
+    painter.save();
+    painter.setPen( QPen( QColor(Marb::LightGray), 1.5 ) );
+    paintXAxis(painter);
+    paintYAxis(painter);
+    painter.restore();
+}
+
+void LinearChart::paintXAxis( QPainter& painter ) {
+
+    QPoint p1( myOrigin.x(), myOrigin.y() );
+    QPoint p2( myChartRect.topRight().x(), myOrigin.y() );
+    painter.drawLine( p1, p2 );
+    qreal x = myX + myOrigin.x();
+    int i = 0;
+    while (i < this->model()->rowCount() ) {
+      QPoint p1( x, myOrigin.y() - 3  );
+      QPoint p2 = p1 + QPoint( 0, 6 );
+      painter.drawLine( p1, p2 );
+      ++i;
+      x += myX;
+    }
+}
+
+void LinearChart::paintYAxis( QPainter& painter ) {
+
+  QPoint p1( myOrigin.x(), myChartRect.y() );
+    QPoint p2 = p1 + QPoint( 0, myChartRect.height() );
+    painter.drawLine( p1, p2 );
+    painter.save();
+    QColor c = painter.pen().color();
+    c.setAlpha( 150 );
+    painter.setPen( QPen( c , 1 ) );
+    qreal y = myMinBound;
+    while ( y <= myMaxBound ) {
+        QPoint p1( myOrigin.x(), valueToPx(y)  );
+        QPoint p2 = p1 + QPoint( myValuesRect.width(), 0 );
+        painter.drawLine( p1, p2 );
+      y += myTickSize;
+    }
+    painter.restore();
+}
 
 void LinearChart::paintColumnLegend(QPainter &painter, int column, QPoint pos, int maxHeight) {
 
@@ -145,7 +224,6 @@ void LinearChart::paintColumnLegend(QPainter &painter, int column, QPoint pos, i
     }
     painter.restore();
 }
-
 
 void LinearChart::paintTextAxis( QPainter& painter) {
 
@@ -193,54 +271,6 @@ void LinearChart::paintTextAxis( QPainter& painter) {
     }
     painter.restore();
 }
-
-
-void LinearChart::paintAxis( QPainter& painter) {
-
-    painter.save();
-    painter.setPen( QPen( QColor(Marb::LightGray), 1.5 ) );
-    paintXAxis(painter);
-    paintYAxis(painter);
-    painter.restore();
-}
-
-
-void LinearChart::paintXAxis( QPainter& painter ) {
-
-    QPoint p1( myOrigin.x(), myOrigin.y() );
-    QPoint p2( myChartRect.topRight().x(), myOrigin.y() );
-    painter.drawLine( p1, p2 );
-    qreal x = myX + myOrigin.x();
-    int i = 0;
-    while (i < this->model()->rowCount() ) {
-      QPoint p1( x, myOrigin.y() - 3  );
-      QPoint p2 = p1 + QPoint( 0, 6 );
-      painter.drawLine( p1, p2 );
-      ++i;
-      x += myX;
-    }
-}
-
-
-void LinearChart::paintYAxis( QPainter& painter ) {
-
-  QPoint p1( myOrigin.x(), myChartRect.y() );
-    QPoint p2 = p1 + QPoint( 0, myChartRect.height() );
-    painter.drawLine( p1, p2 );
-    painter.save();
-    QColor c = painter.pen().color();
-    c.setAlpha( 150 );
-    painter.setPen( QPen( c , 1 ) );
-    qreal y = myMinBound;
-    while ( y <= myMaxBound ) {
-        QPoint p1( myOrigin.x(), valueToPx(y)  );
-        QPoint p2 = p1 + QPoint( myValuesRect.width(), 0 );
-        painter.drawLine( p1, p2 );
-      y += myTickSize;
-    }
-    painter.restore();
-}
-
 
 void LinearChart::paintValues( QPainter& painter, int column ) {
 
@@ -315,47 +345,4 @@ void LinearChart::paintValues( QPainter& painter, int column ) {
     }
   }
   painter.restore();
-}
-
-
-void LinearChart::updateRects() {
-
-  if ( this->model() == 0 ) {
-        return;
-  }
-  this->defineRects();
-  QFontMetrics metrics( this->font() );
-  this->HackedCalculateBounds();
-  myOrigin.setX( metrics.width( QString::number(-1 * myOrder) ) + metrics.width("0") * myNbDigits + myMarginX );
-  myValuesRect = QRect( myChartRect );
-  myValuesRect.setX( myOrigin.x() );
-  myX = qreal( myValuesRect.width() ) / ( this->model()->rowCount() );
-  this->setAlphaBeta();
-  qreal delta = myValuesRect.bottom() - ( myOrigin.y() + myMinBottomMargin );
-  if ( delta < 0 ) {
-    myValuesRect.setHeight( myValuesRect.height() + delta );
-    this->setAlphaBeta();
-  }
-  myTitleRect.moveTo( myChartRect.bottomLeft() );
-  myTitleRect.translate( ( myChartRect.width() - myTitleRect.width())/2, 20 );
-}
-
-
-void LinearChart::HackedCalculateBounds() {
-  myMinBound = 0;
-  myMaxBound = 10;
-  if ( myMaxBound == myMinBound ) {
-    ++myMaxBound;
-    --myMinBound;
-  }
-  myOrder = calculateOrder( 10 );
-  myTickSize = ( 10 ) / (myNbTicks - 1);
-  if ( myOrder >= 10 ) {
-    myNbDigits = 0;
-  } else if ( myOrder == 1 ) {
-    myNbDigits = 2;
-  } else {
-    int nbZero = QString::number(myOrder).count( "0" );
-    myNbDigits = nbZero + 2;
-  }
 }
