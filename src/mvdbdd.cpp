@@ -325,11 +325,11 @@ void PDelegateCardResult::paint(QPainter *painter, const QStyleOptionViewItem &o
             QString NomIconeTypeCarte;
             QRect rect(opt.rect);
             QString TypesCarte = index.data().toString();
-            QStringList ListeTypesCarte = TypesCarte.split(" / ",QString::SkipEmptyParts);
+            QStringList ListeTypesCarte = TypesCarte.split("/",QString::SkipEmptyParts);
             for (int i=0; i<ListeTypesCarte.size(); i++)
                 {
                 QRect target(rect.x()+i*26+10,rect.center().y()-12, 24, 24);
-                NomIconeTypeCarte = ListeTypesCarte.at(i) + ".gif";
+                NomIconeTypeCarte = ListeTypesCarte.at(i).trimmed() + ".gif";
                 QPixmap PixmapCourante(":/icons/type/" + NomIconeTypeCarte);
                 painter->drawPixmap(target, PixmapCourante);
                 }
