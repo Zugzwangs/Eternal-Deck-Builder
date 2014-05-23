@@ -523,8 +523,8 @@ void VipedViewer::mouseReleaseEvent(QMouseEvent * event)
     // change mousepointer
     QPoint pos = event->pos();
     int newValue = PointToValue(pos);
-    if ( newValue > myNbTicks+1 )
-        newValue = myNbTicks+1;
+    if ( newValue > myNbTicks-1 )
+        newValue = myNbTicks-1;
 
     setData(mySelectedSection, newValue );
 }
