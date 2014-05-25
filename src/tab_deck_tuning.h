@@ -46,6 +46,8 @@ private:
     QListView *cryptGalerie;
     QListView *LibraryGalerie;
     VipedViewer *DeckViped;
+    QTableView *DisciplineLibView;
+    QTableView *DisciplineCryptView;
 
     WidgetMetaMapper mapper;
 
@@ -53,7 +55,7 @@ private slots:
     void clear_widgets();
     void refresh_widgets();
     void clear_stat_model();
-    void sync_stats_model(QModelIndex new_item);
+    //void sync_stats_model(QModelIndex new_item);
     void refresh_stat_model(QModelIndex parent_index);
 
 signals:

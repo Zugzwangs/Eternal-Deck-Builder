@@ -248,7 +248,7 @@ void StatsModel::clearData(int columns, bool all)
             {
             for (int j=0; j<columnCount(); j++)
                 {
-                QModelIndex temp_index = index(i, columns);
+                QModelIndex temp_index = index(i, j);
                 if ( temp_index.isValid() )
                     {
                     setData( temp_index, 0, Qt::DisplayRole );

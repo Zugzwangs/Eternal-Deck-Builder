@@ -79,10 +79,50 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     GroupingView->setModel( GroupingModel );
     dynamic_cast<QGridLayout *>(ui->frameOverView->layout())->addWidget( GroupingView, 1, 1 );
 
-    // model that keep stats of disciplines spread
-    DisciplineLibModel   = new StatsModel(10, 1, this);
-    DisciplineCryptModel = new StatsModel(10, 1, this);
+    // models that keep stats of disciplines spread in the Library
+    DisciplineLibModel   = new StatsModel(1, VtesInfo::DisciplinesList.count(), this);
+    QString temp;
+    QModelIndex temp_index;
+    for (int i=0; i<VtesInfo::DisciplinesList.count(); i++)
+        {
+        temp = VtesInfo::DisciplinesSigleList[i];
+        temp_index = DisciplineLibModel->index(0, i);
+        DisciplineLibModel->setHeaderData(i, Qt::Horizontal, temp);
+        if ( temp_index.isValid() ){
+            DisciplineLibModel->setData( temp_index, QIcon(":/icons/disc/" + temp + ".png" ) , Qt::DecorationRole);
+            DisciplineLibModel->setData( temp_index, 0, Qt::DisplayRole );
+            }
+        }
+    DisciplineLibView = new QTableView(this);
+    DisciplineLibView->setModel(DisciplineLibModel);
+    DisciplineLibView->verticalHeader()->hide();
+    DisciplineLibView->horizontalHeader()->hide();
+    DisciplineLibView->setIconSize( QSize(45,45) );
+    dynamic_cast<QGridLayout *>( ui->disciplineLibrary->layout() )->addWidget( DisciplineLibView, 0, 0 );
 
+    // models that keep stats of disciplines spread in the Crypt
+    DisciplineCryptModel = new StatsModel(2, VtesInfo::DisciplinesSigleList.count(), this);
+    for (int i=0; i<VtesInfo::DisciplinesSigleList.count(); i++)
+        {
+        temp = VtesInfo::DisciplinesSigleList[i];
+        DisciplineCryptModel->setHeaderData(i, Qt::Horizontal, temp);
+        temp_index = DisciplineCryptModel->index(0, i);
+        if ( temp_index.isValid() ){
+            DisciplineCryptModel->setData( temp_index, QIcon(":/icons/disc/" + temp + ".png" ) , Qt::DecorationRole);
+            DisciplineCryptModel->setData( temp_index, 0, Qt::DisplayRole );
+            }
+        temp_index = DisciplineCryptModel->index(1, i);
+        if ( temp_index.isValid() ){
+            DisciplineCryptModel->setData( temp_index, QIcon(":/icons/disc/" + temp + "-sup.png" ) , Qt::DecorationRole);
+            DisciplineCryptModel->setData( temp_index, 0, Qt::DisplayRole );
+            }
+        }
+    DisciplineCryptView = new QTableView(this);
+    DisciplineCryptView->setModel(DisciplineCryptModel);
+    DisciplineCryptView->verticalHeader()->hide();
+    DisciplineCryptView->horizontalHeader()->hide();
+    DisciplineCryptView->setIconSize( QSize(45,45) );
+    dynamic_cast<QGridLayout *>( ui->disciplineCrypt->layout() )->addWidget( DisciplineCryptView, 0, 0 );
 
     // SETUP TAB CRYPT DETAILS
     cryptGalerie = new QListView();
@@ -123,7 +163,6 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     connect( ModeleDeck, SIGNAL( DeckChanged(QModelIndex) ), this, SLOT( refresh_stat_model(QModelIndex) ) );
     connect( ModeleDeck, SIGNAL( DeckCleared() ), this, SLOT( clear_stat_model() ) );
     connect( ModeleDeck, SIGNAL( DeckCleared() ), this, SLOT( clear_widgets()) );
-
 }
 
 void tab_deck_tuning::refresh_widgets()
@@ -161,12 +200,14 @@ void tab_deck_tuning::clear_stat_model()
     CardCostModel->clearData();
     CapacityModel->clearData();
     GroupingModel->clearData();
+    DisciplineCryptModel->clearData();
+    DisciplineLibModel->clearData();
 }
 
-void tab_deck_tuning::sync_stats_model( QModelIndex new_item )
-{// the deck model has been changed, so we update datas in the stats/overview model
-/*  TODO : fonction à reécrire !!! */
-}
+/*void tab_deck_tuning::sync_stats_model( QModelIndex new_item )
+{
+
+}*/
 
 void tab_deck_tuning::refresh_stat_model(QModelIndex parent_index)
 {
@@ -176,6 +217,8 @@ void tab_deck_tuning::refresh_stat_model(QModelIndex parent_index)
             {
             CardTypeModel->clearData(0);
             CardCostModel->clearData(0);
+            DisciplineLibModel->clearData(0, true);
+
             QStandardItem *current_stat_item;
             QStandardItem *current_item;
             QStandardItem *parent_item = ModeleDeck->itemFromIndex(parent_index);
@@ -187,8 +230,7 @@ void tab_deck_tuning::refresh_stat_model(QModelIndex parent_index)
 
                 // compute Card Type stats
                 QString TypesOfNewCard = current_item->data(VtesInfo::TypeRole).toString();
-                QStringList TypeList = TypesOfNewCard.split(" /*|*/ ", QString::SkipEmptyParts);
-                /* !!!!! BUG : le type Action Modifier se split en 2 => formater la BDD "type1|type2|..." */
+                QStringList TypeList = TypesOfNewCard.split("/", QString::SkipEmptyParts);
                 for ( int k=0; k<TypeList.count(); k++)
                     {
                     for (int j=0; j<VtesInfo::CardTypeList.count(); j++)
@@ -209,6 +251,17 @@ void tab_deck_tuning::refresh_stat_model(QModelIndex parent_index)
                 current_stat_item = CardCostModel->item(cost, 0);
                 current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+multiplicateur, Qt::DisplayRole );
 
+                // compute discipline spread stats
+                QStringList Disciplines = current_item->data(VtesInfo::DisciplineRole).toString().split(" ", QString::SkipEmptyParts);
+                for ( int k=0; k<Disciplines.count(); k++)
+                    {
+                    int DisciplineIndex = VtesInfo::DisciplinesSigleList.indexOf(Disciplines[k]);
+                    if (DisciplineIndex > -1 )
+                        {
+                        current_stat_item = DisciplineLibModel->item( 0, DisciplineIndex );
+                        current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+multiplicateur, Qt::DisplayRole );
+                        }
+                    }
                 }
             }
 
@@ -216,6 +269,8 @@ void tab_deck_tuning::refresh_stat_model(QModelIndex parent_index)
             {
             CapacityModel->clearData(0);
             GroupingModel->clearData(0);
+            DisciplineCryptModel->clearData(0, true);
+
             QStandardItem *current_stat_item;
             QStandardItem *current_item;
             QStandardItem *parent_item = ModeleDeck->itemFromIndex(parent_index);
@@ -239,11 +294,27 @@ void tab_deck_tuning::refresh_stat_model(QModelIndex parent_index)
                     current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+multiplicateur, Qt::DisplayRole );
                 else
                     qDebug() << "soucis de grouping ! group =" << group;
+
+                // compute discipline spread stats
+                QStringList Disciplines = current_item->data(VtesInfo::DisciplineRole).toString().split(" ", QString::SkipEmptyParts);
+                for ( int k=0; k<Disciplines.count(); k++)
+                    {
+                    int DisciplineIndex = VtesInfo::DisciplinesSigleList.indexOf(Disciplines[k]);
+                    if (DisciplineIndex > -1 )
+                        {
+                        current_stat_item = DisciplineCryptModel->item( 0, DisciplineIndex );
+                        current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+multiplicateur, Qt::DisplayRole );
+                        }
+                    else
+                        {
+
+                        }
+                    }
                 }
-            GroupingView->repaint();
-            CapacityView->repaint();
             }
 
+        GroupingView->repaint();
+        CapacityView->repaint();
         }
 }
 

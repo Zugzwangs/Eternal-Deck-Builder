@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_tab_deck_tuning_t {
-    QByteArrayData data[9];
-    char stringdata[123];
+    QByteArrayData data[7];
+    char stringdata[97];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,15 +34,12 @@ QT_MOC_LITERAL(1, 16, 13),
 QT_MOC_LITERAL(2, 30, 0),
 QT_MOC_LITERAL(3, 31, 15),
 QT_MOC_LITERAL(4, 47, 16),
-QT_MOC_LITERAL(5, 64, 16),
-QT_MOC_LITERAL(6, 81, 8),
-QT_MOC_LITERAL(7, 90, 18),
-QT_MOC_LITERAL(8, 109, 12)
+QT_MOC_LITERAL(5, 64, 18),
+QT_MOC_LITERAL(6, 83, 12)
     },
     "tab_deck_tuning\0clear_widgets\0\0"
     "refresh_widgets\0clear_stat_model\0"
-    "sync_stats_model\0new_item\0refresh_stat_model\0"
-    "parent_index\0"
+    "refresh_stat_model\0parent_index\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -52,7 +49,7 @@ static const uint qt_meta_data_tab_deck_tuning[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -60,18 +57,16 @@ static const uint qt_meta_data_tab_deck_tuning[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   39,    2, 0x08,
-       3,    0,   40,    2, 0x08,
-       4,    0,   41,    2, 0x08,
-       5,    1,   42,    2, 0x08,
-       7,    1,   45,    2, 0x08,
+       1,    0,   34,    2, 0x08,
+       3,    0,   35,    2, 0x08,
+       4,    0,   36,    2, 0x08,
+       5,    1,   37,    2, 0x08,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QModelIndex,    6,
-    QMetaType::Void, QMetaType::QModelIndex,    8,
 
        0        // eod
 };
@@ -84,8 +79,7 @@ void tab_deck_tuning::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 0: _t->clear_widgets(); break;
         case 1: _t->refresh_widgets(); break;
         case 2: _t->clear_stat_model(); break;
-        case 3: _t->sync_stats_model((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
-        case 4: _t->refresh_stat_model((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
+        case 3: _t->refresh_stat_model((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -116,13 +110,13 @@ int tab_deck_tuning::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 4;
     }
     return _id;
 }

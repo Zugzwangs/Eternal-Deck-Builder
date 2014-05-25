@@ -23,7 +23,6 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QScrollArea>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QVBoxLayout>
@@ -72,14 +71,12 @@ public:
     QVBoxLayout *verticalLayout;
     QFrame *disciplineCrypt;
     QGridLayout *gridLayout_3;
-    QSpacerItem *verticalSpacer;
     QFrame *frameCrypt;
     QVBoxLayout *verticalLayout_3;
     QWidget *tab_library;
     QVBoxLayout *verticalLayout_6;
     QFrame *disciplineLibrary;
     QGridLayout *gridLayout_4;
-    QSpacerItem *verticalSpacer_2;
     QFrame *frameLibrary;
     QVBoxLayout *verticalLayout_2;
 
@@ -308,10 +305,6 @@ public:
         disciplineCrypt->setFrameShadow(QFrame::Raised);
         gridLayout_3 = new QGridLayout(disciplineCrypt);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
-        verticalSpacer = new QSpacerItem(20, 373, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_3->addItem(verticalSpacer, 0, 0, 1, 1);
-
 
         verticalLayout->addWidget(disciplineCrypt);
 
@@ -340,10 +333,6 @@ public:
         disciplineLibrary->setFrameShadow(QFrame::Raised);
         gridLayout_4 = new QGridLayout(disciplineLibrary);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
-        verticalSpacer_2 = new QSpacerItem(20, 373, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_4->addItem(verticalSpacer_2, 0, 0, 1, 1);
-
 
         verticalLayout_6->addWidget(disciplineLibrary);
 
