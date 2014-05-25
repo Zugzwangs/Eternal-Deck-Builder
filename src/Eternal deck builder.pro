@@ -18,7 +18,6 @@ SOURCES +=  main.cpp\
             mainwindow.cpp \
             Global.cpp \
             Sauvegarde.cpp \
-            PWidget.cpp \
             dialogoptions.cpp \
             tab_search_library.cpp \
             tab_search_crypt.cpp \
@@ -39,12 +38,13 @@ SOURCES +=  main.cpp\
             playground.cpp \
             mvddeck.cpp \
             mvdbdd.cpp \
-    Widgets/bloodbank.cpp
+    Widgets/bloodbank.cpp \
+    Widgets/disciplinebutton.cpp \
+    Widgets/vipedviewer.cpp
 
 HEADERS  += mainwindow.h \
             Global.h \
             Sauvegarde.h \
-            PWidget.h \
             dialogoptions.h \
             tab_search_library.h \
             tab_search_crypt.h \
@@ -66,7 +66,9 @@ HEADERS  += mainwindow.h \
             playground.h \
             mvddeck.h \
             mvdbdd.h \
-    Widgets/bloodbank.h
+    Widgets/bloodbank.h \
+    Widgets/disciplinebutton.h \
+    Widgets/vipedviewer.h
 
 FORMS    += mainwindow.ui \
             dialogoptions.ui \

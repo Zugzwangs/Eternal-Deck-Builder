@@ -1,31 +1,8 @@
-#ifndef PWIDGET_H
-#define PWIDGET_H
+#ifndef VIPEDVIEWER_H
+#define VIPEDVIEWER_H
 
 #include <QFrame>
 #include <QMouseEvent>
-#include <QPushButton>
-
-// /////////////////////////////////////////////////////////////////////////////////////////
-//
-class DisciplineButton : public QPushButton
-{
-public:
-    explicit DisciplineButton(QWidget *parent = 0);
-    void setupDiscipline(QString dis);
-    void resetState();
-    QString get_sql_request();
-
-protected:
-    void paintEvent(QPaintEvent *e);
-    void nextCheckState();
-
-private:
-    int state;
-    enum state_list{ RequestNothing, RequestDiscipline, RequestNotDiscipline };
-    QString discipline;
-    QPixmap icone;
-    QString sql_request;
-};
 
 class VipedViewer : public QFrame
 {
@@ -87,5 +64,4 @@ signals:
     void dataChanged(QString key, int value);
 };
 
-#endif // PWIDGET_H
-
+#endif // VIPEDVIEWER_H

@@ -1,7 +1,7 @@
 #include "tab_search_crypt.h"
 #include "ui_tab_search_crypt.h"
 
-#include "PWidget.h"
+#include "Widgets/disciplinebutton.h"
 
 tab_search_crypt::tab_search_crypt(QWidget *parent) : QScrollArea(parent), ui(new Ui::tab_search_crypt)
 {

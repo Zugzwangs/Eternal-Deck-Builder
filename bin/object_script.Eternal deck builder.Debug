@@ -3,7 +3,6 @@ INPUT(
 ./debug\mainwindow.o
 ./debug\Global.o
 ./debug\Sauvegarde.o
-./debug\PWidget.o
 ./debug\dialogoptions.o
 ./debug\tab_search_library.o
 ./debug\tab_search_crypt.o
@@ -25,9 +24,10 @@ INPUT(
 ./debug\mvddeck.o
 ./debug\mvdbdd.o
 ./debug\bloodbank.o
+./debug\disciplinebutton.o
+./debug\vipedviewer.o
 ./debug\qrc_res.o
 ./debug\moc_mainwindow.o
-./debug\moc_PWidget.o
 ./debug\moc_dialogoptions.o
 ./debug\moc_tab_search_library.o
 ./debug\moc_tab_search_crypt.o
@@ -47,4 +47,5 @@ INPUT(
 ./debug\moc_mvddeck.o
 ./debug\moc_mvdbdd.o
 ./debug\moc_bloodbank.o
+./debug\moc_vipedviewer.o
 );

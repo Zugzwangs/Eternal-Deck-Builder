@@ -7,7 +7,7 @@
 #include <QTableView>
 
 #include "mvddeck.h"
-#include "PWidget.h"
+#include "Widgets/vipedviewer.h"
 #include "Charts/piechart.h"
 #include "Charts/linearchart.h"
 #include "Charts/radialchart.h"

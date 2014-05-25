@@ -3,7 +3,6 @@ INPUT(
 ./release\mainwindow.o
 ./release\Global.o
 ./release\Sauvegarde.o
-./release\PWidget.o
 ./release\dialogoptions.o
 ./release\tab_search_library.o
 ./release\tab_search_crypt.o
@@ -25,9 +24,10 @@ INPUT(
 ./release\mvddeck.o
 ./release\mvdbdd.o
 ./release\bloodbank.o
+./release\disciplinebutton.o
+./release\vipedviewer.o
 ./release\qrc_res.o
 ./release\moc_mainwindow.o
-./release\moc_PWidget.o
 ./release\moc_dialogoptions.o
 ./release\moc_tab_search_library.o
 ./release\moc_tab_search_crypt.o
@@ -47,4 +47,5 @@ INPUT(
 ./release\moc_mvddeck.o
 ./release\moc_mvdbdd.o
 ./release\moc_bloodbank.o
+./release\moc_vipedviewer.o
 );
