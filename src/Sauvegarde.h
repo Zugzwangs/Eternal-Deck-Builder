@@ -15,12 +15,12 @@
 /*    */
 /************************************************************************************/
 
-class FFFF
+class DeckTranslator
 {
 
 public:
-    FFFF();
-    FFFF(PTreeModel* DeckModel, QSqlQueryModel* BddModel);
+    DeckTranslator();
+    DeckTranslator(PTreeModel* DeckModel, QSqlQueryModel* BddModel);
     void setDeckModel(PTreeModel* DeckModel);
     void setBddModel(QSqlQueryModel* BddModel);
 

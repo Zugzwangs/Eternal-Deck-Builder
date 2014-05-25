@@ -68,7 +68,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 //  SETUP MANAGER IMPORT/EXPORT DECK DATAS
 
     queryModel = new QSqlQueryModel;
-    inOutDecksManager = FFFF(test_tuning->ModeleDeck, queryModel );
+    inOutDecksManager = DeckTranslator(test_tuning->ModeleDeck, queryModel );
 
 // ///////////////////////////////////////////////
 // DEFINITION DES CONNEXIONS

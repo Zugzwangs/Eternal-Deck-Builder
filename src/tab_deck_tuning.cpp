@@ -83,6 +83,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     DisciplineLibModel   = new StatsModel(10, 1, this);
     DisciplineCryptModel = new StatsModel(10, 1, this);
 
+
     // SETUP TAB CRYPT DETAILS
     cryptGalerie = new QListView();
     cryptGalerie->setFixedHeight(450);

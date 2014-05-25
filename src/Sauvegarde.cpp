@@ -10,29 +10,29 @@
 #include <QPrinter>
 #include <QSqlQuery>
 
-FFFF::FFFF()
+DeckTranslator::DeckTranslator()
 {
    D = NULL;
    B = NULL;
 }
 
-FFFF::FFFF(PTreeModel* DeckModel, QSqlQueryModel* BddModel)
+DeckTranslator::DeckTranslator(PTreeModel* DeckModel, QSqlQueryModel* BddModel)
 {
     D = DeckModel;
     B = BddModel;
 }
 
-void FFFF::setDeckModel(PTreeModel* DeckModel)
+void DeckTranslator::setDeckModel(PTreeModel* DeckModel)
 {
     D = DeckModel;
 }
 
-void FFFF::setBddModel(QSqlQueryModel *BddModel)
+void DeckTranslator::setBddModel(QSqlQueryModel *BddModel)
 {
     B = BddModel;
 }
 
-QStringList FFFF::queryCardsInfo( const QString CardName, const QString TableName )
+QStringList DeckTranslator::queryCardsInfo( const QString CardName, const QString TableName )
 {
     QStringList infos = QStringList();
     QSqlQuery myQuery;
@@ -63,7 +63,7 @@ QStringList FFFF::queryCardsInfo( const QString CardName, const QString TableNam
     return infos;
 }
 
-bool FFFF::deckModelToEdb( QString filePath )
+bool DeckTranslator::deckModelToEdb( QString filePath )
 {
     // open file in write mode and put the xml stream on it
     QFile file(filePath);
@@ -121,7 +121,7 @@ bool FFFF::deckModelToEdb( QString filePath )
     return true;
 }
 
-bool FFFF::EdbToDeckModel( QString filePath )
+bool DeckTranslator::EdbToDeckModel( QString filePath )
 {
     // open file in read mode and put the xml stream on it
     QFile file(filePath);
@@ -177,7 +177,7 @@ bool FFFF::EdbToDeckModel( QString filePath )
     return true;
 }
 
-bool FFFF::deckModelToPDF( QString filePath )
+bool DeckTranslator::deckModelToPDF( QString filePath )
 {
 int NbEx;
 PathProvider path_list;
