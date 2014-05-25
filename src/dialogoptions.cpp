@@ -20,34 +20,31 @@ void DialogOptions::QuitWithChange()
 {
 if (SaveOptions())
     {
-     qDebug() << "QuitWithChange et je suis dans le TRUE";
     }
 else
     {
-     qDebug() << "QuitWithChange et je suis dans le FALSE";
     }
 
  this->close();
 }
+
 void DialogOptions::QuitWithoutchange()
 {
- qDebug() << "QuitWithoutchange";
  this->close();
 }
+
 void DialogOptions::ApplyChange()
 {
  if (SaveOptions())
      {
-      qDebug() << "ApplyChange et je suis dans le TRUE";
      }
  else
      {
-      qDebug() << "ApplyChange et je suis dans le FALSE";
      }
 }
+
 bool DialogOptions::SaveOptions()
 {
- qDebug() << "SaveOptions";
  QSettings settings("./cfg.ini", QSettings::IniFormat);
 
  if (this->ui->rBA4->isChecked())
@@ -57,6 +54,7 @@ bool DialogOptions::SaveOptions()
 
  return(true);
 }
+
 void DialogOptions::LoadOptions()
 {
  QSettings settings("./cfg.ini", QSettings::IniFormat);

@@ -23,9 +23,7 @@
 #include <QScrollBar>
 #include <QPainter>
 #include <QPaintEvent>
-
 #include <QStandardItem>
-
 
 
 MarbAbstractItemView::MarbAbstractItemView(QWidget *parent) : QAbstractItemView( parent ),

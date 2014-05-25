@@ -1,5 +1,7 @@
 #include <QDebug>
 #include <QStringList>
+#include <QNetworkReply>
+
 #include "update_manager.h"
 
 
@@ -31,8 +33,8 @@ void update_manager::authentification(QNetworkReply* reply, QAuthenticator* auth
 
 void update_manager::erreur(QNetworkReply::NetworkError code)
 {
-    // on signal qu'une erreur s'est produite
-    qDebug() << "connection fail";
+    // on signal qu'une erreur s'est produit
+    qDebug() << "update_manager error code n°" << code ;
 }
 
 // requête d'une image de carte au serveur

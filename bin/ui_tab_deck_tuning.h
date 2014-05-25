@@ -365,7 +365,7 @@ public:
 
         retranslateUi(tab_deck_tuning);
 
-        tab_details->setCurrentIndex(0);
+        tab_details->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(tab_deck_tuning);

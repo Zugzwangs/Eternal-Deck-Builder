@@ -259,32 +259,33 @@ else
         }
     }
 
-//On crée la page de garde et on l'imprime:
-//QString html;
-//QWebView webView;
-//webView.setHtml(html);
-//webView.print(&printer);
+    //On crée la page de garde et on l'imprime:
+    //QString html;
+    //QWebView webView;
+    //webView.setHtml(html);
+    //webView.print(&printer);
 
-//Maitenant on imprime les planches que l'on a créé :
-QPrinter DeckPrinter(QPrinter::ScreenResolution);
-QPainter PrintPainter;
+    //Maitenant on imprime les planches que l'on a créé :
+    QPrinter DeckPrinter(QPrinter::ScreenResolution);
+    QPainter PrintPainter;
 
-DeckPrinter.setOrientation(QPrinter::Landscape);
-if ( PrintFormat == "A4" )
-    DeckPrinter.setPaperSize(QPrinter::A4);
-else
-    DeckPrinter.setPaperSize(QPrinter::A3);
-DeckPrinter.setOutputFormat(QPrinter::PdfFormat);
-DeckPrinter.setOutputFileName( filePath );
-DeckPrinter.setPageMargins(10,10,0,0,QPrinter::Millimeter);
-DeckPrinter.setResolution(150);
+    DeckPrinter.setOrientation(QPrinter::Landscape);
+    if ( PrintFormat == "A4" )
+        DeckPrinter.setPaperSize(QPrinter::A4);
+    else
+        DeckPrinter.setPaperSize(QPrinter::A3);
+    DeckPrinter.setOutputFormat(QPrinter::PdfFormat);
+    DeckPrinter.setOutputFileName( filePath );
+    DeckPrinter.setPageMargins(10,10,0,0,QPrinter::Millimeter);
+    DeckPrinter.setResolution(150);
 
-PrintPainter.begin(&DeckPrinter);
-for(int i=0; i<Planches.count(); i++)
-    {
-    PrintPainter.drawImage( QPoint(0,0), *Planches.at(i) );
-    DeckPrinter.newPage();
-    }
-PrintPainter.end();
+    PrintPainter.begin(&DeckPrinter);
+    for(int i=0; i<Planches.count(); i++)
+        {
+        PrintPainter.drawImage( QPoint(0,0), *Planches.at(i) );
+        DeckPrinter.newPage();
+        }
+    PrintPainter.end();
 
+    return true;
 }

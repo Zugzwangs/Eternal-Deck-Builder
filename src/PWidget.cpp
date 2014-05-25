@@ -1,52 +1,9 @@
 #include "PWidget.h"
 #include "mainwindow.h"
-#include <QDrag>
+
 #include <QStyle>
 
 #define PI 3.14159265
-
-// /////////////////////////////////////////////////////////////////////////////////////////
-// Distributeur de blood
-PFrame::PFrame(QWidget *parent) : QFrame(parent)
-{
-    setObjectName("bourse");
-    setGeometry(1170,0,116,94);
-    show();
-    setVisible(true);
-    setFrameStyle(QFrame::Sunken | QFrame::Box);
-    setLineWidth(2);
-    //setStyleSheet("background-image: url(" + QCoreApplication::applicationDirPath() + "/Images/bourse.png)");
-    //BloodPxm = new QPixmap(QCoreApplication::applicationDirPath() + "/Images/Blood.png");
-}
-
-void PFrame::mousePressEvent(QMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton)
-        { startPos = event->pos(); }
-}
-
-void PFrame::mouseMoveEvent(QMouseEvent *event)
-{
-    if(event->buttons() & Qt::LeftButton)
-    {
-        int distance = (event->pos() - startPos).manhattanLength();
-        if (distance >= QApplication::startDragDistance())
-        { startDrag(); }
-    }
-}
-
-void PFrame::startDrag()
-{
-    //QImage IconeDrag;
-    QDrag *Drag = new QDrag(this);
-    QMimeData *mimeData = new QMimeData;
-    mimeData->setText("Blood Marqueur");
-    mimeData->setImageData(*BloodPxm);
-    Drag->setPixmap(*BloodPxm);
-    Drag->setHotSpot(QPoint(20,20));
-    Drag->setMimeData(mimeData);
-    Drag->exec(Qt::CopyAction);
-}
 
 // /////////////////////////////////////////////////////////////////////////////////////////
 // Widget symbolisant une discipline
@@ -288,7 +245,6 @@ void VipedViewer::updateRects()
     // the Chart's rect is widget's rect reduced by Margins values
     myChartRect = QRect( myMarginX, myMarginY, (rect().width()-2*myMarginX), (rect().height()-2*myMarginY) );
     // the Title rect lay the entire bottom of Chart's rect
-    int h = 0;
     if ( myTitle != "")
         {
         QFontMetrics metrics( font() );
@@ -512,11 +468,11 @@ void VipedViewer::mousePressEvent(QMouseEvent * event)
     mySelectedSection = i.key();
     // change mousepointer
 }
-
+/*
 void VipedViewer::mouseMoveEvent(QMouseEvent * event)
 {
 
-}
+}*/
 
 void VipedViewer::mouseReleaseEvent(QMouseEvent * event)
 {

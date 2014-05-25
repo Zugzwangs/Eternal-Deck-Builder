@@ -154,7 +154,7 @@ void MainWindow::OpenDeck()
     if ( fileName.isEmpty() )
         return;
 
-    if ( inOutDecksManager.EdbToDeckModel( fileName ) );
+    if ( inOutDecksManager.EdbToDeckModel( fileName ) )
         emit DeckLoaded();
 }
 
@@ -197,12 +197,10 @@ void MainWindow::CloseDeck()
         }
 }
 
-
 void MainWindow::NewDeck()
 {
     CloseDeck();
 }
-
 
 void MainWindow::OuvrirMenuOption()
 {
@@ -211,7 +209,6 @@ void MainWindow::OuvrirMenuOption()
      // On rend visible et modale notre fenêtre avec la méthode exec()
      Options.exec();
 }
-
 
 MainWindow::~MainWindow()
 {

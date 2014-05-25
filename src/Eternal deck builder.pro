@@ -38,7 +38,8 @@ SOURCES +=  main.cpp\
             Statistic.cpp \
             playground.cpp \
             mvddeck.cpp \
-            mvdbdd.cpp
+            mvdbdd.cpp \
+    Widgets/bloodbank.cpp
 
 HEADERS  += mainwindow.h \
             Global.h \
@@ -64,7 +65,8 @@ HEADERS  += mainwindow.h \
             Statistic.h \
             playground.h \
             mvddeck.h \
-            mvdbdd.h
+            mvdbdd.h \
+    Widgets/bloodbank.h
 
 FORMS    += mainwindow.ui \
             dialogoptions.ui \

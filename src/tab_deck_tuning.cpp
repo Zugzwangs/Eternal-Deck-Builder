@@ -40,7 +40,6 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     ui->frame_viped->layout()->addWidget(DeckViped);
     connect( DeckViped, SIGNAL(dataChanged(QString, int)), ModeleDeck, SLOT(setVipedMeta(QString,int))  );
 
-
     // model that keep stats of card's types repartition
     CardTypeModel = new StatsModel(VtesInfo::CardTypeList.count(), 1, this);
     CardTypeView = new PieChart();
@@ -79,6 +78,10 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     GroupingView->setColumnStyle( 0, style );
     GroupingView->setModel( GroupingModel );
     dynamic_cast<QGridLayout *>(ui->frameOverView->layout())->addWidget( GroupingView, 1, 1 );
+
+    // model that keep stats of disciplines spread
+    DisciplineLibModel   = new StatsModel(10, 1, this);
+    DisciplineCryptModel = new StatsModel(10, 1, this);
 
     // SETUP TAB CRYPT DETAILS
     cryptGalerie = new QListView();

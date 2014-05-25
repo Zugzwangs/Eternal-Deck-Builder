@@ -1,19 +1,19 @@
 #include "tab_gold_fich.h"
 #include "ui_tab_gold_fich.h"
 
-#include "PWidget.h"
+#include "Widgets/bloodbank.h"
 
 tab_gold_fich::tab_gold_fich(QWidget *parent) : QScrollArea(parent), ui(new Ui::tab_gold_fich)
 {
     ui->setupUi(this);
 
-    PFrame* Bourse = new PFrame(this);
+    BloodBank* Bourse = new BloodBank(this);
     TabledeJeu = new PGraphicsView(this);
     Scenedejeu = new PGraphicsScene();
     TabledeJeu->setScene(Scenedejeu);
 }
 
-void tab_gold_fich::initialisation(QString path) //rename in setPaths ??
+void tab_gold_fich::initialisation(QString path)
 {
    PathCartes = path;
 

@@ -35,6 +35,8 @@ private:
     StatsModel *CardCostModel;
     StatsModel *CapacityModel;
     StatsModel *GroupingModel;
+    StatsModel *DisciplineLibModel;
+    StatsModel *DisciplineCryptModel;
 
     // Views
     PieChart *CardTypeView;

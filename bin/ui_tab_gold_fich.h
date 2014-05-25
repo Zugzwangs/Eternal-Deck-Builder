@@ -28,11 +28,11 @@ public:
     {
         if (tab_gold_fich->objectName().isEmpty())
             tab_gold_fich->setObjectName(QStringLiteral("tab_gold_fich"));
-        tab_gold_fich->resize(978, 642);
+        tab_gold_fich->resize(1027, 698);
         tab_gold_fich->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 976, 640));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1025, 696));
         tab_gold_fich->setWidget(scrollAreaWidgetContents);
 
         retranslateUi(tab_gold_fich);

@@ -2,30 +2,8 @@
 #define PWIDGET_H
 
 #include <QFrame>
-#include <QLabel>
 #include <QMouseEvent>
-#include <QApplication>
 #include <QPushButton>
-
-// /////////////////////////////////////////////////////////////////////////////////////////
-// Distributeur de blood
-
-class PFrame : public QFrame
-{
-   //Q_OBJECT
-
-public:
-    explicit PFrame(QWidget *parent = 0);
-
-protected:
-    void mousePressEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
-
-private:
-    void startDrag();
-    QPixmap *BloodPxm;
-    QPoint startPos;
-};
 
 // /////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -68,7 +46,7 @@ protected:
     virtual void paintEvent(QPaintEvent * event);
     virtual void resizeEvent(QResizeEvent * event);
     virtual void mousePressEvent(QMouseEvent * event);
-    virtual void mouseMoveEvent(QMouseEvent * event);
+    //virtual void mouseMoveEvent(QMouseEvent * event);
     virtual void mouseReleaseEvent(QMouseEvent * event);
 
 private:
