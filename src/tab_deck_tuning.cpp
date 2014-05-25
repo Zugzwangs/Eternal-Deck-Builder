@@ -299,15 +299,16 @@ void tab_deck_tuning::refresh_stat_model(QModelIndex parent_index)
                 QStringList Disciplines = current_item->data(VtesInfo::DisciplineRole).toString().split(" ", QString::SkipEmptyParts);
                 for ( int k=0; k<Disciplines.count(); k++)
                     {
-                    int DisciplineIndex = VtesInfo::DisciplinesSigleList.indexOf(Disciplines[k]);
-                    if (DisciplineIndex > -1 )
+                    int DisciplineIndex = VtesInfo::DisciplinesSigleList.indexOf( Disciplines[k].toLower() );
+                    if ( DisciplineIndex > -1 && Disciplines[k] < Disciplines[k].toLower() )
                         {
-                        current_stat_item = DisciplineCryptModel->item( 0, DisciplineIndex );
+                        current_stat_item = DisciplineCryptModel->item( 1, DisciplineIndex );
                         current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+multiplicateur, Qt::DisplayRole );
                         }
                     else
                         {
-
+                        current_stat_item = DisciplineCryptModel->item( 0, DisciplineIndex );
+                        current_stat_item->setData( current_stat_item->data(Qt::DisplayRole).toInt()+multiplicateur, Qt::DisplayRole );
                         }
                     }
                 }
