@@ -113,6 +113,7 @@ public:
 
         tab_details = new QTabWidget(scrollAreaWidgetContents);
         tab_details->setObjectName(QStringLiteral("tab_details"));
+        tab_details->setMinimumSize(QSize(0, 200));
         tab_details->setTabPosition(QTabWidget::North);
         tab_details->setTabShape(QTabWidget::Rounded);
         tab_details->setElideMode(Qt::ElideNone);
@@ -300,9 +301,9 @@ public:
         sizePolicy3.setHeightForWidth(disciplineCrypt->sizePolicy().hasHeightForWidth());
         disciplineCrypt->setSizePolicy(sizePolicy3);
         disciplineCrypt->setMinimumSize(QSize(0, 260));
-        disciplineCrypt->setMaximumSize(QSize(16777215, 400));
-        disciplineCrypt->setFrameShape(QFrame::StyledPanel);
-        disciplineCrypt->setFrameShadow(QFrame::Raised);
+        disciplineCrypt->setMaximumSize(QSize(16777215, 280));
+        disciplineCrypt->setFrameShape(QFrame::NoFrame);
+        disciplineCrypt->setFrameShadow(QFrame::Plain);
         gridLayout_3 = new QGridLayout(disciplineCrypt);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
 
@@ -328,9 +329,9 @@ public:
         sizePolicy3.setHeightForWidth(disciplineLibrary->sizePolicy().hasHeightForWidth());
         disciplineLibrary->setSizePolicy(sizePolicy3);
         disciplineLibrary->setMinimumSize(QSize(0, 170));
-        disciplineLibrary->setMaximumSize(QSize(16777215, 400));
-        disciplineLibrary->setFrameShape(QFrame::StyledPanel);
-        disciplineLibrary->setFrameShadow(QFrame::Raised);
+        disciplineLibrary->setMaximumSize(QSize(16777215, 170));
+        disciplineLibrary->setFrameShape(QFrame::NoFrame);
+        disciplineLibrary->setFrameShadow(QFrame::Plain);
         gridLayout_4 = new QGridLayout(disciplineLibrary);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
 

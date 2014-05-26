@@ -80,7 +80,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     dynamic_cast<QGridLayout *>(ui->frameOverView->layout())->addWidget( GroupingView, 1, 1 );
 
     // models that keep stats of disciplines spread in the Library
-    DisciplineLibModel   = new StatsModel(1, VtesInfo::DisciplinesList.count(), this);
+    DisciplineLibModel   = new StatsDisciplineModel(1, VtesInfo::DisciplinesList.count(), this);
     QString temp;
     QModelIndex temp_index;
     for (int i=0; i<VtesInfo::DisciplinesList.count(); i++)
@@ -89,40 +89,63 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
         temp_index = DisciplineLibModel->index(0, i);
         DisciplineLibModel->setHeaderData(i, Qt::Horizontal, temp);
         if ( temp_index.isValid() ){
-            DisciplineLibModel->setData( temp_index, QIcon(":/icons/disc/" + temp + ".png" ) , Qt::DecorationRole);
+            DisciplineLibModel->setData( temp_index, ":/icons/disc/" + temp + ".png" , Qt::UserRole);
             DisciplineLibModel->setData( temp_index, 0, Qt::DisplayRole );
             }
         }
     DisciplineLibView = new QTableView(this);
     DisciplineLibView->setModel(DisciplineLibModel);
+    DisciplineDelegate *LibDisciplineDelegate = new DisciplineDelegate(DisciplineLibView);
+    DisciplineLibView->setItemDelegate( LibDisciplineDelegate  );
     DisciplineLibView->verticalHeader()->hide();
     DisciplineLibView->horizontalHeader()->hide();
-    DisciplineLibView->setIconSize( QSize(45,45) );
+    DisciplineLibView->setRowHeight(0, 115);
+    DisciplineLibView->setFrameStyle(QFrame::NoFrame);
+    for (int i=0; i<DisciplineLibModel->columnCount(); i++)
+        {
+        DisciplineLibView->setColumnWidth(i, 45);
+        DisciplineLibView->setColumnHidden(i , true);
+        }
+    DisciplineLibView->setShowGrid(false);
+    DisciplineLibView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     dynamic_cast<QGridLayout *>( ui->disciplineLibrary->layout() )->addWidget( DisciplineLibView, 0, 0 );
+    connect( DisciplineLibModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(refresh_disciplinesLib_view(QStandardItem *)) );
 
     // models that keep stats of disciplines spread in the Crypt
-    DisciplineCryptModel = new StatsModel(2, VtesInfo::DisciplinesSigleList.count(), this);
+    DisciplineCryptModel = new StatsDisciplineModel(2, VtesInfo::DisciplinesSigleList.count(), this);
     for (int i=0; i<VtesInfo::DisciplinesSigleList.count(); i++)
         {
         temp = VtesInfo::DisciplinesSigleList[i];
         DisciplineCryptModel->setHeaderData(i, Qt::Horizontal, temp);
         temp_index = DisciplineCryptModel->index(0, i);
         if ( temp_index.isValid() ){
-            DisciplineCryptModel->setData( temp_index, QIcon(":/icons/disc/" + temp + ".png" ) , Qt::DecorationRole);
+            DisciplineCryptModel->setData( temp_index, ":/icons/disc/" + temp + ".png" , Qt::UserRole);
             DisciplineCryptModel->setData( temp_index, 0, Qt::DisplayRole );
             }
         temp_index = DisciplineCryptModel->index(1, i);
         if ( temp_index.isValid() ){
-            DisciplineCryptModel->setData( temp_index, QIcon(":/icons/disc/" + temp + "-sup.png" ) , Qt::DecorationRole);
+            DisciplineCryptModel->setData( temp_index, ":/icons/disc/" + temp + "-sup.png" , Qt::UserRole);
             DisciplineCryptModel->setData( temp_index, 0, Qt::DisplayRole );
             }
         }
-    DisciplineCryptView = new QTableView(this);
-    DisciplineCryptView->setModel(DisciplineCryptModel);
+    DisciplineCryptView = new QTableView( this );
+    DisciplineCryptView->setModel( DisciplineCryptModel );
+    DisciplineDelegate *CryptDisciplineDelegate = new DisciplineDelegate(DisciplineCryptView);
+    DisciplineCryptView->setItemDelegate( CryptDisciplineDelegate  );
     DisciplineCryptView->verticalHeader()->hide();
     DisciplineCryptView->horizontalHeader()->hide();
-    DisciplineCryptView->setIconSize( QSize(45,45) );
+    DisciplineCryptView->setRowHeight(0, 115);
+    DisciplineCryptView->setRowHeight(1, 115);
+    DisciplineCryptView->setFrameStyle(QFrame::NoFrame);
+    for (int i=0; i<DisciplineCryptModel->columnCount(); i++)
+        {
+        DisciplineCryptView->setColumnWidth(i, 45);
+        DisciplineCryptView->setColumnHidden(i , true);
+        }
+    DisciplineCryptView->setShowGrid(false);
+    DisciplineCryptView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     dynamic_cast<QGridLayout *>( ui->disciplineCrypt->layout() )->addWidget( DisciplineCryptView, 0, 0 );
+    connect( DisciplineCryptModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(refresh_disciplinesCrypt_view(QStandardItem *)) );
 
     // SETUP TAB CRYPT DETAILS
     cryptGalerie = new QListView();
@@ -165,6 +188,34 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     connect( ModeleDeck, SIGNAL( DeckCleared() ), this, SLOT( clear_widgets()) );
 }
 
+void tab_deck_tuning::refresh_disciplinesLib_view(QStandardItem *currentItem)
+{
+    if ( !currentItem )
+        return;
+
+    //if an item in the discipline spread View holds a null value, we need to hide the corresponding column
+    int c = currentItem->index().column();
+
+     if ( currentItem->data(Qt::DisplayRole).toInt() == 0 )
+        DisciplineLibView->setColumnHidden(c, true);
+    else
+        DisciplineLibView->setColumnHidden(c, false);
+}
+
+void tab_deck_tuning::refresh_disciplinesCrypt_view(QStandardItem *currentItem)
+{
+    if ( !currentItem )
+        return;
+
+    //if an item in the discipline spread View holds a null value, we need to hide the corresponding column
+    int c = currentItem->index().column();
+
+     if ( currentItem->data(Qt::DisplayRole).toInt() == 0 )
+        DisciplineCryptView->setColumnHidden(c, true);
+    else
+        DisciplineCryptView->setColumnHidden(c, false);
+}
+
 void tab_deck_tuning::refresh_widgets()
 {   //get meta value from model and set widgets with !
 
@@ -203,11 +254,6 @@ void tab_deck_tuning::clear_stat_model()
     DisciplineCryptModel->clearData();
     DisciplineLibModel->clearData();
 }
-
-/*void tab_deck_tuning::sync_stats_model( QModelIndex new_item )
-{
-
-}*/
 
 void tab_deck_tuning::refresh_stat_model(QModelIndex parent_index)
 {

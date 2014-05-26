@@ -44,6 +44,7 @@ private:
     QString PathImages;
 };
 
+
 class PDelegateCardResult : public QStyledItemDelegate
 {
     Q_OBJECT

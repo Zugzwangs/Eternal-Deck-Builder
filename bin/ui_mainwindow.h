@@ -49,6 +49,7 @@ public:
     QMenuBar *menuBar;
     QMenu *menuFichier;
     QMenu *menuParam_trages;
+    QMenu *menuAbout;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -128,6 +129,8 @@ public:
         menuFichier->setObjectName(QStringLiteral("menuFichier"));
         menuParam_trages = new QMenu(menuBar);
         menuParam_trages->setObjectName(QStringLiteral("menuParam_trages"));
+        menuAbout = new QMenu(menuBar);
+        menuAbout->setObjectName(QStringLiteral("menuAbout"));
         MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -135,6 +138,7 @@ public:
 
         menuBar->addAction(menuFichier->menuAction());
         menuBar->addAction(menuParam_trages->menuAction());
+        menuBar->addAction(menuAbout->menuAction());
         menuFichier->addAction(actionEnregistrer_le_Deck);
         menuFichier->addAction(actionExport_Deck);
         menuFichier->addAction(actionImprimer_le_Deck);
@@ -154,9 +158,9 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Vampire, the eternal deck builder", 0));
-        actionEnregistrer_le_Deck->setText(QApplication::translate("MainWindow", "Enregistrer le Deck", 0));
+        actionEnregistrer_le_Deck->setText(QApplication::translate("MainWindow", "Save Deck", 0));
         actionEnregistrer_le_Deck->setShortcut(QApplication::translate("MainWindow", "Ctrl+S", 0));
-        actionImprimer_le_Deck->setText(QApplication::translate("MainWindow", "Imprimer le Deck", 0));
+        actionImprimer_le_Deck->setText(QApplication::translate("MainWindow", "Print proxy", 0));
         actionImprimer_le_Deck->setShortcut(QApplication::translate("MainWindow", "Ctrl+P", 0));
         actionOptions->setText(QApplication::translate("MainWindow", "Options", 0));
         actionExport_Deck->setText(QApplication::translate("MainWindow", "Export Deck", 0));
@@ -171,8 +175,9 @@ public:
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletRechercheCrypte), QApplication::translate("MainWindow", "Crypt search", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletProba), QApplication::translate("MainWindow", "Deck View", 0));
         tabEditorModule->setTabText(tabEditorModule->indexOf(OngletGoldFish), QApplication::translate("MainWindow", "Playground", 0));
-        menuFichier->setTitle(QApplication::translate("MainWindow", "Fichier", 0));
-        menuParam_trages->setTitle(QApplication::translate("MainWindow", "Param\303\250trages", 0));
+        menuFichier->setTitle(QApplication::translate("MainWindow", "Files", 0));
+        menuParam_trages->setTitle(QApplication::translate("MainWindow", "Settings", 0));
+        menuAbout->setTitle(QApplication::translate("MainWindow", "About", 0));
     } // retranslateUi
 
 };

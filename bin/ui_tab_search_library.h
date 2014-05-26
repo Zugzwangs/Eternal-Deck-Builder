@@ -29,7 +29,7 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include <mvddeck.h>
-#include "PWidget.h"
+#include "Widgets/disciplinebutton.h"
 #include "mvdbdd.h"
 
 QT_BEGIN_NAMESPACE

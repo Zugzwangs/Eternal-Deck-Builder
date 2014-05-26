@@ -114,7 +114,7 @@ signals:
 
 
 /*****************************************************************************************/
-/*  THE OVER VIEW MODEL                                                                  */
+/*  THE OVER VIEW MODELS                                                                 */
 /*****************************************************************************************/
 class StatsModel : public QStandardItemModel
 {
@@ -125,6 +125,30 @@ public:
     void clearData(int columns = 0, bool all = false);
 };
 
+class StatsDisciplineModel : public StatsModel
+{
+    Q_OBJECT
+
+public:
+    int myMax;
+    explicit StatsDisciplineModel(int rows = 1, int columns = 1, QObject *parent = 0);
+    void clearData(int columns = 0, bool all = false);
+    virtual bool setData(const QModelIndex &index, const QVariant &value, int role);
+};
+
+
+/*****************************************************************************************/
+/*  STATISTIC DELEGATE                                                                   */
+/*****************************************************************************************/
+class DisciplineDelegate : public QStyledItemDelegate
+{
+    Q_OBJECT
+
+public:
+    DisciplineDelegate(QObject* parent=0);
+    void paint(QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index ) const;
+    virtual QSize sizeHint(const QStyleOptionViewItem & option, const QModelIndex & index ) const;
+};
 
 /*****************************************************************************************/
 /*  METADATAS TO WIDGET MAPPER                                                           */

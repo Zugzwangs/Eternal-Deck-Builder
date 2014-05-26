@@ -83,6 +83,12 @@
     </item>
     <item>
      <widget class="QTabWidget" name="tab_details">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>200</height>
+       </size>
+      </property>
       <property name="tabPosition">
        <enum>QTabWidget::North</enum>
       </property>
@@ -419,14 +425,14 @@
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>400</height>
+            <height>280</height>
            </size>
           </property>
           <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+           <enum>QFrame::NoFrame</enum>
           </property>
           <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
+           <enum>QFrame::Plain</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout_3"/>
          </widget>
@@ -479,14 +485,14 @@
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>400</height>
+            <height>170</height>
            </size>
           </property>
           <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+           <enum>QFrame::NoFrame</enum>
           </property>
           <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
+           <enum>QFrame::Plain</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout_4"/>
          </widget>

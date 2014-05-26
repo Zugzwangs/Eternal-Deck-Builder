@@ -35,8 +35,8 @@ private:
     StatsModel *CardCostModel;
     StatsModel *CapacityModel;
     StatsModel *GroupingModel;
-    StatsModel *DisciplineLibModel;
-    StatsModel *DisciplineCryptModel;
+    StatsDisciplineModel *DisciplineLibModel;
+    StatsDisciplineModel *DisciplineCryptModel;
 
     // Views
     PieChart *CardTypeView;
@@ -54,8 +54,9 @@ private:
 private slots:
     void clear_widgets();
     void refresh_widgets();
+    void refresh_disciplinesLib_view(QStandardItem *);
+    void refresh_disciplinesCrypt_view(QStandardItem *);
     void clear_stat_model();
-    //void sync_stats_model(QModelIndex new_item);
     void refresh_stat_model(QModelIndex parent_index);
 
 signals:

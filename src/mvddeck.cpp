@@ -234,7 +234,7 @@ return NULL;
 }
 
 /*****************************************************************************************/
-/*                                                                                       */
+/*  STATISTIC MODEL                                                                      */
 /*****************************************************************************************/
 StatsModel::StatsModel(int rows, int columns, QObject *parent) : QStandardItemModel(rows, columns, parent)
 {
@@ -267,6 +267,81 @@ void StatsModel::clearData(int columns, bool all)
                 }
             }
         }
+}
+
+/*****************************************************************************************/
+/*  DISCIPLINES STATISTIC MODEL                                                          */
+/*****************************************************************************************/
+
+StatsDisciplineModel::StatsDisciplineModel(int rows, int columns, QObject *parent) : StatsModel(rows, columns, parent)
+{
+    myMax = 0;
+}
+
+void StatsDisciplineModel::clearData(int columns, bool all)
+{
+    myMax = 0;
+    StatsModel::clearData(columns, all);
+}
+
+bool StatsDisciplineModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if ( role == Qt::DisplayRole )
+        {
+        if ( value.canConvert(QMetaType::Int) )
+            myMax = qMax( myMax, value.toInt() );
+        }
+    QStandardItemModel::setData(index, value, role);
+}
+
+
+/*****************************************************************************************/
+/* DISCIPLINES STATISTIC DELEGATE                                                        */
+/*****************************************************************************************/
+DisciplineDelegate::DisciplineDelegate(QObject* parent) : QStyledItemDelegate(parent)
+{
+
+}
+
+void DisciplineDelegate::paint(QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index ) const
+{
+    if ( !index.isValid() )
+        return;
+
+    // setup du contexte de dessin
+    QStyleOptionViewItemV4 opt(option);
+    QStyledItemDelegate::initStyleOption(&opt, index);
+
+    // setup du paintre
+    painter->save();
+    painter->setRenderHint(QPainter::Antialiasing);
+    painter->setClipRect(opt.rect, Qt::ReplaceClip);
+    painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
+
+    // découpage des régions
+    QRect TxtRegion( opt.rect );
+    TxtRegion.setHeight(70);
+    QRect IcoRegion( opt.rect );
+    IcoRegion.setTop( TxtRegion.bottom() );
+    IcoRegion.adjust(5, 5, -5, -5);
+    TxtRegion.adjust(3, 3, -3, -3);
+
+    // dessin de  l'icone
+    painter->drawPixmap( IcoRegion, QPixmap(index.data(Qt::UserRole).toString()) );
+
+    // dessin de la valeur
+    //int currentMax = dynamic_cast<const StatsDisciplineModel *>( index.model() )->myMax;
+    //QRect FillRegion( TxtRegion );
+    //FillRegion.setTop( TxtRegion.bottom() - (index.data(Qt::DisplayRole).toInt()/currentMax)*TxtRegion.height() );
+    //painter->fillRect( FillRegion, Qt::red );
+    painter->drawText( TxtRegion, Qt::AlignCenter, index.data().toString() );
+    painter->restore();
+}
+
+QSize DisciplineDelegate::sizeHint(const QStyleOptionViewItem & option, const QModelIndex & index ) const
+{
+    return QSize(45, 115);
+    //return QStyledItemDelegate(option, index);
 }
 
 /*****************************************************************************************/
@@ -351,7 +426,7 @@ void WidgetMetaMapper::syncComboBox(const QString & newData)
 }
 
 /*****************************************************************************************/
-/*  VIEW                                                                                 */
+/*  DECK VIEW                                                                            */
 /*****************************************************************************************/
 PTreeView::PTreeView(QWidget *parent) : QTreeView(parent)
 {

@@ -483,6 +483,140 @@ int StatsModel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     return _id;
 }
+struct qt_meta_stringdata_StatsDisciplineModel_t {
+    QByteArrayData data[1];
+    char stringdata[22];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    offsetof(qt_meta_stringdata_StatsDisciplineModel_t, stringdata) + ofs \
+        - idx * sizeof(QByteArrayData) \
+    )
+static const qt_meta_stringdata_StatsDisciplineModel_t qt_meta_stringdata_StatsDisciplineModel = {
+    {
+QT_MOC_LITERAL(0, 0, 20)
+    },
+    "StatsDisciplineModel\0"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_StatsDisciplineModel[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void StatsDisciplineModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+const QMetaObject StatsDisciplineModel::staticMetaObject = {
+    { &StatsModel::staticMetaObject, qt_meta_stringdata_StatsDisciplineModel.data,
+      qt_meta_data_StatsDisciplineModel,  qt_static_metacall, 0, 0}
+};
+
+
+const QMetaObject *StatsDisciplineModel::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *StatsDisciplineModel::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_StatsDisciplineModel.stringdata))
+        return static_cast<void*>(const_cast< StatsDisciplineModel*>(this));
+    return StatsModel::qt_metacast(_clname);
+}
+
+int StatsDisciplineModel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = StatsModel::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    return _id;
+}
+struct qt_meta_stringdata_DisciplineDelegate_t {
+    QByteArrayData data[1];
+    char stringdata[20];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    offsetof(qt_meta_stringdata_DisciplineDelegate_t, stringdata) + ofs \
+        - idx * sizeof(QByteArrayData) \
+    )
+static const qt_meta_stringdata_DisciplineDelegate_t qt_meta_stringdata_DisciplineDelegate = {
+    {
+QT_MOC_LITERAL(0, 0, 18)
+    },
+    "DisciplineDelegate\0"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_DisciplineDelegate[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void DisciplineDelegate::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+const QMetaObject DisciplineDelegate::staticMetaObject = {
+    { &QStyledItemDelegate::staticMetaObject, qt_meta_stringdata_DisciplineDelegate.data,
+      qt_meta_data_DisciplineDelegate,  qt_static_metacall, 0, 0}
+};
+
+
+const QMetaObject *DisciplineDelegate::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *DisciplineDelegate::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_DisciplineDelegate.stringdata))
+        return static_cast<void*>(const_cast< DisciplineDelegate*>(this));
+    return QStyledItemDelegate::qt_metacast(_clname);
+}
+
+int DisciplineDelegate::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QStyledItemDelegate::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    return _id;
+}
 struct qt_meta_stringdata_WidgetMetaMapper_t {
     QByteArrayData data[8];
     char stringdata[87];
