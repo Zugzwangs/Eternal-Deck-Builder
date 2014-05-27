@@ -162,7 +162,7 @@ Requete = "(Type != 'Vampire' AND Type != 'Imbued')"; //condition tjrs vraie
 
     if (ui->sBConvictionCost->value() > 0 && ui->cBConvictionCost->currentText() != "")   {Requete += " AND (CCost " + ui->cBConvictionCost->currentText() + " " + QString::number(ui->sBConvictionCost->value()) + ")";}
 
-    /******************* Cadre Requirements *******************/
+    /************************ Cadre Requirements ************************/
     if (ui->cBClan_2->currentText()!= "   <vide>")  {Requete += " AND Clan = '" + ui->cBClan_2->currentText() + "'";}
 
     if (ui->cBSect_2->currentText()!= "   <vide>")  {Requete += " AND Sect like '%" + ui->cBSect_2->currentText() + "%'";}
@@ -179,7 +179,7 @@ Requete = "(Type != 'Vampire' AND Type != 'Imbued')"; //condition tjrs vraie
             }
         }
 
-    /******************* Cadre Mots Clef *******************/
+    /************************* Cadre Key words *************************/
     QList<QCheckBox *> ListOthersCheckBox = ui->CardgroupBoxOthers->findChildren<QCheckBox *>();
     for (int i=0; i<ListOthersCheckBox.count(); i++)
         {
