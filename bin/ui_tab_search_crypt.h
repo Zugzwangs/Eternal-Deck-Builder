@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'tab_search_crypt.ui'
 **
-** Created by: Qt User Interface Compiler version 5.1.1
+** Created by: Qt User Interface Compiler version 5.2.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -145,16 +145,16 @@ public:
     QCheckBox *ckBBlackHand;
     QCheckBox *ckBFlight;
     QCheckBox *ckBScare;
-    QLabel *lTitle;
-    QComboBox *cBTitle;
     QCheckBox *ckBSeraph;
     QCheckBox *ckBInfernal;
     QCheckBox *ckBSlave;
-    QLabel *lSect;
-    QComboBox *cBSect;
     QCheckBox *ckBSterile;
     QCheckBox *ckBBloodCurse;
     QCheckBox *ckBRedList;
+    QComboBox *cBSect;
+    QComboBox *cBTitle;
+    QLabel *lSect;
+    QLabel *lTitle;
     QSpacerItem *horizontalSpacer_2;
     PartialDeckView *CryptView;
     QSpacerItem *horizontalSpacer;
@@ -1115,19 +1115,6 @@ public:
 
         gridLayout_4->addWidget(ckBScare, 0, 4, 1, 1);
 
-        lTitle = new QLabel(groupBoxTrait);
-        lTitle->setObjectName(QStringLiteral("lTitle"));
-        sizePolicy2.setHeightForWidth(lTitle->sizePolicy().hasHeightForWidth());
-        lTitle->setSizePolicy(sizePolicy2);
-
-        gridLayout_4->addWidget(lTitle, 1, 0, 1, 1);
-
-        cBTitle = new QComboBox(groupBoxTrait);
-        cBTitle->setObjectName(QStringLiteral("cBTitle"));
-        cBTitle->setMinimumSize(QSize(160, 0));
-
-        gridLayout_4->addWidget(cBTitle, 1, 1, 1, 1);
-
         ckBSeraph = new QCheckBox(groupBoxTrait);
         ckBSeraph->setObjectName(QStringLiteral("ckBSeraph"));
         ckBSeraph->setLayoutDirection(Qt::RightToLeft);
@@ -1146,19 +1133,6 @@ public:
 
         gridLayout_4->addWidget(ckBSlave, 1, 4, 1, 1);
 
-        lSect = new QLabel(groupBoxTrait);
-        lSect->setObjectName(QStringLiteral("lSect"));
-        sizePolicy2.setHeightForWidth(lSect->sizePolicy().hasHeightForWidth());
-        lSect->setSizePolicy(sizePolicy2);
-
-        gridLayout_4->addWidget(lSect, 2, 0, 1, 1);
-
-        cBSect = new QComboBox(groupBoxTrait);
-        cBSect->setObjectName(QStringLiteral("cBSect"));
-        cBSect->setMinimumSize(QSize(160, 0));
-
-        gridLayout_4->addWidget(cBSect, 2, 1, 1, 1);
-
         ckBSterile = new QCheckBox(groupBoxTrait);
         ckBSterile->setObjectName(QStringLiteral("ckBSterile"));
         ckBSterile->setLayoutDirection(Qt::RightToLeft);
@@ -1176,6 +1150,32 @@ public:
         ckBRedList->setLayoutDirection(Qt::RightToLeft);
 
         gridLayout_4->addWidget(ckBRedList, 2, 4, 1, 1);
+
+        cBSect = new QComboBox(groupBoxTrait);
+        cBSect->setObjectName(QStringLiteral("cBSect"));
+        cBSect->setMinimumSize(QSize(160, 0));
+
+        gridLayout_4->addWidget(cBSect, 1, 1, 1, 1);
+
+        cBTitle = new QComboBox(groupBoxTrait);
+        cBTitle->setObjectName(QStringLiteral("cBTitle"));
+        cBTitle->setMinimumSize(QSize(160, 0));
+
+        gridLayout_4->addWidget(cBTitle, 2, 1, 1, 1);
+
+        lSect = new QLabel(groupBoxTrait);
+        lSect->setObjectName(QStringLiteral("lSect"));
+        sizePolicy2.setHeightForWidth(lSect->sizePolicy().hasHeightForWidth());
+        lSect->setSizePolicy(sizePolicy2);
+
+        gridLayout_4->addWidget(lSect, 1, 0, 1, 1);
+
+        lTitle = new QLabel(groupBoxTrait);
+        lTitle->setObjectName(QStringLiteral("lTitle"));
+        sizePolicy2.setHeightForWidth(lTitle->sizePolicy().hasHeightForWidth());
+        lTitle->setSizePolicy(sizePolicy2);
+
+        gridLayout_4->addWidget(lTitle, 2, 0, 1, 1);
 
 
         gridLayout_5->addWidget(groupBoxTrait, 1, 0, 2, 1);
@@ -1396,14 +1396,14 @@ public:
         ckBBlackHand->setText(QApplication::translate("tab_search_crypt", "Black hand", 0));
         ckBFlight->setText(QApplication::translate("tab_search_crypt", "Flight", 0));
         ckBScare->setText(QApplication::translate("tab_search_crypt", "Scarce", 0));
-        lTitle->setText(QApplication::translate("tab_search_crypt", "Title", 0));
         ckBSeraph->setText(QApplication::translate("tab_search_crypt", "Seraph", 0));
         ckBInfernal->setText(QApplication::translate("tab_search_crypt", "Infernal", 0));
         ckBSlave->setText(QApplication::translate("tab_search_crypt", "Slave", 0));
-        lSect->setText(QApplication::translate("tab_search_crypt", "Sect", 0));
         ckBSterile->setText(QApplication::translate("tab_search_crypt", "Sterile", 0));
         ckBBloodCurse->setText(QApplication::translate("tab_search_crypt", "Blood curse", 0));
         ckBRedList->setText(QApplication::translate("tab_search_crypt", "Red List", 0));
+        lSect->setText(QApplication::translate("tab_search_crypt", "Sect", 0));
+        lTitle->setText(QApplication::translate("tab_search_crypt", "Title", 0));
         pBCryptSearch->setText(QApplication::translate("tab_search_crypt", "Search", 0));
         pBCryptSearch->setShortcut(QApplication::translate("tab_search_crypt", "F1", 0));
         pBCryptClearForm->setText(QApplication::translate("tab_search_crypt", "Clear Form", 0));
