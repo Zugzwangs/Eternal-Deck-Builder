@@ -1052,7 +1052,7 @@ public:
         ven->setText(QString());
         vis2->setText(QString());
         CardgroupBoxFilters->setTitle(QApplication::translate("tab_search_library", "Filters ", 0));
-        label_4->setText(QApplication::translate("tab_search_library", "Sous type", 0));
+        label_4->setText(QApplication::translate("tab_search_library", "Sub-type", 0));
         label_43->setText(QApplication::translate("tab_search_library", "   Type", 0));
         CardgroupBoxGeneral->setTitle(QApplication::translate("tab_search_library", "General ", 0));
         label_31->setText(QApplication::translate("tab_search_library", "Name :", 0));

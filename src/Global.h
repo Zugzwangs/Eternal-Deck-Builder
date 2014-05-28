@@ -37,7 +37,7 @@ namespace VtesInfo
     const QStringList CreedList = QStringList() << "Avenger" << "Defender" << "Innocent" << "Judge" << "Martyr" << "Redeemer" << "Visionary";
 
     const QStringList TitlesList = QStringList() << "Titled" << "Primogen" << "Prince" << "Justicar" << "Inner Circle" << "Bishop"
-                                                 << "Archbishop" << "Cardinal" << "Regent" << "Priscus" << "1 vote" << "2 votes"
+                                                 << "Archbishop" << "Cardinal" << "Regent" << "Priscus" << "Inquisitor" << "1 vote" << "2 votes"
                                                  << "3 votes" << "Baron" << "Magaji";
 
     const QStringList SectsList = QStringList() << "Camarilla" << "Sabbat" << "Independent" << "Laibon" << "Imbued";
@@ -46,7 +46,7 @@ namespace VtesInfo
 
     const QStringList CardTypeList = QStringList() << "Master" << "Conviction" << "Event" << "Action" << "Political Action"
                                                     << "Equipment" << "Ally" << "Retainer" << "Action Modifier" << "Combat"
-                                                    << "Reaction" << "Power" << "Reflex" << "Token";
+                                                    << "Reaction" << "Power" << "Reflex"; // << "Token";
 
     const QStringList MasterSubTypeList = QStringList() << "Discipline" << "Out-of-turn" << "Location" << "Hunting ground"
                                                         << "Archetype" << "Contract" << "Investment" << "Trophy" << "Watchtower";

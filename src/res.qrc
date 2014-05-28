@@ -138,5 +138,6 @@
         <file>icons/minus.png</file>
         <file>icons/plus.png</file>
         <file>icons/cross.png</file>
+        <file>icons/type/Conviction.gif</file>
     </qresource>
 </RCC>

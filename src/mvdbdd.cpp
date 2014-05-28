@@ -46,7 +46,9 @@ setEditTriggers(QAbstractItemView::NoEditTriggers);
 void PItemView::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
-        { startPos = event->pos(); }
+        {
+        startPos = event->pos();
+        }
     QTableView::mousePressEvent(event);
 }
 
@@ -55,8 +57,8 @@ void PItemView::mouseMoveEvent(QMouseEvent *event)
     if(event->buttons() & Qt::LeftButton)
     {
         int distance = (event->pos() - startPos).manhattanLength();
-        if (distance >= QApplication::startDragDistance())
-        { startDrag(); }
+        if (distance >= QApplication::startDragDistance() && indexAt(startPos).isValid() )
+            { startDrag(); }
     }
     QTableView::mouseMoveEvent(event);
 }

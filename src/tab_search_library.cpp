@@ -153,7 +153,7 @@ Requete = "(Type != 'Vampire' AND Type != 'Imbued')"; //condition tjrs vraie
     /******************* Cadre Filters *******************/
     if (ui->cBType->currentText() != "   <vide>")    {Requete += " AND Type like '" + ui->cBType->currentText() + "'";}
 
-    if (ui->cBSousType->currentText()!= "   <vide>") {Requete += " AND SubType like '" + ui->cBType->currentText() + "'";}
+    if (ui->cBSousType->currentText()!= "   <vide>") {Requete += " AND SubType like '%" + ui->cBSousType->currentText() + "%'";}
 
     /******************* Cadre Cout *******************/
     if (ui->sBBloodCost->value() > 0 && ui->cBBloodCost->currentText() != "")   {Requete += " AND (BCost " + ui->cBBloodCost->currentText() + " " + QString::number(ui->sBBloodCost->value()) + ")";}
@@ -291,6 +291,7 @@ foreach( DisciplineButton* current_virtues_bt, ListVirtuesCheckBox )
     current_virtues_bt->resetState();
     }
 
+this->AdapteSousType();
 ModelReponseCarte->setFilter(""); //On nettoie le filtre
 }
 
@@ -306,7 +307,6 @@ void tab_search_library::AfficheImageCarte(QString CardName)
         }
 }
 
-/* GESTION DES EVENEMENTS */
 void tab_search_library::keyPressEvent(QKeyEvent *e)
 {
     //if user type enter when crypt search tab is the active tab do the SQL select
