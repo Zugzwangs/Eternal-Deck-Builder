@@ -38,7 +38,7 @@ namespace VtesInfo
 
     const QStringList TitlesList = QStringList() << "Titled" << "Primogen" << "Prince" << "Justicar" << "Inner Circle" << "Bishop"
                                                  << "Archbishop" << "Cardinal" << "Regent" << "Priscus" << "Inquisitor" << "1 vote" << "2 votes"
-                                                 << "3 votes" << "Baron" << "Magaji";
+                                                 << "3 votes" << "Baron" << "Magaji"; //<< "All Titles" //???
 
     const QStringList SectsList = QStringList() << "Camarilla" << "Sabbat" << "Independent" << "Laibon" << "Imbued";
 

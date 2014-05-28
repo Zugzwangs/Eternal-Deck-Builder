@@ -155,7 +155,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     cryptGalerie->setIconSize( QSize(144,200) );
     cryptGalerie->setWrapping(true);
     cryptGalerie->setMovement(QListView::Static);
-    cryptGalerie->setDragDropMode(QAbstractItemView::InternalMove);
+    //cryptGalerie->setDragDropMode(QAbstractItemView::InternalMove);
     cryptGalerie->setFrameShape(QFrame::NoFrame);
     cryptGalerie->setModel(ModeleDeck);
     cryptGalerie->setModelColumn(0);
@@ -170,7 +170,7 @@ tab_deck_tuning::tab_deck_tuning(QWidget *parent) : QScrollArea(parent), ui(new 
     LibraryGalerie->setIconSize( QSize(144,200) );
     LibraryGalerie->setWrapping(true);
     LibraryGalerie->setMovement(QListView::Static);
-    LibraryGalerie->setDragDropMode(QAbstractItemView::InternalMove);
+    //LibraryGalerie->setDragDropMode(QAbstractItemView::InternalMove);
     LibraryGalerie->setFrameShape(QFrame::NoFrame);
     LibraryGalerie->setModel(ModeleDeck);
     LibraryGalerie->setModelColumn(0);

@@ -153,7 +153,7 @@ Requete = "(Type != 'Vampire' AND Type != 'Imbued')"; //condition tjrs vraie
     /******************* Cadre Filters *******************/
     if (ui->cBType->currentText() != "   <vide>")    {Requete += " AND Type like '" + ui->cBType->currentText() + "'";}
 
-    if (ui->cBSousType->currentText()!= "   <vide>") {Requete += " AND SubType like '%" + ui->cBSousType->currentText() + "%'";}
+    if (ui->cBSousType->currentText()!= "   <vide>" && ui->cBSousType->currentText()!= "<choose sub type>") {Requete += " AND SubType like '%" + ui->cBSousType->currentText() + "%'";}
 
     /******************* Cadre Cout *******************/
     if (ui->sBBloodCost->value() > 0 && ui->cBBloodCost->currentText() != "")   {Requete += " AND (BCost " + ui->cBBloodCost->currentText() + " " + QString::number(ui->sBBloodCost->value()) + ")";}
@@ -215,13 +215,13 @@ void tab_search_library::AdapteSousType()
         /* pour les cas ou des sous type existent, on remplie la combobox. Sinon on vide la liste */
         case 1  :
             ui->cBSousType->clear();
-            ui->cBSousType->addItem("   <vide>");
+            ui->cBSousType->addItem("<choose sub type>");
             ui->cBSousType->addItems(VtesInfo::MasterSubTypeList);
             break;
 
         case 3 :
             ui->cBSousType->clear();
-            ui->cBSousType->addItem("   <vide>");
+            ui->cBSousType->addItem("<choose sub type>");
             ui->cBSousType->addItems(VtesInfo::EventSubTypeList);
             break;
 
