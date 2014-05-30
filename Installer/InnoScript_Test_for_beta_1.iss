@@ -35,27 +35,33 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
+[Dirs]
+Name: "{app}\bin"
+Name: "{app}\bin\platforms"
+Name: "{app}\Cartes"
+Name: "{app}\Decks"
+Name: "{app}\docs"
+
 [Files]
-Source: "D:\Eternal-Deck-Builder\bin\Eternal.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\docs\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "D:\Eternal-Deck-Builder\Decks\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "D:\Eternal-Deck-Builder\Cartes\*"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\cfg.ini"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\eternal.log"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\Eternal_resource.rc"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\icudt51.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\icuin51.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\icuuc51.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\libgcc_s_dw2-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\libstdc++-6.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\Qt5Network.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\Qt5PrintSupport.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\Qt5Sql.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Eternal-Deck-Builder\bin\VtesCardsListDB"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\Eternal.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\docs\*"; DestDir: "{app}\docs"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\Eternal-Deck-Builder\bin\cfg.ini"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\eternal.log"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\Eternal_resource.rc"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\icudt51.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\icuin51.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\icuuc51.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\libgcc_s_dw2-1.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\libstdc++-6.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\libwinpthread-1.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\Qt5Core.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\Qt5Gui.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\Qt5Network.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\Qt5PrintSupport.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\Qt5Sql.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\Qt5Widgets.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\VtesCardsListDB"; DestDir: "{app}\bin"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\platforms\qwindows.dll"; DestDir: "{app}\bin\platforms"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -64,5 +70,5 @@ Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: 
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: quicklaunchicon
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\bin\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 
