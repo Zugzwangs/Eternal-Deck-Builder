@@ -19,9 +19,7 @@ private:
     Ui::tab_gold_fich *ui;
 
     QString PathCartes;
-    PGraphicsView* TabledeJeu;
     QGraphicsScene *Scenedejeu;
-
 };
 
 #endif // TAB_GOLD_FICH_H

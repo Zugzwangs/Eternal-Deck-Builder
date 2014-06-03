@@ -9,13 +9,14 @@
 BloodBank::BloodBank(QWidget *parent) : QFrame(parent)
 {
     setObjectName("bourse");
-    setGeometry(1170,0,116,94);
-    show();
-    setVisible(true);
     setFrameStyle(QFrame::Sunken | QFrame::Box);
     setLineWidth(2);
-    //setStyleSheet("background-image: url(" + QCoreApplication::applicationDirPath() + "/Images/bourse.png)");
-    //BloodPxm = new QPixmap(QCoreApplication::applicationDirPath() + "/Images/Blood.png");
+    setMaximumWidth(116);
+    setMinimumWidth(116);
+    setMaximumHeight(94);
+    setMinimumHeight(94);
+    setStyleSheet( "background-image: url("":/icons/bourse.png"")" );
+    BloodPxm = new QPixmap(":/icons/Blood.png");
 }
 
 void BloodBank::mousePressEvent(QMouseEvent *event)
@@ -40,7 +41,7 @@ void BloodBank::startDrag()
     QDrag *Drag = new QDrag(this);
     QMimeData *mimeData = new QMimeData;
     mimeData->setText("Blood Marqueur");
-    mimeData->setImageData(*BloodPxm);
+    mimeData->setImageData( QImage( ":/icons/Blood.png" ) );
     Drag->setPixmap(*BloodPxm);
     Drag->setHotSpot(QPoint(20,20));
     Drag->setMimeData(mimeData);

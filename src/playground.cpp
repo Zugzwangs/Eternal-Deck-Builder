@@ -12,9 +12,7 @@
 //
 PGraphicsView::PGraphicsView(QWidget *parent) : QGraphicsView(parent)
 {
- setGeometry(0,94,1290,876);
  setBackgroundBrush(QBrush(QColor(77,120,58)));
- setVisible(true);
  setAcceptDrops(true);
  setInteractive(true);
  setDragMode(QGraphicsView::ScrollHandDrag); //defini le comportement de la Vue qd on drag la souris dans une zone vide
@@ -54,7 +52,7 @@ void PGraphicsView::ContextMenuSlot(QAction *ActionChoisie)
 //
 PGraphicsScene::PGraphicsScene(QWidget* parent) : QGraphicsScene(parent)
 {
- this->setSceneRect(-10000,-10000,20000,20000);
+    setSceneRect(-5000,-5000,10000,10000);
 }
 void PGraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 {
@@ -74,16 +72,16 @@ if (event->source()->objectName() == "bourse")
 }
 void PGraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
-QPixmap DFGH;
 QPointF DropPos = event->pos();
 
 if (event->source()->objectName() == "bourse")
     {
-    DFGH = event->mimeData()->imageData().value<QPixmap>();
-    QGraphicsPixmapItem *NouveauBlood = new QGraphicsPixmapItem(DFGH);
+    QImage image = qvariant_cast<QImage>(event->mimeData()->imageData());
+    QGraphicsPixmapItem *NouveauBlood = new QGraphicsPixmapItem(QPixmap::fromImage(image));
     NouveauBlood->setFlag(QGraphicsItem::ItemIsSelectable, true);
     NouveauBlood->setFlag(QGraphicsItem::ItemIsMovable, true);
     NouveauBlood->setPos(DropPos); //ne marche pas
+    this->addItem( NouveauBlood );
     }
 }
 

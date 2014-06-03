@@ -6,11 +6,10 @@
 tab_gold_fich::tab_gold_fich(QWidget *parent) : QScrollArea(parent), ui(new Ui::tab_gold_fich)
 {
     ui->setupUi(this);
-
     BloodBank* Bourse = new BloodBank(this);
-    TabledeJeu = new PGraphicsView(this);
+    ui->TopBoard->layout()->addWidget(Bourse);
     Scenedejeu = new PGraphicsScene();
-    TabledeJeu->setScene(Scenedejeu);
+    ui->TabledeJeu->setScene(Scenedejeu);
 }
 
 void tab_gold_fich::initialisation(QString path)

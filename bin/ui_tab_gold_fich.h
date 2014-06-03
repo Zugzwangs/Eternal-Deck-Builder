@@ -13,9 +13,14 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QScrollArea>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "playground.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -23,16 +28,85 @@ class Ui_tab_gold_fich
 {
 public:
     QWidget *scrollAreaWidgetContents;
+    QVBoxLayout *verticalLayout;
+    QFrame *TopBoard;
+    QHBoxLayout *horizontalLayout;
+    QSpacerItem *horizontalSpacer;
+    QFrame *frame;
+    QHBoxLayout *horizontalLayout_2;
+    PGraphicsView *TabledeJeu;
+    QFrame *SideBoard;
+    QVBoxLayout *verticalLayout_2;
 
     void setupUi(QScrollArea *tab_gold_fich)
     {
         if (tab_gold_fich->objectName().isEmpty())
             tab_gold_fich->setObjectName(QStringLiteral("tab_gold_fich"));
-        tab_gold_fich->resize(1027, 698);
+        tab_gold_fich->resize(1100, 778);
         tab_gold_fich->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1025, 696));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1098, 776));
+        verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        TopBoard = new QFrame(scrollAreaWidgetContents);
+        TopBoard->setObjectName(QStringLiteral("TopBoard"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(TopBoard->sizePolicy().hasHeightForWidth());
+        TopBoard->setSizePolicy(sizePolicy);
+        TopBoard->setMinimumSize(QSize(0, 200));
+        TopBoard->setMaximumSize(QSize(16777215, 200));
+        TopBoard->setFrameShape(QFrame::StyledPanel);
+        TopBoard->setFrameShadow(QFrame::Raised);
+        horizontalLayout = new QHBoxLayout(TopBoard);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+
+        verticalLayout->addWidget(TopBoard);
+
+        frame = new QFrame(scrollAreaWidgetContents);
+        frame->setObjectName(QStringLiteral("frame"));
+        frame->setFrameShape(QFrame::StyledPanel);
+        frame->setFrameShadow(QFrame::Raised);
+        horizontalLayout_2 = new QHBoxLayout(frame);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        TabledeJeu = new PGraphicsView(frame);
+        TabledeJeu->setObjectName(QStringLiteral("TabledeJeu"));
+
+        horizontalLayout_2->addWidget(TabledeJeu);
+
+        SideBoard = new QFrame(frame);
+        SideBoard->setObjectName(QStringLiteral("SideBoard"));
+        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(SideBoard->sizePolicy().hasHeightForWidth());
+        SideBoard->setSizePolicy(sizePolicy1);
+        SideBoard->setMinimumSize(QSize(200, 0));
+        SideBoard->setMaximumSize(QSize(200, 16777215));
+        SideBoard->setFrameShape(QFrame::StyledPanel);
+        SideBoard->setFrameShadow(QFrame::Raised);
+        verticalLayout_2 = new QVBoxLayout(SideBoard);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+
+        horizontalLayout_2->addWidget(SideBoard);
+
+        horizontalLayout_2->setStretch(0, 4);
+        horizontalLayout_2->setStretch(1, 1);
+
+        verticalLayout->addWidget(frame);
+
+        verticalLayout->setStretch(0, 1);
+        verticalLayout->setStretch(1, 3);
         tab_gold_fich->setWidget(scrollAreaWidgetContents);
 
         retranslateUi(tab_gold_fich);
