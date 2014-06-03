@@ -3,8 +3,8 @@
 
 #define MyAppName "Eternal Deck Builder"
 #define MyAppVersion "Eternal Deck Builder - beta 1.0 "
-#define MyAppPublisher "Zugzwang"
-#define MyAppURL "http://www.example.com/"
+#define MyAppPublisher "Zugzwangs"
+#define MyAppURL "https://github.com/Zugzwangs/Eternal-Deck-Builder"
 #define MyAppExeName "Eternal.exe"
 
 [Setup]
@@ -38,9 +38,13 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 [Dirs]
 Name: "{app}\bin"
 Name: "{app}\bin\platforms"
+Name: "{app}\bin\sqldrivers"
+Name: "{app}\bin\printsupport"
+Name: "{app}\bin\imageformats"
 Name: "{app}\Cartes"
 Name: "{app}\Decks"
 Name: "{app}\docs"
+
 
 [Files]
 Source: "D:\Eternal-Deck-Builder\bin\Eternal.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
@@ -62,12 +66,15 @@ Source: "D:\Eternal-Deck-Builder\bin\Qt5Sql.dll"; DestDir: "{app}\bin"; Flags: i
 Source: "D:\Eternal-Deck-Builder\bin\Qt5Widgets.dll"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "D:\Eternal-Deck-Builder\bin\VtesCardsListDB"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "D:\Eternal-Deck-Builder\bin\platforms\qwindows.dll"; DestDir: "{app}\bin\platforms"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\sqldrivers\qsqlite.dll"; DestDir: "{app}\bin\sqldrivers"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\printsupport\windowsprintersupport.dll"; DestDir: "{app}\bin\printsupport"; Flags: ignoreversion
+Source: "D:\Eternal-Deck-Builder\bin\imageformats\*"; DestDir: "{app}\bin\imageformats"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: quicklaunchicon
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\bin\{#MyAppExeName}"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\bin\{#MyAppExeName}"; Tasks: quicklaunchicon
 
 [Run]
 Filename: "{app}\bin\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
