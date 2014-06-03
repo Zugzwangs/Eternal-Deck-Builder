@@ -42,11 +42,11 @@ public:
     {
         if (tab_gold_fich->objectName().isEmpty())
             tab_gold_fich->setObjectName(QStringLiteral("tab_gold_fich"));
-        tab_gold_fich->resize(1100, 778);
+        tab_gold_fich->resize(1111, 797);
         tab_gold_fich->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1098, 776));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1109, 795));
         verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
