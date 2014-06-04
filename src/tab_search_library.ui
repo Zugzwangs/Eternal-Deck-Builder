@@ -1602,7 +1602,7 @@
                 <enum>Qt::RightToLeft</enum>
                </property>
                <property name="text">
-                <string>Aim</string>
+                <string>Unique</string>
                </property>
               </widget>
              </item>

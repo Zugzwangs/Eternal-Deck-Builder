@@ -1110,7 +1110,7 @@ public:
         Boon->setText(QApplication::translate("tab_search_library", "Boon", 0));
         Grapple->setText(QApplication::translate("tab_search_library", "Grapple", 0));
         Frenzy->setText(QApplication::translate("tab_search_library", "Frenzy", 0));
-        Aim->setText(QApplication::translate("tab_search_library", "Aim", 0));
+        Aim->setText(QApplication::translate("tab_search_library", "Unique", 0));
         CardgroupBoxCout->setTitle(QApplication::translate("tab_search_library", "Costs", 0));
         label_37->setText(QApplication::translate("tab_search_library", "Blood cost", 0));
         label_39->setText(QApplication::translate("tab_search_library", "Pool cost", 0));
