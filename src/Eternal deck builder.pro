@@ -38,9 +38,12 @@ SOURCES +=  main.cpp\
             playground.cpp \
             mvddeck.cpp \
             mvdbdd.cpp \
-    Widgets/bloodbank.cpp \
-    Widgets/disciplinebutton.cpp \
-    Widgets/vipedviewer.cpp
+            Widgets/bloodbank.cpp \
+            Widgets/disciplinebutton.cpp \
+            Widgets/vipedviewer.cpp \
+            Widgets/library.cpp \
+            Widgets/distributor.cpp \
+            hud.cpp
 
 HEADERS  += mainwindow.h \
             Global.h \
@@ -66,16 +69,20 @@ HEADERS  += mainwindow.h \
             playground.h \
             mvddeck.h \
             mvdbdd.h \
-    Widgets/bloodbank.h \
-    Widgets/disciplinebutton.h \
-    Widgets/vipedviewer.h
+            Widgets/bloodbank.h \
+            Widgets/disciplinebutton.h \
+            Widgets/vipedviewer.h \
+            Widgets/library.h \
+            Widgets/distributor.h \
+            hud.h
 
 FORMS    += mainwindow.ui \
             dialogoptions.ui \
             tab_search_library.ui \
             tab_search_crypt.ui \
             tab_deck_tuning.ui \
-            tab_gold_fich.ui
+            tab_gold_fich.ui \
+            hud.ui
 
 RESOURCES += res.qrc
 
