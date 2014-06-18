@@ -50,7 +50,7 @@ void PGraphicsView::ContextMenuSlot(QAction *ActionChoisie)
 //
 PGraphicsScene::PGraphicsScene(QWidget* parent) : QGraphicsScene(parent)
 {
-    setSceneRect(-5000,-5000,10000,10000);
+    setSceneRect(-4000,-4000,8000,8000);
 }
 
 void PGraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
