@@ -16,26 +16,19 @@ tab_gold_fich::tab_gold_fich(QWidget *parent) : QScrollArea(parent), ui(new Ui::
     Scenedejeu = new PGraphicsScene();
     ui->TabledeJeu->setScene(Scenedejeu);
 
-    connect( ui->pBOpenDeck, SIGNAL(pressed()), this, SLOT(load_deck()) );
-    connect( ui->pBRestartGame, SIGNAL(pressed()), this, SLOT(restart_game()) );
+    connect( ui->pBOpenDeck, SIGNAL( pressed() ), this, SLOT( load_deck() ) );
+    connect( ui->pBRestartGame, SIGNAL( pressed() ), this, SLOT( restart_game() ) );
+    connect (ui->pBdrawLibrary, SIGNAL( pressed() ), this, SLOT( test_draw() ) );
 }
 
 void tab_gold_fich::initialisation(DeckTranslator *DT)
 {
     if ( ! path_list.initPaths() )
         qDebug() << "ca a chier !";
+
     PathCartes = path_list.getCardPath();
     PathDeck = path_list.getDeckPath();
-
     translator = DT;
-
-    //PGraphicsPixmapItem* CardItem  = new PGraphicsPixmapItem( QPixmap(PathCartes + "/" + "44magnum.jpg") );
-    //PGraphicsPixmapItem* CardItem2 = new PGraphicsPixmapItem( QPixmap(PathCartes + "/" + "abiku.jpg") );
-
-    /*CardItem2->setPos(1000,1000);
-    CardItem3->setPos(400,600);
-    Scenedejeu->addItem(CardItem);
-    Scenedejeu->addItem(CardItem2);*/
 }
 
 tab_gold_fich::~tab_gold_fich()
@@ -50,6 +43,20 @@ void tab_gold_fich::load_deck()
         return;
 
     translator->EdbToDeck(fileName, currentDeck);
+}
+
+void tab_gold_fich::test_draw()
+{
+    Carte* carte_pioched = currentDeck->drawLib();
+    if ( !carte_pioched )
+        {
+        qDebug() << "la biblio est vide !";
+        return;
+        }
+
+    PGraphicsPixmapItem* CardItem  = new PGraphicsPixmapItem(carte_pioched);
+    CardItem->setPos(400, 600);
+    Scenedejeu->addItem(CardItem);
 }
 
 void tab_gold_fich::restart_game()

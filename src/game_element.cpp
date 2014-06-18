@@ -1,21 +1,16 @@
+#include <QDebug>
 #include "game_element.h"
 
 // /////////////////////////////////////////
 // Objet modélisant une carte
-Carte::Carte(QObject* parent) : QObject(parent)
-{
-
-}
+Carte::Carte(QObject* parent) : QObject(parent) {}
 
 Carte::Carte(QStringList L, QObject* parent) : QObject(parent)
 {
     setCard(L);
 }
 
-Carte::~Carte()
-{
-
-}
+Carte::~Carte() {}
 
 void Carte::setCard(QStringList L)
 {
@@ -28,7 +23,7 @@ void Carte::setCard(QStringList L)
         Kind = VtesInfo::CryptType;
         Name = L[1];
         Sets = L[2];
-        ImageFile = L[3];
+        ImageFile = L[3] + ".jpg";
         UrlCard = L[4];
         Expansion = L[5];
         Rarity = L[6];
@@ -51,7 +46,7 @@ void Carte::setCard(QStringList L)
         Kind = VtesInfo::LibraryType;
         Name = L[1];
         Sets = L[2];
-        ImageFile = L[3];
+        ImageFile = L[3] + ".jpg";
         UrlCard = L[4];
         Expansion = L[5];
         Rarity = L[6];
@@ -127,6 +122,18 @@ void Deck::addCard(Carte *crt)
         if ( crt->getKind() != VtesInfo::NoType ){
             crt->setParent( this );
             Crypt.append(crt);}
+        }
+}
+
+Carte* Deck::drawLib()
+{
+    if ( !Library.isEmpty() ){
+        return Library.takeAt(0);
+        }
+    else
+        {
+        return NULL;
+        qDebug() << "you can't draw, library is empty.";
         }
 }
 

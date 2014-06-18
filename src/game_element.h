@@ -108,6 +108,7 @@ public:
     Deck(QObject* parent=0);
     ~Deck();
     void addCard(Carte *crt);
+    Carte* drawLib();
     void clearDeck();
     void setUpDeck();
 

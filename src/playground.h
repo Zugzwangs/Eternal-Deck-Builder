@@ -9,6 +9,8 @@
 #include <QGraphicsSceneDragDropEvent>
 #include <QGraphicsSceneContextMenuEvent>
 
+#include "game_element.h"
+
 // /////////////////////////////////////////////////////////////////////////////////////////
 // Custom graphic view that show the playground
 class PGraphicsView : public QGraphicsView
@@ -53,7 +55,7 @@ class PGraphicsPixmapItem : public QObject, public QGraphicsPixmapItem
    Q_OBJECT
 
 public:
-    explicit PGraphicsPixmapItem(QGraphicsItem* parent=0);
+    explicit PGraphicsPixmapItem(Carte *C, QGraphicsItem* parent=0);
     void setTaped(bool T = true);
     void setTurned(bool T = true);
     bool isTaped();
@@ -70,12 +72,12 @@ protected:
 private:
     bool Taped;
     bool Turned;
-    QPixmap Face;
-    QPixmap Back;
+    QString FacePixmapPath;
+    QString TailPixmapPath;
+    Carte *card;
 
 private slots:
     void ContextMenuSlot(QAction *ActionChoisie);
-
 };
 
 #endif // PLAYGROUND_H

@@ -1,12 +1,10 @@
-#include "playground.h"
-#include "math.h"
-
 #include <QWheelEvent>
 #include <QDebug>
 #include <QMimeData>
 #include <QCoreApplication>
 
-//#include "mainwindow.h"
+#include "playground.h"
+#include "math.h"
 
 // ///////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -90,16 +88,21 @@ void PGraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 
 // ///////////////////////////////////////////////////////////////////////////////////////////
 //
-PGraphicsPixmapItem::PGraphicsPixmapItem(QGraphicsItem *parent) : QGraphicsPixmapItem(parent)
+PGraphicsPixmapItem::PGraphicsPixmapItem(Carte *C, QGraphicsItem *parent) : QGraphicsPixmapItem(parent)
 {
-    setFlag(QGraphicsItem::ItemIsSelectable, true);
-    setFlag(QGraphicsItem::ItemIsMovable, true);
-    setAcceptDrops(true);
-    QPixmap pixmap;
-    setPixmap(pixmap);
+    //setttings corresponding to card/game datas
+    card = C;
+    FacePixmapPath = "D:/Eternal-Deck-Builder/Cartes/" + card->getImageFile();
+    TailPixmapPath = "D:/Eternal-Deck-Builder/Cartes/Vtes_Grelarge.gif";
     setTaped(false);
     setTurned(false);
+
+    //settings corresponding to QGraphicsPixmapItem part
+    setFlag(QGraphicsItem::ItemIsSelectable, true);
+    setFlag(QGraphicsItem::ItemIsMovable, true);
     setTransformOriginPoint( boundingRect().center() );
+    setAcceptDrops(true);
+    setPixmap( QPixmap(FacePixmapPath) );
 }
 
 // IMPLEMENTATION DES METHODES //
@@ -121,9 +124,9 @@ void PGraphicsPixmapItem::setTurned(bool T)
 {
     Turned = T;
     if ( Turned )
-        setPixmap(Back);
+        setPixmap(QPixmap(TailPixmapPath));
     else
-        setPixmap(Face);
+        setPixmap(QPixmap(FacePixmapPath));
 }
 
 bool PGraphicsPixmapItem::isTaped()

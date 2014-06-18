@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'tab_gold_fich.ui'
 **
-** Created by: Qt User Interface Compiler version 5.1.1
+** Created by: Qt User Interface Compiler version 5.2.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -38,6 +38,7 @@ public:
     QVBoxLayout *verticalLayout_2;
     QPushButton *pBRestartGame;
     QPushButton *pBOpenDeck;
+    QPushButton *pBdrawLibrary;
 
     void setupUi(QScrollArea *tab_gold_fich)
     {
@@ -107,6 +108,11 @@ public:
 
         verticalLayout_2->addWidget(pBOpenDeck);
 
+        pBdrawLibrary = new QPushButton(SideBoard);
+        pBdrawLibrary->setObjectName(QStringLiteral("pBdrawLibrary"));
+
+        verticalLayout_2->addWidget(pBdrawLibrary);
+
 
         horizontalLayout_2->addWidget(SideBoard);
 
@@ -129,6 +135,7 @@ public:
         tab_gold_fich->setWindowTitle(QApplication::translate("tab_gold_fich", "ScrollArea", 0));
         pBRestartGame->setText(QApplication::translate("tab_gold_fich", "restart game", 0));
         pBOpenDeck->setText(QApplication::translate("tab_gold_fich", "Open deck", 0));
+        pBdrawLibrary->setText(QApplication::translate("tab_gold_fich", "draw library", 0));
     } // retranslateUi
 
 };
