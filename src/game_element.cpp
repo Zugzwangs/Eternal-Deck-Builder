@@ -147,5 +147,21 @@ void Deck::setUpDeck()
 
 }
 
+// /////////////////////////////////////////
+// A player
+Player::Player(QObject* parent=0) : QObject(parent)
+{
+    nickName = "Unnamed Player";
+    rank = "blood bag";
+    avatar = QPixmap(80,80);
+    avatar.fill(Qt::black);
+}
+
+Player::~Player()
+{
+
+}
+
+
 
 

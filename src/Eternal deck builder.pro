@@ -42,7 +42,6 @@ SOURCES +=  main.cpp\
             Widgets/disciplinebutton.cpp \
             Widgets/vipedviewer.cpp \
             Widgets/library.cpp \
-            Widgets/distributor.cpp \
             hud.cpp
 
 HEADERS  += mainwindow.h \
@@ -73,7 +72,6 @@ HEADERS  += mainwindow.h \
             Widgets/disciplinebutton.h \
             Widgets/vipedviewer.h \
             Widgets/library.h \
-            Widgets/distributor.h \
             hud.h
 
 FORMS    += mainwindow.ui \

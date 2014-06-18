@@ -127,4 +127,20 @@ public slots:
 
 };
 
+class Player : public QObject
+{
+    Q_OBJECT
+
+public:
+    Player(QObject* parent=0);
+    ~Player();
+
+private:
+    QString nickName;
+    QPixmap avatar;
+    QString rank;
+};
+
+
+
 #endif // GAME_ELEMENT_H
