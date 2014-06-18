@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.2.1
+** Created by: Qt User Interface Compiler version 5.1.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -96,6 +96,7 @@ public:
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
         tabEditorModule->addTab(OngletRechercheCarte, QString());
         OngletRechercheCrypte = new QWidget();
         OngletRechercheCrypte->setObjectName(QStringLiteral("OngletRechercheCrypte"));
@@ -103,6 +104,7 @@ public:
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
         tabEditorModule->addTab(OngletRechercheCrypte, QString());
         OngletProba = new QWidget();
         OngletProba->setObjectName(QStringLiteral("OngletProba"));
@@ -110,6 +112,7 @@ public:
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
         tabEditorModule->addTab(OngletProba, QString());
         OngletGoldFish = new QWidget();
         OngletGoldFish->setObjectName(QStringLiteral("OngletGoldFish"));
@@ -117,6 +120,7 @@ public:
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
         tabEditorModule->addTab(OngletGoldFish, QString());
 
         gridLayout->addWidget(tabEditorModule, 0, 0, 1, 1);
@@ -124,7 +128,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1680, 26));
+        menuBar->setGeometry(QRect(0, 0, 1680, 21));
         menuFichier = new QMenu(menuBar);
         menuFichier->setObjectName(QStringLiteral("menuFichier"));
         menuParam_trages = new QMenu(menuBar);

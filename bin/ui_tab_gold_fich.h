@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'tab_gold_fich.ui'
 **
-** Created by: Qt User Interface Compiler version 5.2.1
+** Created by: Qt User Interface Compiler version 5.1.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -16,8 +16,8 @@
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "playground.h"
@@ -31,22 +31,26 @@ public:
     QVBoxLayout *verticalLayout;
     QFrame *TopBoard;
     QHBoxLayout *horizontalLayout;
-    QSpacerItem *horizontalSpacer;
     QFrame *frame;
     QHBoxLayout *horizontalLayout_2;
     PGraphicsView *TabledeJeu;
     QFrame *SideBoard;
     QVBoxLayout *verticalLayout_2;
+    QPushButton *pBRestartGame;
+    QPushButton *pBOpenDeck;
 
     void setupUi(QScrollArea *tab_gold_fich)
     {
         if (tab_gold_fich->objectName().isEmpty())
             tab_gold_fich->setObjectName(QStringLiteral("tab_gold_fich"));
         tab_gold_fich->resize(1111, 797);
+        tab_gold_fich->setFrameShape(QFrame::NoFrame);
+        tab_gold_fich->setFrameShadow(QFrame::Plain);
+        tab_gold_fich->setLineWidth(0);
         tab_gold_fich->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1109, 795));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1111, 797));
         verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
@@ -57,17 +61,13 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(TopBoard->sizePolicy().hasHeightForWidth());
         TopBoard->setSizePolicy(sizePolicy);
-        TopBoard->setMinimumSize(QSize(0, 200));
-        TopBoard->setMaximumSize(QSize(16777215, 200));
+        TopBoard->setMinimumSize(QSize(0, 160));
+        TopBoard->setMaximumSize(QSize(16777215, 160));
         TopBoard->setFrameShape(QFrame::StyledPanel);
         TopBoard->setFrameShadow(QFrame::Raised);
         horizontalLayout = new QHBoxLayout(TopBoard);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer);
-
 
         verticalLayout->addWidget(TopBoard);
 
@@ -97,6 +97,16 @@ public:
         verticalLayout_2 = new QVBoxLayout(SideBoard);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        pBRestartGame = new QPushButton(SideBoard);
+        pBRestartGame->setObjectName(QStringLiteral("pBRestartGame"));
+
+        verticalLayout_2->addWidget(pBRestartGame);
+
+        pBOpenDeck = new QPushButton(SideBoard);
+        pBOpenDeck->setObjectName(QStringLiteral("pBOpenDeck"));
+
+        verticalLayout_2->addWidget(pBOpenDeck);
+
 
         horizontalLayout_2->addWidget(SideBoard);
 
@@ -117,6 +127,8 @@ public:
     void retranslateUi(QScrollArea *tab_gold_fich)
     {
         tab_gold_fich->setWindowTitle(QApplication::translate("tab_gold_fich", "ScrollArea", 0));
+        pBRestartGame->setText(QApplication::translate("tab_gold_fich", "restart game", 0));
+        pBOpenDeck->setText(QApplication::translate("tab_gold_fich", "Open deck", 0));
     } // retranslateUi
 
 };

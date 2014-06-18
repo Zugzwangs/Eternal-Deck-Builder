@@ -54,83 +54,97 @@ PGraphicsScene::PGraphicsScene(QWidget* parent) : QGraphicsScene(parent)
 {
     setSceneRect(-5000,-5000,10000,10000);
 }
+
 void PGraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 {
-if (event->source()->objectName() == "bourse")
-    {
-    event->setDropAction(Qt::CopyAction);
-    event->accept();
-    }
+    if (event->source()->objectName() == "bourse")
+        {
+        event->setDropAction(Qt::CopyAction);
+        event->accept();
+        }
 }
+
 void PGraphicsScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 {
-if (event->source()->objectName() == "bourse")
-    {
-    event->setDropAction(Qt::CopyAction);
-    event->accept();
-    }
+    if (event->source()->objectName() == "bourse")
+        {
+        event->setDropAction(Qt::CopyAction);
+        event->accept();
+        }
 }
+
 void PGraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
-QPointF DropPos = event->pos();
+    QPointF DropPos = event->pos();
 
-if (event->source()->objectName() == "bourse")
-    {
-    QImage image = qvariant_cast<QImage>(event->mimeData()->imageData());
-    QGraphicsPixmapItem *NouveauBlood = new QGraphicsPixmapItem(QPixmap::fromImage(image));
-    NouveauBlood->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    NouveauBlood->setFlag(QGraphicsItem::ItemIsMovable, true);
-    NouveauBlood->setPos(DropPos); //ne marche pas
-    this->addItem( NouveauBlood );
-    }
+    if (event->source()->objectName() == "bourse")
+        {
+        QImage image = qvariant_cast<QImage>(event->mimeData()->imageData());
+        QGraphicsPixmapItem *NouveauBlood = new QGraphicsPixmapItem(QPixmap::fromImage(image));
+        NouveauBlood->setFlag(QGraphicsItem::ItemIsSelectable, true);
+        NouveauBlood->setFlag(QGraphicsItem::ItemIsMovable, true);
+        NouveauBlood->setPos(DropPos); //ne marche pas
+        this->addItem( NouveauBlood );
+        }
 }
 
 // ///////////////////////////////////////////////////////////////////////////////////////////
 //
-PGraphicsPixmapItem::PGraphicsPixmapItem(const QPixmap& pixmap, TypesdeCarte type, QGraphicsItem *parent) : QGraphicsPixmapItem(pixmap,parent), DosCarteLibrarie("Vtes_Grelarge.gif"), DosCartecrypt("Vtes_Tanlarge.gif")
+PGraphicsPixmapItem::PGraphicsPixmapItem(QGraphicsItem *parent) : QGraphicsPixmapItem(parent)
 {
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    this->setFlag(QGraphicsItem::ItemIsMovable, true);
-    this->setAcceptDrops(true);
-    this->setTransformOriginPoint(this->boundingRect().center());
-    DossierAppli.setPath(QCoreApplication::applicationDirPath());
-    FaceCarte = pixmap;
-    FaceVisible = true;
-    setTypeCarte(type);
+    setFlag(QGraphicsItem::ItemIsSelectable, true);
+    setFlag(QGraphicsItem::ItemIsMovable, true);
+    setAcceptDrops(true);
+    QPixmap pixmap;
+    setPixmap(pixmap);
+    setTaped(false);
+    setTurned(false);
+    setTransformOriginPoint( boundingRect().center() );
 }
 
 // IMPLEMENTATION DES METHODES //
-void PGraphicsPixmapItem::setTypeCarte(PGraphicsPixmapItem::TypesdeCarte type)
+int PGraphicsPixmapItem::getCardType()
 {
- QString PathDosCarte;
-
- TypeCarte = type;
-
- if (DossierAppli.cd("Images"))
-    {
-     PathDosCarte = DossierAppli.absolutePath();
-    }
-
- switch (type)
-    {
-    case 0 : DosCarte.load(PathDosCarte +"/" + DosCarteLibrarie);  break;
-    case 1 : DosCarte.load(PathDosCarte +"/" + DosCartecrypt);     break;
-    case 2 : DosCarte.load(PathDosCarte +"/" + DosCarteLibrarie);  break;
-    }
+    return(0);
 }
-int PGraphicsPixmapItem::getTypeCarte()
+
+void PGraphicsPixmapItem::setTaped(bool T)
 {
-    return(TypeCarte);
+    Taped = T;
+    if ( Taped )
+        setRotation(90);
+    else
+        setRotation(0);
+}
+
+void PGraphicsPixmapItem::setTurned(bool T)
+{
+    Turned = T;
+    if ( Turned )
+        setPixmap(Back);
+    else
+        setPixmap(Face);
+}
+
+bool PGraphicsPixmapItem::isTaped()
+{
+    return Taped;
+}
+
+bool PGraphicsPixmapItem::isTurned()
+{
+    return Turned;
 }
 
 // GESTION DES EVENTS //
 void PGraphicsPixmapItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (rotation() == 0)
-        this->setRotation(90);
+    if ( isTaped() )
+        setTaped(false);
     else
-        this->setRotation(0);
+        setTaped(true);
 }
+
 void PGraphicsPixmapItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     event->setAccepted(true);
@@ -139,46 +153,45 @@ void PGraphicsPixmapItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
     menu->popup(event->screenPos());
     connect(menu, SIGNAL(triggered(QAction*)), this, SLOT(ContextMenuSlot(QAction*)));
 }
+
 void PGraphicsPixmapItem::ContextMenuSlot(QAction *ActionChoisie)
 {
     if (ActionChoisie->text() == "Retourner la carte")
-    {
-    if (FaceVisible)
-        {FaceVisible = false; this->setPixmap(DosCarte);}
-    else
-        {FaceVisible = true; this->setPixmap(FaceCarte);}
-    }
+        setTurned(!isTurned());
 }
+
 void PGraphicsPixmapItem::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 {
     qDebug() << "item DragEnterEvent !!!";
-if (event->source()->objectName() == "bourse")
-    {
-    event->setDropAction(Qt::CopyAction);
-    event->accept();
-    }
+    if (event->source()->objectName() == "bourse")
+        {
+        event->setDropAction(Qt::CopyAction);
+        event->accept();
+        }
 }
+
 void PGraphicsPixmapItem::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 {
     qDebug() << "item DragEnterEvent !!!";
-if (event->source()->objectName() == "bourse")
-    {
-    qDebug() << "item DragMoveEvent !!!";
-    event->setDropAction(Qt::CopyAction);
-    event->accept();
-    }
+    if (event->source()->objectName() == "bourse")
+        {
+        qDebug() << "item DragMoveEvent !!!";
+        event->setDropAction(Qt::CopyAction);
+        event->accept();
+        }
 }
+
 void PGraphicsPixmapItem::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
-QPixmap DFGH;
-qDebug() << "item DragEnterEvent !!!";
+    QPixmap DFGH;
+    qDebug() << "item DragEnterEvent !!!";
 
-if (event->source()->objectName() == "bourse")
-    {
-    qDebug() << "item dropEvent !!!";
-    DFGH = event->mimeData()->imageData().value<QPixmap>();
-    QGraphicsPixmapItem *NouveauBlood = new QGraphicsPixmapItem(DFGH,this);
-    NouveauBlood->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    NouveauBlood->setFlag(QGraphicsItem::ItemIsMovable, true);
-    }
+    if (event->source()->objectName() == "bourse")
+        {
+        qDebug() << "item dropEvent !!!";
+        DFGH = event->mimeData()->imageData().value<QPixmap>();
+        QGraphicsPixmapItem *NouveauBlood = new QGraphicsPixmapItem(DFGH,this);
+        NouveauBlood->setFlag(QGraphicsItem::ItemIsSelectable, true);
+        NouveauBlood->setFlag(QGraphicsItem::ItemIsMovable, true);
+        }
 }

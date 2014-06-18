@@ -42,10 +42,10 @@ class Carte : public QObject
 
 public:
 
-    Carte(QObject* parent=0);       // create an empty card
-    Carte(const Carte& c);          // copy constructor
-    Carte(QStringList);             // create and setup a card. the class doesn't verify if the given list is correct
-    Carte(QString s);               // create a card and request database in order to fill up datas
+    Carte(QObject* parent=0);                   // create an empty card
+    Carte(QStringList L, QObject* parent=0);    // create and setup a card
+    void setCard(QStringList L);
+    void clearCard();
     virtual ~Carte();
 
     CardType getKind() const;
@@ -72,9 +72,6 @@ public:
     QString getText() const;
     QString getArtist() const;
     QString getCommentaires() const;
-
-    void SetCard(QStringList L);
-    void ClearCard();
 
 private:
     CardType Kind;
@@ -103,13 +100,16 @@ private:
     QString Commentaires;
 };
 
-class Deck
+class Deck : public QObject
 {
+    Q_OBJECT
+
 public:
-    Deck();
-    void AddCard(Carte crt);
-    void RemoveCard(QString cardName, bool all);
+    Deck(QObject* parent=0);
     ~Deck();
+    void addCard(Carte *crt);
+    void clearDeck();
+    void setUpDeck();
 
     int Id;
     QString Nom;
@@ -118,9 +118,12 @@ public:
     QString Resultat;
     QString Date;
     QString Commentaire;
-    QList<Carte*> Crypt;
-    QList<Carte*> Bibliotheque;
-    QList<Carte*> Side;
+    QList<Carte *>Crypt;
+    QList<Carte *>Library;
+    QList<Carte *>ashHeap;
+
+public slots:
+
 };
 
 #endif // GAME_ELEMENT_H

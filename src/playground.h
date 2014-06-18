@@ -47,18 +47,18 @@ private:
 };
 
 // /////////////////////////////////////////////////////////////////////////////////////////
-// Custom Graphics Item, represent game entity
+// A card in the graphic scene
 class PGraphicsPixmapItem : public QObject, public QGraphicsPixmapItem
 {
    Q_OBJECT
 
 public:
-    enum TypesdeCarte { CarteSansType = 0, CartedeLibrairie = 1, CartedeVampire = 2 };
-
-    explicit PGraphicsPixmapItem(const QPixmap & pixmap, TypesdeCarte type=CarteSansType, QGraphicsItem* parent=0);
-
-    void setTypeCarte(PGraphicsPixmapItem::TypesdeCarte type);
-    int getTypeCarte();
+    explicit PGraphicsPixmapItem(QGraphicsItem* parent=0);
+    void setTaped(bool T = true);
+    void setTurned(bool T = true);
+    bool isTaped();
+    bool isTurned();
+    int getCardType();
 
 protected:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
@@ -68,13 +68,10 @@ protected:
     void dropEvent(QGraphicsSceneDragDropEvent *event);
 
 private:
-    const QString DosCarteLibrarie;
-    const QString DosCartecrypt;
-    int TypeCarte; //type de carte : vampire ou de librairie
-    bool FaceVisible;
-    QDir DossierAppli;
-    QPixmap DosCarte;
-    QPixmap FaceCarte;
+    bool Taped;
+    bool Turned;
+    QPixmap Face;
+    QPixmap Back;
 
 private slots:
     void ContextMenuSlot(QAction *ActionChoisie);

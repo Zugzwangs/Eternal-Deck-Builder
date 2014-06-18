@@ -11,26 +11,20 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
 // ////////////////////////////////////////////////
 //  INITIALISATION DES PATHS DE L'APPLI
-
     if ( ! path_list.initPaths() )
-        {
         qDebug() << "ca a chier !";
-        }
+
     PathCartes = path_list.getCardPath();
     PathDeck = path_list.getDeckPath();
 
-
 // ////////////////////////////////////////////////
 //  INITIALISATION DU MODULE DE TELECHARGEMENT
-
     downloader = new update_manager( this );
     downloader->set_card_directory( PathCartes );
     downloader->set_serv_settings( "127.0.0.1", "jr", "pass" );
 
-
 // ////////////////////////////////////////////////
 //  OUVERTURE DE LA BDD 'VtesCardsListDB'
-
     this->SqlDB = QSqlDatabase::addDatabase("QSQLITE");
     this->SqlDB.setDatabaseName("VtesCardsListDB");
     if (!this->SqlDB.open())
@@ -41,14 +35,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
 // ////////////////////////////////////////////////
 //  MISE EN FORME DE LA FENETRE PRINCIPALE
-
     ui->setupUi(this);
     this->setWindowState(Qt::WindowMaximized);
 
-
 // ///////////////////////////////////////////////
 // SETUP MAIN TABS
-
     test_tuning = new tab_deck_tuning();
     ui->OngletProba->layout()->addWidget(test_tuning);
 
@@ -61,18 +52,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     ui->OngletRechercheCrypte->layout()->addWidget(advanced_crypt_search_tab);
 
     playground_tab = new tab_gold_fich();
-    playground_tab->initialisation(PathCartes);
     ui->OngletGoldFish->layout()->addWidget(playground_tab);
 
 // ////////////////////////////////////////////////
 //  SETUP MANAGER IMPORT/EXPORT DECK DATAS
-
     queryModel = new QSqlQueryModel;
     inOutDecksManager = DeckTranslator(test_tuning->ModeleDeck, queryModel );
+    playground_tab->initialisation(&inOutDecksManager);
 
 // ///////////////////////////////////////////////
 // DEFINITION DES CONNEXIONS
-
     connect( ui->actionEnregistrer_le_Deck, SIGNAL( triggered() ), this, SLOT( SaveDeck() ) ) ;
     connect( ui->actionImprimer_le_Deck,    SIGNAL( triggered() ), this, SLOT( PrintDeck() ) );
     connect( ui->actionOptions,             SIGNAL( triggered() ), this, SLOT( OuvrirMenuOption() ) );
@@ -80,7 +69,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect( ui->actionClose_deck,          SIGNAL( triggered() ), this, SLOT( CloseDeck()) );
     connect( ui->actionNew_Deck,            SIGNAL( triggered() ), this, SLOT( NewDeck()  ) );
     connect( this,                          SIGNAL( DeckLoaded()), test_tuning, SLOT(refresh_widgets() ) );
-
     //connect( downloader, SIGNAL( picture_downloaded() ), this, SLOT( AfficheImageCarte(QString) ) );
 
 }

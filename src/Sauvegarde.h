@@ -9,6 +9,7 @@
 #include "Global.h"
 #include "mvddeck.h"
 #include "mvdbdd.h"
+#include "game_element.h"
 
 /************************************************************************************/
 /*    */
@@ -28,6 +29,7 @@ public slots:
     bool deckModelToEdb( QString filePath );
     bool EdbToDeckModel( QString filePath );
     bool deckModelToPDF( QString filePath );
+    bool EdbToDeck(QString filePath , Deck *D);
     QStringList queryCardsInfo( const QString CardName, const QString TableName );
 
 private:

@@ -26,6 +26,9 @@ INPUT(
 ./release\bloodbank.o
 ./release\disciplinebutton.o
 ./release\vipedviewer.o
+./release\library.o
+./release\distributor.o
+./release\hud.o
 ./release\qrc_res.o
 ./release\moc_mainwindow.o
 ./release\moc_dialogoptions.o
@@ -48,4 +51,7 @@ INPUT(
 ./release\moc_mvdbdd.o
 ./release\moc_bloodbank.o
 ./release\moc_vipedviewer.o
+./release\moc_library.o
+./release\moc_distributor.o
+./release\moc_hud.o
 );

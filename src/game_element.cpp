@@ -4,18 +4,79 @@
 // Objet modélisant une carte
 Carte::Carte(QObject* parent) : QObject(parent)
 {
-}
-
-Carte::Carte(const Carte &c) //: QObject(c)
-{
-}
-
-Carte::Carte(QString s)
-{
 
 }
-Carte::Carte(QStringList)
+
+Carte::Carte(QStringList L, QObject* parent) : QObject(parent)
 {
+    setCard(L);
+}
+
+Carte::~Carte()
+{
+
+}
+
+void Carte::setCard(QStringList L)
+{
+    if ( L.count() < 19 )
+        return;
+
+    QString currentType = L[7];
+    if ( currentType == "Vampire" || currentType == "Imbued" )
+        {
+        Kind = VtesInfo::CryptType;
+        Name = L[1];
+        Sets = L[2];
+        ImageFile = L[3];
+        UrlCard = L[4];
+        Expansion = L[5];
+        Rarity = L[6];
+        Type = L[7];
+        Clan = L[8];
+        Grouping = L[9];
+        Capacity = L[10];
+        Discipline = L[11];
+        Sect = L[12];
+        Title = L[13];
+        Trait = L[14];
+        KeyWords = L[15];
+        Limitation = L[16];
+        Text = L[17];
+        Artist = L[18];
+        Commentaires = L[19];
+        }
+    else
+        {
+        Kind = VtesInfo::LibraryType;
+        Name = L[1];
+        Sets = L[2];
+        ImageFile = L[3];
+        UrlCard = L[4];
+        Expansion = L[5];
+        Rarity = L[6];
+        Type = L[7];
+        SubType = L[8];
+        Clan = L[9];
+        Capacity = L[10];
+        Discipline = L[11];
+        Sect = L[12];
+        PCost = L[13];
+        BCost = L[14];
+        CCost = L[15];
+        Title = L[16];
+        Trait = L[17];
+        KeyWords = L[18];
+        Limitation = L[19];
+        Text = L[20];
+        Artist = L[21];
+        Commentaires = L[22];
+        }
+}
+
+void Carte::clearCard()
+{
+
 }
 
 CardType Carte::getKind() const { return(Kind); }
@@ -43,34 +104,41 @@ QString Carte::getText() const { return(Text); }
 QString Carte::getArtist() const { return(Artist); }
 QString Carte::getCommentaires() const { return(Commentaires); }
 
-Carte::~Carte()
-{
-
-}
-
-void Carte::SetCard(QStringList L)
-{
-
-}
-
-void Carte::ClearCard()
-{
-
-}
-
 
 // /////////////////////////////////////////
 // Objet deck
-Deck::Deck()
+Deck::Deck(QObject *parent) : QObject(parent)
 {
 
 }
 
-void Deck::AddCard(Carte crt)
+Deck::~Deck()
 {
 
 }
 
-void Deck::RemoveCard(QString cardName, bool all)
+void Deck::addCard(Carte *crt)
 {
+    if ( crt->getKind() == VtesInfo::LibraryType ){
+        crt->setParent( this );
+        Library.append(crt);}
+    else
+        {
+        if ( crt->getKind() != VtesInfo::NoType ){
+            crt->setParent( this );
+            Crypt.append(crt);}
+        }
 }
+
+void Deck::clearDeck()
+{
+
+}
+
+void Deck::setUpDeck()
+{
+
+}
+
+
+

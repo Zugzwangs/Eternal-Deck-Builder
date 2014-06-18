@@ -1,4 +1,5 @@
 #include "Sauvegarde.h"
+#include "game_element.h"
 #include "math.h"
 
 #include <QDebug>
@@ -139,6 +140,7 @@ bool DeckTranslator::EdbToDeckModel( QString filePath )
     if (reader.hasError()) {
         qDebug() << "An error has been encounter when parsing deck file";
         qDebug() << reader.errorString() << reader.lineNumber() << reader.columnNumber();
+        file.close();
         return false;
         }
     reader.readNextStartElement();
@@ -174,6 +176,65 @@ bool DeckTranslator::EdbToDeckModel( QString filePath )
         reader.readNextStartElement();
         }
 
+    file.close();
+    return true;
+}
+
+bool DeckTranslator::EdbToDeck( QString filePath, Deck *D )
+{
+    // open file in read mode and put the xml stream on it
+    QFile file(filePath);
+    if ( !file.open(QFile::ReadOnly | QFile::Text) ) {
+        qDebug() << "An error has been encounter when opening deck file";
+        return false;
+    }
+
+    QXmlStreamReader reader(&file);
+
+    // read file until reach of <Metadonnees> element
+    while (!reader.atEnd() && reader.name() != "Crypt" ) {
+        reader.readNext();
+    }
+    if (reader.hasError()) {
+        qDebug() << "An error has been encounter when parsing deck file";
+        qDebug() << reader.errorString() << reader.lineNumber() << reader.columnNumber();
+        file.close();
+        return false;
+        }
+    reader.readNextStartElement();
+
+    Carte *currentCard;
+    while (!reader.atEnd() && reader.name() != "Crypt" )
+        {
+        if ( reader.isStartElement() )
+            {
+            int occurence = reader.attributes().value("Number").toInt();
+            for (int i=1; i<occurence; i++)
+                {
+                currentCard = new Carte( queryCardsInfo(reader.attributes().value("name").toString(), "VampireList") );
+                D->addCard( currentCard );
+                }
+            }
+        reader.readNextStartElement();
+        }
+    reader.readNextStartElement();
+    reader.readNextStartElement();
+
+    while (!reader.atEnd() && reader.name() != "Bibliotheque" )
+        {
+        if ( reader.isStartElement() )
+            {
+            int occurence = reader.attributes().value("Number").toInt();
+            for (int i=1; i<occurence; i++)
+                {
+                currentCard = new Carte( queryCardsInfo(reader.attributes().value("name").toString(), "CardList") );
+                D->addCard( currentCard );
+                }
+            }
+        reader.readNextStartElement();
+        }
+
+    file.close();
     return true;
 }
 

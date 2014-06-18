@@ -26,10 +26,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    QSqlDatabase SqlDB;         // La BDD embarquée
-    update_manager* downloader; // gestionnaire de téléchargement
-    PathProvider path_list;     // gestionnaire de path de paths
-    DeckTranslator inOutDecksManager;     // implémente import/export decks
+    QSqlDatabase SqlDB;                 // La BDD embarquée
+    update_manager* downloader;         // gestionnaire de téléchargement
+    PathProvider path_list;             // gestionnaire de path de paths
+    DeckTranslator inOutDecksManager;   // implémente import/export decks
     QSqlQueryModel *queryModel;
     QString PathCartes;
     QString PathRessources;
