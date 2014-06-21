@@ -149,7 +149,7 @@ void Deck::setUpDeck()
 
 // /////////////////////////////////////////
 // A player
-Player::Player(QObject* parent=0) : QObject(parent)
+Player::Player(QObject* parent) : QObject(parent)
 {
     nickName = "Unnamed Player";
     rank = "blood bag";

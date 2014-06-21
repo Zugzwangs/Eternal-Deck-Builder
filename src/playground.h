@@ -60,7 +60,7 @@ public:
     void setTurned(bool T = true);
     bool isTaped();
     bool isTurned();
-    int getCardType();
+    CardType getCardType();
 
 protected:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
@@ -68,13 +68,18 @@ protected:
     void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
     void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
     void dropEvent(QGraphicsSceneDragDropEvent *event);
+    void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
+    void hoverMoveEvent(QGraphicsSceneHoverEvent * event);
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
 
 private:
+
     bool Taped;
     bool Turned;
     QString FacePixmapPath;
     QString TailPixmapPath;
     Carte *card;
+    PathProvider path_list;
 
 private slots:
     void ContextMenuSlot(QAction *ActionChoisie);

@@ -55,6 +55,7 @@ PGraphicsScene::PGraphicsScene(QWidget* parent) : QGraphicsScene(parent)
 
 void PGraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 {
+    qDebug() << "PGraphicsScene::dragEnterEvent !!!";
     if (event->source()->objectName() == "bourse")
         {
         event->setDropAction(Qt::CopyAction);
@@ -64,6 +65,7 @@ void PGraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 
 void PGraphicsScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 {
+    qDebug() << "PGraphicsScene::dragMoveEvent !!!";
     if (event->source()->objectName() == "bourse")
         {
         event->setDropAction(Qt::CopyAction);
@@ -73,6 +75,7 @@ void PGraphicsScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 
 void PGraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
+    qDebug() << "PGraphicsScene::dropEvent !!!";
     QPointF DropPos = event->pos();
 
     if (event->source()->objectName() == "bourse")
@@ -92,23 +95,42 @@ PGraphicsPixmapItem::PGraphicsPixmapItem(Carte *C, QGraphicsItem *parent) : QGra
 {
     //setttings corresponding to card/game datas
     card = C;
-    FacePixmapPath = "D:/Eternal-Deck-Builder/Cartes/" + card->getImageFile();
-    TailPixmapPath = "D:/Eternal-Deck-Builder/Cartes/Vtes_Grelarge.gif";
     setTaped(false);
     setTurned(false);
+
+    //settings paths to pictures
+    if ( path_list.initPaths() )
+        FacePixmapPath = path_list.getCardPath() + QString("/") + card->getImageFile();
+    else
+        FacePixmapPath = ":/icons/bourse.png";
+
+    switch ( C->getKind() )
+        {
+        case VtesInfo::LibraryType:
+            TailPixmapPath = ":/icons/Vtes_Tanlarge.gif";
+            break;
+        case VtesInfo::CryptType:
+            TailPixmapPath = ":/icons/Vtes_Grelarge.gif";
+            break;
+        default:
+            TailPixmapPath = ":/icons/Vtes_Grelarge.gif";
+            break;
+        }
 
     //settings corresponding to QGraphicsPixmapItem part
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setFlag(QGraphicsItem::ItemIsMovable, true);
+    setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
+    setCursor( QPixmap(":/icons/evil.png") );
+    setPixmap( QPixmap(FacePixmapPath) );
     setTransformOriginPoint( boundingRect().center() );
     setAcceptDrops(true);
-    setPixmap( QPixmap(FacePixmapPath) );
+    setAcceptHoverEvents(true);
 }
 
-// IMPLEMENTATION DES METHODES //
-int PGraphicsPixmapItem::getCardType()
+CardType PGraphicsPixmapItem::getCardType()
 {
-    return(0);
+    return(card->getKind());
 }
 
 void PGraphicsPixmapItem::setTaped(bool T)
@@ -165,7 +187,7 @@ void PGraphicsPixmapItem::ContextMenuSlot(QAction *ActionChoisie)
 
 void PGraphicsPixmapItem::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 {
-    qDebug() << "item DragEnterEvent !!!";
+    qDebug() << "PGraphicsPixmapItem::dragEnterEvent !!!";
     if (event->source()->objectName() == "bourse")
         {
         event->setDropAction(Qt::CopyAction);
@@ -175,7 +197,7 @@ void PGraphicsPixmapItem::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 
 void PGraphicsPixmapItem::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 {
-    qDebug() << "item DragEnterEvent !!!";
+    qDebug() << "PGraphicsPixmapItem::dragMoveEvent !!!";
     if (event->source()->objectName() == "bourse")
         {
         qDebug() << "item DragMoveEvent !!!";
@@ -187,7 +209,7 @@ void PGraphicsPixmapItem::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 void PGraphicsPixmapItem::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
     QPixmap DFGH;
-    qDebug() << "item DragEnterEvent !!!";
+    qDebug() << "PGraphicsPixmapItem::dropEvent !!!";
 
     if (event->source()->objectName() == "bourse")
         {
@@ -198,3 +220,19 @@ void PGraphicsPixmapItem::dropEvent(QGraphicsSceneDragDropEvent *event)
         NouveauBlood->setFlag(QGraphicsItem::ItemIsMovable, true);
         }
 }
+
+void PGraphicsPixmapItem::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
+{
+    qDebug() << "PGraphicsPixmapItem::hoverEnterEvent !!!";
+}
+
+void PGraphicsPixmapItem::hoverMoveEvent(QGraphicsSceneHoverEvent * event)
+{
+    qDebug() << "PGraphicsPixmapItem::hoverMoveEvent !!!";
+}
+
+void PGraphicsPixmapItem::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
+{
+    qDebug() << "PGraphicsPixmapItem::hoverLeaveEvent !!!";
+}
+

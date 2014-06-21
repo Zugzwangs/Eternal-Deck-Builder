@@ -140,5 +140,6 @@
         <file>icons/cross.png</file>
         <file>icons/type/Conviction.gif</file>
         <file>icons/bourse.png</file>
+        <file>icons/evil.png</file>
     </qresource>
 </RCC>
