@@ -173,6 +173,7 @@ PGraphicsPixmapItem::PGraphicsPixmapItem(Carte *C, QGraphicsItem *parent) : QGra
     //settings corresponding to QGraphicsPixmapItem part
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setFlag(QGraphicsItem::ItemIsMovable, true);
+    setFlag(QGraphicsItem::ItemClipsChildrenToShape, true);
     setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
     setCursor( QPixmap(":/icons/evil.png") );
     setPixmap( QPixmap(FacePixmapPath) );
