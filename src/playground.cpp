@@ -10,40 +10,101 @@
 //
 PGraphicsView::PGraphicsView(QWidget *parent) : QGraphicsView(parent)
 {
- setBackgroundBrush(QBrush(QColor(77,120,58)));
- setAcceptDrops(true);
- setInteractive(true);
- setDragMode(QGraphicsView::ScrollHandDrag); //defini le comportement de la Vue qd on drag la souris dans une zone vide
+    setBackgroundBrush(QBrush(QColor(77,120,58)));
+    setAcceptDrops(true);
+    setInteractive(true);
+    setDragMode(QGraphicsView::ScrollHandDrag); //defini le comportement de la Vue qd on drag la souris dans une zone vide
 }
 
 void PGraphicsView::wheelEvent(QWheelEvent *event)
 {
- scaleView(pow((double)2, event->delta() / 240.0));
+    scaleView(pow((double)2, event->delta() / 240.0));
 }
 
 void PGraphicsView::scaleView(qreal scaleFactor)
 {
- qreal factor = matrix().scale(scaleFactor, scaleFactor).mapRect(QRectF(0, 0, 1, 1)).width();
- if (factor<0.1 || factor>1.1)  {return;}
- scale(scaleFactor, scaleFactor);
+    qreal factor = matrix().scale(scaleFactor, scaleFactor).mapRect(QRectF(0, 0, 1, 1)).width();
+    if (factor<0.1 || factor>1.1)  {return;}
+    scale(scaleFactor, scaleFactor);
 }
 
 void PGraphicsView::contextMenuEvent(QContextMenuEvent *event)
 {
-QGraphicsView::contextMenuEvent(event); //sert à propager le signal
-if (!event->isAccepted())
-    {
-    QMenu *menu = new QMenu();
-    menu->addAction("Relancer la partie");
-    menu->addAction("Tout supprimer");
-    menu->popup(event->globalPos());
-    connect(menu, SIGNAL(triggered(QAction*)), this, SLOT(ContextMenuSlot(QAction*)));
-    }
+    QGraphicsView::contextMenuEvent(event); //sert à propager le signal
+    if (!event->isAccepted())
+        {
+        QMenu *menu = new QMenu();
+        menu->addAction("Relancer la partie");
+        menu->addAction("Tout supprimer");
+        menu->popup(event->globalPos());
+        connect(menu, SIGNAL(triggered(QAction*)), this, SLOT(ContextMenuSlot(QAction*)));
+        }
 }
 
 void PGraphicsView::ContextMenuSlot(QAction *ActionChoisie)
 {
     qDebug()<< ActionChoisie->text();
+}
+
+void PGraphicsView::dragEnterEvent(QDragEnterEvent * event)
+{
+qDebug() << "PGraphicsView::dragEnterEvent";
+    if ( !event->mimeData()->hasText() || !scene() )
+        {
+        event->ignore();
+        return;
+        }
+    QGraphicsView::dragEnterEvent(event);
+    //event->accept();
+}
+
+void PGraphicsView::dragMoveEvent(QDragMoveEvent *event)
+{
+qDebug() << "PGraphicsView::dragMoveEvent";
+    if ( !event->mimeData()->hasText() || !scene() )
+        {
+        event->ignore();
+        return;
+        }
+    QGraphicsView::dragMoveEvent(event);
+    //event->accept();
+}
+
+void PGraphicsView::dragLeaveEvent(QDragLeaveEvent * event)
+{
+qDebug() << "PGraphicsView::dragLeaveEvent";
+    QGraphicsView::dragLeaveEvent(event);
+    //event->accept();
+}
+
+void PGraphicsView::dropEvent(QDropEvent * event)
+{
+qDebug() << "PGraphicsView::dropEvent";
+    if ( !event->mimeData()->hasText() || !scene() )
+        {
+        event->ignore();
+        return;
+        }
+
+    QPoint DropPos = event->pos();
+    if ( itemAt(DropPos) )
+        {
+        //we propagate event to the scene
+        QGraphicsView::dropEvent(event);
+        }
+    else
+        {
+        if ( event->mimeData()->text() == "Blood" )
+            {
+            qDebug() << "##################### View handle a blood drop ! ########################";
+            PGraphicsBlood *newBloob = new PGraphicsBlood();
+            scene()->addItem( newBloob );
+            newBloob->setPos( mapToScene(DropPos) );
+            event->accept();
+            }
+        else
+            event->ignore();
+        }
 }
 
 // ///////////////////////////////////////////////////////////////////////////////////////////
@@ -55,42 +116,34 @@ PGraphicsScene::PGraphicsScene(QWidget* parent) : QGraphicsScene(parent)
 
 void PGraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 {
-    qDebug() << "PGraphicsScene::dragEnterEvent !!!";
-    if (event->source()->objectName() == "bourse")
-        {
-        event->setDropAction(Qt::CopyAction);
-        event->accept();
-        }
+qDebug() << "PGraphicsScene::dragEnterEvent";
+    QGraphicsScene::dragEnterEvent(event);
+    //event->accept();
 }
 
 void PGraphicsScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 {
-    qDebug() << "PGraphicsScene::dragMoveEvent !!!";
-    if (event->source()->objectName() == "bourse")
-        {
-        event->setDropAction(Qt::CopyAction);
-        event->accept();
-        }
+qDebug() << "PGraphicsScene::dragMoveEvent";
+    QGraphicsScene::dragMoveEvent(event);
+    event->setDropAction(Qt::CopyAction);
+    event->accept();
+}
+
+void PGraphicsScene::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
+{
+qDebug() << "PGraphicsScene::dragLeaveEvent";
+    QGraphicsScene::dragLeaveEvent(event);
+    //event->accept();
 }
 
 void PGraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
-    qDebug() << "PGraphicsScene::dropEvent !!!";
-    QPointF DropPos = event->pos();
-
-    if (event->source()->objectName() == "bourse")
-        {
-        QImage image = qvariant_cast<QImage>(event->mimeData()->imageData());
-        QGraphicsPixmapItem *NouveauBlood = new QGraphicsPixmapItem(QPixmap::fromImage(image));
-        NouveauBlood->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        NouveauBlood->setFlag(QGraphicsItem::ItemIsMovable, true);
-        NouveauBlood->setPos(DropPos); //ne marche pas
-        this->addItem( NouveauBlood );
-        }
+qDebug() << "PGraphicsScene::dropEvent";
+    QGraphicsScene::dropEvent(event);
 }
 
 // ///////////////////////////////////////////////////////////////////////////////////////////
-//
+// Card item
 PGraphicsPixmapItem::PGraphicsPixmapItem(Carte *C, QGraphicsItem *parent) : QGraphicsPixmapItem(parent)
 {
     //setttings corresponding to card/game datas
@@ -126,6 +179,12 @@ PGraphicsPixmapItem::PGraphicsPixmapItem(Carte *C, QGraphicsItem *parent) : QGra
     setTransformOriginPoint( boundingRect().center() );
     setAcceptDrops(true);
     setAcceptHoverEvents(true);
+
+    origin = QPointF( boundingRect().center() );
+    origin.setY( origin.y()-100 );
+    radius = (boundingRect().width()*32)/100;
+    mySpreadingAngle = 0.62831853071;
+    i = 0;
 }
 
 CardType PGraphicsPixmapItem::getCardType()
@@ -161,7 +220,6 @@ bool PGraphicsPixmapItem::isTurned()
     return Turned;
 }
 
-// GESTION DES EVENTS //
 void PGraphicsPixmapItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
     if ( isTaped() )
@@ -187,7 +245,7 @@ void PGraphicsPixmapItem::ContextMenuSlot(QAction *ActionChoisie)
 
 void PGraphicsPixmapItem::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 {
-    qDebug() << "PGraphicsPixmapItem::dragEnterEvent !!!";
+    qDebug() << "PGraphicsPixmapItem::dragEnterEvent";
     if (event->source()->objectName() == "bourse")
         {
         event->setDropAction(Qt::CopyAction);
@@ -197,42 +255,60 @@ void PGraphicsPixmapItem::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 
 void PGraphicsPixmapItem::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 {
-    qDebug() << "PGraphicsPixmapItem::dragMoveEvent !!!";
+qDebug() << "PGraphicsPixmapItem::dragMoveEvent";
     if (event->source()->objectName() == "bourse")
         {
-        qDebug() << "item DragMoveEvent !!!";
         event->setDropAction(Qt::CopyAction);
         event->accept();
         }
 }
 
+void PGraphicsPixmapItem::dragLeaveEvent(QGraphicsSceneDragDropEvent * event)
+{
+qDebug() << "PGraphicsPixmapItem::dragLeaveEvent";
+    event->accept();
+}
+
+
 void PGraphicsPixmapItem::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
-    QPixmap DFGH;
-    qDebug() << "PGraphicsPixmapItem::dropEvent !!!";
-
+qDebug() << "PGraphicsPixmapItem::dropEvent";
     if (event->source()->objectName() == "bourse")
         {
-        qDebug() << "item dropEvent !!!";
-        DFGH = event->mimeData()->imageData().value<QPixmap>();
-        QGraphicsPixmapItem *NouveauBlood = new QGraphicsPixmapItem(DFGH,this);
-        NouveauBlood->setFlag(QGraphicsItem::ItemIsSelectable, true);
-        NouveauBlood->setFlag(QGraphicsItem::ItemIsMovable, true);
+        PGraphicsBlood *newBloob = new PGraphicsBlood();
+        newBloob->setParentItem(this);
+        QPointF currentBloodPos;
+        currentBloodPos.setX( origin.x()+ radius*cos(mySpreadingAngle*i) );
+        currentBloodPos.setY( origin.y()+ radius*sin(mySpreadingAngle*i) );
+        newBloob->setPos(currentBloodPos);
+        i++;
+        event->accept();
         }
 }
 
 void PGraphicsPixmapItem::hoverEnterEvent(QGraphicsSceneHoverEvent * event)
 {
-    qDebug() << "PGraphicsPixmapItem::hoverEnterEvent !!!";
+    //qDebug() << "PGraphicsPixmapItem::hoverEnterEvent !!!";
 }
 
 void PGraphicsPixmapItem::hoverMoveEvent(QGraphicsSceneHoverEvent * event)
 {
-    qDebug() << "PGraphicsPixmapItem::hoverMoveEvent !!!";
+    //qDebug() << "PGraphicsPixmapItem::hoverMoveEvent !!!";
 }
 
 void PGraphicsPixmapItem::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
 {
-    qDebug() << "PGraphicsPixmapItem::hoverLeaveEvent !!!";
+    //qDebug() << "PGraphicsPixmapItem::hoverLeaveEvent !!!";
 }
 
+
+// ///////////////////////////////////////////////////////////////////////////////////////////
+// blood item
+PGraphicsBlood::PGraphicsBlood() : QGraphicsPixmapItem()
+{
+    setAcceptDrops(false);
+    setFlag(QGraphicsItem::ItemIsSelectable, true);
+    setFlag(QGraphicsItem::ItemIsMovable, true);
+    setShapeMode(QGraphicsPixmapItem::MaskShape);
+    setPixmap( QPixmap(":/icons/Blood.png") );
+}

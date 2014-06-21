@@ -31,7 +31,7 @@ void BloodBank::mouseMoveEvent(QMouseEvent *event)
     {
         int distance = (event->pos() - startPos).manhattanLength();
         if (distance >= QApplication::startDragDistance())
-        { startDrag(); }
+            startDrag();
     }
 }
 
@@ -40,10 +40,11 @@ void BloodBank::startDrag()
     //QImage IconeDrag;
     QDrag *Drag = new QDrag(this);
     QMimeData *mimeData = new QMimeData;
-    mimeData->setText("Blood Marqueur");
-    mimeData->setImageData( QImage( ":/icons/Blood.png" ) );
+    mimeData->setText("Blood");
     Drag->setPixmap(*BloodPxm);
-    Drag->setHotSpot(QPoint(20,20));
+    Drag->setHotSpot(QPoint(0,0));
+    //Drag->setHotSpot(QPoint(BloodPxm->width()/2,BloodPxm->height()/2));
+    // maybe set QCoreApplication::setCursor temporaly to BloodPmp ?
     Drag->setMimeData(mimeData);
     Drag->exec(Qt::CopyAction);
 }

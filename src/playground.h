@@ -24,6 +24,10 @@ protected:
     void wheelEvent(QWheelEvent *event);
     void scaleView(qreal scaleFactor);
     void contextMenuEvent(QContextMenuEvent *event);
+    void dragEnterEvent(QDragEnterEvent * event);
+    void dragMoveEvent(QDragMoveEvent *event);
+    void dragLeaveEvent(QDragLeaveEvent * event);
+    void dropEvent(QDropEvent * event);
 
 private slots:
     void ContextMenuSlot(QAction *ActionChoisie);
@@ -42,6 +46,7 @@ public:
 protected:
     void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
     void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
+    void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
     void dropEvent(QGraphicsSceneDragDropEvent *event);
 
 private:
@@ -67,22 +72,39 @@ protected:
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
     void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
     void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
+    void dragLeaveEvent(QGraphicsSceneDragDropEvent * event);
     void dropEvent(QGraphicsSceneDragDropEvent *event);
     void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     void hoverMoveEvent(QGraphicsSceneHoverEvent * event);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
 
 private:
-
     bool Taped;
     bool Turned;
     QString FacePixmapPath;
     QString TailPixmapPath;
     Carte *card;
     PathProvider path_list;
+    QPointF origin;
+    int radius;
+    double mySpreadingAngle;
+    qint8 i;
 
 private slots:
     void ContextMenuSlot(QAction *ActionChoisie);
+};
+
+// /////////////////////////////////////////////////////////////////////////////////////////
+// A blood item in the graphic scene
+class PGraphicsBlood : public QObject, public QGraphicsPixmapItem
+{
+   Q_OBJECT
+
+public:
+    PGraphicsBlood();
+
+private:
+
 };
 
 #endif // PLAYGROUND_H
