@@ -41,8 +41,8 @@ SOURCES +=  main.cpp\
             Widgets/bloodbank.cpp \
             Widgets/disciplinebutton.cpp \
             Widgets/vipedviewer.cpp \
-            Widgets/library.cpp \
-            hud.cpp
+            hud.cpp \
+    Widgets/cardsstackview.cpp
 
 HEADERS  += mainwindow.h \
             Global.h \
@@ -71,8 +71,8 @@ HEADERS  += mainwindow.h \
             Widgets/bloodbank.h \
             Widgets/disciplinebutton.h \
             Widgets/vipedviewer.h \
-            Widgets/library.h \
-            hud.h
+            hud.h \
+    Widgets/cardsstackview.h
 
 FORMS    += mainwindow.ui \
             dialogoptions.ui \
@@ -80,7 +80,8 @@ FORMS    += mainwindow.ui \
             tab_search_crypt.ui \
             tab_deck_tuning.ui \
             tab_gold_fich.ui \
-            hud.ui
+            hud.ui \
+    Widgets/cardsstackview.ui
 
 RESOURCES += res.qrc
 

@@ -141,5 +141,9 @@
         <file>icons/type/Conviction.gif</file>
         <file>icons/bourse.png</file>
         <file>icons/evil.png</file>
+        <file>icons/browse.png</file>
+        <file>icons/burn.png</file>
+        <file>icons/draw.png</file>
+        <file>icons/shuffle.png</file>
     </qresource>
 </RCC>

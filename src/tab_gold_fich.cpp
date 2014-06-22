@@ -8,12 +8,21 @@
 tab_gold_fich::tab_gold_fich(QWidget *parent) : QScrollArea(parent), ui(new Ui::tab_gold_fich)
 {
     ui->setupUi(this);
+
+    // allocation/setup of custom widgets
     currentDeck = new Deck(this);
-    BloodBank* Bourse = new BloodBank(this);
-    Hud *testHud = new Hud(this);
+    Bourse = new BloodBank(this);
+    testHud = new Hud(this);
+    LibraryWidget = new CardsStackView(this);
+    LibraryWidget->setSource(currentDeck);
+
+    // insertion into layouts
     ui->TopBoard->layout()->addWidget(testHud);
     ui->SideBoard->layout()->addWidget(Bourse);
-    Scenedejeu = new PGraphicsScene();
+    ui->SideBoard->layout()->addWidget(LibraryWidget);
+
+    // setup the scene
+    Scenedejeu = new PGraphicsScene(this);
     ui->TabledeJeu->setScene(Scenedejeu);
 
     connect( ui->pBOpenDeck, SIGNAL( pressed() ), this, SLOT( load_deck() ) );

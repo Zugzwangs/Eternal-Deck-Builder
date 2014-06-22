@@ -122,6 +122,11 @@ public:
     QList<Carte *>Crypt;
     QList<Carte *>Library;
     QList<Carte *>ashHeap;
+    QList<Carte *>Hand;
+    QList<Carte *>Uncontroled;
+    QList<Carte *>Uncapacited;
+    QList<Carte *>Removed;
+    QList<Carte *>InPlay;
 
 public slots:
 

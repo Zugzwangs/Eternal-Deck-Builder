@@ -2,6 +2,8 @@
 #define TAB_GOLD_FICH_H
 
 #include <QScrollArea>
+#include "Widgets/bloodbank.h"
+#include "Widgets/cardsstackview.h"
 #include "playground.h"
 #include "hud.h"
 #include "Global.h"
@@ -23,12 +25,14 @@ private:
     Ui::tab_gold_fich *ui;
 
     PathProvider path_list;
+    QString PathCartes;
+    QString PathDeck;
     DeckTranslator *translator;
     QGraphicsScene *Scenedejeu;
     Hud *testHud;
-    QString PathCartes;
-    QString PathDeck;
+    BloodBank* Bourse;
     Deck *currentDeck;
+    CardsStackView *LibraryWidget;
 
 public slots:
     void load_deck();
