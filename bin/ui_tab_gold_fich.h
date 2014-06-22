@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'tab_gold_fich.ui'
 **
-** Created by: Qt User Interface Compiler version 5.1.1
+** Created by: Qt User Interface Compiler version 5.2.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -91,8 +91,8 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(SideBoard->sizePolicy().hasHeightForWidth());
         SideBoard->setSizePolicy(sizePolicy1);
-        SideBoard->setMinimumSize(QSize(200, 0));
-        SideBoard->setMaximumSize(QSize(200, 16777215));
+        SideBoard->setMinimumSize(QSize(250, 0));
+        SideBoard->setMaximumSize(QSize(250, 16777215));
         SideBoard->setFrameShape(QFrame::StyledPanel);
         SideBoard->setFrameShadow(QFrame::Raised);
         verticalLayout_2 = new QVBoxLayout(SideBoard);

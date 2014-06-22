@@ -145,5 +145,7 @@
         <file>icons/burn.png</file>
         <file>icons/draw.png</file>
         <file>icons/shuffle.png</file>
+        <file>icons/Crypt_back.png</file>
+        <file>icons/Library_back.png</file>
     </qresource>
 </RCC>
