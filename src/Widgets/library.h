@@ -20,11 +20,8 @@ private:
     Deck *currentDeck;
 
 private slots:
-    bool draw();
-    bool burn();
-    bool shuffle();
-    void browse();
-
+    void open_browser();
+    void readDeckInfo();
 };
 
-#endif
+#endif // LIBRARY_H

@@ -18,7 +18,6 @@ private:
 
 signals:
     void request_deck_load();
-    void request_drawing();
     void request_game_restart();
 };
 

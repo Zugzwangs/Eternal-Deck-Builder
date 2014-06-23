@@ -39,7 +39,8 @@ private:
 public slots:
     void load_deck();
     void restart_game();
-    void test_draw();
+    void library_draw();
+    void crypt_draw();
 };
 
 #endif // TAB_GOLD_FICH_H

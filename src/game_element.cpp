@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <algorithm>
 #include "game_element.h"
 
 // /////////////////////////////////////////
@@ -104,12 +105,16 @@ QString Carte::getCommentaires() const { return(Commentaires); }
 // Objet deck
 Deck::Deck(QObject *parent) : QObject(parent)
 {
-
+    DeckName.clear();
+    LibrarySize = 0;
+    CryptSize = 0;
 }
 
-Deck::~Deck()
+void Deck::setupDeck()
 {
-
+    LibrarySize = Library.count();
+    CryptSize = Crypt.count();
+    emit deck_loaded();
 }
 
 void Deck::addCard(Carte *crt)
@@ -125,24 +130,95 @@ void Deck::addCard(Carte *crt)
         }
 }
 
+QString Deck::getDeckName()
+{
+    return DeckName;
+}
+
+int Deck::getLibrarySize()
+{
+    return LibrarySize;
+}
+
+int Deck::getCryptSize()
+{
+    return CryptSize;
+}
+
 Carte* Deck::drawLib()
 {
     if ( !Library.isEmpty() ){
-        return Library.takeAt(0);
+        Hand.append( Library.takeFirst() );
+        return Hand.last();
         }
-    else
-        {
+    else{
         return NULL;
-        qDebug() << "you can't draw, library is empty.";
         }
+}
+
+Carte* Deck::drawCrypt()
+{
+    if ( !Crypt.isEmpty() ){
+        Uncontroled.append( Crypt.takeFirst() );
+        return Uncontroled.last();
+        }
+    else{
+        return NULL;
+        }
+}
+
+Carte* Deck::burnLib()
+{
+    if ( !Library.isEmpty() ){
+        ashHeap.append( Library.takeFirst() );
+        return ashHeap.last();
+        }
+    else{
+        return NULL;
+        }
+}
+
+Carte* Deck::burnCrypt()
+{
+    if ( !Crypt.isEmpty() ){
+        ashHeap.append( Crypt.takeFirst() );
+        return ashHeap.last();
+        }
+    else{
+        return NULL;
+        }
+}
+
+void Deck::library_shuffle()
+{
+    std::random_shuffle(Library.begin(), Library.end());
+    // or maybe
+    //#include <random>
+    //std::random_device rd;
+    //std::mt19937 rng(rd());
+    //std::shuffle(Library.begin(), Library.end(), rng);
+}
+
+void Deck::crypt_shuffle()
+{
+    std::random_shuffle(Crypt.begin(), Crypt.end());
 }
 
 void Deck::clearDeck()
 {
-
+    DeckName.clear();
+    Crypt.clear();
+    Library.clear();
+    ashHeap.clear();
+    Hand.clear();
+    Uncontroled.clear();
+    Uncapacited.clear();
+    Removed.clear();
+    InPlay.clear();
+    emit deck_cleared();
 }
 
-void Deck::setUpDeck()
+Deck::~Deck()
 {
 
 }

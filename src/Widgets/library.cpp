@@ -1,40 +1,33 @@
+#include <QDebug>
 #include "library.h"
 #include "ui_library.h"
 
 Library::Library(QWidget *parent) : QFrame(parent), ui(new Ui::Library)
 {
     ui->setupUi(this);
-
-    /*connect( ui->pbBrowse,  SIGNAL(clicked()), this, SLOT(browse()) );
-    connect( ui->pbBurn,    SIGNAL(clicked()), this, SLOT(burn()) );
-    connect( ui->pbDraw,    SIGNAL(clicked()), this, SLOT(draw()) );
-    connect( ui->pbShuffle, SIGNAL(clicked()), this, SLOT(shuffle()) );*/
 }
 
 void Library::setSource(Deck *d)
 {
     currentDeck = d;
-    connect (ui->pbDraw, SIGNAL( clicked() ), currentDeck, SLOT( request_game_restart() ) );
+    // connect user actions toward locals or deck's slots
+    connect (ui->pbShuffle, SIGNAL( clicked() ), currentDeck, SLOT( library_shuffle() ));
+    connect (ui->pbDraw,    SIGNAL( clicked() ), currentDeck, SLOT( drawLib() ));
+    connect (ui->pbBurn,    SIGNAL( clicked() ), currentDeck, SLOT( burnLib() ));
+    connect (ui->pbBrowse,  SIGNAL( clicked() ), this,        SLOT( open_browser() ));
+    // connect relevants signals coming from deck to locals slots
+    connect (currentDeck,   SIGNAL( deck_loaded() ), this,    SLOT( readDeckInfo() ));
 }
 
-bool Library::draw()
+void Library::open_browser()
 {
-
+    qDebug() << "Browsing library";
 }
 
-bool Library::burn()
+void Library::readDeckInfo()
 {
-
-}
-
-bool Library::shuffle()
-{
-
-}
-
-void Library::browse()
-{
-
+    QString cNbr = QString::number( currentDeck->Library.count() );
+    ui->CardCount->setText( cNbr + " / " + cNbr);
 }
 
 Library::~Library()

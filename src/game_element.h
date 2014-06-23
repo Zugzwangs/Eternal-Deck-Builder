@@ -106,19 +106,13 @@ class Deck : public QObject
 
 public:
     Deck(QObject* parent=0);
-    ~Deck();
     void addCard(Carte *crt);
-    Carte* drawLib();
-    void clearDeck();
-    void setUpDeck();
+    void setupDeck();
+    QString getDeckName();
+    int getLibrarySize();
+    int getCryptSize();
+    ~Deck();
 
-    int Id;
-    QString Nom;
-    QString Auteur;
-    QString Descriptif;
-    QString Resultat;
-    QString Date;
-    QString Commentaire;
     QList<Carte *>Crypt;
     QList<Carte *>Library;
     QList<Carte *>ashHeap;
@@ -129,6 +123,22 @@ public:
     QList<Carte *>InPlay;
 
 public slots:
+    Carte* drawLib();
+    Carte* drawCrypt();
+    Carte* burnLib();
+    Carte* burnCrypt();
+    void clearDeck();
+    void library_shuffle();
+    void crypt_shuffle();
+
+private:
+    int LibrarySize;
+    int CryptSize;
+    QString DeckName;
+
+signals:
+    void deck_cleared();
+    void deck_loaded();
 
 };
 

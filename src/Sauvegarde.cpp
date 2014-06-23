@@ -209,7 +209,7 @@ bool DeckTranslator::EdbToDeck( QString filePath, Deck *D )
         if ( reader.isStartElement() )
             {
             int occurence = reader.attributes().value("Number").toInt();
-            for (int i=1; i<occurence; i++)
+            for (int i=1; i<=occurence; i++)
                 {
                 currentCard = new Carte( queryCardsInfo(reader.attributes().value("name").toString(), "VampireList") );
                 D->addCard( currentCard );
@@ -225,7 +225,7 @@ bool DeckTranslator::EdbToDeck( QString filePath, Deck *D )
         if ( reader.isStartElement() )
             {
             int occurence = reader.attributes().value("Number").toInt();
-            for (int i=1; i<occurence; i++)
+            for (int i=1; i<=occurence; i++)
                 {
                 currentCard = new Carte( queryCardsInfo(reader.attributes().value("name").toString(), "CardList") );
                 D->addCard( currentCard );
@@ -234,6 +234,7 @@ bool DeckTranslator::EdbToDeck( QString filePath, Deck *D )
         reader.readNextStartElement();
         }
 
+    D->setupDeck();
     file.close();
     return true;
 }

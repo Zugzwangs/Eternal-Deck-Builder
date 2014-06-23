@@ -19,10 +19,9 @@ private:
     Ui::Crypt *ui;
     Deck *currentDeck;
 
-public slots:
-
-signals:
-
+private slots:
+    void open_browser();
+    void readDeckInfo();
 };
 
 #endif // CRYPT_H
