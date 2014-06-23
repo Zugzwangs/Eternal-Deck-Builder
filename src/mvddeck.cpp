@@ -291,7 +291,7 @@ bool StatsDisciplineModel::setData(const QModelIndex &index, const QVariant &val
         if ( value.canConvert(QMetaType::Int) )
             myMax = qMax( myMax, value.toInt() );
         }
-    QStandardItemModel::setData(index, value, role);
+    return QStandardItemModel::setData(index, value, role);
 }
 
 

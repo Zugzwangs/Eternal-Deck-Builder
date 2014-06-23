@@ -42,7 +42,8 @@ SOURCES +=  main.cpp\
             Widgets/disciplinebutton.cpp \
             Widgets/vipedviewer.cpp \
             hud.cpp \
-            Widgets/cardsstackview.cpp
+            Widgets/library.cpp \
+    Widgets/crypt.cpp
 
 HEADERS  += mainwindow.h \
             Global.h \
@@ -72,7 +73,8 @@ HEADERS  += mainwindow.h \
             Widgets/disciplinebutton.h \
             Widgets/vipedviewer.h \
             hud.h \
-            Widgets/cardsstackview.h
+            Widgets/library.h \
+    Widgets/crypt.h
 
 FORMS    += mainwindow.ui \
             dialogoptions.ui \
@@ -81,7 +83,8 @@ FORMS    += mainwindow.ui \
             tab_deck_tuning.ui \
             tab_gold_fich.ui \
             hud.ui \
-            Widgets/cardsstackview.ui
+            Widgets/library.ui \
+    Widgets/crypt.ui
 
 RESOURCES += res.qrc
 

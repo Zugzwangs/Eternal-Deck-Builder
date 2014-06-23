@@ -3,9 +3,7 @@
 
 #include <QScrollArea>
 
-namespace Ui {
-class Hud;
-}
+namespace Ui { class Hud; }
 
 class Hud : public QScrollArea
 {
@@ -17,6 +15,11 @@ public:
 
 private:
     Ui::Hud *ui;
+
+signals:
+    void request_deck_load();
+    void request_drawing();
+    void request_game_restart();
 };
 
 #endif // HUD_H

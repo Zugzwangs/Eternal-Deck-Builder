@@ -3,7 +3,8 @@
 
 #include <QScrollArea>
 #include "Widgets/bloodbank.h"
-#include "Widgets/cardsstackview.h"
+#include "Widgets/crypt.h"
+#include "Widgets/library.h"
 #include "playground.h"
 #include "hud.h"
 #include "Global.h"
@@ -32,7 +33,8 @@ private:
     Hud *testHud;
     BloodBank* Bourse;
     Deck *currentDeck;
-    CardsStackView *LibraryWidget;
+    Library *LibraryWidget;
+    Crypt *CryptWidget;
 
 public slots:
     void load_deck();

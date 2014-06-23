@@ -3,7 +3,6 @@
 
 #include "tab_gold_fich.h"
 #include "ui_tab_gold_fich.h"
-#include "Widgets/bloodbank.h"
 
 tab_gold_fich::tab_gold_fich(QWidget *parent) : QScrollArea(parent), ui(new Ui::tab_gold_fich)
 {
@@ -13,21 +12,24 @@ tab_gold_fich::tab_gold_fich(QWidget *parent) : QScrollArea(parent), ui(new Ui::
     currentDeck = new Deck(this);
     Bourse = new BloodBank(this);
     testHud = new Hud(this);
-    LibraryWidget = new CardsStackView(this);
+    LibraryWidget = new Library(this);
+    CryptWidget = new Crypt(this);
     LibraryWidget->setSource(currentDeck);
+    CryptWidget->setSource(currentDeck);
 
     // insertion into layouts
     ui->TopBoard->layout()->addWidget(testHud);
     ui->SideBoard->layout()->addWidget(Bourse);
     ui->SideBoard->layout()->addWidget(LibraryWidget);
+    ui->SideBoard->layout()->addWidget(CryptWidget);
 
     // setup the scene
     Scenedejeu = new PGraphicsScene(this);
     ui->TabledeJeu->setScene(Scenedejeu);
 
-    connect( ui->pBOpenDeck, SIGNAL( pressed() ), this, SLOT( load_deck() ) );
-    connect( ui->pBRestartGame, SIGNAL( pressed() ), this, SLOT( restart_game() ) );
-    connect (ui->pBdrawLibrary, SIGNAL( pressed() ), this, SLOT( test_draw() ) );
+    connect( testHud, SIGNAL( request_deck_load() ), this, SLOT( load_deck() ) );
+    connect( testHud, SIGNAL( request_drawing() ), this, SLOT( restart_game() ) );
+    connect( testHud, SIGNAL( request_game_restart() ), this, SLOT( test_draw() ) );
 }
 
 void tab_gold_fich::initialisation(DeckTranslator *DT)

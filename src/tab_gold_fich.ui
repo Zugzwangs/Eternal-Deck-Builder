@@ -152,27 +152,6 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item>
-           <widget class="QPushButton" name="pBRestartGame">
-            <property name="text">
-             <string>restart game</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pBOpenDeck">
-            <property name="text">
-             <string>Open deck</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pBdrawLibrary">
-            <property name="text">
-             <string>draw library</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </widget>
        </item>

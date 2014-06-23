@@ -78,6 +78,7 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setContentsMargins(2, 2, 2, 0);
         tabEditorModule = new QTabWidget(centralWidget);
         tabEditorModule->setObjectName(QStringLiteral("tabEditorModule"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);

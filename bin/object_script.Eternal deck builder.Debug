@@ -27,7 +27,8 @@ INPUT(
 ./debug\disciplinebutton.o
 ./debug\vipedviewer.o
 ./debug\hud.o
-./debug\cardsstackview.o
+./debug\library.o
+./debug\crypt.o
 ./debug\qrc_res.o
 ./debug\moc_mainwindow.o
 ./debug\moc_dialogoptions.o
@@ -51,5 +52,6 @@ INPUT(
 ./debug\moc_bloodbank.o
 ./debug\moc_vipedviewer.o
 ./debug\moc_hud.o
-./debug\moc_cardsstackview.o
+./debug\moc_library.o
+./debug\moc_crypt.o
 );
