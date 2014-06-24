@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'tab_gold_fich.ui'
 **
-** Created by: Qt User Interface Compiler version 5.2.1
+** Created by: Qt User Interface Compiler version 5.1.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QScrollArea>
@@ -30,9 +31,12 @@ public:
     QVBoxLayout *verticalLayout;
     QFrame *TopBoard;
     QHBoxLayout *horizontalLayout;
-    QFrame *frame;
+    QFrame *MainFrame;
     QHBoxLayout *horizontalLayout_2;
+    QFrame *GameBoard;
+    QVBoxLayout *verticalLayout_3;
     PGraphicsView *TabledeJeu;
+    QGraphicsView *HandView;
     QFrame *SideBoard;
     QVBoxLayout *verticalLayout_2;
 
@@ -49,6 +53,7 @@ public:
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1111, 797));
         verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
+        verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         TopBoard = new QFrame(scrollAreaWidgetContents);
@@ -58,29 +63,57 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(TopBoard->sizePolicy().hasHeightForWidth());
         TopBoard->setSizePolicy(sizePolicy);
-        TopBoard->setMinimumSize(QSize(0, 160));
-        TopBoard->setMaximumSize(QSize(16777215, 160));
-        TopBoard->setFrameShape(QFrame::StyledPanel);
-        TopBoard->setFrameShadow(QFrame::Raised);
+        TopBoard->setMinimumSize(QSize(0, 140));
+        TopBoard->setMaximumSize(QSize(16777215, 140));
+        TopBoard->setFrameShape(QFrame::NoFrame);
+        TopBoard->setFrameShadow(QFrame::Plain);
+        TopBoard->setLineWidth(0);
         horizontalLayout = new QHBoxLayout(TopBoard);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
 
         verticalLayout->addWidget(TopBoard);
 
-        frame = new QFrame(scrollAreaWidgetContents);
-        frame->setObjectName(QStringLiteral("frame"));
-        frame->setFrameShape(QFrame::StyledPanel);
-        frame->setFrameShadow(QFrame::Raised);
-        horizontalLayout_2 = new QHBoxLayout(frame);
+        MainFrame = new QFrame(scrollAreaWidgetContents);
+        MainFrame->setObjectName(QStringLiteral("MainFrame"));
+        MainFrame->setFrameShape(QFrame::NoFrame);
+        MainFrame->setFrameShadow(QFrame::Plain);
+        MainFrame->setLineWidth(0);
+        horizontalLayout_2 = new QHBoxLayout(MainFrame);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        TabledeJeu = new PGraphicsView(frame);
+        GameBoard = new QFrame(MainFrame);
+        GameBoard->setObjectName(QStringLiteral("GameBoard"));
+        GameBoard->setFrameShape(QFrame::NoFrame);
+        GameBoard->setFrameShadow(QFrame::Plain);
+        GameBoard->setLineWidth(0);
+        verticalLayout_3 = new QVBoxLayout(GameBoard);
+        verticalLayout_3->setSpacing(0);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
+        TabledeJeu = new PGraphicsView(GameBoard);
         TabledeJeu->setObjectName(QStringLiteral("TabledeJeu"));
+        TabledeJeu->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        TabledeJeu->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-        horizontalLayout_2->addWidget(TabledeJeu);
+        verticalLayout_3->addWidget(TabledeJeu);
 
-        SideBoard = new QFrame(frame);
+        HandView = new QGraphicsView(GameBoard);
+        HandView->setObjectName(QStringLiteral("HandView"));
+        HandView->setMinimumSize(QSize(0, 150));
+        HandView->setMaximumSize(QSize(16777215, 300));
+        QBrush brush(QColor(170, 170, 255, 255));
+        brush.setStyle(Qt::SolidPattern);
+        HandView->setBackgroundBrush(brush);
+
+        verticalLayout_3->addWidget(HandView);
+
+        verticalLayout_3->setStretch(0, 3);
+        verticalLayout_3->setStretch(1, 1);
+
+        horizontalLayout_2->addWidget(GameBoard);
+
+        SideBoard = new QFrame(MainFrame);
         SideBoard->setObjectName(QStringLiteral("SideBoard"));
         QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
@@ -89,18 +122,19 @@ public:
         SideBoard->setSizePolicy(sizePolicy1);
         SideBoard->setMinimumSize(QSize(250, 0));
         SideBoard->setMaximumSize(QSize(250, 16777215));
-        SideBoard->setFrameShape(QFrame::StyledPanel);
-        SideBoard->setFrameShadow(QFrame::Raised);
+        SideBoard->setFrameShape(QFrame::NoFrame);
+        SideBoard->setFrameShadow(QFrame::Plain);
+        SideBoard->setLineWidth(0);
         verticalLayout_2 = new QVBoxLayout(SideBoard);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
 
         horizontalLayout_2->addWidget(SideBoard);
 
-        horizontalLayout_2->setStretch(0, 4);
+        horizontalLayout_2->setStretch(0, 1);
         horizontalLayout_2->setStretch(1, 1);
 
-        verticalLayout->addWidget(frame);
+        verticalLayout->addWidget(MainFrame);
 
         verticalLayout->setStretch(0, 1);
         verticalLayout->setStretch(1, 3);

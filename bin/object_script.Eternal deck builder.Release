@@ -29,6 +29,7 @@ INPUT(
 ./release\hud.o
 ./release\library.o
 ./release\crypt.o
+./release\ashheap.o
 ./release\qrc_res.o
 ./release\moc_mainwindow.o
 ./release\moc_dialogoptions.o
@@ -54,4 +55,5 @@ INPUT(
 ./release\moc_hud.o
 ./release\moc_library.o
 ./release\moc_crypt.o
+./release\moc_ashheap.o
 );

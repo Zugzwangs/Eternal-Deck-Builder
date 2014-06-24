@@ -2,9 +2,11 @@
 #define TAB_GOLD_FICH_H
 
 #include <QScrollArea>
+#include <QSplitter>
 #include "Widgets/bloodbank.h"
 #include "Widgets/crypt.h"
 #include "Widgets/library.h"
+#include "Widgets/ashheap.h"
 #include "playground.h"
 #include "hud.h"
 #include "Global.h"
@@ -28,6 +30,7 @@ private:
     PathProvider path_list;
     QString PathCartes;
     QString PathDeck;
+    QSplitter *splitter;
     DeckTranslator *translator;
     QGraphicsScene *Scenedejeu;
     Hud *testHud;
@@ -35,6 +38,7 @@ private:
     Deck *currentDeck;
     Library *LibraryWidget;
     Crypt *CryptWidget;
+    AshHeap *AshHeapWidget;
 
 public slots:
     void load_deck();

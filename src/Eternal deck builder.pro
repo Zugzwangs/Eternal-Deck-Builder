@@ -43,7 +43,8 @@ SOURCES +=  main.cpp\
             Widgets/vipedviewer.cpp \
             hud.cpp \
             Widgets/library.cpp \
-    Widgets/crypt.cpp
+    Widgets/crypt.cpp \
+    Widgets/ashheap.cpp
 
 HEADERS  += mainwindow.h \
             Global.h \
@@ -74,7 +75,8 @@ HEADERS  += mainwindow.h \
             Widgets/vipedviewer.h \
             hud.h \
             Widgets/library.h \
-    Widgets/crypt.h
+    Widgets/crypt.h \
+    Widgets/ashheap.h
 
 FORMS    += mainwindow.ui \
             dialogoptions.ui \
@@ -84,7 +86,8 @@ FORMS    += mainwindow.ui \
             tab_gold_fich.ui \
             hud.ui \
             Widgets/library.ui \
-    Widgets/crypt.ui
+    Widgets/crypt.ui \
+    Widgets/ashheap.ui
 
 RESOURCES += res.qrc
 

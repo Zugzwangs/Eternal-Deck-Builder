@@ -8,20 +8,31 @@ tab_gold_fich::tab_gold_fich(QWidget *parent) : QScrollArea(parent), ui(new Ui::
 {
     ui->setupUi(this);
 
+    // setup splitter
+    splitter = new QSplitter();
+    splitter->setOrientation(Qt::Vertical);
+    ui->GameBoard->layout()->addWidget(splitter);
+    splitter->addWidget(ui->TabledeJeu);
+    splitter->addWidget(ui->HandView);
+
     // allocation/setup of custom widgets
     currentDeck = new Deck(this);
     Bourse = new BloodBank(this);
     testHud = new Hud(this);
     LibraryWidget = new Library(this);
     CryptWidget = new Crypt(this);
+    AshHeapWidget = new AshHeap(this);
     LibraryWidget->setSource(currentDeck);
     CryptWidget->setSource(currentDeck);
+    AshHeapWidget->setSource(currentDeck);
 
     // insertion into layouts
     ui->TopBoard->layout()->addWidget(testHud);
-    ui->SideBoard->layout()->addWidget(Bourse);
+    ui->TopBoard->layout()->addWidget(Bourse);
+    ui->SideBoard->layout()->addWidget(AshHeapWidget);
     ui->SideBoard->layout()->addWidget(LibraryWidget);
     ui->SideBoard->layout()->addWidget(CryptWidget);
+
 
     // setup the scene
     Scenedejeu = new PGraphicsScene(this);

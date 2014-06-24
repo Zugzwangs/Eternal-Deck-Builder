@@ -29,6 +29,7 @@ INPUT(
 ./debug\hud.o
 ./debug\library.o
 ./debug\crypt.o
+./debug\ashheap.o
 ./debug\qrc_res.o
 ./debug\moc_mainwindow.o
 ./debug\moc_dialogoptions.o
@@ -54,4 +55,5 @@ INPUT(
 ./debug\moc_hud.o
 ./debug\moc_library.o
 ./debug\moc_crypt.o
+./debug\moc_ashheap.o
 );
