@@ -140,7 +140,7 @@ signals:
     void deck_cleared();
     void deck_loaded();
     void cardSendtoHand(Carte* C);
-
+    void cardSendtoAshHeap(Carte* C);
 };
 
 class Player : public QObject

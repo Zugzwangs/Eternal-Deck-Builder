@@ -14,12 +14,12 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QFrame>
-#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include <playground.h>
 #include "playground.h"
 
 QT_BEGIN_NAMESPACE
@@ -36,7 +36,7 @@ public:
     QFrame *GameBoard;
     QVBoxLayout *verticalLayout_3;
     PGraphicsView *TabledeJeu;
-    QGraphicsView *HandView;
+    HandGraphicsView *HandView;
     QFrame *SideBoard;
     QVBoxLayout *verticalLayout_2;
 
@@ -98,7 +98,7 @@ public:
 
         verticalLayout_3->addWidget(TabledeJeu);
 
-        HandView = new QGraphicsView(GameBoard);
+        HandView = new HandGraphicsView(GameBoard);
         HandView->setObjectName(QStringLiteral("HandView"));
         HandView->setMinimumSize(QSize(0, 150));
         HandView->setMaximumSize(QSize(16777215, 300));

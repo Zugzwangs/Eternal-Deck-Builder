@@ -146,16 +146,17 @@ qDebug() << "PGraphicsScene::dropEvent";
 // Custom graphic view that show the hand
 HandGraphicsView::HandGraphicsView(QWidget* parent) : QGraphicsView(parent)
 {
-
+    setAcceptDrops(true);
+    scale(0.5, 0.5);
 }
-void HandGraphicsView::wheelEvent(QWheelEvent *event){}
-void HandGraphicsView::scaleView(qreal scaleFactor){}
-void HandGraphicsView::contextMenuEvent(QContextMenuEvent *event){}
-void HandGraphicsView::dragEnterEvent(QDragEnterEvent * event){}
+void HandGraphicsView::wheelEvent(QWheelEvent *event){} //poubelle ?
+void HandGraphicsView::scaleView(qreal scaleFactor){}   //adapter le scale à la hauteur de la view pour voir toujours toute la hauteur de la scene
+void HandGraphicsView::contextMenuEvent(QContextMenuEvent *event){} //pas forcement besoin
+void HandGraphicsView::dragEnterEvent(QDragEnterEvent * event){} //on prend les drop de carte uniquement et on vire les enfants
 void HandGraphicsView::dragMoveEvent(QDragMoveEvent *event){}
 void HandGraphicsView::dragLeaveEvent(QDragLeaveEvent * event){}
 void HandGraphicsView::dropEvent(QDropEvent * event){}
-void HandGraphicsView::ContextMenuSlot(QAction *ActionChoisie){}
+void HandGraphicsView::ContextMenuSlot(QAction *ActionChoisie){} //pas forcement besoin
 
 // ///////////////////////////////////////////////////////////////////////////////////////////
 // Custom graphic scene who host the Hand
@@ -163,6 +164,7 @@ HandGraphicsScene::HandGraphicsScene(QWidget* parent) : QGraphicsScene(parent)
 {
     setSceneRect(-1000,-200,1000,200);
 }
+
 void HandGraphicsScene::setSource(Deck *d)
 {
     currentDeck = d;

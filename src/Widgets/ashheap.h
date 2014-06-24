@@ -15,6 +15,9 @@ public:
     void setSource(Deck *d);
     ~AshHeap();
 
+public slots:
+    void AddCardtoAshHeap(Carte *C);
+
 private:
     Ui::AshHeap *ui;
     Deck *currentDeck;

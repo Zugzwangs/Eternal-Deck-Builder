@@ -172,6 +172,7 @@ Carte* Deck::burnLib()
 {
     if ( !Library.isEmpty() ){
         ashHeap.append( Library.takeFirst() );
+        emit cardSendtoAshHeap( ashHeap.last() );
         return ashHeap.last();
         }
     else{
@@ -183,6 +184,7 @@ Carte* Deck::burnCrypt()
 {
     if ( !Crypt.isEmpty() ){
         ashHeap.append( Crypt.takeFirst() );
+        emit cardSendtoAshHeap( ashHeap.last() );
         return ashHeap.last();
         }
     else{

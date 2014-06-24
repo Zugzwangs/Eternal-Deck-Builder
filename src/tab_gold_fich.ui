@@ -157,7 +157,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QGraphicsView" name="HandView">
+           <widget class="HandGraphicsView" name="HandView">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -240,6 +240,11 @@
    <class>PGraphicsView</class>
    <extends>QGraphicsView</extends>
    <header>playground.h</header>
+  </customwidget>
+  <customwidget>
+   <class>HandGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">playground.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
