@@ -48,9 +48,51 @@ protected:
     void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
     void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
     void dropEvent(QGraphicsSceneDragDropEvent *event);
+};
+
+// /////////////////////////////////////////////////////////////////////////////////////////
+// Custom graphic view that show the hand
+class HandGraphicsView : public QGraphicsView
+{
+   Q_OBJECT
+
+public:
+    explicit HandGraphicsView(QWidget* parent=0);
+
+protected:
+    void wheelEvent(QWheelEvent *event);
+    void scaleView(qreal scaleFactor);
+    void contextMenuEvent(QContextMenuEvent *event);
+    void dragEnterEvent(QDragEnterEvent * event);
+    void dragMoveEvent(QDragMoveEvent *event);
+    void dragLeaveEvent(QDragLeaveEvent * event);
+    void dropEvent(QDropEvent * event);
+
+private slots:
+    void ContextMenuSlot(QAction *ActionChoisie);
+};
+
+// ///////////////////////////////////////////////////////////////////////////////////////////
+// Custom graphic scene who host the Hand
+class HandGraphicsScene : public QGraphicsScene
+{
+   Q_OBJECT
+
+public:
+    explicit HandGraphicsScene(QWidget* parent=0);
+    void setSource(Deck *d);
+
+public slots:
+    void AddCardtoHand(Carte *C);
+
+protected:
+    void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
+    void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
+    void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
+    void dropEvent(QGraphicsSceneDragDropEvent *event);
 
 private:
-
+    Deck *currentDeck;
 };
 
 // /////////////////////////////////////////////////////////////////////////////////////////

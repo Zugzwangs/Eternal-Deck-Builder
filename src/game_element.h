@@ -139,6 +139,7 @@ private:
 signals:
     void deck_cleared();
     void deck_loaded();
+    void cardSendtoHand(Carte* C);
 
 };
 

@@ -142,6 +142,45 @@ qDebug() << "PGraphicsScene::dropEvent";
     QGraphicsScene::dropEvent(event);
 }
 
+// /////////////////////////////////////////////////////////////////////////////////////////
+// Custom graphic view that show the hand
+HandGraphicsView::HandGraphicsView(QWidget* parent) : QGraphicsView(parent)
+{
+
+}
+void HandGraphicsView::wheelEvent(QWheelEvent *event){}
+void HandGraphicsView::scaleView(qreal scaleFactor){}
+void HandGraphicsView::contextMenuEvent(QContextMenuEvent *event){}
+void HandGraphicsView::dragEnterEvent(QDragEnterEvent * event){}
+void HandGraphicsView::dragMoveEvent(QDragMoveEvent *event){}
+void HandGraphicsView::dragLeaveEvent(QDragLeaveEvent * event){}
+void HandGraphicsView::dropEvent(QDropEvent * event){}
+void HandGraphicsView::ContextMenuSlot(QAction *ActionChoisie){}
+
+// ///////////////////////////////////////////////////////////////////////////////////////////
+// Custom graphic scene who host the Hand
+HandGraphicsScene::HandGraphicsScene(QWidget* parent) : QGraphicsScene(parent)
+{
+    setSceneRect(-1000,-200,1000,200);
+}
+void HandGraphicsScene::setSource(Deck *d)
+{
+    currentDeck = d;
+    connect(currentDeck, SIGNAL(cardSendtoHand(Carte*)), this, SLOT(AddCardtoHand(Carte*)));
+}
+
+void HandGraphicsScene::AddCardtoHand(Carte *C)
+{
+    PGraphicsPixmapItem* CardItem  = new PGraphicsPixmapItem(C);
+    CardItem->setPos(10, 10);
+    addItem(CardItem);
+}
+
+void HandGraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event){}
+void HandGraphicsScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){}
+void HandGraphicsScene::dragLeaveEvent(QGraphicsSceneDragDropEvent *event){}
+void HandGraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event){}
+
 // ///////////////////////////////////////////////////////////////////////////////////////////
 // Card item
 PGraphicsPixmapItem::PGraphicsPixmapItem(Carte *C, QGraphicsItem *parent) : QGraphicsPixmapItem(parent)

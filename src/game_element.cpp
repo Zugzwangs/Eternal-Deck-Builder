@@ -149,6 +149,7 @@ Carte* Deck::drawLib()
 {
     if ( !Library.isEmpty() ){
         Hand.append( Library.takeFirst() );
+        emit cardSendtoHand(Hand.last());
         return Hand.last();
         }
     else{

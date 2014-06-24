@@ -32,7 +32,8 @@ private:
     QString PathDeck;
     QSplitter *splitter;
     DeckTranslator *translator;
-    QGraphicsScene *Scenedejeu;
+    PGraphicsScene *Scenedejeu;
+    HandGraphicsScene* HandZone;
     Hud *testHud;
     BloodBank* Bourse;
     Deck *currentDeck;
@@ -43,8 +44,7 @@ private:
 public slots:
     void load_deck();
     void restart_game();
-    void library_draw();
-    void crypt_draw();
+
 };
 
 #endif // TAB_GOLD_FICH_H

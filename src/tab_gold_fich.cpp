@@ -34,9 +34,12 @@ tab_gold_fich::tab_gold_fich(QWidget *parent) : QScrollArea(parent), ui(new Ui::
     ui->SideBoard->layout()->addWidget(CryptWidget);
 
 
-    // setup the scene
+    // setup the scenes
     Scenedejeu = new PGraphicsScene(this);
+    HandZone = new HandGraphicsScene(this);
     ui->TabledeJeu->setScene(Scenedejeu);
+    ui->HandView->setScene(HandZone);
+    HandZone->setSource(currentDeck);
 
     // Hud connections
     connect( testHud, SIGNAL( request_deck_load() ), this, SLOT( load_deck() ) );
@@ -53,11 +56,6 @@ void tab_gold_fich::initialisation(DeckTranslator *DT)
     translator = DT;
 }
 
-tab_gold_fich::~tab_gold_fich()
-{
-    delete ui;
-}
-
 void tab_gold_fich::load_deck()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open Deck"), PathDeck, tr("Deck Files (*.edb)"));
@@ -67,36 +65,14 @@ void tab_gold_fich::load_deck()
     translator->EdbToDeck(fileName, currentDeck);
 }
 
-void tab_gold_fich::library_draw()
-{
-    Carte* carte_pioched = currentDeck->drawLib();
-    if ( !carte_pioched )
-        {
-        qDebug() << "la biblio est vide !";
-        return;
-        }
-
-    PGraphicsPixmapItem* CardItem  = new PGraphicsPixmapItem(carte_pioched);
-    CardItem->setPos(400, 600);
-    Scenedejeu->addItem(CardItem);
-}
-
-void tab_gold_fich::crypt_draw()
-{
-    Carte* carte_pioched = currentDeck->drawCrypt();
-    if ( !carte_pioched )
-        {
-        qDebug() << "la crypte est vide !";
-        return;
-        }
-
-    PGraphicsPixmapItem* CardItem  = new PGraphicsPixmapItem(carte_pioched);
-    CardItem->setPos(500, 600);
-    Scenedejeu->addItem(CardItem);
-}
-
 void tab_gold_fich::restart_game()
 {
 
 }
+
+tab_gold_fich::~tab_gold_fich()
+{
+    delete ui;
+}
+
 
