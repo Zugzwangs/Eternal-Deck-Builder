@@ -147,7 +147,7 @@ qDebug() << "PGraphicsScene::dropEvent";
 HandGraphicsView::HandGraphicsView(QWidget* parent) : QGraphicsView(parent)
 {
     setAcceptDrops(true);
-    scale(0.5, 0.5);
+    scale(0.2, 0.2);
 }
 void HandGraphicsView::wheelEvent(QWheelEvent *event){} //poubelle ?
 void HandGraphicsView::scaleView(qreal scaleFactor){}   //adapter le scale à la hauteur de la view pour voir toujours toute la hauteur de la scene
@@ -162,7 +162,11 @@ void HandGraphicsView::ContextMenuSlot(QAction *ActionChoisie){} //pas forcement
 // Custom graphic scene who host the Hand
 HandGraphicsScene::HandGraphicsScene(QWidget* parent) : QGraphicsScene(parent)
 {
-    setSceneRect(-1000,-200,1000,200);
+    setSceneRect(-2000,-200,4000,400);
+    QGraphicsLinearLayout *handLayout = new QGraphicsLinearLayout();
+    graphicsContainer = new QGraphicsWidget();
+    graphicsContainer->setLayout(handLayout);
+    addItem(graphicsContainer);
 }
 
 void HandGraphicsScene::setSource(Deck *d)
@@ -174,8 +178,11 @@ void HandGraphicsScene::setSource(Deck *d)
 void HandGraphicsScene::AddCardtoHand(Carte *C)
 {
     PGraphicsPixmapItem* CardItem  = new PGraphicsPixmapItem(C);
-    CardItem->setPos(10, 10);
-    addItem(CardItem);
+    dynamic_cast<QGraphicsLinearLayout *>( graphicsContainer->layout() )->addItem(CardItem);
+    qDebug() << graphicsContainer->geometry();
+    qDebug() << graphicsContainer->boundingRect();
+    //graphicsContainer->setPos();
+
 }
 
 void HandGraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event){}
@@ -185,7 +192,7 @@ void HandGraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event){}
 
 // ///////////////////////////////////////////////////////////////////////////////////////////
 // Card item
-PGraphicsPixmapItem::PGraphicsPixmapItem(Carte *C, QGraphicsItem *parent) : QGraphicsPixmapItem(parent)
+PGraphicsPixmapItem::PGraphicsPixmapItem(Carte *C, QGraphicsItem *parent) : QGraphicsPixmapItem(parent), QGraphicsLayoutItem()
 {
     //setttings corresponding to card/game datas
     card = C;
@@ -211,7 +218,7 @@ PGraphicsPixmapItem::PGraphicsPixmapItem(Carte *C, QGraphicsItem *parent) : QGra
             break;
         }
 
-    //settings corresponding to QGraphicsPixmapItem part
+    //settings corresponding to the QGraphicsPixmapItem part
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemClipsChildrenToShape, true);
@@ -227,6 +234,9 @@ PGraphicsPixmapItem::PGraphicsPixmapItem(Carte *C, QGraphicsItem *parent) : QGra
     radius = (boundingRect().width()*32)/100;
     mySpreadingAngle = 0.62831853071;
     i = 0;
+
+    //settings corresponding to the QGraphicsLayoutItem part
+    setGraphicsItem(this);
 }
 
 CardType PGraphicsPixmapItem::getCardType()
@@ -311,7 +321,6 @@ qDebug() << "PGraphicsPixmapItem::dragLeaveEvent";
     event->accept();
 }
 
-
 void PGraphicsPixmapItem::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
 qDebug() << "PGraphicsPixmapItem::dropEvent";
@@ -345,17 +354,21 @@ void PGraphicsPixmapItem::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
 
 QSizeF PGraphicsPixmapItem::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
 {
-
+    return boundingRect().size();
 }
 
 void PGraphicsPixmapItem::setGeometry(const QRectF &rect)
 {
-
+    qDebug() << "PGraphicsPixmapItem::setGeometry";
+        qDebug() << "with rect = " << rect;
+    prepareGeometryChange();
+    QGraphicsLayoutItem::setGeometry(rect);
+    setPos(rect.topLeft());
 }
 
 void PGraphicsPixmapItem::updateGeometry()
 {
-
+    QGraphicsLayoutItem::updateGeometry();
 }
 
 // ///////////////////////////////////////////////////////////////////////////////////////////

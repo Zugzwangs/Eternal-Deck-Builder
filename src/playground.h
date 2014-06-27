@@ -5,8 +5,10 @@
 #include <QMenu>
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QGraphicsWidget>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsLayoutItem>
+#include <QGraphicsLinearLayout>
 #include <QGraphicsSceneDragDropEvent>
 #include <QGraphicsSceneContextMenuEvent>
 
@@ -94,6 +96,7 @@ protected:
 
 private:
     Deck *currentDeck;
+    QGraphicsWidget *graphicsContainer;
 };
 
 // /////////////////////////////////////////////////////////////////////////////////////////
