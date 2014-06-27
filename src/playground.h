@@ -6,6 +6,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
+#include <QGraphicsLayoutItem>
 #include <QGraphicsSceneDragDropEvent>
 #include <QGraphicsSceneContextMenuEvent>
 
@@ -97,7 +98,7 @@ private:
 
 // /////////////////////////////////////////////////////////////////////////////////////////
 // A card in the graphic scene
-class PGraphicsPixmapItem : public QObject, public QGraphicsPixmapItem
+class PGraphicsPixmapItem : public QObject, public QGraphicsPixmapItem, public QGraphicsLayoutItem
 {
    Q_OBJECT
 
@@ -108,6 +109,8 @@ public:
     bool isTaped();
     bool isTurned();
     CardType getCardType();
+    void setGeometry(const QRectF &rect);
+    void updateGeometry();
 
 protected:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
@@ -119,6 +122,7 @@ protected:
     void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     void hoverMoveEvent(QGraphicsSceneHoverEvent * event);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
+    QSizeF sizeHint(Qt::SizeHint which, const QSizeF &constraint) const;
 
 private:
     bool Taped;

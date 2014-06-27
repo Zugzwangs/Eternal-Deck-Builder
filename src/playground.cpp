@@ -343,6 +343,20 @@ void PGraphicsPixmapItem::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
     //qDebug() << "PGraphicsPixmapItem::hoverLeaveEvent !!!";
 }
 
+QSizeF PGraphicsPixmapItem::sizeHint(Qt::SizeHint which, const QSizeF &constraint) const
+{
+
+}
+
+void PGraphicsPixmapItem::setGeometry(const QRectF &rect)
+{
+
+}
+
+void PGraphicsPixmapItem::updateGeometry()
+{
+
+}
 
 // ///////////////////////////////////////////////////////////////////////////////////////////
 // blood item
