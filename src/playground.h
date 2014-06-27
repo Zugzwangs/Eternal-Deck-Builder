@@ -64,6 +64,7 @@ public:
 
 protected:
     void wheelEvent(QWheelEvent *event);
+    void resizeEvent(QResizeEvent * event);
     void scaleView(qreal scaleFactor);
     void contextMenuEvent(QContextMenuEvent *event);
     void dragEnterEvent(QDragEnterEvent * event);

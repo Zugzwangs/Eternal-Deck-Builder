@@ -24,7 +24,8 @@ void PGraphicsView::wheelEvent(QWheelEvent *event)
 void PGraphicsView::scaleView(qreal scaleFactor)
 {
     qreal factor = matrix().scale(scaleFactor, scaleFactor).mapRect(QRectF(0, 0, 1, 1)).width();
-    if (factor<0.1 || factor>1.1)  {return;}
+    if (factor<0.1 || factor>1.1)
+        return;
     scale(scaleFactor, scaleFactor);
 }
 
@@ -147,8 +148,17 @@ qDebug() << "PGraphicsScene::dropEvent";
 HandGraphicsView::HandGraphicsView(QWidget* parent) : QGraphicsView(parent)
 {
     setAcceptDrops(true);
-    scale(0.2, 0.2);
+    scale(0.95, 0.95);
 }
+
+void HandGraphicsView::resizeEvent(QResizeEvent * event)
+{
+    QGraphicsView::resizeEvent(event);
+    qreal scalef = this->height()/360.0;
+    setMatrix( QMatrix(scalef, 0, 0, scalef, 0, 0 ), false);
+    scale( scalef, scalef );
+}
+
 void HandGraphicsView::wheelEvent(QWheelEvent *event){} //poubelle ?
 void HandGraphicsView::scaleView(qreal scaleFactor){}   //adapter le scale à la hauteur de la view pour voir toujours toute la hauteur de la scene
 void HandGraphicsView::contextMenuEvent(QContextMenuEvent *event){} //pas forcement besoin
@@ -164,9 +174,11 @@ HandGraphicsScene::HandGraphicsScene(QWidget* parent) : QGraphicsScene(parent)
 {
     setSceneRect(-2000,-200,4000,400);
     QGraphicsLinearLayout *handLayout = new QGraphicsLinearLayout();
+    handLayout->setSpacing(30);
     graphicsContainer = new QGraphicsWidget();
     graphicsContainer->setLayout(handLayout);
     addItem(graphicsContainer);
+    graphicsContainer->setY(-261);
 }
 
 void HandGraphicsScene::setSource(Deck *d)
@@ -179,10 +191,7 @@ void HandGraphicsScene::AddCardtoHand(Carte *C)
 {
     PGraphicsPixmapItem* CardItem  = new PGraphicsPixmapItem(C);
     dynamic_cast<QGraphicsLinearLayout *>( graphicsContainer->layout() )->addItem(CardItem);
-    qDebug() << graphicsContainer->geometry();
-    qDebug() << graphicsContainer->boundingRect();
-    //graphicsContainer->setPos();
-
+    graphicsContainer->setX(-graphicsContainer->geometry().width()/2);
 }
 
 void HandGraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event){}
@@ -359,8 +368,6 @@ QSizeF PGraphicsPixmapItem::sizeHint(Qt::SizeHint which, const QSizeF &constrain
 
 void PGraphicsPixmapItem::setGeometry(const QRectF &rect)
 {
-    qDebug() << "PGraphicsPixmapItem::setGeometry";
-        qDebug() << "with rect = " << rect;
     prepareGeometryChange();
     QGraphicsLayoutItem::setGeometry(rect);
     setPos(rect.topLeft());
