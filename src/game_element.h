@@ -127,6 +127,7 @@ public slots:
     Carte* drawCrypt();
     Carte* burnLib();
     Carte* burnCrypt();
+    void playCardFromHand(Carte* C);
     void clearDeck();
     void library_shuffle();
     void crypt_shuffle();
@@ -141,6 +142,7 @@ signals:
     void deck_loaded();
     void cardSendtoHand(Carte* C);
     void cardSendtoAshHeap(Carte* C);
+    void cardPlayedFromHand(Carte* C);
 };
 
 class Player : public QObject

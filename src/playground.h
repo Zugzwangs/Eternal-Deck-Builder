@@ -15,89 +15,13 @@
 #include "game_element.h"
 
 // /////////////////////////////////////////////////////////////////////////////////////////
-// Custom graphic view that show the playground
-class PGraphicsView : public QGraphicsView
+// A blood item in the graphic scene
+class PGraphicsBlood : public QObject, public QGraphicsPixmapItem
 {
    Q_OBJECT
 
 public:
-    explicit PGraphicsView(QWidget* parent=0);
-
-protected:
-    void wheelEvent(QWheelEvent *event);
-    void scaleView(qreal scaleFactor);
-    void contextMenuEvent(QContextMenuEvent *event);
-    void dragEnterEvent(QDragEnterEvent * event);
-    void dragMoveEvent(QDragMoveEvent *event);
-    void dragLeaveEvent(QDragLeaveEvent * event);
-    void dropEvent(QDropEvent * event);
-
-private slots:
-    void ContextMenuSlot(QAction *ActionChoisie);
-};
-
-
-// ///////////////////////////////////////////////////////////////////////////////////////////
-// Custom graphic scene who host the game
-class PGraphicsScene : public QGraphicsScene
-{
-   Q_OBJECT
-
-public:
-    explicit PGraphicsScene(QWidget* parent=0);
-
-protected:
-    void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
-    void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
-    void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
-    void dropEvent(QGraphicsSceneDragDropEvent *event);
-};
-
-// /////////////////////////////////////////////////////////////////////////////////////////
-// Custom graphic view that show the hand
-class HandGraphicsView : public QGraphicsView
-{
-   Q_OBJECT
-
-public:
-    explicit HandGraphicsView(QWidget* parent=0);
-
-protected:
-    void wheelEvent(QWheelEvent *event);
-    void resizeEvent(QResizeEvent * event);
-    void scaleView(qreal scaleFactor);
-    void contextMenuEvent(QContextMenuEvent *event);
-    void dragEnterEvent(QDragEnterEvent * event);
-    void dragMoveEvent(QDragMoveEvent *event);
-    void dragLeaveEvent(QDragLeaveEvent * event);
-    void dropEvent(QDropEvent * event);
-
-private slots:
-    void ContextMenuSlot(QAction *ActionChoisie);
-};
-
-// ///////////////////////////////////////////////////////////////////////////////////////////
-// Custom graphic scene who host the Hand
-class HandGraphicsScene : public QGraphicsScene
-{
-   Q_OBJECT
-
-public:
-    explicit HandGraphicsScene(QWidget* parent=0);
-    void setSource(Deck *d);
-
-public slots:
-    void AddCardtoHand(Carte *C);
-
-protected:
-    void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
-    void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
-    void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
-    void dropEvent(QGraphicsSceneDragDropEvent *event);
-
-private:
-    Deck *currentDeck;
-    QGraphicsWidget *graphicsContainer;
+    PGraphicsBlood();
 };
 
 // /////////////////////////////////////////////////////////////////////////////////////////
@@ -113,6 +37,8 @@ public:
     bool isTaped();
     bool isTurned();
     CardType getCardType();
+    QString getCardName();
+    Carte *getCardref();
     void setGeometry(const QRectF &rect);
     void updateGeometry();
 
@@ -145,16 +71,103 @@ private slots:
 };
 
 // /////////////////////////////////////////////////////////////////////////////////////////
-// A blood item in the graphic scene
-class PGraphicsBlood : public QObject, public QGraphicsPixmapItem
+// Custom graphic view that show the playground
+class PGraphicsView : public QGraphicsView
 {
    Q_OBJECT
 
 public:
-    PGraphicsBlood();
+    explicit PGraphicsView(QWidget* parent=0);
+
+protected:
+    void wheelEvent(QWheelEvent *event);
+    void scaleView(qreal scaleFactor);
+    void contextMenuEvent(QContextMenuEvent *event);
+    void dragEnterEvent(QDragEnterEvent * event);
+    void dragMoveEvent(QDragMoveEvent *event);
+    void dragLeaveEvent(QDragLeaveEvent * event);
+    void dropEvent(QDropEvent * event);
+
+private slots:
+    void ContextMenuSlot(QAction *ActionChoisie);
+};
+
+
+// ///////////////////////////////////////////////////////////////////////////////////////////
+// Custom graphic scene who host the game's table
+class PGraphicsScene : public QGraphicsScene
+{
+   Q_OBJECT
+
+public:
+    explicit PGraphicsScene(QWidget* parent=0);
+    void setSource(Deck *d);
+
+public slots:
+    void AddCard(Carte*C);
+
+protected:
+    void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
+    void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
+    void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
+    void dropEvent(QGraphicsSceneDragDropEvent *event);
 
 private:
+    Deck *currentDeck;
+};
 
+// /////////////////////////////////////////////////////////////////////////////////////////
+// Custom graphic view that show the hand
+class HandGraphicsView : public QGraphicsView
+{
+   Q_OBJECT
+
+public:
+    explicit HandGraphicsView(QWidget* parent=0);
+
+protected:
+    void wheelEvent(QWheelEvent *event);
+    void resizeEvent(QResizeEvent * event);
+    void scaleView();
+    void mouseDoubleClickEvent(QMouseEvent *event);
+    void contextMenuEvent(QContextMenuEvent *event);
+    void dragEnterEvent(QDragEnterEvent * event);
+    void dragMoveEvent(QDragMoveEvent *event);
+    void dragLeaveEvent(QDragLeaveEvent * event);
+    void dropEvent(QDropEvent * event);
+
+private slots:
+    void ContextMenuSlot(QAction *ActionChoisie);
+};
+
+// ///////////////////////////////////////////////////////////////////////////////////////////
+// Custom graphic scene who host the Hand
+class HandGraphicsScene : public QGraphicsScene
+{
+   Q_OBJECT
+
+public:
+    explicit HandGraphicsScene(QWidget* parent=0);
+    void setSource(Deck *d);
+
+public slots:
+    void AddCardtoHand(Carte *C);
+    void removeCardFromHand(PGraphicsPixmapItem *currentItem);
+    void startDrag();
+
+protected:
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *mouseEvent);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
+    void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
+    void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
+    void dropEvent(QGraphicsSceneDragDropEvent *event);
+
+private:
+    QPointF startPos;
+    Deck *currentDeck;
+    QGraphicsWidget *graphicsContainer;
 };
 
 #endif // PLAYGROUND_H

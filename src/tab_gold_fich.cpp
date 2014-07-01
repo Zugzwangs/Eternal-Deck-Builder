@@ -39,6 +39,7 @@ tab_gold_fich::tab_gold_fich(QWidget *parent) : QScrollArea(parent), ui(new Ui::
     HandZone = new HandGraphicsScene(this);
     ui->TabledeJeu->setScene(Scenedejeu);
     ui->HandView->setScene(HandZone);
+    Scenedejeu->setSource(currentDeck);
     HandZone->setSource(currentDeck);
 
     // Hud connections

@@ -192,6 +192,20 @@ Carte* Deck::burnCrypt()
         }
 }
 
+void Deck::playCardFromHand(Carte* C)
+{
+    for (int i=0; i<Hand.count(); i++)
+        {
+        if ( Hand.at(i) == C )
+            {
+            InPlay.append( Hand.takeAt(i) );
+            emit cardPlayedFromHand( InPlay.last() );
+            return;
+            }
+        }
+    return;
+}
+
 void Deck::library_shuffle()
 {
     std::random_shuffle(Library.begin(), Library.end());

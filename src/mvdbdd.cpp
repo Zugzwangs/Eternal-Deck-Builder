@@ -83,10 +83,7 @@ PathDragIcone = PathDragIcone + "/" + "Vtes_Grelarge.gif";
 CurrentIndex = CurrentSelection.first();
 for (int i=0; i< model()->columnCount(); i++)
     {
-    //QString dataCat = model()->headerData(i, Qt::Horizontal, Qt::DisplayRole).toString();
     QString dataValue = model()->index(CurrentIndex.row(),i).data(Qt::DisplayRole).toString().trimmed();
-    //qDebug() << QString::number(i) << dataCat << dataValue ;
-    //embeddedDatas.append( dataCat + " == " + dataValue );
     embeddedDatas.append( dataValue );
     }
 

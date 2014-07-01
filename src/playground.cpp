@@ -1,5 +1,6 @@
 #include <QWheelEvent>
 #include <QDebug>
+#include <QDrag>
 #include <QMimeData>
 #include <QCoreApplication>
 
@@ -49,7 +50,7 @@ void PGraphicsView::ContextMenuSlot(QAction *ActionChoisie)
 
 void PGraphicsView::dragEnterEvent(QDragEnterEvent * event)
 {
-qDebug() << "PGraphicsView::dragEnterEvent";
+//qDebug() << "PGraphicsView::dragEnterEvent";
     if ( !event->mimeData()->hasText() || !scene() )
         {
         event->ignore();
@@ -61,7 +62,7 @@ qDebug() << "PGraphicsView::dragEnterEvent";
 
 void PGraphicsView::dragMoveEvent(QDragMoveEvent *event)
 {
-qDebug() << "PGraphicsView::dragMoveEvent";
+//qDebug() << "PGraphicsView::dragMoveEvent";
     if ( !event->mimeData()->hasText() || !scene() )
         {
         event->ignore();
@@ -97,7 +98,6 @@ qDebug() << "PGraphicsView::dropEvent";
         {
         if ( event->mimeData()->text() == "Blood" )
             {
-            qDebug() << "##################### View handle a blood drop ! ########################";
             PGraphicsBlood *newBloob = new PGraphicsBlood();
             scene()->addItem( newBloob );
             newBloob->setPos( mapToScene(DropPos) );
@@ -113,6 +113,19 @@ qDebug() << "PGraphicsView::dropEvent";
 PGraphicsScene::PGraphicsScene(QWidget* parent) : QGraphicsScene(parent)
 {
     setSceneRect(-4000,-4000,8000,8000);
+}
+
+void PGraphicsScene::setSource(Deck *d)
+{
+    currentDeck = d;
+    connect(currentDeck, SIGNAL(cardPlayedFromHand(Carte*)), this, SLOT(AddCard(Carte*)));
+}
+
+void PGraphicsScene::AddCard(Carte *C)
+{
+    PGraphicsPixmapItem *newCard = new PGraphicsPixmapItem(C);
+    addItem(newCard);
+    newCard->setPos(0, 0);
 }
 
 void PGraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
@@ -148,39 +161,70 @@ qDebug() << "PGraphicsScene::dropEvent";
 HandGraphicsView::HandGraphicsView(QWidget* parent) : QGraphicsView(parent)
 {
     setAcceptDrops(true);
+    setDragMode(QGraphicsView::ScrollHandDrag);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
 void HandGraphicsView::resizeEvent(QResizeEvent * event)
 {
     QGraphicsView::resizeEvent(event);
-    qreal scalef = height()/360.0;
-    setMatrix( QMatrix(scalef, 0, 0, scalef, 0, 0 ), false);
-    scale( scalef, scalef );
+    scaleView();
 }
 
-void HandGraphicsView::wheelEvent(QWheelEvent *event) //poubelle ?
+void HandGraphicsView::scaleView()
+{
+    qreal scalef = height()/526.0;
+    setMatrix( QMatrix(scalef, 0, 0, scalef, 0, 0 ), false);
+}
+
+void HandGraphicsView::wheelEvent(QWheelEvent *event)
 {
     QGraphicsView::wheelEvent(event);
 }
 
+void HandGraphicsView::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    QGraphicsView::mouseDoubleClickEvent(event);
+}
+
+void HandGraphicsView::dragEnterEvent(QDragEnterEvent * event)  //on ne gere que les drops de cartes
+{
+    qDebug() << "HandGraphicsView::dragEnterEvent";
+    if( event->mimeData()->text() != "library card" )
+    {
+        event->ignore();
+        return;
+    }
+    QGraphicsView::dragEnterEvent(event);
+}
+
+void HandGraphicsView::dragMoveEvent(QDragMoveEvent *event)
+{
+    qDebug() << "HandGraphicsView::dragMoveEvent";
+    QGraphicsView::dragMoveEvent(event);
+}
+void HandGraphicsView::dragLeaveEvent(QDragLeaveEvent * event){}
+void HandGraphicsView::dropEvent(QDropEvent * event)
+{
+    qDebug() << "HandGraphicsView::dropEvent";
+    QGraphicsView::dropEvent(event);
+}
 void HandGraphicsView::contextMenuEvent(QContextMenuEvent *event){} //pas forcement besoin
 void HandGraphicsView::ContextMenuSlot(QAction *ActionChoisie){}    //pas forcement besoin
-void HandGraphicsView::dragEnterEvent(QDragEnterEvent * event){}    //on prend les drop de carte uniquement et on vire les enfants
-void HandGraphicsView::dragMoveEvent(QDragMoveEvent *event){}
-void HandGraphicsView::dragLeaveEvent(QDragLeaveEvent * event){}
-void HandGraphicsView::dropEvent(QDropEvent * event){}
 
 // ///////////////////////////////////////////////////////////////////////////////////////////
 // Custom graphic scene who host the Hand
 HandGraphicsScene::HandGraphicsScene(QWidget* parent) : QGraphicsScene(parent)
 {
-    setSceneRect(-2000,-182,4000,364);
+    setSceneRect(-2000,-261,4000,522);
     QGraphicsLinearLayout *handLayout = new QGraphicsLinearLayout();
-    handLayout->setSpacing(30);
+    handLayout->setSpacing(20);
     graphicsContainer = new QGraphicsWidget();
     graphicsContainer->setLayout(handLayout);
     addItem(graphicsContainer);
     graphicsContainer->setY(-261);
+    startPos = QPointF();
 }
 
 void HandGraphicsScene::setSource(Deck *d)
@@ -196,10 +240,90 @@ void HandGraphicsScene::AddCardtoHand(Carte *C)
     graphicsContainer->setX(-graphicsContainer->geometry().width()/2);
 }
 
-void HandGraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event){}
-void HandGraphicsScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){}
-void HandGraphicsScene::dragLeaveEvent(QGraphicsSceneDragDropEvent *event){}
-void HandGraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event){}
+void HandGraphicsScene::removeCardFromHand(PGraphicsPixmapItem *currentItem)
+{
+    removeItem(currentItem);
+    currentItem->deleteLater();
+}
+
+void HandGraphicsScene::mouseDoubleClickEvent(QGraphicsSceneMouseEvent * mouseEvent)
+{
+    //qDebug() << "HandGraphicsScene::mouseDoubleClickEvent";
+    if ( PGraphicsPixmapItem *crt_item = dynamic_cast<PGraphicsPixmapItem *>( itemAt( mouseEvent->scenePos(), QTransform() ) ) )
+        {
+        currentDeck->playCardFromHand( crt_item->getCardref() );
+        removeCardFromHand(crt_item);
+        mouseEvent->accept();
+        return;
+        }
+}
+
+void HandGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton && dynamic_cast<PGraphicsPixmapItem *>( itemAt( event->scenePos(), QTransform() ) ))
+        {
+        qDebug() << "HandGraphicsScene::mousePressEvent on a card";
+        startPos = event->scenePos();
+        event->accept();
+        return;
+        }
+    startPos = QPointF();
+    QGraphicsScene::mousePressEvent(event);
+}
+
+void HandGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    qDebug() << "HandGraphicsScene::mouseMoveEvent";
+    if (event->buttons() & Qt::LeftButton && !startPos.isNull() )
+        {
+        event->accept();
+        qDebug() << "move event accepted";
+        int distance = (event->scenePos() - startPos).manhattanLength();
+        if ( distance >= 8 )
+            startDrag();
+        return;
+        }
+    QGraphicsScene::mouseMoveEvent(event);
+}
+
+void HandGraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
+{
+    qDebug() << "HandGraphicsScene::dragEnterEvent";
+    event->accept();
+}
+
+void HandGraphicsScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
+{
+    qDebug() << "HandGraphicsScene::dragMoveEvent";
+    event->accept();
+}
+
+void HandGraphicsScene::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
+{
+    QGraphicsScene::dragLeaveEvent(event);
+}
+
+void HandGraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event)
+{
+    qDebug() << "HandGraphicsScene::dropEvent";
+    if (event->mimeData()->text() == "library card")
+        qDebug() << "je catch bien le drop interne";
+}
+
+void HandGraphicsScene::startDrag()
+{
+QMimeData *DraggedData = new QMimeData;
+QDrag *Drag = new QDrag(this);
+
+    qDebug() << "HandGraphicsScene::startDrag()";
+    PGraphicsPixmapItem *draggedItem = dynamic_cast<PGraphicsPixmapItem *>( itemAt( startPos, QTransform() ) );
+    draggedItem->hide(); //le retirer du layout plutot !
+
+    DraggedData->setText( "library card" );
+    Drag->setPixmap( draggedItem->pixmap().scaled( QSize(150, 150),Qt::KeepAspectRatio, Qt::FastTransformation) );
+    Drag->setMimeData( DraggedData );
+    Drag->exec(Qt::MoveAction);
+}
 
 // ///////////////////////////////////////////////////////////////////////////////////////////
 // Card item
@@ -255,6 +379,16 @@ CardType PGraphicsPixmapItem::getCardType()
     return(card->getKind());
 }
 
+QString PGraphicsPixmapItem::getCardName()
+{
+    return( card->getName() );
+}
+
+Carte* PGraphicsPixmapItem::getCardref()
+{
+    return( card );
+}
+
 void PGraphicsPixmapItem::setTaped(bool T)
 {
     Taped = T;
@@ -285,10 +419,8 @@ bool PGraphicsPixmapItem::isTurned()
 
 void PGraphicsPixmapItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
-    if ( isTaped() )
-        setTaped(false);
-    else
-        setTaped(true);
+    setTaped( !isTaped() );
+    event->ignore();
 }
 
 void PGraphicsPixmapItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
@@ -390,3 +522,5 @@ PGraphicsBlood::PGraphicsBlood() : QGraphicsPixmapItem()
     setShapeMode(QGraphicsPixmapItem::MaskShape);
     setPixmap( QPixmap(":/icons/Blood.png") );
 }
+
+

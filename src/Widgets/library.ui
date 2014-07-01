@@ -149,7 +149,7 @@
         </property>
         <property name="iconSize">
          <size>
-          <width>48</width>
+          <width>24</width>
           <height>24</height>
          </size>
         </property>
