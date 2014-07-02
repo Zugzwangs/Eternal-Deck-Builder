@@ -161,6 +161,7 @@ Carte* Deck::drawCrypt()
 {
     if ( !Crypt.isEmpty() ){
         Uncontroled.append( Crypt.takeFirst() );
+        emit cardSendtoUncontroled(Uncontroled.last());
         return Uncontroled.last();
         }
     else{

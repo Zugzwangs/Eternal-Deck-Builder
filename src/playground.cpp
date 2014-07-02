@@ -112,13 +112,21 @@ qDebug() << "PGraphicsView::dropEvent";
 //
 PGraphicsScene::PGraphicsScene(QWidget* parent) : QGraphicsScene(parent)
 {
-    setSceneRect(-4000,-4000,8000,8000);
+    setSceneRect(-3000,-2500,6000,5000);
+    uncontroledZoneItem = new QGraphicsWidget();
+    QGraphicsLinearLayout *uncontroledLayout = new QGraphicsLinearLayout();
+    uncontroledLayout->setSpacing(40);
+    uncontroledZoneItem->setLayout(uncontroledLayout);
+    addItem(uncontroledZoneItem);
+    uncontroledZoneItem->setPos(400,1700);
+    uncontroledZoneItem->setWindowTitle("Uncontroled zone");
 }
 
 void PGraphicsScene::setSource(Deck *d)
 {
     currentDeck = d;
     connect(currentDeck, SIGNAL(cardPlayedFromHand(Carte*)), this, SLOT(AddCard(Carte*)));
+    connect(currentDeck, SIGNAL(cardSendtoUncontroled(Carte*)), this, SLOT(addCardtoUncontroled(Carte*)));
 }
 
 void PGraphicsScene::AddCard(Carte *C)
@@ -126,6 +134,12 @@ void PGraphicsScene::AddCard(Carte *C)
     PGraphicsPixmapItem *newCard = new PGraphicsPixmapItem(C);
     addItem(newCard);
     newCard->setPos(0, 0);
+}
+
+void PGraphicsScene::addCardtoUncontroled(Carte *C)
+{
+    PGraphicsPixmapItem *newCard = new PGraphicsPixmapItem(C);
+    dynamic_cast<QGraphicsLinearLayout *>(uncontroledZoneItem->layout())->addItem(newCard);
 }
 
 void PGraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
@@ -188,9 +202,8 @@ void HandGraphicsView::mouseDoubleClickEvent(QMouseEvent *event)
     QGraphicsView::mouseDoubleClickEvent(event);
 }
 
-void HandGraphicsView::dragEnterEvent(QDragEnterEvent * event)  //on ne gere que les drops de cartes
+void HandGraphicsView::dragEnterEvent(QDragEnterEvent * event)  //on ne gere que les drops de cartesde lib
 {
-    qDebug() << "HandGraphicsView::dragEnterEvent";
     if( event->mimeData()->text() != "library card" )
     {
         event->ignore();
@@ -201,17 +214,24 @@ void HandGraphicsView::dragEnterEvent(QDragEnterEvent * event)  //on ne gere que
 
 void HandGraphicsView::dragMoveEvent(QDragMoveEvent *event)
 {
-    qDebug() << "HandGraphicsView::dragMoveEvent";
+    //qDebug() << "HandGraphicsView::dragMoveEvent";
     QGraphicsView::dragMoveEvent(event);
 }
-void HandGraphicsView::dragLeaveEvent(QDragLeaveEvent * event){}
+
+void HandGraphicsView::dragLeaveEvent(QDragLeaveEvent * event)
+{
+
+}
+
 void HandGraphicsView::dropEvent(QDropEvent * event)
 {
-    qDebug() << "HandGraphicsView::dropEvent";
+    //qDebug() << "HandGraphicsView::dropEvent";
     QGraphicsView::dropEvent(event);
 }
-void HandGraphicsView::contextMenuEvent(QContextMenuEvent *event){} //pas forcement besoin
-void HandGraphicsView::ContextMenuSlot(QAction *ActionChoisie){}    //pas forcement besoin
+
+void HandGraphicsView::contextMenuEvent(QContextMenuEvent *event){} // pas forcement
+
+void HandGraphicsView::ContextMenuSlot(QAction *ActionChoisie){}    // besoin
 
 // ///////////////////////////////////////////////////////////////////////////////////////////
 // Custom graphic scene who host the Hand
@@ -317,8 +337,8 @@ QDrag *Drag = new QDrag(this);
 
     qDebug() << "HandGraphicsScene::startDrag()";
     PGraphicsPixmapItem *draggedItem = dynamic_cast<PGraphicsPixmapItem *>( itemAt( startPos, QTransform() ) );
-    draggedItem->hide(); //le retirer du layout plutot !
-
+    dynamic_cast<QGraphicsLinearLayout *>(graphicsContainer->layout())->removeItem(draggedItem);
+    draggedItem->hide();
     DraggedData->setText( "library card" );
     Drag->setPixmap( draggedItem->pixmap().scaled( QSize(150, 150),Qt::KeepAspectRatio, Qt::FastTransformation) );
     Drag->setMimeData( DraggedData );

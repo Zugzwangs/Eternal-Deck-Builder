@@ -104,7 +104,8 @@ public:
     void setSource(Deck *d);
 
 public slots:
-    void AddCard(Carte*C);
+    void AddCard(Carte* C);
+    void addCardtoUncontroled(Carte* C);
 
 protected:
     void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
@@ -114,6 +115,7 @@ protected:
 
 private:
     Deck *currentDeck;
+    QGraphicsWidget *uncontroledZoneItem;
 };
 
 // /////////////////////////////////////////////////////////////////////////////////////////

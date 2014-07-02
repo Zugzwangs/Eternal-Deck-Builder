@@ -143,6 +143,7 @@ signals:
     void cardSendtoHand(Carte* C);
     void cardSendtoAshHeap(Carte* C);
     void cardPlayedFromHand(Carte* C);
+    void cardSendtoUncontroled(Carte* C);
 };
 
 class Player : public QObject
