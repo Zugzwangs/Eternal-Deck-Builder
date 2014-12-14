@@ -26,18 +26,21 @@
    <string>Frame</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">AshHeap
+   <string notr="true">/*AshHeap
 {
      border-width: 1px;
      border-style: solid;
      border-radius: 4px;
-}</string>
+}*/</string>
   </property>
   <property name="frameShape">
-   <enum>QFrame::StyledPanel</enum>
+   <enum>QFrame::NoFrame</enum>
   </property>
   <property name="frameShadow">
-   <enum>QFrame::Raised</enum>
+   <enum>QFrame::Plain</enum>
+  </property>
+  <property name="lineWidth">
+   <number>0</number>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <property name="spacing">

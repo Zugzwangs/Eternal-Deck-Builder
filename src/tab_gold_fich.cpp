@@ -17,7 +17,7 @@ tab_gold_fich::tab_gold_fich(QWidget *parent) : QScrollArea(parent), ui(new Ui::
 
     // allocation/setup of custom widgets
     currentDeck = new Deck(this);
-    Bourse = new BloodBank(this);
+    //Bourse = new BloodBank(this);
     testHud = new Hud(this);
     LibraryWidget = new Library(this);
     CryptWidget = new Crypt(this);
@@ -28,11 +28,10 @@ tab_gold_fich::tab_gold_fich(QWidget *parent) : QScrollArea(parent), ui(new Ui::
 
     // insertion into layouts
     ui->TopBoard->layout()->addWidget(testHud);
-    ui->TopBoard->layout()->addWidget(Bourse);
+    //ui->TopBoard->layout()->addWidget(Bourse);
     ui->SideBoard->layout()->addWidget(AshHeapWidget);
-    ui->SideBoard->layout()->addWidget(LibraryWidget);
     ui->SideBoard->layout()->addWidget(CryptWidget);
-
+    ui->SideBoard->layout()->addWidget(LibraryWidget);
 
     // setup the scenes
     Scenedejeu = new PGraphicsScene(this);

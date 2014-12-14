@@ -35,7 +35,7 @@ private:
     PGraphicsScene *Scenedejeu;
     HandGraphicsScene* HandZone;
     Hud *testHud;
-    BloodBank* Bourse;
+    //BloodBank* Bourse;
     Deck *currentDeck;
     Library *LibraryWidget;
     Crypt *CryptWidget;

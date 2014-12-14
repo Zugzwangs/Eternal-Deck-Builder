@@ -32,21 +32,16 @@
    <string>Frame</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">Library
-{
-     border-width: 1px;
-     border-style: solid;
-     border-radius: 4px;
-}</string>
+   <string notr="true"/>
   </property>
   <property name="frameShape">
-   <enum>QFrame::Box</enum>
+   <enum>QFrame::NoFrame</enum>
   </property>
   <property name="frameShadow">
-   <enum>QFrame::Raised</enum>
+   <enum>QFrame::Plain</enum>
   </property>
   <property name="lineWidth">
-   <number>2</number>
+   <number>0</number>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -140,6 +135,9 @@
       </property>
       <item>
        <widget class="QPushButton" name="pbDraw">
+        <property name="toolTip">
+         <string>draw</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -157,6 +155,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="pbBrowse">
+        <property name="toolTip">
+         <string>browse library</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -174,6 +175,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="pbBurn">
+        <property name="toolTip">
+         <string>burn top card</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -191,6 +195,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="pbShuffle">
+        <property name="toolTip">
+         <string>shuffle</string>
+        </property>
         <property name="text">
          <string/>
         </property>

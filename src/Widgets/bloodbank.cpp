@@ -3,12 +3,12 @@
 #include <QDrag>
 #include <QApplication>
 #include <QMimeData>
+#include <QDebug>
 
 // /////////////////////////////////////////////////////////////////////////////////////////
 // Distributeur de blood
 BloodBank::BloodBank(QWidget *parent) : QFrame(parent)
 {
-    setObjectName("bourse");
     setFrameStyle(QFrame::Sunken | QFrame::Box);
     setLineWidth(2);
     setMaximumWidth(116);
@@ -37,6 +37,7 @@ void BloodBank::mouseMoveEvent(QMouseEvent *event)
 
 void BloodBank::startDrag()
 {
+    qDebug() << "le nom de la baquue est: " << this->objectName();
     //QImage IconeDrag;
     QDrag *Drag = new QDrag(this);
     QMimeData *mimeData = new QMimeData;

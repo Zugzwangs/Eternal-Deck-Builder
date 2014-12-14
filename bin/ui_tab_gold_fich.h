@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'tab_gold_fich.ui'
 **
-** Created by: Qt User Interface Compiler version 5.1.1
+** Created by: Qt User Interface Compiler version 5.2.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -63,8 +63,8 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(TopBoard->sizePolicy().hasHeightForWidth());
         TopBoard->setSizePolicy(sizePolicy);
-        TopBoard->setMinimumSize(QSize(0, 140));
-        TopBoard->setMaximumSize(QSize(16777215, 140));
+        TopBoard->setMinimumSize(QSize(0, 125));
+        TopBoard->setMaximumSize(QSize(16777215, 125));
         TopBoard->setFrameShape(QFrame::NoFrame);
         TopBoard->setFrameShadow(QFrame::Plain);
         TopBoard->setLineWidth(0);
@@ -80,6 +80,7 @@ public:
         MainFrame->setFrameShadow(QFrame::Plain);
         MainFrame->setLineWidth(0);
         horizontalLayout_2 = new QHBoxLayout(MainFrame);
+        horizontalLayout_2->setSpacing(5);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
         GameBoard = new QFrame(MainFrame);
@@ -127,7 +128,7 @@ public:
         SideBoard->setLineWidth(0);
         verticalLayout_2 = new QVBoxLayout(SideBoard);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        verticalLayout_2->setContentsMargins(0, 0, 5, 0);
 
         horizontalLayout_2->addWidget(SideBoard);
 
