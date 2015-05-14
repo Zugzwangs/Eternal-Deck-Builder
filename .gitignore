@@ -1,19 +1,25 @@
-# Compiled source #
-###################
+###############################
+#        Compiled source      #
+###############################
 *.com
 *.class
 *.dll
 *.exe
 *.o
 *.so
+*.obj
 
+###############################
 # Qt specific generated files #
 ###############################
 moc_*.cpp
 ui_*.h
+*.pro.user
+*.pro.user*
 
-# OS generated files #
-######################
+###############################
+#     OS generated files      #
+###############################
 .DS_Store
 .DS_Store?
 ._*
