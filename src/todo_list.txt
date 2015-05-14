@@ -1,0 +1,19 @@
+Liste de bug a corriger
+
+    - voir pourquoi on trouve pas les library card si on cherche par extension
+    - utilisation de requetex preparées pour les recherches dans la bdd
+    - le message d'erreur "soucis de grouping ! group = 0 " apparait a caouse de anarch convert
+    - le fond des planches est noir
+
+Liste de fonctionnalites a rajouter
+
+    - negation logique des criteres de recherche
+    - conjonction logique entre les criteres de recherche
+    -
+
+
+Elements de la Bdd a corriger
+
+    - ajouter l'extension Danse macabre
+    - faire une repasse sur tous les elements de l'extension The Unaligned
+    - ajouter le KeyWord basic aux 6 vampires qui possedent une version advanced

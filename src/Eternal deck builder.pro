@@ -93,3 +93,6 @@ RESOURCES += res.qrc
 
 RC_FILE = logo_link.rc
 
+OTHER_FILES += \
+    todo_list.txt
+

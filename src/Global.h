@@ -25,7 +25,7 @@ namespace VtesInfo
     const QStringList ExpList = QStringList()   << "Keepers of Tradition" << "Legacies of Blood" << "Third Edition" << "Bloodlines" << "Anarchs" << "Sabbat"
                                                 << "Ebony Kingdom" << "Camarilla Edition" << "Heirs to the Blood" << "Lords of The Night" << "Ancient Hearts"
                                                 << "Final Nights" << "Sword of Caine" << "Dark Sovereigns" << "Black Hand" << "10th Anniversary" << "Sabbat War"
-                                                << "Blood Shadow Court" << "Promo" << "Kindred Most Wanted"<<  "Twilight Rebellion" << "Nights of Reckoning";
+                                                << "Blood Shadow Court" << "Promo" << "Kindred Most Wanted"<<  "Twilight Rebellion" << "Nights of Reckoning" << "The Unaligned";
 
     const QStringList ClansList = QStringList() << "Abomination" << "Ahrimane" << "Akunanse" << "Assamite" << "Baali" << "Blood Brother" << "Brujah" << "Brujah antitribu"
                                                 << "Caitiff" << "Daughters of Cacophony" << "Follower of Set" << "Gangrel" << "Gangrel antitribu" << "Gargoyle"
