@@ -149,6 +149,10 @@ QString Requete,NameRequete,TextRequete,ArtistRequete;
     if (ui->cBTitle->currentText()!= "   <vide>")
         {Requete += " AND Title like '%" + ui->cBTitle->currentText() + "%'";}
 
+    //On regarde la checkbox Advanced vampire
+    if (ui->cBcheckBox->isChecked())
+        Requete += " AND KeyWords like '%Advanced%'";
+
     //On parcours toutes les QCheckBox du QFrame regroupant les Traits
     QList<QCheckBox *> ListTraitCheckBox = ui->groupBoxTrait->findChildren<QCheckBox *>();
     for (int i=0; i<ListTraitCheckBox.count(); i++)
