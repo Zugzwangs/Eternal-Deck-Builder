@@ -112,14 +112,13 @@ qDebug() << "PGraphicsView::dropEvent";
 //
 PGraphicsScene::PGraphicsScene(QWidget* parent) : QGraphicsScene(parent)
 {
-    setSceneRect(-3000,-2500,6000,5000);
-    uncontroledZoneItem = new QGraphicsWidget();
-    QGraphicsLinearLayout *uncontroledLayout = new QGraphicsLinearLayout();
-    uncontroledLayout->setSpacing(40);
-    uncontroledZoneItem->setLayout(uncontroledLayout);
-    addItem(uncontroledZoneItem);
-    uncontroledZoneItem->setPos(400,1700);
-    uncontroledZoneItem->setWindowTitle("Uncontroled zone");
+    setSceneRect(-4000,-2500,8000,5000);
+    uncontroledZone = new GraphicsZone();
+    addItem(uncontroledZone);
+    uncontroledZone->setGeometry(-4000, 1800, 3000, 680);
+    uncapacitedZone = new GraphicsZone();
+    addItem(uncapacitedZone);
+    uncapacitedZone->setGeometry(1000, 1800, 3000, 680);
 }
 
 void PGraphicsScene::setSource(Deck *d)
@@ -139,7 +138,7 @@ void PGraphicsScene::AddCard(Carte *C)
 void PGraphicsScene::addCardtoUncontroled(Carte *C)
 {
     PGraphicsPixmapItem *newCard = new PGraphicsPixmapItem(C);
-    dynamic_cast<QGraphicsLinearLayout *>(uncontroledZoneItem->layout())->addItem(newCard);
+    dynamic_cast<QGraphicsLinearLayout *>(uncontroledZone->layout())->addItem(newCard);
 }
 
 void PGraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
@@ -282,22 +281,24 @@ void HandGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton && dynamic_cast<PGraphicsPixmapItem *>( itemAt( event->scenePos(), QTransform() ) ))
         {
-        qDebug() << "HandGraphicsScene::mousePressEvent on a card";
+        //qDebug() << "HandGraphicsScene::mousePressEvent on a card";
         startPos = event->scenePos();
         event->accept();
-        return;
         }
-    startPos = QPointF();
-    QGraphicsScene::mousePressEvent(event);
+    else
+        {
+        startPos = QPointF();
+        QGraphicsScene::mousePressEvent(event);
+        }
 }
 
 void HandGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    qDebug() << "HandGraphicsScene::mouseMoveEvent";
+    //qDebug() << "HandGraphicsScene::mouseMoveEvent";
     if (event->buttons() & Qt::LeftButton && !startPos.isNull() )
         {
         event->accept();
-        qDebug() << "move event accepted";
+        //qDebug() << "move event accepted";
         int distance = (event->scenePos() - startPos).manhattanLength();
         if ( distance >= 8 )
             startDrag();
@@ -308,26 +309,32 @@ void HandGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void HandGraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 {
-    qDebug() << "HandGraphicsScene::dragEnterEvent";
+    //qDebug() << "HandGraphicsScene::dragEnterEvent";
     event->accept();
 }
 
 void HandGraphicsScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 {
-    qDebug() << "HandGraphicsScene::dragMoveEvent";
+    //qDebug() << "HandGraphicsScene::dragMoveEvent";
     event->accept();
 }
 
 void HandGraphicsScene::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
 {
+    //qDebug() << "HandGraphicsScene::dragLeaveEvent";
     QGraphicsScene::dragLeaveEvent(event);
 }
 
 void HandGraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
-    qDebug() << "HandGraphicsScene::dropEvent";
-    if (event->mimeData()->text() == "library card")
-        qDebug() << "je catch bien le drop interne";
+    //qDebug() << "HandGraphicsScene::dropEvent";
+    if (event->mimeData()->text() == "library card" && draggedItem)
+        {
+        qDebug() << "drop & il est interne pasque draggedItem not null";
+        //event->scenePos()
+        draggedItem->show();
+        dynamic_cast<QGraphicsLinearLayout *>(graphicsContainer->layout())->insertItem(-1, draggedItem);
+        }
 }
 
 void HandGraphicsScene::startDrag()
@@ -336,7 +343,7 @@ QMimeData *DraggedData = new QMimeData;
 QDrag *Drag = new QDrag(this);
 
     qDebug() << "HandGraphicsScene::startDrag()";
-    PGraphicsPixmapItem *draggedItem = dynamic_cast<PGraphicsPixmapItem *>( itemAt( startPos, QTransform() ) );
+    draggedItem = dynamic_cast<PGraphicsPixmapItem *>( itemAt( startPos, QTransform() ) );
     dynamic_cast<QGraphicsLinearLayout *>(graphicsContainer->layout())->removeItem(draggedItem);
     draggedItem->hide();
     DraggedData->setText( "library card" );
@@ -487,7 +494,8 @@ qDebug() << "PGraphicsPixmapItem::dragLeaveEvent";
 void PGraphicsPixmapItem::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
 qDebug() << "PGraphicsPixmapItem::dropEvent";
-    if (event->source()->objectName() == "bourse")
+
+    if ( event->mimeData()->text() == "Blood" )
         {
         PGraphicsBlood *newBloob = new PGraphicsBlood();
         newBloob->setParentItem(this);
@@ -543,4 +551,28 @@ PGraphicsBlood::PGraphicsBlood() : QGraphicsPixmapItem()
     setPixmap( QPixmap(":/icons/Blood.png") );
 }
 
+// ///////////////////////////////////////////////////////////////////////////////////////////
+// subzone item :
+
+GraphicsZone::GraphicsZone(QGraphicsItem* parent) : QGraphicsWidget(parent)
+{
+    // adjust geometry and layout
+    setContentsMargins(80, 80, 80, 80);
+    QGraphicsLinearLayout *EmbeddedLayout = new QGraphicsLinearLayout();
+    EmbeddedLayout->setSpacing(80);
+    setLayout(EmbeddedLayout);
+
+    // adjust behavior
+    setAcceptDrops(true);
+    setFlag(QGraphicsItem::ItemIsSelectable, false);
+    setFlag(QGraphicsItem::ItemIsMovable, false);
+}
+
+void GraphicsZone::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    painter->save();
+    painter->setPen( QPen( QBrush(Qt::white), 18, Qt::SolidLine, Qt::SquareCap, Qt::RoundJoin) );
+    painter->drawRoundedRect( rect(), 10, 10 );
+    painter->restore();
+}
 

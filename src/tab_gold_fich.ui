@@ -61,13 +61,13 @@
       <property name="minimumSize">
        <size>
         <width>0</width>
-        <height>140</height>
+        <height>125</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>140</height>
+        <height>125</height>
        </size>
       </property>
       <property name="frameShape">
@@ -107,6 +107,9 @@
        <number>0</number>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1">
+       <property name="spacing">
+        <number>5</number>
+       </property>
        <property name="leftMargin">
         <number>0</number>
        </property>
@@ -221,7 +224,7 @@
            <number>0</number>
           </property>
           <property name="rightMargin">
-           <number>0</number>
+           <number>5</number>
           </property>
           <property name="bottomMargin">
            <number>0</number>

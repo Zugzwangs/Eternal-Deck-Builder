@@ -71,6 +71,20 @@ private slots:
 };
 
 // /////////////////////////////////////////////////////////////////////////////////////////
+// An item that show bounds of subzones in play (Uncontroled and uncapacited zone)
+//
+class GraphicsZone : public QGraphicsWidget
+{
+    Q_OBJECT
+
+public:
+    GraphicsZone(QGraphicsItem* parent=0);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+};
+
+
+// /////////////////////////////////////////////////////////////////////////////////////////
 // Custom graphic view that show the playground
 class PGraphicsView : public QGraphicsView
 {
@@ -115,7 +129,8 @@ protected:
 
 private:
     Deck *currentDeck;
-    QGraphicsWidget *uncontroledZoneItem;
+    GraphicsZone *uncontroledZone;
+    GraphicsZone *uncapacitedZone;
 };
 
 // /////////////////////////////////////////////////////////////////////////////////////////
@@ -169,6 +184,7 @@ protected:
 private:
     QPointF startPos;
     Deck *currentDeck;
+    PGraphicsPixmapItem* draggedItem;
     QGraphicsWidget *graphicsContainer;
 };
 
