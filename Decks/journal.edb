@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Id="123534">
+    <Metadatas>
+        <Metadata name="Bleed" value="0"/>
+        <Metadata name="Combat" value="0"/>
+        <Metadata name="Defense" value="0"/>
+        <Metadata name="Diplomacy" value="0"/>
+        <Metadata name="Speed" value="0"/>
+        <Metadata name="author" value=""/>
+        <Metadata name="description" value=""/>
+        <Metadata name="format" value="Unlimited"/>
+        <Metadata name="game_win" value=""/>
+        <Metadata name="games_played" value=""/>
+        <Metadata name="name" value=""/>
+        <Metadata name="tournament_win" value=""/>
+        <Metadata name="victory_point" value=""/>
+    </Metadatas>
+    <Crypt Taille="2">
+        <CryptCard Number="1" name="Obaluaye"/>
+        <CryptCard Number="1" name="Eurayle Gelasia Mylonas"/>
+    </Crypt>
+    <Bibliotheque Taille="63">
+        <LibraryCard Number="1" name="Path of Tears, The"/>
+        <LibraryCard Number="5" name="Journal of Hrorsh"/>
+        <LibraryCard Number="2" name="Sunset Strip, Hollywood"/>
+        <LibraryCard Number="30" name="Freak Drive"/>
+        <LibraryCard Number="2" name="Predator's Transformation"/>
+        <LibraryCard Number="1" name="Unseen Hibernation"/>
+        <LibraryCard Number="1" name="Renewed Vigor"/>
+        <LibraryCard Number="1" name="Treat the Sick Mind"/>
+        <LibraryCard Number="1" name="Safe Passage"/>
+        <LibraryCard Number="1" name="Anesthetic Touch"/>
+        <LibraryCard Number="1" name="Force of Will"/>
+        <LibraryCard Number="1" name="Daring the Dawn"/>
+        <LibraryCard Number="1" name="Kiss of Ra, The"/>
+        <LibraryCard Number="6" name="Ashur Tablets"/>
+        <LibraryCard Number="2" name="Heidelberg Castle, Germany"/>
+        <LibraryCard Number="1" name="J. S. Simmons, Esq."/>
+        <LibraryCard Number="1" name="Robert Carter"/>
+        <LibraryCard Number="1" name="Tasha Morgan"/>
+        <LibraryCard Number="1" name="Camera Phone"/>
+        <LibraryCard Number="1" name="Inveraray, Scotland"/>
+        <LibraryCard Number="1" name="Laptop Computer"/>
+        <LibraryCard Number="1" name="Seal of Veddartha"/>
+    </Bibliotheque>
+</Deck>

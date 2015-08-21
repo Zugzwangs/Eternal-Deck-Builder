@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck Id="123534">
+    <Metadatas>
+        <Metadata name="Bleed" value="0"/>
+        <Metadata name="Combat" value="0"/>
+        <Metadata name="Defense" value="0"/>
+        <Metadata name="Diplomacy" value="0"/>
+        <Metadata name="Speed" value="0"/>
+        <Metadata name="author" value="0"/>
+        <Metadata name="description" value="0"/>
+        <Metadata name="format" value=""/>
+        <Metadata name="game_win" value="0"/>
+        <Metadata name="games_played" value="0"/>
+        <Metadata name="name" value="0"/>
+        <Metadata name="tournament_win" value="0"/>
+        <Metadata name="victory_point" value="0"/>
+    </Metadatas>
+    <Crypt Taille="0"/>
+    <Bibliotheque Taille="16">
+        <LibraryCard Number="7" name="Three's a Crowd"/>
+        <LibraryCard Number="2" name="Perfectionist"/>
+        <LibraryCard Number="4" name="Secure Haven"/>
+        <LibraryCard Number="3" name="Camera Phone"/>
+    </Bibliotheque>
+</Deck>
