@@ -19,16 +19,14 @@
         <CryptCard Number="1" name="Obaluaye"/>
         <CryptCard Number="1" name="Eurayle Gelasia Mylonas"/>
     </Crypt>
-    <Bibliotheque Taille="63">
+    <Bibliotheque Taille="70">
         <LibraryCard Number="1" name="Path of Tears, The"/>
         <LibraryCard Number="5" name="Journal of Hrorsh"/>
         <LibraryCard Number="2" name="Sunset Strip, Hollywood"/>
         <LibraryCard Number="30" name="Freak Drive"/>
         <LibraryCard Number="2" name="Predator's Transformation"/>
         <LibraryCard Number="1" name="Unseen Hibernation"/>
-        <LibraryCard Number="1" name="Renewed Vigor"/>
-        <LibraryCard Number="1" name="Treat the Sick Mind"/>
-        <LibraryCard Number="1" name="Safe Passage"/>
+        <LibraryCard Number="4" name="Renewed Vigor"/>
         <LibraryCard Number="1" name="Anesthetic Touch"/>
         <LibraryCard Number="1" name="Force of Will"/>
         <LibraryCard Number="1" name="Daring the Dawn"/>
@@ -38,9 +36,10 @@
         <LibraryCard Number="1" name="J. S. Simmons, Esq."/>
         <LibraryCard Number="1" name="Robert Carter"/>
         <LibraryCard Number="1" name="Tasha Morgan"/>
-        <LibraryCard Number="1" name="Camera Phone"/>
         <LibraryCard Number="1" name="Inveraray, Scotland"/>
         <LibraryCard Number="1" name="Laptop Computer"/>
         <LibraryCard Number="1" name="Seal of Veddartha"/>
+        <LibraryCard Number="6" name="Repulsion"/>
+        <LibraryCard Number="1" name="Healing Touch"/>
     </Bibliotheque>
 </Deck>
