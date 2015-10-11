@@ -1,4 +1,4 @@
-#ifndef TAB_DECK_TUNING_H
+﻿#ifndef TAB_DECK_TUNING_H
 #define TAB_DECK_TUNING_H
 
 #include <QScrollArea>

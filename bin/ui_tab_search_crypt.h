@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'tab_search_crypt.ui'
 **
-** Created by: Qt User Interface Compiler version 5.2.1
+** Created by: Qt User Interface Compiler version 5.4.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -115,7 +115,14 @@ public:
     QLabel *lVisceratika;
     QComboBox *vis;
     QGroupBox *groupBox;
-    QGridLayout *gridLayout_3;
+    QVBoxLayout *verticalLayout_3;
+    QFrame *frame_6;
+    QHBoxLayout *horizontalLayout_5;
+    QSpacerItem *horizontalSpacer_3;
+    QCheckBox *cBcheckBox;
+    QSpacerItem *horizontalSpacer_4;
+    QFrame *frame_5;
+    QGridLayout *gridLayout_7;
     QLabel *label_21;
     QComboBox *cBGroup;
     QSpinBox *sBGroup;
@@ -861,27 +868,57 @@ public:
         groupBox = new QGroupBox(CryptSearchFrame);
         groupBox->setObjectName(QStringLiteral("groupBox"));
         groupBox->setMinimumSize(QSize(150, 0));
-        gridLayout_3 = new QGridLayout(groupBox);
-        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
-        gridLayout_3->setContentsMargins(5, 5, 5, 5);
-        label_21 = new QLabel(groupBox);
+        verticalLayout_3 = new QVBoxLayout(groupBox);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(5, 5, 5, 5);
+        frame_6 = new QFrame(groupBox);
+        frame_6->setObjectName(QStringLiteral("frame_6"));
+        frame_6->setFrameShape(QFrame::StyledPanel);
+        frame_6->setFrameShadow(QFrame::Raised);
+        horizontalLayout_5 = new QHBoxLayout(frame_6);
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
+        horizontalSpacer_3 = new QSpacerItem(47, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_3);
+
+        cBcheckBox = new QCheckBox(frame_6);
+        cBcheckBox->setObjectName(QStringLiteral("cBcheckBox"));
+
+        horizontalLayout_5->addWidget(cBcheckBox);
+
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_4);
+
+
+        verticalLayout_3->addWidget(frame_6);
+
+        frame_5 = new QFrame(groupBox);
+        frame_5->setObjectName(QStringLiteral("frame_5"));
+        frame_5->setFrameShape(QFrame::StyledPanel);
+        frame_5->setFrameShadow(QFrame::Raised);
+        gridLayout_7 = new QGridLayout(frame_5);
+        gridLayout_7->setObjectName(QStringLiteral("gridLayout_7"));
+        gridLayout_7->setContentsMargins(0, 5, 0, 5);
+        label_21 = new QLabel(frame_5);
         label_21->setObjectName(QStringLiteral("label_21"));
         sizePolicy2.setHeightForWidth(label_21->sizePolicy().hasHeightForWidth());
         label_21->setSizePolicy(sizePolicy2);
         label_21->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        gridLayout_3->addWidget(label_21, 0, 0, 1, 1);
+        gridLayout_7->addWidget(label_21, 0, 0, 1, 1);
 
-        cBGroup = new QComboBox(groupBox);
+        cBGroup = new QComboBox(frame_5);
         cBGroup->setObjectName(QStringLiteral("cBGroup"));
         sizePolicy3.setHeightForWidth(cBGroup->sizePolicy().hasHeightForWidth());
         cBGroup->setSizePolicy(sizePolicy3);
         cBGroup->setMinimumSize(QSize(45, 0));
         cBGroup->setMaximumSize(QSize(45, 16777215));
 
-        gridLayout_3->addWidget(cBGroup, 0, 1, 1, 1);
+        gridLayout_7->addWidget(cBGroup, 0, 1, 1, 1);
 
-        sBGroup = new QSpinBox(groupBox);
+        sBGroup = new QSpinBox(frame_5);
         sBGroup->setObjectName(QStringLiteral("sBGroup"));
         sizePolicy3.setHeightForWidth(sBGroup->sizePolicy().hasHeightForWidth());
         sBGroup->setSizePolicy(sizePolicy3);
@@ -895,26 +932,26 @@ public:
         sBGroup->setFont(font);
         sBGroup->setMaximum(6);
 
-        gridLayout_3->addWidget(sBGroup, 0, 2, 1, 1);
+        gridLayout_7->addWidget(sBGroup, 0, 2, 1, 1);
 
-        label_29 = new QLabel(groupBox);
+        label_29 = new QLabel(frame_5);
         label_29->setObjectName(QStringLiteral("label_29"));
         sizePolicy2.setHeightForWidth(label_29->sizePolicy().hasHeightForWidth());
         label_29->setSizePolicy(sizePolicy2);
         label_29->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        gridLayout_3->addWidget(label_29, 1, 0, 1, 1);
+        gridLayout_7->addWidget(label_29, 1, 0, 1, 1);
 
-        cBCapa = new QComboBox(groupBox);
+        cBCapa = new QComboBox(frame_5);
         cBCapa->setObjectName(QStringLiteral("cBCapa"));
         sizePolicy3.setHeightForWidth(cBCapa->sizePolicy().hasHeightForWidth());
         cBCapa->setSizePolicy(sizePolicy3);
         cBCapa->setMinimumSize(QSize(45, 0));
         cBCapa->setMaximumSize(QSize(45, 16777215));
 
-        gridLayout_3->addWidget(cBCapa, 1, 1, 1, 1);
+        gridLayout_7->addWidget(cBCapa, 1, 1, 1, 1);
 
-        sBCapa = new QSpinBox(groupBox);
+        sBCapa = new QSpinBox(frame_5);
         sBCapa->setObjectName(QStringLiteral("sBCapa"));
         sizePolicy3.setHeightForWidth(sBCapa->sizePolicy().hasHeightForWidth());
         sBCapa->setSizePolicy(sizePolicy3);
@@ -923,8 +960,19 @@ public:
         sBCapa->setFont(font);
         sBCapa->setMaximum(11);
 
-        gridLayout_3->addWidget(sBCapa, 1, 2, 1, 1);
+        gridLayout_7->addWidget(sBCapa, 1, 2, 1, 1);
 
+        label_21->raise();
+        sBCapa->raise();
+        cBCapa->raise();
+        cBGroup->raise();
+        label_29->raise();
+        sBGroup->raise();
+
+        verticalLayout_3->addWidget(frame_5);
+
+        verticalLayout_3->setStretch(0, 1);
+        verticalLayout_3->setStretch(1, 3);
 
         gridLayout_5->addWidget(groupBox, 1, 1, 2, 1);
 
@@ -1339,6 +1387,7 @@ public:
         lThanatosis->setText(QString());
         lVisceratika->setText(QString());
         groupBox->setTitle(QApplication::translate("tab_search_crypt", "Generation", 0));
+        cBcheckBox->setText(QApplication::translate("tab_search_crypt", "Advanced", 0));
         label_21->setText(QApplication::translate("tab_search_crypt", "Grouping", 0));
         label_29->setText(QApplication::translate("tab_search_crypt", "Capacity", 0));
         groupBoxVirtues->setTitle(QApplication::translate("tab_search_crypt", "Virtues", 0));

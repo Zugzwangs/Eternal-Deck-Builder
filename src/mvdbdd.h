@@ -1,4 +1,4 @@
-#ifndef MVDBDD_H
+﻿#ifndef MVDBDD_H
 #define MVDBDD_H
 
 #include <QSqlTableModel>

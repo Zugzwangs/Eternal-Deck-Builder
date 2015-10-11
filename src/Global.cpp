@@ -1,4 +1,4 @@
-/* Module contenant les caracteristiques de Jyhad */
+﻿/* Module contenant les caracteristiques de Jyhad */
 #include "Global.h"
 
 #include <QDir>

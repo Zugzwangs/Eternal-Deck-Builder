@@ -1,4 +1,4 @@
-#include "dialogoptions.h"
+﻿#include "dialogoptions.h"
 #include "ui_dialogoptions.h"
 
 DialogOptions::DialogOptions(QWidget *parent) : QDialog(parent), ui(new Ui::DialogOptions)

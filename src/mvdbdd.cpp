@@ -1,4 +1,4 @@
-#include "mvdbdd.h"
+﻿#include "mvdbdd.h"
 #include "Global.h"
 
 #include <QApplication>

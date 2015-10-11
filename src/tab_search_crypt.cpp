@@ -1,4 +1,4 @@
-#include "tab_search_crypt.h"
+﻿#include "tab_search_crypt.h"
 #include "ui_tab_search_crypt.h"
 
 #include "Widgets/disciplinebutton.h"

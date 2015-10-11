@@ -1,4 +1,4 @@
-#ifndef TAB_GOLD_FICH_H
+﻿#ifndef TAB_GOLD_FICH_H
 #define TAB_GOLD_FICH_H
 
 #include <QScrollArea>

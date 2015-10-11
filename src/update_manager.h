@@ -1,4 +1,4 @@
-#ifndef UPDATE_MANAGER_H
+﻿#ifndef UPDATE_MANAGER_H
 #define UPDATE_MANAGER_H
 
 #include <QtNetwork/QNetworkAccessManager>

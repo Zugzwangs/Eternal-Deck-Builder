@@ -1,4 +1,4 @@
-#ifndef TAB_SEARCH_CRYPT_H
+﻿#ifndef TAB_SEARCH_CRYPT_H
 #define TAB_SEARCH_CRYPT_H
 
 #include <QScrollArea>

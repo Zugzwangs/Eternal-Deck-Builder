@@ -1,4 +1,4 @@
-#include <QWheelEvent>
+﻿#include <QWheelEvent>
 #include <QDebug>
 #include <QDrag>
 #include <QMimeData>

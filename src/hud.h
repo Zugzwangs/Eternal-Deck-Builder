@@ -1,4 +1,4 @@
-#ifndef HUD_H
+﻿#ifndef HUD_H
 #define HUD_H
 
 #include <QScrollArea>

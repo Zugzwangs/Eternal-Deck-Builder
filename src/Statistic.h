@@ -1,4 +1,4 @@
-#ifndef STATISTIC_H
+﻿#ifndef STATISTIC_H
 #define STATISTIC_H
 
 #include<math.h>
