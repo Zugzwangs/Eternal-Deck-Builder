@@ -20,6 +20,8 @@ qrc_res.cpp
 Makefile
 Makefile.Debug
 MAkefile.Release
+object_script.EternalDeckBuilder.Release
+object_script.EternalDeckBuilder_d.Debug
 
 ###############################
 #     OS generated files      #
