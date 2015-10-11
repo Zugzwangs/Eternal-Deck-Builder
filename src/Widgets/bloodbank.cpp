@@ -3,7 +3,7 @@
 #include <QDrag>
 #include <QApplication>
 #include <QMimeData>
-#include <QDebug>
+//#include <QDebug>
 
 // /////////////////////////////////////////////////////////////////////////////////////////
 // Distributeur de blood
@@ -37,7 +37,7 @@ void BloodBank::mouseMoveEvent(QMouseEvent *event)
 
 void BloodBank::startDrag()
 {
-    qDebug() << "le nom de la baquue est: " << this->objectName();
+    //qDebug() << "le nom de la baquue est: " << this->objectName();
     //QImage IconeDrag;
     QDrag *Drag = new QDrag(this);
     QMimeData *mimeData = new QMimeData;

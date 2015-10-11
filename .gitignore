@@ -16,6 +16,10 @@ moc_*.cpp
 ui_*.h
 *.pro.user
 *.pro.user*
+qrc_res.cpp
+Makefile
+Makefile.Debug
+MAkefile.Release
 
 ###############################
 #     OS generated files      #
