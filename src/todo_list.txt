@@ -1,4 +1,4 @@
-Liste de bug a corriger
+﻿Liste de bug a corriger
 
     - voir pourquoi on trouve pas les library card si on cherche par extension
     - utilisation de requetex preparées pour les recherches dans la bdd
@@ -17,3 +17,10 @@ Elements de la Bdd a corriger
     - ajouter l'extension Danse macabre
     - faire une repasse sur tous les elements de l'extension The Unaligned
     - ajouter le KeyWord basic aux 6 vampires qui possedent une version advanced
+
+
+Une erreur sur la carte Velvet tongue
+
+erreur sur la carete Brick by brick sur les disciplines
+
+
