@@ -1,4 +1,4 @@
-ï»¿#include <QWheelEvent>
+#include <QWheelEvent>
 #include <QDebug>
 #include <QDrag>
 #include <QMimeData>
@@ -32,7 +32,7 @@ void PGraphicsView::scaleView(qreal scaleFactor)
 
 void PGraphicsView::contextMenuEvent(QContextMenuEvent *event)
 {
-    QGraphicsView::contextMenuEvent(event); //sert à propager le signal
+    QGraphicsView::contextMenuEvent(event); //sert a propager le signal
     if (!event->isAccepted())
         {
         QMenu *menu = new QMenu();

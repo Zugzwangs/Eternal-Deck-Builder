@@ -1,4 +1,4 @@
-﻿#ifndef DIALOGOPTIONS_H
+#ifndef DIALOGOPTIONS_H
 #define DIALOGOPTIONS_H
 
 #include <QDialog>

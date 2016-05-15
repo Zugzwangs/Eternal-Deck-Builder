@@ -1,4 +1,4 @@
-﻿#ifndef PLAYGROUND_H
+#ifndef PLAYGROUND_H
 #define PLAYGROUND_H
 
 #include <QDir>

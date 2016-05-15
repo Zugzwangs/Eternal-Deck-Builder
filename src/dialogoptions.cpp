@@ -1,16 +1,16 @@
-ï»¿#include "dialogoptions.h"
+#include "dialogoptions.h"
 #include "ui_dialogoptions.h"
 
 DialogOptions::DialogOptions(QWidget *parent) : QDialog(parent), ui(new Ui::DialogOptions)
 {
-/* On construit la fenetre modélisée dans Qt Creator*/
+/* On construit le formulaire */
  ui->setupUi(this);
 
-/* On procéde aux initialisations complémentaires */
+/* On procÃ¨de aux initialisations supplÃ©mentaires */
  this->setFixedSize(this->size());
  LoadOptions();
 
-/* On définie les connections */
+/* On dÃ©finie les connections */
  this->connect(ui->pBOk, SIGNAL(clicked()), this, SLOT(QuitWithChange()));
  this->connect(ui->pBCancel, SIGNAL(clicked()), this, SLOT(QuitWithoutchange()));
  this->connect(ui->pBApply, SIGNAL(clicked()), this, SLOT(ApplyChange()));

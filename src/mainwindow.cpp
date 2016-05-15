@@ -1,4 +1,4 @@
-ï»¿#include <QMessageBox>
+#include <QMessageBox>
 #include <QFile>
 #include <QFileDialog>
 
@@ -192,9 +192,9 @@ void MainWindow::NewDeck()
 
 void MainWindow::OuvrirMenuOption()
 {
-     // Création de notre fenêtre modale
+     // CrÃ©ation de notre fenÃªtre modale
      DialogOptions Options(this);
-     // On rend visible et modale notre fenêtre avec la méthode exec()
+     // On rend visible et modale notre fenetre avec la mÃ©thode exec()
      Options.exec();
 }
 
@@ -202,6 +202,6 @@ MainWindow::~MainWindow()
 {
     /* On ferme la BDD */
     this->SqlDB.close();
-    /* On detruit le reste de la fenêtre */
+    /* On detruit le reste de la fenetre */
     delete ui;
 }

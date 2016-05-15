@@ -1,4 +1,4 @@
-ï»¿#ifndef MAINWINDOW_H
+#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -26,10 +26,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    QSqlDatabase SqlDB;                 // La BDD embarquée
-    update_manager* downloader;         // gestionnaire de téléchargement
+    QSqlDatabase SqlDB;                 // La BDD embarquee
+    update_manager* downloader;         // gestionnaire de tÃ©lÃ©chargement
     PathProvider path_list;             // gestionnaire de path de paths
-    DeckTranslator inOutDecksManager;   // implémente import/export decks
+    DeckTranslator inOutDecksManager;   // implÃ©mente import/export decks
     QSqlQueryModel *queryModel;
     QString PathCartes;
     QString PathRessources;

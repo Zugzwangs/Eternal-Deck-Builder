@@ -1,4 +1,4 @@
-﻿#ifndef SAUVEGARDE_H
+#ifndef SAUVEGARDE_H
 #define SAUVEGARDE_H
 
 #include <QXmlStreamReader>

@@ -1,4 +1,4 @@
-﻿#include "tab_search_library.h"
+#include "tab_search_library.h"
 #include "ui_tab_search_library.h"
 
 #include <QDebug>

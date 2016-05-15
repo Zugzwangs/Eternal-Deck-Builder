@@ -1,4 +1,4 @@
-﻿#ifndef GAME_ELEMENT_H
+#ifndef GAME_ELEMENT_H
 #define GAME_ELEMENT_H
 
 #include <QString>

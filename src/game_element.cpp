@@ -1,4 +1,4 @@
-﻿#include <QDebug>
+#include <QDebug>
 #include <algorithm>
 #include "game_element.h"
 

@@ -1,4 +1,4 @@
-ï»¿#include "Sauvegarde.h"
+#include "Sauvegarde.h"
 #include "game_element.h"
 #include "math.h"
 
@@ -74,11 +74,11 @@ bool DeckTranslator::deckModelToEdb( QString filePath )
     QXmlStreamWriter writer(&file);
 
     writer.setAutoFormatting(true);             //Permet l'indentation du fichier XML
-    writer.writeStartDocument();                // Écrit l'en-tête du fichier XML : <?xml version="1.0" encoding="UTF-8" ?>
-    writer.writeStartElement("Deck");           // Ajoute l'élément racine du fichier XML
+    writer.writeStartDocument();                // Ã©crit l'en-tÃªte du fichier XML : <?xml version="1.0" encoding="UTF-8" ?>
+    writer.writeStartElement("Deck");           // Ajoute l'Ã©lÃ©ment racine du fichier XML
     writer.writeAttribute("Id","123534");       //
 
-        /********** Elements Métadonnées **********/
+        /********** Elements MÃ©tadonnÃ©es **********/
         writer.writeStartElement("Metadatas");
             QMap<QString, QString>::const_iterator i;
             for (i = D->meta_list.constBegin(); i != D->meta_list.constEnd(); i++)
@@ -112,11 +112,11 @@ bool DeckTranslator::deckModelToEdb( QString filePath )
                 writer.writeAttribute( "name", D->itemLib->child(i,0)->data(VtesInfo::NameRole).toString() );
                 writer.writeEndElement();
                 }
-        writer.writeEndElement();                   // Ferme l'élément Bibliotheque
+        writer.writeEndElement();                   // Ferme l'Ã©lÃ©ment Bibliotheque
 
     writer.writeEndElement();
     writer.writeEndDocument();  // Finalise le document XML
-    file.close();               // Fermer le fichier pour bien enregistrer le document et ferme l'élément Deck (l'élément Root)
+    file.close();               // Fermer le fichier pour bien enregistrer le document et ferme l'Ã©lÃ©ment Deck (l'Ã©lÃ©ment Root)
 
     D->setUnmodified();
     return true;
@@ -249,7 +249,7 @@ QList<QString> ListPathImageCarte;
 
 // Gathering all datas to print
 
-//On crée la liste de tous les chemins vers les images necesaires
+//On crÃ©e la liste de tous les chemins vers les images necesaires
 for (int i=0; i<D->itemCrypt->rowCount(); i++)
     {
     NbEx = D->itemCrypt->child(i,0)->data(VtesInfo::ExemplairRole).toInt();
@@ -281,7 +281,7 @@ QPainter PlanchePainter;
 if (PrintFormat == "A4")
    {
     NbCarteParPage = 8;
-    //En fonction du nombre de carte trouvées, on détermine le nombre de planches nécessaires
+    //En fonction du nombre de carte trouvÃ©es, on dÃ©termine le nombre de planches nÃ©cessaires
     NbPage = ceil(ListPathImageCarte.count()/NbCarteParPage);
     //On construit les planches
     for (int i=1; i<=NbPage; i++)
@@ -302,7 +302,7 @@ if (PrintFormat == "A4")
 else
    {
     NbCarteParPage = 18;
-    //En fonction du nombre de carte trouvées, on détermine le nombre de planches nécessaires
+    //En fonction du nombre de carte trouvÃ©es, on dÃ©termine le nombre de planches nÃ©cessaires
     NbPage = ceil(ListPathImageCarte.count()/NbCarteParPage);
     //On construit les planches
     for (int i=1; i<=NbPage; i++)
@@ -321,13 +321,13 @@ else
         }
     }
 
-    //On crée la page de garde et on l'imprime:
+    //On crÃ©e la page de garde et on l'imprime:
     //QString html;
     //QWebView webView;
     //webView.setHtml(html);
     //webView.print(&printer);
 
-    //Maitenant on imprime les planches que l'on a créé :
+    //Maitenant on imprime les planches que l'on a crÃ©e :
     QPrinter DeckPrinter(QPrinter::ScreenResolution);
     QPainter PrintPainter;
 

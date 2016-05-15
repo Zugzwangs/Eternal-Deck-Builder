@@ -1,4 +1,4 @@
-﻿#include "tab_search_crypt.h"
+#include "tab_search_crypt.h"
 #include "ui_tab_search_crypt.h"
 
 #include "Widgets/disciplinebutton.h"
@@ -168,7 +168,7 @@ QString Requete,NameRequete,TextRequete,ArtistRequete;
     QList<QComboBox *> ListDisciplineComboBox = ui->groupBoxDiscipline->findChildren<QComboBox *>(QString(), Qt::FindDirectChildrenOnly);;
     foreach( QComboBox* CurrentComboBox, ListDisciplineComboBox )
         {
-         QString CurrentName = CurrentComboBox->objectName().left(3); //left3 �  cause fortitude : on peut pas nommer un objet 'for'
+         QString CurrentName = CurrentComboBox->objectName().left(3); //left3 a cause fortitude : on peut pas nommer un objet 'for'
          switch(CurrentComboBox->currentIndex())
             {
              case 0 : {/*pas de conditions supplémentaires */} break;

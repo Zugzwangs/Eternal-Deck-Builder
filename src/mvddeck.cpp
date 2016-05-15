@@ -1,4 +1,4 @@
-﻿#include "mvddeck.h"
+#include "mvddeck.h"
 #include "Global.h"
 
 #include <QApplication>

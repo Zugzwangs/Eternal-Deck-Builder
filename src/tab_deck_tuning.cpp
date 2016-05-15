@@ -1,4 +1,4 @@
-﻿#include "tab_deck_tuning.h"
+#include "tab_deck_tuning.h"
 #include "ui_tab_deck_tuning.h"
 #include "Global.h"
 

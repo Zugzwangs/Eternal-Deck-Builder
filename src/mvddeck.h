@@ -1,4 +1,4 @@
-﻿#ifndef MVDDECK_H
+#ifndef MVDDECK_H
 #define MVDDECK_H
 
 #include <QTreeView>
