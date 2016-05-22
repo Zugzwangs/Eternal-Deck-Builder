@@ -76,7 +76,7 @@ bool DeckTranslator::deckModelToEdb( QString filePath )
     writer.setAutoFormatting(true);             //Permet l'indentation du fichier XML
     writer.writeStartDocument();                // écrit l'en-tête du fichier XML : <?xml version="1.0" encoding="UTF-8" ?>
     writer.writeStartElement("Deck");           // Ajoute l'élément racine du fichier XML
-    writer.writeAttribute("Id","123534");       //
+    writer.writeAttribute("Id","123534");       // TODO générer un numéro aléatoire si ce deck n'en a pas déjà
 
         /********** Elements Métadonnées **********/
         writer.writeStartElement("Metadatas");
@@ -287,6 +287,7 @@ if (PrintFormat == "A4")
     for (int i=1; i<=NbPage; i++)
         {
         Planches.append(new QImage(1440,1000,QImage::Format_RGB666));
+        Planches.at(i-1)->fill(Qt::white);
         PlanchePainter.begin(Planches.at(i-1));
         for(int j=(i-1)*NbCarteParPage; (j<=(i*NbCarteParPage)-1) && (j<ListPathImageCarte.count()); j++)
             {
