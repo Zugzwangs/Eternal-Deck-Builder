@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 // ////////////////////////////////////////////////
 //  OUVERTURE DE LA BDD 'VtesCardsListDB'
     this->SqlDB = QSqlDatabase::addDatabase("QSQLITE");
-    this->SqlDB.setDatabaseName("VtesCardsListDB");
+    this->SqlDB.setDatabaseName("VtesCardsListDB.sqlite");
     if (!this->SqlDB.open())
         {
          QMessageBox::warning(this, "Erreur", this->SqlDB.lastError().text());
