@@ -19,3 +19,12 @@ Elements de la Bdd a corriger
     - ajouter l'extension Danse macabre
     - ajouter la toute dernière extension
     - ajouter le KeyWord basic aux 6 vampires qui possedent une version advanced
+
+
+Renommer les dossiers du projet:
+
+    - tous les dossiers doivent commencer par une minuscule
+    - renommer conception en design
+    - Cartes par cards
+    - 
+
